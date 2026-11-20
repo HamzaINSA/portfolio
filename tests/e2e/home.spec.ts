@@ -25,7 +25,8 @@ test.describe('Home', () => {
     for (const forbidden of [
       '[TO CONFIRM',
       '[SOURCE NEEDED',
-      'KTH',
+      // The unverified KTH item; the approved bio may mention KTH as a plan.
+      'Planned double degree at KTH',
       'Propulseo',
     ]) {
       expect(text).not.toContain(forbidden);

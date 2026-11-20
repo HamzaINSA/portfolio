@@ -122,3 +122,11 @@ export function toProjectDetailView(
     }),
   };
 }
+
+/** The bio split into paragraphs (blank-line separated). Empty or null gives []. */
+export function bioParagraphs(bio: string | null | undefined): string[] {
+  return (bio ?? '')
+    .split(/\n\s*\n/)
+    .map((p) => p.trim())
+    .filter(Boolean);
+}

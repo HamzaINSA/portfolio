@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { neighbours } from '../../src/lib/content/select';
 import {
+  bioParagraphs,
   toProjectCardView,
   toProjectDetailView,
   yearSpan,
@@ -161,5 +162,17 @@ describe('neighbours', () => {
       next: null,
     });
     expect(neighbours(items, 'x')).toEqual({ previous: null, next: null });
+  });
+});
+
+describe('bioParagraphs', () => {
+  it('splits on blank lines and drops empty parts', () => {
+    expect(bioParagraphs('One.\n\nTwo.\n  \nThree.')).toEqual([
+      'One.',
+      'Two.',
+      'Three.',
+    ]);
+    expect(bioParagraphs(null)).toEqual([]);
+    expect(bioParagraphs('  ')).toEqual([]);
   });
 });

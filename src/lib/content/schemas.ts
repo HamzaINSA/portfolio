@@ -146,7 +146,6 @@ export const profileSchema = z
       .strict(),
     links: z.object({ github: z.url(), linkedin: z.url() }).strict(),
     contact: z.object({ email: z.email().nullable() }).strict(),
-    cv: z.object({ path: z.string().nullable() }).strict(),
     photo: z.string().nullable(),
     bio: z.string().nullable(),
     status,

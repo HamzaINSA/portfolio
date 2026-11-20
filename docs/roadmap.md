@@ -33,7 +33,7 @@ Each milestone is a set of small PRs. Do them in order. After each milestone, te
 
 ## M4. About and contact
 
-- About page, contact block, `mailto:` form, CV link handling.
+- About page, contact block, `mailto:` form (no CV download, decision O3).
 - Done when: matches `About.dc.html`; no data leaves the browser.
 
 ## M5. Chatbot

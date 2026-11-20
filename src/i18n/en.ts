@@ -24,7 +24,6 @@ export const en = {
     introSuffix: 'fine-tuned for machine learning and AI.',
     introCta: 'Read my model card, or just ask the model.',
     ask: 'ASK THE MODEL',
-    cv: 'DOWNLOAD CV',
   },
   console: {
     title: 'inference_console',

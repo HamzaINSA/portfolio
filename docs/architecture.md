@@ -24,7 +24,6 @@ docs/                              specs (this folder)
 private/                           git-ignored raw sources
 public/
   fonts/                           self-hosted WOFF2 (Space Grotesk, JetBrains Mono)
-  cv/                              public CV (provided by Hamza, see decision O3)
   og/                              social preview image
 scripts/
   check-content.ts                 content validation and publish gate
