@@ -21,14 +21,13 @@
   "cv": {
     "path": null
   },
-  "photo": null,
+  "photo": "/images/about/hamza.webp",
   "bio": null,
   "status": "verified",
   "openQuestions": [
     "contact.email: which address to publish? The INSA address stops working after graduation (decision O2).",
     "cv.path: provide a public-safe CV (no phone number, no address) in public/cv/ (decision O3).",
     "bio: Hamza to write or approve 3 to 4 sentences in his own voice. Do not invent.",
-    "photo: optional (decision O4).",
     "modelVersion: 'v4' follows the study year. Confirm it should change next year (v5 at KTH?)."
   ]
 }
