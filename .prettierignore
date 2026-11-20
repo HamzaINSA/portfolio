@@ -1,0 +1,13 @@
+dist/
+.astro/
+node_modules/
+package-lock.json
+playwright-report/
+test-results/
+private/
+docs/design/mockups/
+content/
+docs/
+CLAUDE.md
+README.md
+.github/PULL_REQUEST_TEMPLATE.md
