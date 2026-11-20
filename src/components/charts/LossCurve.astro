@@ -1,0 +1,68 @@
+---
+import { lossCurve } from '../../lib/charts/loss-curve';
+
+interface Props {
+  count: number;
+  label: string;
+}
+const { count, label } = Astro.props;
+
+// Two drawings (phone and desktop) so markers keep a readable size; only one is shown at a time.
+const desktop = lossCurve(count, 1280, 200, 10);
+const phone = lossCurve(count, 350, 90, 6);
+---
+
+<svg
+  class="curve curve--desktop"
+  viewBox="0 0 1280 200"
+  role="img"
+  aria-label={label}
+>
+  <path
+    d={desktop.path}
+    fill="none"
+    stroke="currentColor"
+    stroke-width="4"
+  ></path>
+  {desktop.points.map((p) => (
+    <circle cx={p.x} cy={p.y} r="9" fill="currentColor" />
+  ))}
+</svg>
+<svg
+  class="curve curve--phone"
+  viewBox="0 0 350 90"
+  role="img"
+  aria-label={label}
+>
+  <path
+    d={phone.path}
+    fill="none"
+    stroke="currentColor"
+    stroke-width="3"
+  ></path>
+  {phone.points.map((p) => (
+    <circle cx={p.x} cy={p.y} r="6" fill="currentColor" />
+  ))}
+</svg>
+
+<style>
+  .curve {
+    width: 100%;
+    height: auto;
+    color: var(--color-accent);
+  }
+
+  .curve--desktop {
+    display: none;
+  }
+
+  @media (min-width: 48em) {
+    .curve--desktop {
+      display: block;
+    }
+
+    .curve--phone {
+      display: none;
+    }
+  }
+</style>

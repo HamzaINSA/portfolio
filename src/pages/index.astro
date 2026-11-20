@@ -1,34 +1,112 @@
 ---
-// Placeholder page. The real Home is built in M2.
-import '../styles/fonts.css';
-import '../styles/tokens.css';
-import '../styles/base.css';
+import ConsoleTeaser from '../components/sections/ConsoleTeaser.astro';
+import EvaluationPreview from '../components/sections/EvaluationPreview.astro';
+import Hero from '../components/sections/Hero.astro';
+import ModelDetails from '../components/sections/ModelDetails.astro';
+import TrainingPreview from '../components/sections/TrainingPreview.astro';
+import Container from '../components/layout/Container.astro';
+import CtaStrip from '../components/ui/CtaStrip.astro';
+import { en, teaserSuggestionIds } from '../i18n/en';
+import {
+  getEducation,
+  getExperiences,
+  getKnowledgeBase,
+  getProfile,
+  getProjects,
+} from '../lib/content';
+import {
+  checkpoints,
+  currentEducation,
+  entriesById,
+  featuredProjects,
+} from '../lib/content/select';
+import { formatMonth } from '../lib/format/dates';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const [profile, education, experiences, projects, knowledgeBase] =
+  await Promise.all([
+    getProfile(),
+    getEducation(),
+    getExperiences(),
+    getProjects(),
+    getKnowledgeBase(),
+  ]);
+
+const firstName = (profile.name.split(' ')[0] ?? profile.name).toLowerCase();
+// "4th year" -> "4th-year" so that it reads as an adjective in the intro.
+const intro = `${profile.yearLabel.replace(/\s+/g, '-')} ${profile.school} engineering student, ${en.hero.introSuffix}`;
+const period = `${formatMonth(profile.seeking.start)} · ${profile.seeking.duration}`;
+
+const suggestions = entriesById(knowledgeBase, teaserSuggestionIds).map(
+  (entry) => ({
+    label: entry.suggestedLabel ?? entry.title,
+    href: `/ask?q=${encodeURIComponent(entry.suggestedLabel ?? entry.title)}`,
+  }),
+);
+
+const steps = checkpoints(experiences).map((e) => ({
+  title: e.title,
+  organization: e.organization.displayName ?? e.organization.name,
+}));
+const education_ = currentEducation(education);
+const now = `${profile.school}, ${profile.yearLabel}`;
+
+const cards = featuredProjects(projects).map((p) => ({
+  title: p.title,
+  summary: p.summary,
+  href: `/projects/${p.id}`,
+}));
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link
-      rel="preload"
-      href="/fonts/space-grotesk-latin-700-normal.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
+<BaseLayout current="home">
+  <Container class="hero">
+    <Hero
+      firstName={firstName}
+      version={profile.modelVersion}
+      period={period}
+      intro={intro}
+      cvPath={profile.cv.path}
     />
-    <link
-      rel="preload"
-      href="/fonts/jetbrains-mono-latin-400-normal.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
-    <title>Hamza Bencheikh</title>
-  </head>
-  <body>
-    <main>
-      <h1>Hamza Bencheikh</h1>
-      <p>Site under construction.</p>
-    </main>
-  </body>
-</html>
+    <ConsoleTeaser suggestions={suggestions} />
+  </Container>
+
+  <ModelDetails
+    version={`${profile.modelVersion}, ${profile.school} ${profile.yearLabel}`}
+    architecture={education_?.program ?? null}
+    intendedUse={profile.seeking.role}
+    bio={profile.bio}
+    aboutHref="/about"
+  />
+
+  <TrainingPreview checkpoints={steps} now={now} trainingHref="/training" />
+
+  {cards.length > 0 && (
+    <EvaluationPreview projects={cards} allHref="/projects" />
+  )}
+
+  <CtaStrip contactHref="/about#contact" />
+</BaseLayout>
+
+<style>
+  :global(.hero) {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(30rem, 100%), 1fr));
+    align-items: center;
+    gap: var(--space-10);
+    padding-block: var(--space-8) var(--space-8);
+  }
+
+  @media (min-width: 48em) {
+    :global(.hero) {
+      gap: var(--space-14);
+      padding-block: 4rem 3.5rem;
+    }
+  }
+
+  /* Wider text column so that "hamza" and the version chip stay on one line at the design width. */
+  @media (min-width: 75em) {
+    :global(.hero) {
+      grid-template-columns: 1.15fr 1fr;
+    }
+  }
+</style>

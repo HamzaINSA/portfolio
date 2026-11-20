@@ -1,0 +1,81 @@
+---
+import { en } from '../../i18n/en';
+import Container from '../layout/Container.astro';
+import Button from '../ui/Button.astro';
+import FieldCell from '../ui/FieldCell.astro';
+
+interface Props {
+  version: string;
+  architecture: string | null;
+  intendedUse: string;
+  bio: string | null;
+  aboutHref: string;
+}
+const { version, architecture, intendedUse, bio, aboutHref } = Astro.props;
+---
+
+<Container class="details-wrap">
+  <section class="panel" aria-labelledby="model-details-title">
+    <h2 id="model-details-title" class="panel-title">
+      {en.modelDetails.title}
+    </h2>
+    <dl class="cells">
+      <FieldCell label={en.modelDetails.version}>{version}</FieldCell>
+      {architecture && (
+        <FieldCell label={en.modelDetails.architecture}>
+          {architecture}
+        </FieldCell>
+      )}
+      <FieldCell label={en.modelDetails.intendedUse}>{intendedUse}</FieldCell>
+    </dl>
+    <div class="panel-foot">
+      {bio && <p class="bio">{bio}</p>}
+      <Button href={aboutHref} variant="secondary">
+        {en.modelDetails.fullCard}
+      </Button>
+    </div>
+  </section>
+</Container>
+
+<style>
+  :global(.details-wrap) {
+    padding-block: var(--space-10) var(--section-pad);
+  }
+
+  .panel {
+    background: var(--color-surface);
+    border: var(--border-thick);
+  }
+
+  .panel-title {
+    padding: var(--space-3) var(--space-5);
+    background: var(--color-ink);
+    color: var(--color-on-ink);
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+    letter-spacing: 0;
+    line-height: var(--leading-body);
+  }
+
+  .cells {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(17.5rem, 100%), 1fr));
+    gap: 2px;
+    margin: 0;
+    background: var(--color-ink);
+    border-bottom: var(--border-thin);
+  }
+
+  .panel-foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    padding: var(--space-5);
+  }
+
+  .bio {
+    max-width: 47.5rem;
+  }
+</style>

@@ -1,0 +1,66 @@
+---
+import { en } from '../../i18n/en';
+import Container from '../layout/Container.astro';
+import Button from './Button.astro';
+
+interface Props {
+  contactHref: string;
+}
+const { contactHref } = Astro.props;
+---
+
+<section class="cta-strip">
+  <Container class="cta-inner">
+    <p class="cta-title">{en.cta.title}</p>
+    <div class="cta-actions">
+      <Button href={contactHref}>{en.cta.contact}</Button>
+      <Button href={en.nav.cta.href} variant="secondary">
+        {en.cta.ask}
+      </Button>
+    </div>
+  </Container>
+</section>
+
+<style>
+  .cta-strip {
+    background: var(--color-accent);
+    border-top: var(--border-thick);
+  }
+
+  .cta-strip :global(.cta-inner) {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    padding-block: var(--section-pad);
+  }
+
+  .cta-title {
+    max-width: 47.5rem;
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 1.2rem + 2.4vw, 3rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+  }
+
+  .cta-actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  @media (min-width: 48em) {
+    .cta-strip :global(.cta-inner) {
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-6);
+    }
+
+    .cta-actions {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+  }
+</style>
