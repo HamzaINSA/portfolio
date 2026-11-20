@@ -4,9 +4,9 @@
   "role": "Developer and technical consultant",
   "context": "ETIC INSA Technologies",
   "client": {
-    "disclosure": "anonymous",
+    "disclosure": "named",
     "descriptor": "an environmental and territorial consulting firm",
-    "publicName": null
+    "publicName": "Inddigo"
   },
   "startDate": null,
   "endDate": null,
@@ -51,9 +51,8 @@
   "status": "verified",
   "openQuestions": [
     "Start month, and end month once finished?",
-    "May the client be named? Hamza wrote the name differently from the proposal; confirm spelling and the agreement of ETIC and the client first.",
     "Result of the evaluation against the manual reference, once done: publish only with a source [SOURCE NEEDED].",
     "Switch the verbs to the past tense and set current to false when the project is finished."
   ],
-  "internalNote": "Moved from experiences/ on 2026-11-20 (ETIC work counts as projects). Written from an ETIC commercial proposal kept out of the repo. Hamza confirmed on 2026-11-20 that he does everything the proposal describes and that the project is in progress. Do not copy the proposal's text, names, figures or prices. Do not mention the doctoral thesis context."
+  "internalNote": "Moved from experiences/ on 2026-11-20 (ETIC work counts as projects). Written from an ETIC commercial proposal kept out of the repo. Hamza confirmed on 2026-11-20 that he does everything the proposal describes and that the project is in progress. Do not copy the proposal's text, names, figures or prices. Do not mention the doctoral thesis context. Hamza confirmed on 2026-11-20 that the client may be named, spelled Inddigo."
 }

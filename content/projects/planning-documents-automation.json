@@ -4,9 +4,9 @@
   "role": "Developer and technical consultant",
   "context": "ETIC INSA Technologies",
   "client": {
-    "disclosure": "anonymous",
+    "disclosure": "named",
     "descriptor": "a French road-construction company",
-    "publicName": null
+    "publicName": "VINCI"
   },
   "startDate": null,
   "endDate": null,
@@ -46,11 +46,10 @@
   "links": [],
   "status": "verified",
   "openQuestions": [
-    "May the client be named? Only with the agreement of ETIC and the client (keep anonymous until then).",
     "Any measurable result (time saved per week, errors avoided)? Publish only with a source: [SOURCE NEEDED].",
     "What worked, what failed, what is next? Pages omit empty blocks.",
     "Start month, and end month once finished?",
     "Switch the verbs to the past tense and set current to false when the project is finished."
   ],
-  "internalNote": "Moved from experiences/ on 2026-11-20 (ETIC work counts as projects). Written from an ETIC commercial proposal kept out of the repo; Hamza confirmed on 2026-11-20 that he does everything the proposal describes and that the project is in progress. Do not copy the proposal's text, names, figures or prices."
+  "internalNote": "Moved from experiences/ on 2026-11-20 (ETIC work counts as projects). Written from an ETIC commercial proposal kept out of the repo; Hamza confirmed on 2026-11-20 that he does everything the proposal describes and that the project is in progress. Do not copy the proposal's text, names, figures or prices. Hamza confirmed on 2026-11-20 that the client may be named as VINCI."
 }
