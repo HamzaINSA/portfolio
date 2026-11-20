@@ -1,5 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import { toProjectCardView, yearSpan } from '../../src/lib/content/views';
+import { neighbours } from '../../src/lib/content/select';
+import {
+  toProjectCardView,
+  toProjectDetailView,
+  yearSpan,
+} from '../../src/lib/content/views';
 import type { Project } from '../../src/lib/content/types';
 import {
   formatCount,
@@ -107,5 +112,54 @@ describe('topic filter', () => {
     expect(formatCount(1, strings)).toBe('1 project shown');
     expect(formatCount(3, strings)).toBe('3 projects shown');
     expect(formatCount(0, strings)).toBe('0 projects shown');
+  });
+});
+
+describe('toProjectDetailView', () => {
+  it('keeps only filled card cells and story blocks, in mockup order', () => {
+    const view = toProjectDetailView({
+      ...project,
+      card: {
+        task: 'T',
+        data: null,
+        method: '  ',
+        metric: 'M',
+        result: null,
+        myRole: 'R',
+      },
+      retrospective: { worked: null, failed: 'F', next: null },
+    });
+    expect(view.facts).toEqual([
+      { key: 'task', value: 'T' },
+      { key: 'metric', value: 'M' },
+      { key: 'myRole', value: 'R' },
+    ]);
+    expect(view.story).toEqual([{ key: 'failed', text: 'F' }]);
+  });
+  it('has no blocks when card and retrospective are missing', () => {
+    const view = toProjectDetailView(project);
+    expect(view.facts).toEqual([]);
+    expect(view.story).toEqual([]);
+    expect(view).not.toHaveProperty('internalNote');
+    expect(view).not.toHaveProperty('openQuestions');
+  });
+});
+
+describe('neighbours', () => {
+  const items = [{ id: 'a' }, { id: 'b' }, { id: 'c' }];
+  it('returns the items around an id, null at the ends', () => {
+    expect(neighbours(items, 'b')).toEqual({
+      previous: { id: 'a' },
+      next: { id: 'c' },
+    });
+    expect(neighbours(items, 'a')).toEqual({
+      previous: null,
+      next: { id: 'b' },
+    });
+    expect(neighbours(items, 'c')).toEqual({
+      previous: { id: 'b' },
+      next: null,
+    });
+    expect(neighbours(items, 'x')).toEqual({ previous: null, next: null });
   });
 });

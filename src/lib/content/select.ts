@@ -56,3 +56,13 @@ export function entriesById(entries: readonly KnowledgeEntry[], ids: readonly st
   const published = publishedOnly(entries);
   return ids.flatMap((id) => published.filter((e) => e.id === id));
 }
+
+/** Previous and next items around `id` in an ordered list; null at either end. */
+export function neighbours<T extends { id: string }>(
+  items: readonly T[],
+  id: string,
+): { previous: T | null; next: T | null } {
+  const i = items.findIndex((item) => item.id === id);
+  if (i === -1) return { previous: null, next: null };
+  return { previous: items[i - 1] ?? null, next: items[i + 1] ?? null };
+}

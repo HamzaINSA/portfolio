@@ -1,0 +1,304 @@
+---
+import Container from '../../components/layout/Container.astro';
+import Button from '../../components/ui/Button.astro';
+import Chip from '../../components/ui/Chip.astro';
+import FieldCell from '../../components/ui/FieldCell.astro';
+import { en } from '../../i18n/en';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getProjects } from '../../lib/content';
+import { neighbours, publishedProjects } from '../../lib/content/select';
+import { toProjectDetailView } from '../../lib/content/views';
+import { FILTER_TOPICS } from '../../lib/filters/topic';
+
+export async function getStaticPaths() {
+  const projects = publishedProjects(await getProjects());
+  return projects.map((project) => {
+    const { previous, next } = neighbours(projects, project.id);
+    return {
+      params: { id: project.id },
+      props: {
+        project: toProjectDetailView(project, FILTER_TOPICS),
+        previous: previous && {
+          href: `/projects/${previous.id}`,
+          title: previous.title,
+        },
+        next: next && { href: `/projects/${next.id}`, title: next.title },
+      },
+    };
+  });
+}
+
+const { project, previous, next } = Astro.props;
+const t = en.projectPage;
+const tp = en.projectsPage;
+const frame = [
+  project.context && tp.context(project.context),
+  project.client && tp.client(project.client),
+]
+  .filter(Boolean)
+  .join(' · ');
+const when = [project.year, project.current && tp.inProgress]
+  .filter(Boolean)
+  .join(' · ');
+const chip = [project.topic, when].filter(Boolean).join(' · ');
+const askHref = `/ask?q=${encodeURIComponent(t.askQuestion(project.title))}`;
+---
+
+<BaseLayout title={`${project.title} · ${en.siteName}`} current="evaluation">
+  <Container class="detail-head">
+    <a class="back" href="/projects">
+      {t.back}
+    </a>
+    {chip && <Chip variant="accent">{chip}</Chip>}
+    <h1>{project.title}</h1>
+    {frame && <p class="frame">{frame}</p>}
+    <p class="intro">{project.summary}</p>
+    {project.links.length > 0 && (
+      <ul class="links">
+        {project.links.map((link, i) => (
+          <li>
+            <Button href={link.url} variant={i === 0 ? 'primary' : 'secondary'}>
+              {link.label.toUpperCase()} {t.external}
+            </Button>
+          </li>
+        ))}
+      </ul>
+    )}
+  </Container>
+
+  {project.image && (
+    <Container class="hero-wrap">
+      <div class="hero">
+        <img src={project.image.src} alt={project.image.alt} decoding="async" />
+      </div>
+    </Container>
+  )}
+
+  {project.facts.length > 0 && (
+    <Container class="card-wrap">
+      <section class="project-card" aria-labelledby="project-card-title">
+        <h2 id="project-card-title" class="card-title">
+          {t.cardTitle}
+        </h2>
+        <dl class="facts">
+          {project.facts.map((fact) => (
+            <FieldCell label={t.facts[fact.key]} size="text">
+              {fact.value}
+            </FieldCell>
+          ))}
+        </dl>
+      </section>
+    </Container>
+  )}
+
+  {project.story.length > 0 && (
+    <Container class="story">
+      {project.story.map((block) => (
+        <section class:list={['block', `block--${block.key}`]}>
+          <h2>{t.story[block.key]}</h2>
+          <p>{block.text}</p>
+        </section>
+      ))}
+    </Container>
+  )}
+
+  <nav class="pager" aria-label={t.nav}>
+    <Container class="pager-inner">
+      {previous ? (
+        <Button href={previous.href} variant="secondary">
+          {t.previous}
+          <span class="visually-hidden">: {previous.title}</span>
+        </Button>
+      ) : (
+        <span class="pager-gap" />
+      )}
+      <Button href={askHref}>{t.ask}</Button>
+      {next ? (
+        <Button href={next.href} variant="secondary">
+          {t.next}
+          <span class="visually-hidden">: {next.title}</span>
+        </Button>
+      ) : (
+        <span class="pager-gap" />
+      )}
+    </Container>
+  </nav>
+</BaseLayout>
+
+<style>
+  :global(.detail-head) {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-5);
+    padding-block: var(--space-8);
+  }
+
+  .back {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--target-min);
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-decoration: underline;
+  }
+
+  h1 {
+    max-width: 68.75rem;
+    font-size: var(--text-page-title);
+    line-height: 0.92;
+    letter-spacing: -0.045em;
+    text-wrap: balance;
+  }
+
+  .frame {
+    font-size: var(--text-label);
+    font-weight: 700;
+  }
+
+  .intro {
+    max-width: 47.5rem;
+    font-size: clamp(0.9375rem, 0.8rem + 0.6vw, 1.1875rem);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  :global(.hero-wrap),
+  :global(.card-wrap) {
+    padding-bottom: var(--space-8);
+  }
+
+  /* Logos sit centred on white; a screenshot would fill the same frame. */
+  .hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: clamp(13rem, 8rem + 16vw, 26.25rem);
+    padding: var(--space-8);
+    background: var(--color-surface);
+    border: var(--border-thick);
+  }
+
+  .hero img {
+    max-width: min(100%, 28rem);
+    max-height: 100%;
+    object-fit: contain;
+  }
+
+  .project-card {
+    background: var(--color-surface);
+    border: var(--border-thick);
+  }
+
+  .card-title {
+    padding: var(--space-3) var(--space-5);
+    background: var(--color-ink);
+    color: var(--color-on-ink);
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+    font-weight: 700;
+    letter-spacing: normal;
+  }
+
+  /* The ink background shows through the 2px gaps as internal dividers. */
+  .facts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(18.75rem, 100%), 1fr));
+    gap: 2px;
+    margin: 0;
+    background: var(--color-ink);
+  }
+
+  :global(.story) {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(25rem, 100%), 1fr));
+    gap: var(--space-4);
+    padding-bottom: var(--space-10);
+  }
+
+  .block {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: var(--space-6);
+    border: var(--border-thick);
+  }
+
+  .block h2 {
+    font-size: clamp(1.5rem, 1.2rem + 1vw, 1.875rem);
+  }
+
+  .block p {
+    line-height: 1.7;
+  }
+
+  .block--worked {
+    background: var(--color-accent);
+  }
+
+  .block--failed {
+    background: var(--color-surface);
+  }
+
+  .block--next {
+    background: var(--color-ink);
+    color: var(--color-on-ink);
+  }
+
+  .block--next h2 {
+    color: var(--color-accent);
+  }
+
+  .pager {
+    margin-top: var(--space-6);
+    background: var(--color-accent);
+    border-top: var(--border-thick);
+  }
+
+  .pager :global(.pager-inner) {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding-block: var(--space-10);
+  }
+
+  .pager-gap {
+    display: none;
+  }
+
+  @media (min-width: 48em) {
+    :global(.detail-head) {
+      padding-top: var(--space-10);
+    }
+
+    :global(.story) {
+      gap: var(--space-6);
+      padding-bottom: 3.5rem;
+    }
+
+    .block {
+      padding: 1.75rem;
+    }
+
+    .pager :global(.pager-inner) {
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .pager-gap {
+      display: block;
+      min-width: 1px;
+    }
+  }
+</style>

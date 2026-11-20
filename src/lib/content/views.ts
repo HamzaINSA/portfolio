@@ -86,3 +86,39 @@ export function toProjectCardView(
     stack: p.stack,
   };
 }
+
+export type ProjectFactKey = 'task' | 'data' | 'method' | 'metric' | 'result' | 'myRole';
+export type ProjectStoryKey = 'worked' | 'failed' | 'next';
+
+/** Display-safe fields of a project detail page. Blocks without content are left out. */
+export interface ProjectDetailView extends ProjectCardView {
+  links: { label: string; url: string }[];
+  /** Project card cells that have content, in the mockup order. */
+  facts: { key: ProjectFactKey; value: string }[];
+  /** Narrative blocks that have content, in the mockup order. */
+  story: { key: ProjectStoryKey; text: string }[];
+}
+
+const FACT_KEYS: readonly ProjectFactKey[] = ['task', 'data', 'method', 'metric', 'result', 'myRole'];
+const STORY_KEYS: readonly ProjectStoryKey[] = ['worked', 'failed', 'next'];
+
+const filled = (value: string | null | undefined): value is string =>
+  typeof value === 'string' && value.trim().length > 0;
+
+export function toProjectDetailView(
+  p: Project,
+  filterTopics: readonly string[] = [],
+): ProjectDetailView {
+  return {
+    ...toProjectCardView(p, filterTopics),
+    links: p.links.map((l) => ({ label: l.label, url: l.url })),
+    facts: FACT_KEYS.flatMap((key) => {
+      const value = p.card?.[key];
+      return filled(value) ? [{ key, value }] : [];
+    }),
+    story: STORY_KEYS.flatMap((key) => {
+      const text = p.retrospective?.[key];
+      return filled(text) ? [{ key, text }] : [];
+    }),
+  };
+}
