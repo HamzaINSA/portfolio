@@ -1,0 +1,200 @@
+---
+import { en } from '../../i18n/en';
+
+interface Props {
+  current: string;
+}
+const { current } = Astro.props;
+---
+
+<button
+  class="menu-button"
+  type="button"
+  aria-haspopup="dialog"
+  aria-controls="mobile-menu"
+>
+  <span class="visually-hidden">{en.menu.open}</span>
+  <span class="bar" aria-hidden="true"></span>
+  <span class="bar" aria-hidden="true"></span>
+</button>
+
+<!-- A native modal dialog gives focus trapping, Escape to close, an inert page behind and focus return. -->
+<dialog id="mobile-menu" class="menu-panel on-ink" aria-label={en.menu.title}>
+  <div class="menu-head">
+    <span class="menu-title">{en.menu.title}</span>
+    <button class="menu-close" type="button" data-menu-close>
+      {en.menu.close}
+    </button>
+  </div>
+  <nav aria-label={en.nav.label}>
+    <ul>
+      {en.nav.items.map((item) => (
+        <li>
+          <a
+            class="menu-link"
+            href={item.href}
+            data-menu-link
+            aria-current={item.key === current ? 'page' : undefined}
+          >
+            {item.label}
+          </a>
+        </li>
+      ))}
+      <li>
+        <a class="menu-cta" href={en.nav.cta.href} data-menu-link>
+          {en.nav.cta.label}
+        </a>
+      </li>
+    </ul>
+  </nav>
+</dialog>
+
+<style>
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .menu-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    width: var(--target-min);
+    height: var(--target-min);
+    padding: 0;
+    background: transparent;
+    border: var(--border-thick);
+    cursor: pointer;
+  }
+
+  .bar {
+    display: block;
+    width: 20px;
+    height: 3px;
+    background: var(--color-ink);
+  }
+
+  .menu-panel {
+    width: 100%;
+    max-width: none;
+    height: 100%;
+    max-height: none;
+    margin: 0;
+    padding: var(--space-2) var(--gutter) var(--space-8);
+    background: var(--color-ink);
+    color: var(--color-on-ink);
+    border: 0;
+  }
+
+  .menu-panel::backdrop {
+    background: var(--color-ink);
+  }
+
+  .menu-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: var(--target-min);
+    margin-bottom: var(--space-8);
+  }
+
+  .menu-title {
+    font-weight: 700;
+    color: var(--color-accent);
+  }
+
+  .menu-close {
+    min-height: var(--target-min);
+    padding-inline: var(--space-4);
+    background: transparent;
+    color: var(--color-on-ink);
+    border: 2px solid var(--color-on-ink);
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .menu-link,
+  .menu-cta {
+    display: flex;
+    align-items: center;
+    min-height: var(--button-min-height);
+    padding-inline: var(--space-4);
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .menu-link {
+    border-bottom: 2px solid var(--color-ink-line);
+  }
+
+  .menu-link[aria-current='page'] {
+    background: var(--color-on-ink);
+    color: var(--color-ink);
+  }
+
+  .menu-cta {
+    margin-top: var(--space-4);
+    background: var(--color-accent);
+    color: var(--color-ink);
+    font-size: 1rem;
+  }
+
+  :global(body:has(dialog[open])) {
+    overflow: hidden;
+  }
+
+  @media (min-width: 48em) {
+    .menu-button,
+    .menu-panel {
+      display: none;
+    }
+  }
+</style>
+
+<noscript>
+  <style is:inline>
+    .menu-button {
+      display: none !important;
+    }
+  </style>
+</noscript>
+
+<script>
+  const dialog = document.querySelector<HTMLDialogElement>('#mobile-menu');
+  const openButton = document.querySelector<HTMLButtonElement>('.menu-button');
+
+  if (dialog && openButton) {
+    openButton.addEventListener('click', () => dialog.showModal());
+    dialog
+      .querySelector('[data-menu-close]')
+      ?.addEventListener('click', () => dialog.close());
+    // Close on navigation (same-page links, such as #contact, do not reload the page).
+    dialog.querySelectorAll('[data-menu-link]').forEach((link) => {
+      link.addEventListener('click', () => dialog.close());
+    });
+    // Leaving the phone layout while the menu is open would hide it without closing it.
+    window
+      .matchMedia('(min-width: 48em)')
+      .addEventListener('change', (event) => {
+        if (event.matches && dialog.open) dialog.close();
+      });
+  }
+</script>

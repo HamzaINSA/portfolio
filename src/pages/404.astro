@@ -1,0 +1,28 @@
+---
+import Container from '../components/layout/Container.astro';
+import Button from '../components/ui/Button.astro';
+import { en } from '../i18n/en';
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title={`${en.notFound.title} · ${en.siteName}`}>
+  <Container class="not-found">
+    <h1>{en.notFound.title}</h1>
+    <p>{en.notFound.text}</p>
+    <Button href="/">{en.notFound.back}</Button>
+  </Container>
+</BaseLayout>
+
+<style>
+  :global(.not-found) {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-5);
+    padding-block: var(--section-pad);
+  }
+
+  h1 {
+    font-size: var(--text-page-title);
+  }
+</style>

@@ -1,0 +1,56 @@
+---
+import '../styles/fonts.css';
+import '../styles/tokens.css';
+import '../styles/base.css';
+import Footer from '../components/layout/Footer.astro';
+import SiteNav from '../components/layout/SiteNav.astro';
+import { en } from '../i18n/en';
+import { getProfile } from '../lib/content';
+
+interface Props {
+  title?: string;
+  current?: string;
+}
+const { title = en.siteName, current = '' } = Astro.props;
+const profile = await getProfile();
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="preload"
+      href="/fonts/space-grotesk-latin-700-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/jetbrains-mono-latin-400-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <title>{title}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">
+      {en.skipLink}
+    </a>
+    <SiteNav
+      brand={`HAMZA-${profile.modelVersion.toUpperCase()}`}
+      current={current}
+    />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer
+      name={profile.name}
+      github={profile.links.github}
+      linkedin={profile.links.linkedin}
+    />
+  </body>
+</html>

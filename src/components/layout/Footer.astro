@@ -1,0 +1,62 @@
+---
+import { en } from '../../i18n/en';
+import Container from './Container.astro';
+
+interface Props {
+  name: string;
+  github: string;
+  linkedin: string;
+}
+const { name, github, linkedin } = Astro.props;
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <Container class="footer-inner">
+    <p>
+      © {year} {name}. {en.footer.rights}
+    </p>
+    <ul>
+      <li>
+        <a href={github} rel="noopener">
+          {en.footer.github}
+        </a>
+      </li>
+      <li>
+        <a href={linkedin} rel="noopener">
+          {en.footer.linkedin}
+        </a>
+      </li>
+    </ul>
+  </Container>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: var(--border-thick);
+    font-size: var(--text-label);
+  }
+
+  .site-footer :global(.footer-inner) {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2) var(--space-6);
+    padding-block: var(--space-4);
+  }
+
+  ul {
+    display: flex;
+    gap: var(--space-4);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--target-min);
+  }
+</style>

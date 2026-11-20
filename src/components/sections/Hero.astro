@@ -1,0 +1,111 @@
+---
+import { en } from '../../i18n/en';
+import Button from '../ui/Button.astro';
+import Chip from '../ui/Chip.astro';
+
+interface Props {
+  firstName: string;
+  version: string;
+  period: string;
+  intro: string;
+  cvPath: string | null;
+}
+const { firstName, version, period, intro, cvPath } = Astro.props;
+---
+
+<div class="hero-copy">
+  <div class="chips">
+    <Chip variant="accent">
+      <span class="prefix">{en.hero.statusPrefix}</span>
+      {en.hero.available}
+    </Chip>
+    <Chip>{period}</Chip>
+  </div>
+  <h1>
+    {firstName}
+    <span class="version">{version}</span>
+  </h1>
+  <p class="intro">
+    {intro} <span class="intro-cta">{en.hero.introCta}</span>
+  </p>
+  <div class="actions">
+    <Button href={en.nav.cta.href}>
+      <span>{en.hero.ask}</span>
+      <span aria-hidden="true">→</span>
+    </Button>
+    {cvPath && (
+      <Button href={cvPath} variant="secondary">
+        <span>{en.hero.cv}</span>
+        <span aria-hidden="true">↓</span>
+      </Button>
+    )}
+  </div>
+</div>
+
+<style>
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-3);
+    margin-bottom: var(--space-5);
+  }
+
+  .prefix,
+  .intro-cta {
+    display: none;
+  }
+
+  h1 {
+    font-size: var(--text-hero);
+    line-height: 0.88;
+    letter-spacing: -0.05em;
+  }
+
+  .version {
+    display: block;
+    width: fit-content;
+    margin-top: var(--space-2);
+    padding-inline: var(--space-3);
+    background: var(--color-accent);
+  }
+
+  .intro {
+    max-width: 38.75rem;
+    margin-top: var(--space-6);
+    font-size: clamp(1rem, 0.9rem + 0.4vw, 1.1875rem);
+  }
+
+  .actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    margin-top: var(--space-6);
+  }
+
+  @media (min-width: 48em) {
+    .prefix,
+    .intro-cta {
+      display: inline;
+    }
+
+    .chips {
+      margin-bottom: 1.75rem;
+    }
+
+    .version {
+      display: inline-block;
+      margin: 0 0 0 var(--space-2);
+    }
+
+    .intro {
+      margin-top: var(--space-8);
+    }
+
+    .actions {
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: var(--space-4);
+      margin-top: var(--space-8);
+    }
+  }
+</style>

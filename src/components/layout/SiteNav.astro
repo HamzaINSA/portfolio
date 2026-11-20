@@ -1,0 +1,103 @@
+---
+import { en } from '../../i18n/en';
+import MobileMenu from './MobileMenu.astro';
+
+interface Props {
+  brand: string;
+  current: string;
+}
+const { brand, current } = Astro.props;
+---
+
+<header class="site-header">
+  <a class="brand" href="/">
+    {brand}
+  </a>
+
+  <nav class="nav-desktop" aria-label={en.nav.label}>
+    {en.nav.items.map((item) => (
+      <a
+        class="nav-link"
+        href={item.href}
+        aria-current={item.key === current ? 'page' : undefined}
+      >
+        {item.label}
+      </a>
+    ))}
+    <a class="nav-cta" href={en.nav.cta.href}>
+      {en.nav.cta.label}
+    </a>
+  </nav>
+
+  <MobileMenu current={current} />
+</header>
+
+<style>
+  .site-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    padding: var(--space-2) var(--gutter);
+    border-bottom: var(--border-thick);
+    font-size: 0.875rem;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    min-height: var(--target-min);
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .nav-desktop {
+    display: none;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .nav-link,
+  .nav-cta {
+    display: flex;
+    align-items: center;
+    min-height: var(--target-min);
+    text-decoration: none;
+  }
+
+  .nav-link {
+    padding-inline: var(--space-3);
+    transition:
+      background var(--transition-fast),
+      color var(--transition-fast);
+  }
+
+  .nav-link:hover,
+  .nav-link[aria-current='page'] {
+    background: var(--color-ink);
+    color: var(--color-on-ink);
+  }
+
+  .nav-cta {
+    padding-inline: var(--space-4);
+    background: var(--color-accent);
+    border: var(--border-thin);
+    font-weight: 700;
+  }
+
+  @media (min-width: 48em) {
+    .nav-desktop {
+      display: flex;
+    }
+  }
+</style>
+
+<noscript>
+  <style is:inline>
+    .nav-desktop {
+      display: flex !important;
+    }
+  </style>
+</noscript>

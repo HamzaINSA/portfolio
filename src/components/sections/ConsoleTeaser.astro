@@ -1,0 +1,129 @@
+---
+import { en } from '../../i18n/en';
+
+interface Props {
+  suggestions: { label: string; href: string }[];
+}
+const { suggestions } = Astro.props;
+---
+
+<section class="console on-ink" aria-label={en.console.title}>
+  <div class="console-head">
+    <span class="console-title">{en.console.title}</span>
+    <span class="console-meta">{en.console.meta}</span>
+  </div>
+  <div class="console-body">
+    <p class="muted">{en.console.intro}</p>
+    {suggestions.map((s, i) => (
+      <a class:list={['suggestion', { 'hide-phone': i >= 2 }]} href={s.href}>
+        {s.label}
+      </a>
+    ))}
+    <a class="input" href={en.nav.cta.href}>
+      <span class="muted">{en.console.inputPlaceholder}</span>
+      <span class="enter" aria-hidden="true">
+        ↵
+      </span>
+    </a>
+  </div>
+</section>
+
+<style>
+  .console {
+    background: var(--color-ink);
+    color: var(--color-on-ink);
+    border: var(--border-thick);
+    box-shadow: var(--shadow-offset-small);
+  }
+
+  .console-head {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    border-bottom: 2px solid var(--color-ink-line);
+    font-size: var(--text-label-small);
+  }
+
+  .console-title {
+    font-weight: 700;
+    color: var(--color-accent);
+  }
+
+  .console-meta {
+    display: none;
+    color: var(--color-on-ink-muted);
+  }
+
+  .console-body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: var(--space-4);
+    font-size: 0.8125rem;
+  }
+
+  .muted {
+    color: var(--color-on-ink-muted);
+  }
+
+  .suggestion,
+  .input {
+    display: flex;
+    align-items: center;
+    min-height: var(--target-min);
+    padding: var(--space-3) var(--space-4);
+    text-decoration: none;
+  }
+
+  .suggestion {
+    border: 2px solid var(--color-accent);
+    color: var(--color-accent);
+    transition:
+      background var(--transition-fast),
+      color var(--transition-fast);
+  }
+
+  .suggestion:hover {
+    background: var(--color-accent);
+    color: var(--color-ink);
+  }
+
+  .input {
+    justify-content: space-between;
+    border: 2px solid var(--color-ink-line);
+  }
+
+  .enter {
+    color: var(--color-accent);
+  }
+
+  .hide-phone {
+    display: none;
+  }
+
+  @media (min-width: 48em) {
+    .console {
+      box-shadow: var(--shadow-offset);
+    }
+
+    .console-head {
+      padding-inline: 1.125rem;
+      font-size: var(--text-label);
+    }
+
+    .console-meta {
+      display: inline;
+    }
+
+    .console-body {
+      gap: var(--space-4);
+      padding: var(--space-6) 1.375rem;
+      font-size: 0.875rem;
+    }
+
+    .hide-phone {
+      display: flex;
+    }
+  }
+</style>

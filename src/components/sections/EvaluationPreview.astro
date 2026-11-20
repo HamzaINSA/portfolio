@@ -1,0 +1,112 @@
+---
+import { en } from '../../i18n/en';
+import Container from '../layout/Container.astro';
+
+interface Props {
+  projects: { title: string; summary: string; href: string }[];
+  allHref: string;
+}
+const { projects, allHref } = Astro.props;
+---
+
+<Container class="eval-wrap">
+  <section aria-labelledby="evaluation-title">
+    <div class="head">
+      <h2 id="evaluation-title">{en.evaluation.title}</h2>
+      <a class="all" href={allHref}>
+        {en.evaluation.all}
+      </a>
+    </div>
+    <ul class="cards">
+      {projects.map((p) => (
+        <li>
+          <a class="card" href={p.href}>
+            <span class="card-title">{p.title}</span>
+            <span class="card-text">{p.summary}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+</Container>
+
+<style>
+  :global(.eval-wrap) {
+    padding-block: clamp(2.25rem, 1rem + 4vw, 4.5rem);
+  }
+
+  .head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--space-4);
+    margin-bottom: var(--space-5);
+  }
+
+  h2 {
+    font-size: var(--text-section-title);
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+
+  .all {
+    display: flex;
+    align-items: center;
+    min-height: var(--target-min);
+    font-weight: 700;
+    text-decoration: underline;
+  }
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(23.75rem, 100%), 1fr));
+    gap: var(--space-4);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    height: 100%;
+    padding: var(--space-4);
+    background: var(--color-surface);
+    border: var(--border-thick);
+    text-decoration: none;
+    transition:
+      background var(--transition-fast),
+      color var(--transition-fast);
+  }
+
+  .card:hover {
+    background: var(--color-ink);
+    color: var(--color-on-ink);
+  }
+
+  .card-title {
+    font-family: var(--font-display);
+    font-size: var(--text-card-title);
+    font-weight: 700;
+  }
+
+  .card-text {
+    font-size: 0.875rem;
+  }
+
+  @media (min-width: 48em) {
+    .head {
+      margin-bottom: var(--space-8);
+    }
+
+    .cards {
+      gap: var(--space-6);
+    }
+
+    .card {
+      padding: 1.375rem;
+    }
+  }
+</style>
