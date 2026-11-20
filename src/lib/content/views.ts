@@ -49,6 +49,8 @@ export interface ProjectCardView {
   client: string | null;
   /** "2026", "2025–2026", or null when the start date is unknown (the year is then omitted). */
   year: string | null;
+  /** The project is still going on. */
+  current: boolean;
   stack: string[];
 }
 
@@ -74,6 +76,7 @@ export function toProjectCardView(p: Project): ProjectCardView {
     context: p.context ?? null,
     client: displayClient(p),
     year: yearSpan(p.startDate, p.endDate),
+    current: p.current,
     stack: p.stack,
   };
 }

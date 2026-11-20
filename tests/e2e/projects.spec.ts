@@ -21,13 +21,14 @@ test.describe('Evaluation page', () => {
     await expect(
       page.getByRole('heading', { level: 1, name: 'Evaluation' }),
     ).toBeVisible();
-    await expect(page.locator(cards)).toHaveCount(3);
+    await expect(page.locator(cards)).toHaveCount(4);
     const hrefs = await page
       .locator(`${cards} a`)
       .evaluateAll((links) => links.map((a) => a.getAttribute('href')));
     expect(hrefs.sort()).toEqual([
       '/projects/ai-interview-prep-app',
       '/projects/jai-pige',
+      '/projects/material-flow-prototype',
       '/projects/planning-documents-automation',
     ]);
   });
@@ -55,7 +56,7 @@ test.describe('Evaluation page', () => {
 
     await page.getByRole('button', { name: 'All', exact: true }).click();
     await expect(page).toHaveURL(/\/projects$/);
-    await expect(page.locator(visibleCards)).toHaveCount(3);
+    await expect(page.locator(visibleCards)).toHaveCount(4);
   });
 
   test('applies the topic from the URL and ignores unknown topics', async ({
@@ -68,7 +69,7 @@ test.describe('Evaluation page', () => {
     ).toHaveAttribute('aria-pressed', 'true');
 
     await page.goto('/projects?topic=unknown');
-    await expect(page.locator(visibleCards)).toHaveCount(3);
+    await expect(page.locator(visibleCards)).toHaveCount(4);
     await expect(
       page.getByRole('button', { name: 'All', exact: true }),
     ).toHaveAttribute('aria-pressed', 'true');
@@ -84,7 +85,6 @@ test.describe('Evaluation page', () => {
       '[SOURCE NEEDED',
       'Sources: CV',
       'Public repository or demo link?',
-      'Material flow',
     ]) {
       expect(text).not.toContain(forbidden);
     }
@@ -128,7 +128,7 @@ test.describe('Evaluation page without JavaScript', () => {
 
   test('shows all projects and hides the filter buttons', async ({ page }) => {
     await page.goto('/projects?topic=mobile');
-    await expect(page.locator(visibleCards)).toHaveCount(3);
+    await expect(page.locator(visibleCards)).toHaveCount(4);
     await expect(page.locator('[data-filter-bar]')).toBeHidden();
   });
 });

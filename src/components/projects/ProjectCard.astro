@@ -14,14 +14,17 @@ const frame = [
 ]
   .filter(Boolean)
   .join(' · ');
+const when = [project.year, project.current && t.inProgress]
+  .filter(Boolean)
+  .join(' · ');
 // No image area: projects have no image yet, and empty blocks are omitted (design-spec).
 ---
 
 <a class="card" href={project.href}>
-  {(project.topic || project.year) && (
+  {(project.topic || when) && (
     <span class="meta">
       {project.topic && <Chip variant="accent">{project.topic}</Chip>}
-      {project.year && <span class="year">{project.year}</span>}
+      {when && <span class="year">{when}</span>}
     </span>
   )}
   <h2 class="title">{project.title}</h2>

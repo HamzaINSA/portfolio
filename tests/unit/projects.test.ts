@@ -47,6 +47,7 @@ describe('toProjectCardView', () => {
       context: null,
       client: null,
       year: '2026',
+      current: false,
       stack: ['TypeScript', 'Astro'],
     });
   });

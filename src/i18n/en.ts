@@ -75,6 +75,7 @@ export const en = {
     open: 'open case study →',
     context: (frame: string) => `with ${frame}`,
     client: (client: string) => `for ${client}`,
+    inProgress: 'in progress',
     count: { one: '1 project shown', many: '{n} projects shown' },
     cta: {
       title: 'Something missing? Ask the model.',
