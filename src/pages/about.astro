@@ -1,0 +1,326 @@
+---
+import ContactForm from '../components/contact/ContactForm.astro';
+import Container from '../components/layout/Container.astro';
+import Button from '../components/ui/Button.astro';
+import { en } from '../i18n/en';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getExperiences, getProfile, getSkills } from '../lib/content';
+import {
+  bioParagraphs,
+  capabilityGroups,
+  nextRunSteps,
+} from '../lib/content/views';
+import { formatMonth } from '../lib/format/dates';
+
+const [profile, skills, experiences] = await Promise.all([
+  getProfile(),
+  getSkills(),
+  getExperiences(),
+]);
+const t = en.aboutPage;
+
+const bio = bioParagraphs(profile.bio);
+const seeking = profile.seeking;
+const intendedUse = [
+  seeking.role,
+  `${formatMonth(seeking.start)} · ${seeking.duration}`,
+  seeking.relocation ? t.relocation : null,
+]
+  .filter(Boolean)
+  .join(' · ');
+
+// Cards without content are omitted (strengths, limitations and out of scope need Hamza's own words).
+const cards = [
+  { label: t.cards.intendedUse, items: [intendedUse] },
+  { label: t.cards.strengths, items: profile.strengths },
+  { label: t.cards.limitations, items: profile.limitations },
+  { label: t.cards.outOfScope, items: profile.outOfScope },
+].filter((card) => card.items.length > 0);
+
+const capabilities = capabilityGroups(skills, t.spoken);
+const next = nextRunSteps(experiences);
+const email = profile.contact.email;
+---
+
+<BaseLayout title={`${t.title} · ${en.siteName}`} current="about">
+  <Container class="intro">
+    <div class="intro-text">
+      <p class="crumb">{t.crumb}</p>
+      <h1>{t.title}</h1>
+      {bio.map((paragraph) => (
+        <p class="bio">{paragraph}</p>
+      ))}
+    </div>
+    {profile.photo && (
+      <div class="photo">
+        <img
+          src={profile.photo}
+          alt={t.photoAlt}
+          width="800"
+          height="1000"
+          decoding="async"
+        />
+      </div>
+    )}
+  </Container>
+
+  <Container class="cards-wrap">
+    <ul class="cards">
+      {cards.map((card) => (
+        <li class="card">
+          <h2 class="card-label">{card.label}</h2>
+          <p class="card-text">{card.items.join(' · ')}</p>
+        </li>
+      ))}
+    </ul>
+  </Container>
+
+  {capabilities.length > 0 && (
+    <section class="capabilities on-ink" aria-labelledby="capabilities-title">
+      <Container class="capabilities-inner">
+        <h2 id="capabilities-title">{t.capabilities}</h2>
+        <div class="groups">
+          {capabilities.map((group) => (
+            <div class="group">
+              <h3>{group.label}</h3>
+              <ul>
+                {group.items.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </Container>
+    </section>
+  )}
+
+  {next.length > 0 && (
+    <section class="next" aria-labelledby="next-title">
+      <Container class="next-inner">
+        <p class="next-label">{t.next.label}</p>
+        <h2 id="next-title">{t.next.title}</h2>
+        {next.map((step) => (
+          <p class="next-text">{step}</p>
+        ))}
+      </Container>
+    </section>
+  )}
+
+  <section id="contact" class="contact" aria-labelledby="contact-title">
+    <Container class="contact-inner">
+      <div class="contact-main">
+        <h2 id="contact-title">
+          {t.contact.title[0]}
+          <br />
+          {t.contact.title[1]}
+        </h2>
+        {email && <Button href={`mailto:${email}`}>{email}</Button>}
+        <div class="contact-links">
+          <Button href={profile.links.linkedin} variant="secondary">
+            {t.contact.linkedin}
+          </Button>
+          <Button href={profile.links.github} variant="secondary">
+            {t.contact.github}
+          </Button>
+        </div>
+      </div>
+      {email && <ContactForm to={email} />}
+    </Container>
+  </section>
+</BaseLayout>
+
+<style>
+  :global(.intro) {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(26.25rem, 100%), 1fr));
+    gap: var(--space-10);
+    align-items: start;
+    padding-block: var(--space-10) var(--space-8);
+  }
+
+  .crumb {
+    margin-bottom: var(--space-4);
+    font-size: var(--text-label);
+  }
+
+  h1 {
+    font-size: clamp(3.5rem, 2rem + 5.5vw, 6rem);
+    line-height: 0.92;
+    letter-spacing: -0.045em;
+    text-wrap: balance;
+  }
+
+  .bio {
+    max-width: 40rem;
+    margin-top: var(--space-5);
+    font-size: clamp(0.9375rem, 0.85rem + 0.35vw, 1.125rem);
+    line-height: 1.7;
+    text-wrap: pretty;
+  }
+
+  /* Leaves room on the right for the offset shadow. */
+  .photo {
+    justify-self: center;
+    width: min(100% - 10px, 26rem);
+    border: var(--border-thick);
+    box-shadow: var(--shadow-offset-small);
+  }
+
+  .photo img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  :global(.cards-wrap) {
+    padding-bottom: var(--space-10);
+  }
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(18.75rem, 100%), 1fr));
+    gap: var(--space-4);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: var(--space-6);
+    background: var(--color-surface);
+    border: var(--border-thick);
+  }
+
+  .card-label {
+    font-family: var(--font-mono);
+    font-size: var(--text-label-small);
+    font-weight: 400;
+    letter-spacing: normal;
+    color: var(--color-muted);
+  }
+
+  .card-text {
+    line-height: 1.7;
+  }
+
+  .capabilities {
+    background: var(--color-ink);
+    color: var(--color-on-ink);
+    border-block: var(--border-thick);
+  }
+
+  .capabilities :global(.capabilities-inner) {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(18.75rem, 100%), 1fr));
+    gap: var(--space-8);
+    padding-block: var(--section-pad);
+  }
+
+  .capabilities h2 {
+    font-size: clamp(2.25rem, 1.6rem + 2vw, 3rem);
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+
+  .groups {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(11rem, 100%), 1fr));
+    gap: var(--space-6);
+  }
+
+  @media (min-width: 64em) {
+    .groups {
+      grid-column: span 2;
+    }
+  }
+
+  .group h3 {
+    margin-bottom: var(--space-3);
+    font-family: var(--font-mono);
+    font-size: var(--text-label-small);
+    font-weight: 400;
+    letter-spacing: normal;
+    color: var(--color-accent);
+  }
+
+  .group ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 0.9375rem;
+    line-height: 1.8;
+  }
+
+  .next {
+    background: var(--color-accent);
+    border-bottom: var(--border-thick);
+  }
+
+  .next :global(.next-inner) {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    padding-block: var(--section-pad);
+  }
+
+  .next-label {
+    font-size: var(--text-label);
+    font-weight: 700;
+  }
+
+  .next h2 {
+    font-size: clamp(2.25rem, 1.6rem + 2vw, 3rem);
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+  }
+
+  .next-text {
+    max-width: 47.5rem;
+    font-size: clamp(0.9375rem, 0.85rem + 0.35vw, 1.125rem);
+    line-height: 1.7;
+  }
+
+  .contact :global(.contact-inner) {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(26.25rem, 100%), 1fr));
+    gap: var(--space-10);
+    padding-block: var(--section-pad);
+  }
+
+  .contact-main {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-5);
+    min-width: 0;
+  }
+
+  .contact h2 {
+    font-size: clamp(2.5rem, 1.5rem + 3vw, 4rem);
+    letter-spacing: -0.04em;
+    line-height: 0.98;
+  }
+
+  /* Long email addresses must wrap on narrow phones. */
+  .contact-main :global(.btn) {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+
+  .contact-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+
+  @media (min-width: 48em) {
+    .photo {
+      justify-self: end;
+      box-shadow: var(--shadow-offset);
+    }
+  }
+</style>

@@ -104,6 +104,36 @@ export const en = {
     askQuestion: (title: string) => `Tell me about the project ${title}.`,
     nav: 'Other projects',
   },
+  aboutPage: {
+    title: 'About the model',
+    crumb: '/ about',
+    photoAlt: 'Portrait of Hamza Bencheikh',
+    cards: {
+      intendedUse: 'intended use',
+      strengths: 'strengths',
+      limitations: 'known limitations',
+      outOfScope: 'out of scope',
+    },
+    relocation: 'open to relocation',
+    capabilities: 'Capabilities',
+    spoken: 'Spoken',
+    next: { label: 'NEXT TRAINING RUN', title: "Where I'm heading" },
+    contact: {
+      title: ['Run inference.', 'Contact me.'],
+      linkedin: 'LinkedIn ↗',
+      github: 'GitHub ↗',
+      form: {
+        label: 'Contact form',
+        name: 'Name',
+        email: 'Email',
+        message: 'Message',
+        send: 'SEND',
+        note: 'Your message goes to my email only. Nothing is stored on this site.',
+        subject: (name: string) =>
+          name ? `Portfolio contact from ${name}` : 'Portfolio contact',
+      },
+    },
+  },
   cta: {
     title: 'Ready for your next training run.',
     contact: 'CONTACT →',

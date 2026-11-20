@@ -148,6 +148,10 @@ export const profileSchema = z
     contact: z.object({ email: z.email().nullable() }).strict(),
     photo: z.string().nullable(),
     bio: z.string().nullable(),
+    /** Model card cells of the About page; each list is omitted when empty. Hamza's words only. */
+    strengths: stringList,
+    limitations: stringList,
+    outOfScope: stringList,
     status,
     openQuestions: stringList,
   })
