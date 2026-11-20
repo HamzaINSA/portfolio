@@ -1,0 +1,93 @@
+/* Design tokens. Values come from docs/design-spec.md. Components use these, never raw values. */
+:root {
+  /* Colours */
+  --color-paper: #f1f0ea;
+  --color-ink: #0e0e0e;
+  --color-accent: #c6ff3d; /* fill, or text on ink only */
+  --color-surface: #ffffff;
+  --color-surface-2: #e4e3db;
+  --color-muted: #555555;
+  --color-muted-strong: #444444;
+  --color-on-ink: #f1f0ea;
+  --color-on-ink-muted: #b8b8b0;
+  --color-on-ink-soft: #cfcfc7;
+  --color-ink-line: #3a3a36;
+  --color-ink-bubble: #1b1b18;
+
+  /* Typography (fonts are self-hosted, added in a later step) */
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  --text-hero: clamp(
+    5.75rem,
+    3rem + 12vw,
+    9.5rem
+  ); /* 92px phone, 152px desktop */
+  --text-page-title: clamp(
+    3.5rem,
+    2rem + 6vw,
+    6.5rem
+  ); /* about 56px phone, 104px desktop */
+  --text-section-title: clamp(
+    2.5rem,
+    1.5rem + 3vw,
+    4rem
+  ); /* 40px phone, 64px desktop */
+  --text-card-title: clamp(
+    1.25rem,
+    1rem + 0.8vw,
+    1.75rem
+  ); /* 20px phone, 28px desktop */
+  --text-body: clamp(
+    0.8125rem,
+    0.75rem + 0.45vw,
+    1.1875rem
+  ); /* 13px phone, 19px desktop */
+  --text-label: 0.8125rem; /* 13px */
+  --text-label-small: 0.75rem; /* 12px */
+
+  --leading-display: 0.9;
+  --leading-body: 1.65;
+  --tracking-display: -0.04em;
+
+  /* Spacing (4px base) */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-14: 3.5rem;
+  --space-24: 6rem;
+
+  /* Layout */
+  --container-max: 85rem; /* 1360px */
+  --gutter: clamp(1.25rem, 0.5rem + 2vw, 2.5rem); /* 20px phone, 40px desktop */
+  --section-pad: clamp(2.25rem, 1rem + 4vw, 6rem);
+
+  /* Shape: thick square borders, no radius */
+  --border-thick: 3px solid var(--color-ink);
+  --border-thin: 2px solid var(--color-ink);
+  --radius: 0;
+  --shadow-offset: 10px 10px 0 var(--color-accent);
+  --shadow-offset-small: 6px 6px 0 var(--color-accent);
+
+  /* Targets and focus */
+  --target-min: 2.75rem; /* 44px */
+  --button-min-height: 3rem; /* 48px */
+  --focus-ring: 3px solid var(--color-ink);
+  --focus-offset: 3px;
+  --focus-ring-on-ink: 3px solid var(--color-accent);
+
+  /* Motion */
+  --transition-fast: 120ms ease-out;
+}
+
+/*
+ * Breakpoints (custom properties cannot be used inside @media, so the values are fixed here, once):
+ *   phone  : default, mobile first (design reference 390px)
+ *   tablet : min-width 48em  (768px)
+ *   desktop: min-width 75em  (1200px) (design reference 1440px)
+ */

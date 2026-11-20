@@ -8,6 +8,7 @@
   },
   "scripts": {
     "dev": "astro dev",
+    "prebuild": "tsx scripts/check-content.ts",
     "build": "astro build",
     "preview": "astro preview",
     "lint": "eslint . && prettier --check .",

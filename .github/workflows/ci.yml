@@ -8,6 +8,9 @@ permissions:
 jobs:
   check:
     runs-on: ubuntu-latest
+    env:
+      # Decision D7: the publish gate blocks the build on main only; PRs only get warnings.
+      CONTENT_STRICT: ${{ github.ref == 'refs/heads/main' && '1' || '0' }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
