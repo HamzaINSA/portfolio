@@ -93,6 +93,13 @@ describe('publishedProjects', () => {
 });
 
 describe('projectTopics', () => {
+  it('keeps only allowed topics when a list is given', () => {
+    const topics = projectTopics(
+      [proj({ tags: ['privacy', 'llm'] }), proj({ tags: ['data', 'llm'] })],
+      ['llm', 'data'],
+    );
+    expect(topics).toEqual(['llm', 'data']);
+  });
   it('lists each tag once, most used first, then alphabetical', () => {
     const topics = projectTopics([
       proj({ tags: ['mobile', 'llm'] }),

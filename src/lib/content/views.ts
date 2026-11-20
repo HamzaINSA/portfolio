@@ -39,7 +39,7 @@ export interface ProjectCardView {
   href: string;
   title: string;
   summary: string;
-  /** Chip shown on the card: the first tag, or null when the project has none. */
+  /** Chip shown on the card: the first filter topic among its tags (else the first tag), or null. */
   topic: string | null;
   /** All tags, used by the topic filter. */
   topics: string[];
@@ -67,13 +67,16 @@ export function yearSpan(
   return to && to !== from ? `${from}–${to}` : from;
 }
 
-export function toProjectCardView(p: Project): ProjectCardView {
+export function toProjectCardView(
+  p: Project,
+  filterTopics: readonly string[] = [],
+): ProjectCardView {
   return {
     id: p.id,
     href: `/projects/${p.id}`,
     title: p.title,
     summary: p.summary,
-    topic: p.tags[0] ?? null,
+    topic: p.tags.find((t) => filterTopics.includes(t)) ?? p.tags[0] ?? null,
     topics: p.tags,
     context: p.context ?? null,
     client: displayClient(p),

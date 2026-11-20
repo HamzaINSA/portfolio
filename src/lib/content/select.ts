@@ -28,10 +28,17 @@ export function featuredProjects(projects: readonly Project[]): Project[] {
   return publishedProjects(projects).filter((p) => p.featured);
 }
 
-/** Topics of the given projects from their `tags`: most used first, then alphabetical. */
-export function projectTopics(projects: readonly Project[]): string[] {
+/**
+ * Topics of the given projects from their `tags`: most used first, then alphabetical.
+ * With `allowed`, only those tags are kept.
+ */
+export function projectTopics(
+  projects: readonly Project[],
+  allowed?: readonly string[],
+): string[] {
   const counts = new Map<string, number>();
   for (const tag of projects.flatMap((p) => p.tags)) {
+    if (allowed && !allowed.includes(tag)) continue;
     counts.set(tag, (counts.get(tag) ?? 0) + 1);
   }
   return [...counts]

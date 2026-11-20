@@ -9,10 +9,11 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getProjects } from '../../lib/content';
 import { projectTopics, publishedProjects } from '../../lib/content/select';
 import { toProjectCardView } from '../../lib/content/views';
+import { FILTER_TOPICS } from '../../lib/filters/topic';
 
 const projects = publishedProjects(await getProjects());
-const cards = projects.map(toProjectCardView);
-const topics = projectTopics(projects);
+const cards = projects.map((p) => toProjectCardView(p, FILTER_TOPICS));
+const topics = projectTopics(projects, FILTER_TOPICS);
 const t = en.projectsPage;
 ---
 

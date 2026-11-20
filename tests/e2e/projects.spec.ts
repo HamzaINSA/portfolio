@@ -59,13 +59,30 @@ test.describe('Evaluation page', () => {
     await expect(page.locator(visibleCards)).toHaveCount(4);
   });
 
+  test('offers only the chosen topics, "All" first', async ({ page }) => {
+    await page.goto('/projects');
+    const labels = await page
+      .getByRole('group', { name: /Filter projects/ })
+      .getByRole('button')
+      .allInnerTexts();
+    expect(labels[0]).toBe('All');
+    expect(labels.slice(1).sort()).toEqual([
+      'automation',
+      'data',
+      'education',
+      'evaluation',
+      'llm',
+      'mobile',
+    ]);
+  });
+
   test('applies the topic from the URL and ignores unknown topics', async ({
     page,
   }) => {
-    await page.goto('/projects?topic=privacy');
+    await page.goto('/projects?topic=automation');
     await expect(page.locator(visibleCards)).toHaveCount(1);
     await expect(
-      page.getByRole('button', { name: 'privacy', exact: true }),
+      page.getByRole('button', { name: 'automation', exact: true }),
     ).toHaveAttribute('aria-pressed', 'true');
 
     await page.goto('/projects?topic=unknown');

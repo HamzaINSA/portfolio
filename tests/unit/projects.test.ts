@@ -65,6 +65,13 @@ describe('toProjectCardView', () => {
     expect(view.context).toBe('ETIC INSA Technologies');
     expect(view.client).toBe('a road-construction company');
   });
+  it('uses the first filter topic as chip when there is one', () => {
+    const view = toProjectCardView(
+      { ...project, tags: ['privacy', 'mobile'] },
+      ['mobile'],
+    );
+    expect(view.topic).toBe('mobile');
+  });
   it('has no chip when there is no tag', () => {
     expect(toProjectCardView({ ...project, tags: [] }).topic).toBeNull();
   });

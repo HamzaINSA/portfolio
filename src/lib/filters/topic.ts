@@ -1,5 +1,18 @@
 // Topic filter of the Evaluation page. Pure functions, shared by the page script and the unit tests.
 
+/**
+ * Tags offered as filters on the Evaluation page, chosen with Hamza (2026-11-20).
+ * Other tags stay in content/ (the chatbot uses them) but get no button.
+ */
+export const FILTER_TOPICS = [
+  'llm',
+  'data',
+  'evaluation',
+  'automation',
+  'mobile',
+  'education',
+] as const;
+
 /** URL query parameter that holds the active topic (`/projects?topic=llm`). */
 export const TOPIC_PARAM = 'topic';
 
