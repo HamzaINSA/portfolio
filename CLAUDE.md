@@ -51,13 +51,13 @@ The project is not scaffolded yet, so no command exists. Milestone M0 in `docs/r
 
 ```
 npm run dev            # local dev server
-npm run build          # production build (runs check:content --strict)
+npm run build          # production build (runs check:content first; blocking when CONTENT_STRICT=1, set on main)
 npm run preview        # serve the production build
 npm run lint           # ESLint + Prettier check
 npm run typecheck      # TypeScript, strict
 npm run test           # unit tests (Vitest), including chatbot evaluation set
 npm run test:e2e       # Playwright + axe accessibility checks
-npm run check:content  # validate content/ against schemas (warnings in dev)
+npm run check:content  # publish gate on content/ (warnings; add -- --strict or CONTENT_STRICT=1 to fail)
 ```
 
 ## Definition of done (every PR)

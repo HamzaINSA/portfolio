@@ -12,7 +12,7 @@ Hamza delegates technical choices to Claude Code. The decisions below are propos
 | D4 | **Chatbot = local keyword retrieval** over knowledge-base entries, in the browser, no API, no network | Free, private, deterministic, explainable. Honest "no answer" fallback |
 | D5 | **Zero third-party runtime requests**: fonts self-hosted (Space Grotesk, JetBrains Mono), no CDN, no analytics, no embeds | Visitor privacy (fonts from a CDN leak visitor IPs), speed, simplicity |
 | D6 | **English only** in V1. UI strings in one file (`src/i18n/en.ts`) | Target applications are in English |
-| D7 | **Publish gate**: `check:content --strict` blocks builds with `to_confirm` content or placeholder markers | Never publish an unverified claim |
+| D7 | **Publish gate**: `check:content --strict` blocks builds with `to_confirm` content or placeholder markers. Clarified by Hamza (2026-11-20): strict on `main` only (`CONTENT_STRICT=1`); PRs and local builds only warn | Never publish an unverified claim |
 | D8 | **Client missions anonymised by default** | Confidentiality; see `content-guidelines.md` |
 | D9 | **Contact form without backend**: opens the visitor's mail client (`mailto:`), nothing stored | No server, no data collection |
 | D10 | Tests: **Vitest** (unit, chatbot evaluation set), **Playwright + axe** (e2e, accessibility). CI on **GitHub Actions** | Standard, free for public repos |
