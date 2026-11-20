@@ -109,6 +109,28 @@
         }
       }
     },
+    "image": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "description": "Logo or visual shown on the card; file in public/images/projects/. Omitted when null.",
+      "required": [
+        "src",
+        "alt"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "src": {
+          "type": "string",
+          "pattern": "^/images/projects/[a-z0-9-]+\\.(svg|png|webp|jpg)$"
+        },
+        "alt": {
+          "type": "string",
+          "description": "Empty when decorative (the card text already names it)."
+        }
+      }
+    },
     "card": {
       "type": "object",
       "additionalProperties": false,

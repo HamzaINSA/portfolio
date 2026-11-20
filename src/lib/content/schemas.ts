@@ -74,6 +74,16 @@ export const projectSchema = z
     /** Frame the project was done in, for example "ETIC INSA Technologies". Null or absent for personal projects. */
     context: nullableText,
     client: clientSchema.optional(),
+    /** Logo or visual shown on the card. Files live in public/images/projects/. */
+    image: z
+      .object({
+        src: z.string().regex(/^\/images\/projects\/[a-z0-9-]+\.(svg|png|webp|jpg)$/),
+        /** Empty when the image only repeats text already on the card (decorative). */
+        alt: z.string(),
+      })
+      .strict()
+      .nullable()
+      .optional(),
     card: z
       .object({
         task: nullableText,

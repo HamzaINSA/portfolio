@@ -51,6 +51,8 @@ export interface ProjectCardView {
   year: string | null;
   /** The project is still going on. */
   current: boolean;
+  /** Logo or visual, or null (the image area is then omitted). */
+  image: { src: string; alt: string } | null;
   stack: string[];
 }
 
@@ -77,6 +79,7 @@ export function toProjectCardView(p: Project): ProjectCardView {
     client: displayClient(p),
     year: yearSpan(p.startDate, p.endDate),
     current: p.current,
+    image: p.image ?? null,
     stack: p.stack,
   };
 }

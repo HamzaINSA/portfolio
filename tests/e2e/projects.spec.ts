@@ -90,14 +90,10 @@ test.describe('Evaluation page', () => {
     }
   });
 
-  test('shows the frame of ETIC projects with an anonymous client', async ({
-    page,
-  }) => {
+  test('shows the frame and client of ETIC projects', async ({ page }) => {
     await page.goto('/projects');
     await expect(
-      page.getByText(
-        'with ETIC INSA Technologies · for a French road-construction company',
-      ),
+      page.getByText('with ETIC INSA Technologies · for VINCI'),
     ).toBeVisible();
   });
 
