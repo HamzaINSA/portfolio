@@ -23,7 +23,7 @@ Hamza delegates technical choices to Claude Code. The decisions below are propos
 | ID | Question | Recommendation |
 |---|---|---|
 | O1 | Deployment target and custom domain (Vercel, Cloudflare Pages, GitHub Pages) | Decide at milestone M7. Preview deployments per PR are a plus. Needs an account and DNS: ask |
-| O2 | Which email to publish. The INSA address stops working after graduation | A durable personal address |
+| O2 | Which email to publish. Resolved 2026-11-21: Hamza chose his INSA address (hamza.bencheikh@insa-lyon.fr); switch to a durable address before graduation | Done, revisit before graduation |
 | O3 | Public CV file. Resolved 2026-11-20: no CV on the site; the site is the CV and applications already include it | Done |
 | O4 | Photo on the About page (mockup shows an optional slot). Resolved 2026-11-20: Hamza supplied a photo and chose the cut-out on an ink background with a lime grid (`public/images/about/hamza.webp`, metadata stripped; original stays in `private/`) | Done |
 | O5 | Naming clients of ETIC and freelance projects (see `content/projects/`). Resolved for VINCI and Inddigo: Hamza confirmed on 2026-11-20 they may be named, with their logos | Keep anonymous until ETIC and the client agree |

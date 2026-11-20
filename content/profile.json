@@ -16,13 +16,13 @@
     "linkedin": "https://www.linkedin.com/in/hamzabencheikh05"
   },
   "contact": {
-    "email": null
+    "email": "hamza.bencheikh@insa-lyon.fr"
   },
   "photo": "/images/about/hamza.webp",
   "bio": "I'm a 4th-year Computer Science engineering student at INSA Lyon, and what drives me is the models themselves: their architecture, and how to make them more efficient so they need less energy and compute while staying useful.\n\nNext year I plan to join KTH in Stockholm for a double degree to specialise in machine learning, and I then aim for a PhD in the field. I want to bring that work into the companies I join: models that cost less to run and deliver more.\n\nIn summer 2026 I interned at Delta Quest in Sapporo, Japan, in an international team working in English, where I designed generative AI workflows and an evaluation pipeline. Alongside my studies, I build projects with ETIC INSA Technologies for clients such as VINCI and Inddigo.\n\nI'm looking for an AI / LLM engineering internship of up to four months from May 2027, abroad, in a team that challenges me intellectually and where I can put my first AI and machine learning skills into practice.",
   "status": "verified",
   "openQuestions": [
-    "contact.email: which address to publish? The INSA address stops working after graduation (decision O2).",
-    "modelVersion: 'v4' follows the study year. Confirm it should change next year (v5 at KTH?)."
+    "modelVersion: 'v4' follows the study year. Confirm it should change next year (v5 at KTH?).",
+    "contact.email is the INSA address (Hamza, 2026-11-21); replace it with a durable address before graduation."
   ]
 }
