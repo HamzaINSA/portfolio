@@ -8,7 +8,7 @@ The personal website of Hamza Bencheikh, a 4th-year Computer Science engineering
 
 Goal: stand out to tech recruiters. The site is built around a "model card" concept (Hamza presented as a model: version, intended use, training run, evaluation, limitations) plus a **local chatbot** that answers questions about Hamza from a knowledge base, with no API and no tracking.
 
-**Status:** planning is done. Mockups are validated, content is drafted, specs are written. There is no application code yet. You (Claude Code) write all of it.
+**Status:** milestones M0 to M2 are done; M3 (Training and Evaluation pages) is in progress. See `docs/roadmap.md` for what comes next. You (Claude Code) write all of the code.
 
 ## How to work with Hamza
 
@@ -47,7 +47,7 @@ Goal: stand out to tech recruiters. The site is built around a "model card" conc
 
 ## Commands
 
-The project is not scaffolded yet, so no command exists. Milestone M0 in `docs/roadmap.md` creates them. Once they exist, keep this list accurate:
+Keep this list accurate when scripts change:
 
 ```
 npm run dev            # local dev server

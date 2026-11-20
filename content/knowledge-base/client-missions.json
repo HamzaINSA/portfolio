@@ -2,21 +2,49 @@
   "id": "client-missions",
   "title": "Client missions",
   "source": "client-missions.json",
-  "keywords": ["client", "mission", "consulting", "consultant", "customer", "freelance", "automation", "prototype", "deliver", "delivery"],
-  "phrases": ["client mission", "client work", "for customers", "for clients"],
+  "keywords": [
+    "client",
+    "mission",
+    "consulting",
+    "consultant",
+    "customer",
+    "freelance",
+    "automation",
+    "prototype",
+    "deliver",
+    "delivery",
+    "vinci",
+    "inddigo"
+  ],
+  "phrases": [
+    "client mission",
+    "client work",
+    "for customers",
+    "for clients"
+  ],
   "exampleQuestions": [
     "What client missions has he done?",
     "Does Hamza have consulting experience?",
     "Has he built tools for customers?"
   ],
-  "answer": "Through ETIC INSA Technologies, Hamza works on client missions, for example [TO CONFIRM: a tool automating planning documents for a road-construction company, and a Python prototype for material flow analysis for an environmental consulting firm]. [TO CONFIRM: his role and the status of each mission]",
-  "links": [{ "label": "See the training run", "href": "/training" }],
-  "sources": ["etic-mission-planning-automation", "etic-mission-material-flow-prototype"],
-  "related": ["experience"],
+  "answer": "Hamza carries out projects through ETIC INSA Technologies, the Junior Enterprise of INSA Lyon. He is building a tool that generates planning documents automatically from a planning software's exports for VINCI, and a Python prototype that computes material flows for a territory for Inddigo, an environmental and territorial consulting firm, with AI assistants that cite their sources. He also built the J'ai PiGé educational mobile app. All are on the Evaluation page.",
+  "links": [
+    {
+      "label": "See the projects",
+      "href": "/projects"
+    }
+  ],
+  "sources": [
+    "planning-documents-automation",
+    "material-flow-prototype",
+    "jai-pige",
+    "etic-insa-technologies"
+  ],
+  "related": [
+    "experience"
+  ],
   "priority": 1,
   "suggested": false,
-  "status": "to_confirm",
-  "openQuestions": [
-    "Becomes verified only when both mission files in content/experiences/ are confirmed (status, role, permission to describe)."
-  ]
+  "status": "verified",
+  "openQuestions": []
 }

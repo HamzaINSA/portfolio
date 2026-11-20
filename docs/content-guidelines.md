@@ -29,7 +29,7 @@ Two ETIC proposals were provided to explain what Hamza did. They are proposals, 
 - One has a validity date and a planned schedule that run past today. It is not proof that the mission is signed, started or delivered.
 - Each lists several team members. Hamza's exact role and scope are not stated for every mission.
 
-Therefore both mission files are `status: "to_confirm"` with questions in `openQuestions`. Confirm with Hamza: is it signed, in progress or delivered; what exactly did he do; may it be described, and how (anonymised or named).
+Both are now projects in `content/projects/` (`context: "ETIC INSA Technologies"`, anonymous `client`). On 2026-11-20 Hamza confirmed that he did everything each proposal describes. Both are `verified` and in progress (`current: true`, present tense), as Hamza confirmed. On 2026-11-20 Hamza confirmed that both clients may be named (VINCI, Inddigo) and their logos shown; other clients stay anonymous until confirmed.
 
 ## Wording for experiences
 

@@ -1,0 +1,62 @@
+{
+  "id": "material-flow-prototype",
+  "title": "Material flow analysis prototype",
+  "role": "Developer and technical consultant",
+  "context": "ETIC INSA Technologies",
+  "client": {
+    "disclosure": "named",
+    "descriptor": "an environmental and territorial consulting firm",
+    "publicName": "Inddigo"
+  },
+  "image": {
+    "src": "/images/projects/inddigo.webp",
+    "alt": ""
+  },
+  "startDate": null,
+  "endDate": null,
+  "current": true,
+  "featured": false,
+  "summary": "Python prototype that computes material flows for a territory in a traceable and reproducible way, with AI assistants that cite their sources.",
+  "highlights": [
+    "Building a Python prototype that reads an existing Excel data catalogue in read-only mode and computes material flows for a territory.",
+    "Designing Sankey diagrams and sourced exports, with snapshots so that any result can be recomputed identically.",
+    "Designing AI assistants that cite their sources and have no influence on the calculations, which stay deterministic.",
+    "Preparing an evaluation against a manual reference analysis: fidelity flow by flow, coverage, reproducibility and time to completion."
+  ],
+  "stack": [
+    "Python",
+    "pandas",
+    "SQLite",
+    "Streamlit",
+    "Plotly",
+    "LLM API (interchangeable provider)",
+    "Git"
+  ],
+  "tags": [
+    "evaluation",
+    "reproducibility",
+    "llm",
+    "data"
+  ],
+  "card": {
+    "task": "Compute material flows for a territory in a traceable and reproducible way.",
+    "data": "An existing Excel data catalogue, read-only.",
+    "method": "Deterministic Python computation with snapshots; AI assistants that cite sources and do not influence the calculations.",
+    "metric": "Fidelity flow by flow against a manual reference analysis, coverage, reproducibility and time to completion.",
+    "result": null,
+    "myRole": "The whole project, in progress: scoping, design, build and evaluation."
+  },
+  "retrospective": {
+    "worked": null,
+    "failed": null,
+    "next": null
+  },
+  "links": [],
+  "status": "verified",
+  "openQuestions": [
+    "Start month, and end month once finished?",
+    "Result of the evaluation against the manual reference, once done: publish only with a source [SOURCE NEEDED].",
+    "Switch the verbs to the past tense and set current to false when the project is finished."
+  ],
+  "internalNote": "Moved from experiences/ on 2026-11-20 (ETIC work counts as projects). Written from an ETIC commercial proposal kept out of the repo. Hamza confirmed on 2026-11-20 that he does everything the proposal describes and that the project is in progress. Do not copy the proposal's text, names, figures or prices. Do not mention the doctoral thesis context. Hamza confirmed on 2026-11-20 that the client may be named, spelled Inddigo."
+}

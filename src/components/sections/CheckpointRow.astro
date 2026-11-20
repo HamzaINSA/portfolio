@@ -1,0 +1,164 @@
+---
+import { en } from '../../i18n/en';
+import type { CheckpointView } from '../../lib/content/views';
+
+interface Props {
+  checkpoint: CheckpointView;
+  index: number;
+  first?: boolean;
+}
+const { checkpoint, index, first = false } = Astro.props;
+const t = en.trainingPage;
+const askHref = `/ask?q=${encodeURIComponent(t.askQuestion(checkpoint.organization))}`;
+---
+
+<article class:list={['row', { first }]}>
+  <header class="side">
+    <p class="number">
+      {t.checkpoint} {index}
+    </p>
+    <p class="period">{checkpoint.period}</p>
+    <h2>
+      {checkpoint.title}
+      <br />
+      {checkpoint.organization}
+    </h2>
+    {checkpoint.client && <p class="client">{checkpoint.client}</p>}
+  </header>
+  <div class="body">
+    {checkpoint.highlights.length > 0 && (
+      <section>
+        <h3>{t.did}</h3>
+        <ul>
+          {checkpoint.highlights.map((h) => (
+            <li>{h}</li>
+          ))}
+        </ul>
+      </section>
+    )}
+    {checkpoint.learned.length > 0 && (
+      <section>
+        <h3>{t.learned}</h3>
+        <ul>
+          {checkpoint.learned.map((l) => (
+            <li>{l}</li>
+          ))}
+        </ul>
+      </section>
+    )}
+    <section>
+      {checkpoint.stack.length > 0 && (
+        <>
+          <h3>{t.stack}</h3>
+          <p>{checkpoint.stack.join(' · ')}</p>
+        </>
+      )}
+      <a class="ask" href={askHref}>
+        {t.ask}
+      </a>
+    </section>
+  </div>
+</article>
+
+<style>
+  .row {
+    display: grid;
+    grid-template-columns: 1fr;
+    background: var(--color-surface);
+    border: var(--border-thick);
+  }
+
+  .side {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding: var(--space-5);
+    background: var(--color-surface-2);
+    border-bottom: var(--border-thin);
+  }
+
+  .first .side {
+    background: var(--color-accent);
+  }
+
+  .number {
+    font-size: var(--text-label);
+    font-weight: 700;
+  }
+
+  .period {
+    font-size: 0.875rem;
+  }
+
+  h2 {
+    font-size: clamp(1.375rem, 1.1rem + 0.9vw, 1.75rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+
+  .client {
+    font-size: var(--text-label);
+  }
+
+  .body {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(15rem, 100%), 1fr));
+    gap: var(--space-5);
+    padding: var(--space-5);
+  }
+
+  section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    font-size: 0.9375rem;
+  }
+
+  h3 {
+    font-family: var(--font-mono);
+    font-size: var(--text-label-small);
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: var(--leading-body);
+    color: var(--color-muted);
+  }
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li::before {
+    content: '– ';
+  }
+
+  .ask {
+    display: flex;
+    align-items: center;
+    min-height: var(--target-min);
+    margin-top: var(--space-2);
+    font-weight: 700;
+    text-decoration: underline;
+  }
+
+  @media (min-width: 48em) {
+    .row {
+      grid-template-columns: 1fr 2fr;
+    }
+
+    .side {
+      padding: 1.75rem;
+      border-right: var(--border-thin);
+      border-bottom: 0;
+    }
+
+    .body {
+      gap: var(--space-6);
+      padding: 1.75rem;
+    }
+  }
+</style>

@@ -5,6 +5,8 @@ import {
   currentEducation,
   entriesById,
   featuredProjects,
+  projectTopics,
+  publishedProjects,
 } from '../../src/lib/content/select';
 import type {
   EducationItem,
@@ -75,6 +77,36 @@ describe('featuredProjects', () => {
       proj({ id: 'draft', status: 'to_confirm' }),
     ]);
     expect(result.map((p) => p.id)).toEqual(['new', 'old']);
+  });
+});
+
+describe('publishedProjects', () => {
+  it('keeps verified projects, featured or not, newest first, undated last', () => {
+    const result = publishedProjects([
+      proj({ id: 'old', startDate: '2025-01', featured: false }),
+      proj({ id: 'new', startDate: '2026-06' }),
+      proj({ id: 'undated' }),
+      proj({ id: 'hidden', startDate: '2027-01', status: 'to_confirm' }),
+    ]);
+    expect(result.map((p) => p.id)).toEqual(['new', 'old', 'undated']);
+  });
+});
+
+describe('projectTopics', () => {
+  it('keeps only allowed topics when a list is given', () => {
+    const topics = projectTopics(
+      [proj({ tags: ['privacy', 'llm'] }), proj({ tags: ['data', 'llm'] })],
+      ['llm', 'data'],
+    );
+    expect(topics).toEqual(['llm', 'data']);
+  });
+  it('lists each tag once, most used first, then alphabetical', () => {
+    const topics = projectTopics([
+      proj({ tags: ['mobile', 'llm'] }),
+      proj({ tags: ['llm', 'education'] }),
+      proj({ tags: [] }),
+    ]);
+    expect(topics).toEqual(['llm', 'education', 'mobile']);
   });
 });
 
@@ -162,5 +194,45 @@ describe('displayClient', () => {
         client: { disclosure: 'named', descriptor: 'd', publicName: null },
       }),
     ).toBe('d');
+  });
+});
+
+import { plannedSteps, toCheckpointView } from '../../src/lib/content/views';
+
+describe('toCheckpointView', () => {
+  it('formats the period and prefers the display name of the organisation', () => {
+    const view = toCheckpointView(
+      exp({
+        startDate: '2026-05',
+        endDate: null,
+        organization: { name: 'ETIC', displayName: 'ETIC (junior enterprise)' },
+      }),
+    );
+    expect(view.period).toBe('May 2026 – now');
+    expect(view.organization).toBe('ETIC (junior enterprise)');
+    expect(view.client).toBeNull();
+  });
+  it('never exposes a client name that is not disclosed', () => {
+    const view = toCheckpointView(
+      exp({
+        client: {
+          disclosure: 'anonymous',
+          descriptor: 'a consulting firm',
+          publicName: 'Secret',
+        },
+      }),
+    );
+    expect(view.client).toBe('a consulting firm');
+    expect(JSON.stringify(view)).not.toContain('Secret');
+  });
+});
+
+describe('plannedSteps', () => {
+  it('lists the titles of academic plans only', () => {
+    const steps = plannedSteps([
+      exp({ type: 'academic-plan', title: 'Double degree' }),
+      exp({ type: 'internship', title: 'Other' }),
+    ]);
+    expect(steps).toEqual(['Double degree']);
   });
 });

@@ -1,0 +1,110 @@
+---
+import LossCurve from '../components/charts/LossCurve.astro';
+import Container from '../components/layout/Container.astro';
+import CheckpointRow from '../components/sections/CheckpointRow.astro';
+import NowRow from '../components/sections/NowRow.astro';
+import CtaStrip from '../components/ui/CtaStrip.astro';
+import PageHeader from '../components/ui/PageHeader.astro';
+import { en } from '../i18n/en';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getEducation, getExperiences, getProfile } from '../lib/content';
+import { publishedOnly } from '../lib/content/gate';
+import { checkpoints, currentEducation } from '../lib/content/select';
+import { plannedSteps, toCheckpointView } from '../lib/content/views';
+import { formatMonth } from '../lib/format/dates';
+
+const [profile, education, experiences] = await Promise.all([
+  getProfile(),
+  getEducation(),
+  getExperiences(),
+]);
+
+const t = en.trainingPage;
+const steps = checkpoints(experiences).map(toCheckpointView);
+const nowIndex = steps.length + 1;
+const current = currentEducation(education);
+
+const firstYear = checkpoints(experiences)[0]?.startDate?.slice(0, 4);
+const seeking = `${profile.seeking.role}, ${formatMonth(profile.seeking.start)} · ${profile.seeking.duration}`;
+const next = [seeking, ...plannedSteps(publishedOnly(experiences))];
+---
+
+<BaseLayout title={`${t.title} · ${en.siteName}`} current="training">
+  <PageHeader crumb={t.crumb} title={t.title} intro={t.intro} />
+
+  <section class="curve-band on-ink" aria-label={en.training.curveLabel}>
+    <Container class="curve-inner">
+      <LossCurve
+        count={nowIndex}
+        label={en.training.curveLabel}
+        desktopHeight={260}
+        phoneHeight={110}
+        axis
+      />
+      <p class="axis">
+        <span>{firstYear}</span>
+        <span>{en.training.now}</span>
+      </p>
+    </Container>
+  </section>
+
+  <Container class="rows">
+    {steps.map((step, i) => (
+      <CheckpointRow checkpoint={step} index={i + 1} first={i === 0} />
+    ))}
+    {current && (
+      <NowRow
+        index={nowIndex}
+        period={`${current.startYear} – ${current.endYear ?? en.training.now}`}
+        title={current.institution}
+        subtitle={profile.yearLabel}
+        program={current.program}
+        courses={current.coursework}
+        next={next}
+      />
+    )}
+  </Container>
+
+  <CtaStrip
+    title={t.cta.title}
+    primary={{ label: t.cta.button, href: '/projects' }}
+  />
+</BaseLayout>
+
+<style>
+  .curve-band {
+    background: var(--color-ink);
+    color: var(--color-on-ink);
+    border-block: var(--border-thick);
+  }
+
+  .curve-band :global(.curve-inner) {
+    padding-block: var(--space-8);
+  }
+
+  .axis {
+    display: flex;
+    justify-content: space-between;
+    margin-top: var(--space-2);
+    font-size: var(--text-label-small);
+    color: var(--color-on-ink-muted);
+  }
+
+  :global(.rows) {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    padding-block: var(--space-10);
+  }
+
+  @media (min-width: 48em) {
+    .curve-band :global(.curve-inner) {
+      padding-block: 3.5rem;
+    }
+
+    :global(.rows) {
+      gap: var(--space-8);
+      padding-block: 3.5rem;
+    }
+  }
+</style>

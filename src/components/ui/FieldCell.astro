@@ -1,11 +1,13 @@
 ---
 interface Props {
   label: string;
+  /** "title": short value in the display font (model details); "text": a sentence in body text. */
+  size?: 'title' | 'text';
 }
-const { label } = Astro.props;
+const { label, size = 'title' } = Astro.props;
 ---
 
-<div class="cell">
+<div class:list={['cell', `cell--${size}`]}>
   <dt>{label}</dt>
   <dd>
     <slot />
@@ -28,9 +30,17 @@ const { label } = Astro.props;
 
   dd {
     margin: 0;
+  }
+
+  .cell--title dd {
     font-family: var(--font-display);
     font-size: var(--text-card-title);
     font-weight: 700;
+  }
+
+  .cell--text dd {
+    font-size: clamp(0.875rem, 0.8rem + 0.25vw, 1rem);
+    line-height: 1.6;
   }
 
   @media (min-width: 48em) {

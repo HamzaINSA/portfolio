@@ -4,17 +4,29 @@ import { lossCurve } from '../../lib/charts/loss-curve';
 interface Props {
   count: number;
   label: string;
+  /** Drawing heights (viewBox units) for desktop and phone. */
+  desktopHeight?: number;
+  phoneHeight?: number;
+  /** Draws a baseline under the curve. */
+  axis?: boolean;
 }
-const { count, label } = Astro.props;
+const {
+  count,
+  label,
+  desktopHeight = 200,
+  phoneHeight = 90,
+  axis = false,
+} = Astro.props;
 
 // Two drawings (phone and desktop) so markers keep a readable size; only one is shown at a time.
-const desktop = lossCurve(count, 1280, 200, 10);
-const phone = lossCurve(count, 350, 90, 6);
+const axisGap = axis ? 15 : 0;
+const desktop = lossCurve(count, 1280, desktopHeight - axisGap, 10);
+const phone = lossCurve(count, 350, phoneHeight - axisGap, 6);
 ---
 
 <svg
   class="curve curve--desktop"
-  viewBox="0 0 1280 200"
+  viewBox={`0 0 1280 ${desktopHeight}`}
   role="img"
   aria-label={label}
 >
@@ -24,13 +36,22 @@ const phone = lossCurve(count, 350, 90, 6);
     stroke="currentColor"
     stroke-width="4"
   ></path>
+  {axis && (
+    <line
+      class="baseline"
+      x1="10"
+      y1={desktopHeight - 5}
+      x2="1270"
+      y2={desktopHeight - 5}
+    />
+  )}
   {desktop.points.map((p) => (
     <circle cx={p.x} cy={p.y} r="9" fill="currentColor" />
   ))}
 </svg>
 <svg
   class="curve curve--phone"
-  viewBox="0 0 350 90"
+  viewBox={`0 0 350 ${phoneHeight}`}
   role="img"
   aria-label={label}
 >
@@ -40,6 +61,15 @@ const phone = lossCurve(count, 350, 90, 6);
     stroke="currentColor"
     stroke-width="3"
   ></path>
+  {axis && (
+    <line
+      class="baseline"
+      x1="6"
+      y1={phoneHeight - 4}
+      x2="344"
+      y2={phoneHeight - 4}
+    />
+  )}
   {phone.points.map((p) => (
     <circle cx={p.x} cy={p.y} r="6" fill="currentColor" />
   ))}
@@ -50,6 +80,11 @@ const phone = lossCurve(count, 350, 90, 6);
     width: 100%;
     height: auto;
     color: var(--color-accent);
+  }
+
+  .baseline {
+    stroke: var(--color-muted);
+    stroke-width: 2;
   }
 
   .curve--desktop {

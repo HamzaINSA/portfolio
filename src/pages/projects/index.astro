@@ -1,0 +1,68 @@
+---
+import Container from '../../components/layout/Container.astro';
+import FilterBar from '../../components/projects/FilterBar.astro';
+import ProjectCard from '../../components/projects/ProjectCard.astro';
+import CtaStrip from '../../components/ui/CtaStrip.astro';
+import PageHeader from '../../components/ui/PageHeader.astro';
+import { en } from '../../i18n/en';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getProjects } from '../../lib/content';
+import { projectTopics, publishedProjects } from '../../lib/content/select';
+import { toProjectCardView } from '../../lib/content/views';
+import { FILTER_TOPICS } from '../../lib/filters/topic';
+
+const projects = publishedProjects(await getProjects());
+const cards = projects.map((p) => toProjectCardView(p, FILTER_TOPICS));
+const topics = projectTopics(projects, FILTER_TOPICS);
+const t = en.projectsPage;
+---
+
+<BaseLayout title={`${t.title} · ${en.siteName}`} current="evaluation">
+  <PageHeader crumb={t.crumb} title={t.title} intro={t.intro} />
+
+  <Container class="projects">
+    {topics.length > 0 && (
+      <FilterBar topics={topics} total={cards.length} controls="project-list" />
+    )}
+    <ul class="grid" id="project-list">
+      {cards.map((card) => (
+        <li data-topics={card.topics.join(' ')}>
+          <ProjectCard project={card} />
+        </li>
+      ))}
+    </ul>
+  </Container>
+
+  <CtaStrip
+    title={t.cta.title}
+    primary={{ label: t.cta.button, href: '/ask' }}
+  />
+</BaseLayout>
+
+<style>
+  :global(.projects) {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    padding-bottom: var(--section-pad);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(25rem, 100%), 1fr));
+    gap: var(--space-4);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  @media (min-width: 48em) {
+    :global(.projects) {
+      gap: var(--space-8);
+    }
+
+    .grid {
+      gap: var(--space-6);
+    }
+  }
+</style>

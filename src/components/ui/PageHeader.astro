@@ -1,0 +1,45 @@
+---
+import Container from '../layout/Container.astro';
+
+interface Props {
+  crumb: string;
+  title: string;
+  intro?: string;
+}
+const { crumb, title, intro } = Astro.props;
+---
+
+<Container class="page-header">
+  <p class="crumb">{crumb}</p>
+  <h1>{title}</h1>
+  {intro && <p class="intro">{intro}</p>}
+</Container>
+
+<style>
+  :global(.page-header) {
+    padding-block: var(--space-10) var(--space-8);
+  }
+
+  .crumb {
+    margin-bottom: var(--space-4);
+    font-size: var(--text-label);
+  }
+
+  h1 {
+    font-size: var(--text-page-title);
+    line-height: 0.92;
+    letter-spacing: -0.045em;
+  }
+
+  .intro {
+    max-width: 43.75rem;
+    margin-top: var(--space-5);
+    font-size: clamp(0.9375rem, 0.85rem + 0.35vw, 1.0625rem);
+  }
+
+  @media (min-width: 48em) {
+    :global(.page-header) {
+      padding-block: 3.5rem 2.5rem;
+    }
+  }
+</style>

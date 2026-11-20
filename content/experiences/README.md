@@ -12,7 +12,7 @@ Everything that makes up Hamza's "training run": internships, client missions, a
 
 ## Types
 
-`internship`, `junior-enterprise`, `client-mission` (use `parentId` and `client`), `tutoring`, `program`, `association`, `scholarship`, `academic-plan`, `career-goal`.
+`internship`, `junior-enterprise`, `client-mission` (legacy; projects done with ETIC or as a freelancer go to `../projects/` with `context` and `client`), `tutoring`, `program`, `association`, `scholarship`, `academic-plan`, `career-goal`.
 
 ## Index of current items
 
@@ -20,8 +20,6 @@ Everything that makes up Hamza's "training run": internships, client missions, a
 |---|---|---|---|
 | `delta-quest-internship.json` | internship | verified | From CV; no metrics published |
 | `etic-insa-technologies.json` | junior-enterprise | verified | From CV; current |
-| `etic-mission-planning-automation.json` | client-mission | **to_confirm** | Source is a proposal; client anonymised |
-| `etic-mission-material-flow-prototype.json` | client-mission | **to_confirm** | Source is a proposal; client anonymised |
 | `academic-tutor.json` | tutoring | verified | From CV |
 | `aedi-general-secretary.json` | association | verified | From CV |
 | `georges-besse-foundation.json` | scholarship | verified | From CV |
@@ -32,13 +30,11 @@ Everything that makes up Hamza's "training run": internships, client missions, a
 
 ## Open questions for Hamza (ask in French, one by one)
 
-1. **Missions: real status.** The two proposals are not proof of signature or delivery (one has a validity date that has passed or is about to; the planned schedule of the other runs into 2027). For each: signed? started? delivered? What exactly was Hamza's part? He is listed with other team members on one of them.
-2. **Missions: naming.** Keep the clients anonymous (default), or name them? Naming needs agreement of ETIC and the client. Hamza named one client's parent group in his message and spelled another client's name differently from the proposal; do not name anyone until he confirms spelling and permission.
-3. **J'ai PiGé:** the CV lists it as a personal project (June to August 2026) while an ETIC proposal calls it an ETIC mission. Which is right? It changes how it is described (see `../projects/jai-pige.json`).
-4. **Propulseo and Asys:** what is Propulseo (program, incubator, association?), since when, what did Asys do ("propulsé par Asys")? How should it be worded?
-5. **KTH double degree:** programme name, exact dates, admission confirmed or still pending, and what happens to the 5th year at INSA Lyon.
-6. **Delta Quest:** may figures be published for the latency reduction and relevance improvement? Only with a verifiable source; otherwise keep the qualitative wording.
-7. **Dates:** exact start and end months for tutoring (CV gives 2023 to 2026), the Entrepreneurship Track and the Georges Besse Foundation.
+1. **ETIC projects** now live in `../projects/` (Hamza, 2026-11-20: work done with ETIC or as a freelancer is a project; experiences are roles such as internships or tutoring). Their remaining questions are in each project file: dates, and naming of clients (anonymous until ETIC and the client agree).
+2. **Propulseo and Asys:** what is Propulseo (program, incubator, association?), since when, what did Asys do ("propulsé par Asys")? How should it be worded?
+3. **KTH double degree:** programme name, exact dates, admission confirmed or still pending, and what happens to the 5th year at INSA Lyon.
+4. **Delta Quest:** may figures be published for the latency reduction and relevance improvement? Only with a verifiable source; otherwise keep the qualitative wording.
+5. **Dates:** exact start and end months for tutoring (CV gives 2023 to 2026), the Entrepreneurship Track and the Georges Besse Foundation.
 
 ## Rules specific to this folder
 

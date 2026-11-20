@@ -84,7 +84,11 @@ const cards = featuredProjects(projects).map((p) => ({
     <EvaluationPreview projects={cards} allHref="/projects" />
   )}
 
-  <CtaStrip contactHref="/about#contact" />
+  <CtaStrip
+    title={en.cta.title}
+    primary={{ label: en.cta.contact, href: '/about#contact' }}
+    secondary={{ label: en.cta.ask, href: en.nav.cta.href }}
+  />
 </BaseLayout>
 
 <style>
