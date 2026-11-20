@@ -10,14 +10,14 @@
   },
   "startDate": null,
   "endDate": null,
-  "current": false,
+  "current": true,
   "featured": false,
   "summary": "Python prototype that computes material flows for a territory in a traceable and reproducible way, with AI assistants that cite their sources.",
   "highlights": [
-    "Scoped a Python prototype that reads an existing Excel data catalogue in read-only mode and computes material flows for a territory.",
-    "Planned Sankey diagrams and sourced exports, with snapshots so that any result can be recomputed identically.",
-    "Specified AI assistants that cite their sources and have no influence on the calculations, which stay deterministic.",
-    "Planned an evaluation against a manual reference analysis: fidelity flow by flow, coverage, reproducibility and time to completion."
+    "Building a Python prototype that reads an existing Excel data catalogue in read-only mode and computes material flows for a territory.",
+    "Designing Sankey diagrams and sourced exports, with snapshots so that any result can be recomputed identically.",
+    "Designing AI assistants that cite their sources and have no influence on the calculations, which stay deterministic.",
+    "Preparing an evaluation against a manual reference analysis: fidelity flow by flow, coverage, reproducibility and time to completion."
   ],
   "stack": [
     "Python",
@@ -40,7 +40,7 @@
     "method": "Deterministic Python computation with snapshots; AI assistants that cite sources and do not influence the calculations.",
     "metric": "Fidelity flow by flow against a manual reference analysis, coverage, reproducibility and time to completion.",
     "result": null,
-    "myRole": null
+    "myRole": "The whole project, in progress: scoping, design, build and evaluation."
   },
   "retrospective": {
     "worked": null,
@@ -48,12 +48,12 @@
     "next": null
   },
   "links": [],
-  "status": "to_confirm",
+  "status": "verified",
   "openQuestions": [
-    "Status: the proposal's planned schedule runs into 2027. Is the project finished, in progress, or only signed? The verbs (scoped, planned, specified) must match reality before publishing.",
-    "Start and end months?",
+    "Start month, and end month once finished?",
     "May the client be named? Hamza wrote the name differently from the proposal; confirm spelling and the agreement of ETIC and the client first.",
-    "Result of the evaluation against the manual reference, if done: publish only with a source [SOURCE NEEDED]."
+    "Result of the evaluation against the manual reference, once done: publish only with a source [SOURCE NEEDED].",
+    "Switch the verbs to the past tense and set current to false when the project is finished."
   ],
-  "internalNote": "Moved from experiences/ on 2026-11-20 (ETIC work counts as projects). Written from an ETIC commercial proposal kept out of the repo; Hamza confirmed on 2026-11-20 that he did everything the proposal describes (myRole to fill once the status is known). Do not copy the proposal's text, names, figures or prices. Do not mention the doctoral thesis context."
+  "internalNote": "Moved from experiences/ on 2026-11-20 (ETIC work counts as projects). Written from an ETIC commercial proposal kept out of the repo. Hamza confirmed on 2026-11-20 that he does everything the proposal describes and that the project is in progress. Do not copy the proposal's text, names, figures or prices. Do not mention the doctoral thesis context."
 }
