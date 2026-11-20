@@ -42,19 +42,16 @@ describe('isPublishable', () => {
 });
 
 describe('requiredPublicIssues', () => {
-  it('reports an empty email and CV', () => {
+  it('reports an empty email', () => {
     const issues = requiredPublicIssues(
-      { contact: { email: null }, cv: { path: null } },
+      { contact: { email: null } },
       'profile.json',
     );
-    expect(issues.map((i) => i.path)).toEqual(['contact.email', 'cv.path']);
+    expect(issues.map((i) => i.path)).toEqual(['contact.email']);
   });
   it('passes when both are set', () => {
     expect(
-      requiredPublicIssues(
-        { contact: { email: 'a@b.c' }, cv: { path: '/cv/x.pdf' } },
-        'profile.json',
-      ),
+      requiredPublicIssues({ contact: { email: 'a@b.c' } }, 'profile.json'),
     ).toEqual([]);
   });
 });

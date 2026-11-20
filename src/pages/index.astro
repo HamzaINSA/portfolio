@@ -21,6 +21,7 @@ import {
   featuredProjects,
 } from '../lib/content/select';
 import { formatMonth } from '../lib/format/dates';
+import { bioParagraphs } from '../lib/content/views';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const [profile, education, experiences, projects, knowledgeBase] =
@@ -65,7 +66,6 @@ const cards = featuredProjects(projects).map((p) => ({
       version={profile.modelVersion}
       period={period}
       intro={intro}
-      cvPath={profile.cv.path}
     />
     <ConsoleTeaser suggestions={suggestions} />
   </Container>
@@ -74,7 +74,7 @@ const cards = featuredProjects(projects).map((p) => ({
     version={`${profile.modelVersion}, ${profile.school} ${profile.yearLabel}`}
     architecture={education_?.program ?? null}
     intendedUse={profile.seeking.role}
-    bio={profile.bio}
+    bio={bioParagraphs(profile.bio)[0] ?? null}
     aboutHref="/about"
   />
 

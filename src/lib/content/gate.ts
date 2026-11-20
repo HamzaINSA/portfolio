@@ -43,9 +43,8 @@ export function publishedOnly<T>(items: readonly T[]): T[] {
 
 /** Public fields the site cannot go live without (strict mode only). */
 export function requiredPublicIssues(profile: unknown, file: string): Issue[] {
-  const p = profile as { contact?: { email?: unknown }; cv?: { path?: unknown } } | null;
+  const p = profile as { contact?: { email?: unknown } } | null;
   const issues: Issue[] = [];
   if (!p?.contact?.email) issues.push({ file, path: 'contact.email', message: 'required public field is empty' });
-  if (!p?.cv?.path) issues.push({ file, path: 'cv.path', message: 'required public field is empty' });
   return issues;
 }

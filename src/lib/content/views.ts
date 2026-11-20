@@ -1,6 +1,7 @@
 import { displayClient } from './anonymise';
 import { formatRange } from '../format/dates';
-import type { Experience, Project } from './types';
+import { publishedOnly } from './gate';
+import type { Experience, Project, Skills } from './types';
 
 /** Display-safe fields of a checkpoint. Components receive this, never the raw experience. */
 export interface CheckpointView {
@@ -121,4 +122,33 @@ export function toProjectDetailView(
       return filled(text) ? [{ key, text }] : [];
     }),
   };
+}
+
+/** The bio split into paragraphs (blank-line separated). Empty or null gives []. */
+export function bioParagraphs(bio: string | null | undefined): string[] {
+  return (bio ?? '')
+    .split(/\n\s*\n/)
+    .map((p) => p.trim())
+    .filter(Boolean);
+}
+
+/** Published goals for the "next training run" block: academic plans first, then career goals. */
+export function nextRunSteps(experiences: readonly Experience[]): string[] {
+  const published = publishedOnly(experiences);
+  return [
+    ...published.filter((e) => e.type === 'academic-plan'),
+    ...published.filter((e) => e.type === 'career-goal'),
+  ].map((e) => e.summary);
+}
+
+/** Capability columns of the About page: skill groups, then spoken languages with their level. */
+export function capabilityGroups(
+  skills: Skills,
+  spokenLabel: string,
+): { label: string; items: string[] }[] {
+  const groups = skills.groups
+    .filter((g) => g.items.length > 0)
+    .map((g) => ({ label: g.label, items: g.items }));
+  const spoken = skills.spoken.map((s) => `${s.language} (${s.level})`);
+  return spoken.length > 0 ? [...groups, { label: spokenLabel, items: spoken }] : groups;
 }

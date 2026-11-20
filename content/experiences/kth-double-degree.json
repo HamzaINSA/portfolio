@@ -2,7 +2,9 @@
   "id": "kth-double-degree",
   "type": "academic-plan",
   "title": "Double degree at KTH",
-  "organization": { "name": "KTH Royal Institute of Technology" },
+  "organization": {
+    "name": "KTH Royal Institute of Technology"
+  },
   "location": "Stockholm, Sweden",
   "startDate": "2027",
   "endDate": null,
@@ -12,13 +14,17 @@
   "highlights": [],
   "learned": [],
   "stack": [],
-  "tags": ["machine-learning", "international", "education"],
+  "tags": [
+    "machine-learning",
+    "international",
+    "education"
+  ],
   "links": [],
   "status": "to_confirm",
   "openQuestions": [
-    "Hamza said he will do a double degree at KTH next year to specialise in machine learning. Is admission confirmed or pending? Programme name? Exact dates (academic year 2027 to 2028)?",
-    "How does it fit with the 5th year at INSA Lyon (education.json lists 2025 to 2028)?",
-    "May it be published as 'planned' only after admission is confirmed?"
+    "Admission is pending (Hamza, 2026-11-20). The bio mentions KTH as a plan ('I plan to join'); this item stays to_confirm until admission is confirmed.",
+    "Programme name and exact dates (academic year 2027 to 2028)?",
+    "How does it fit with the 5th year at INSA Lyon (education.json lists 2025 to 2028)?"
   ],
   "internalNote": "Source: Hamza's message only. Not in the CV. Not published until confirmed."
 }

@@ -8,9 +8,8 @@ interface Props {
   version: string;
   period: string;
   intro: string;
-  cvPath: string | null;
 }
-const { firstName, version, period, intro, cvPath } = Astro.props;
+const { firstName, version, period, intro } = Astro.props;
 ---
 
 <div class="hero-copy">
@@ -33,12 +32,6 @@ const { firstName, version, period, intro, cvPath } = Astro.props;
       <span>{en.hero.ask}</span>
       <span aria-hidden="true">→</span>
     </Button>
-    {cvPath && (
-      <Button href={cvPath} variant="secondary">
-        <span>{en.hero.cv}</span>
-        <span aria-hidden="true">↓</span>
-      </Button>
-    )}
   </div>
 </div>
 

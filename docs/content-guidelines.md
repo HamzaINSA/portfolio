@@ -12,7 +12,7 @@ All facts about Hamza live in `content/`. This file explains how to write, verif
 
 ## Publish gate (enforced by `check:content --strict`)
 
-A production build fails if any published field contains `[TO CONFIRM]` or `[SOURCE NEEDED]`, if an item has `status: "to_confirm"`, or if a required public field is empty (`profile.contact.email`, `profile.cv.path`). Items with `to_confirm` are not rendered on the site and not included in the chatbot bundle in production.
+A production build fails if any published field contains `[TO CONFIRM]` or `[SOURCE NEEDED]`, if an item has `status: "to_confirm"`, or if a required public field is empty (`profile.contact.email`). Items with `to_confirm` are not rendered on the site and not included in the chatbot bundle in production.
 
 ## Confidentiality
 

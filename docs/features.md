@@ -65,8 +65,8 @@ Mockup: `ProjectDetail.dc.html`. Route `/projects/<slug>`.
 Mockup: `About.dc.html`. Route `/about`, contact block at `#contact`.
 
 - Bio (`profile.bio`), intended use, strengths, known limitations, out of scope, capabilities (from `skills`), "next training run" (from goals), optional photo.
-- Contact: email button, LinkedIn, GitHub, CV download, and a contact form that **opens the visitor's mail client** with a prefilled subject and body (`mailto:`), no backend, nothing stored. Keep the note "Your message goes to my email only. Nothing is stored on this site." only while that is true.
-- CV button points to `profile.cv.path`; hidden if null (and strict build fails if still null, since CV is required for V1).
+- Contact: email button, LinkedIn, GitHub, and a contact form that **opens the visitor's mail client** with a prefilled subject and body (`mailto:`), no backend, nothing stored. Keep the note "Your message goes to my email only. Nothing is stored on this site." only while that is true.
+- No CV download (Hamza, 2026-11-20): the site itself plays the role of the CV, and recruiters already receive the CV with each application.
 
 ## F8. Ask the model: chatbot (P0)
 
