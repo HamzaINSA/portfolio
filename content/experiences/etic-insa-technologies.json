@@ -21,11 +21,15 @@
     "Keeping deadlines under control."
   ],
   "stack": [],
-  "tags": ["consulting", "client-facing", "project-management"],
+  "tags": [
+    "consulting",
+    "client-facing",
+    "project-management"
+  ],
   "links": [],
   "status": "verified",
   "openQuestions": [
     "The CV says engagements 'worth several thousand euros'. Do not publish amounts."
   ],
-  "internalNote": "Sources: CV and cover letter. Specific client missions are separate files (parentId = this id)."
+  "internalNote": "Sources: CV and cover letter. Projects done with ETIC live in content/projects/ (context \"ETIC INSA Technologies\"), as Hamza decided on 2026-11-20."
 }

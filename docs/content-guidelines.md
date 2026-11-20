@@ -29,7 +29,7 @@ Two ETIC proposals were provided to explain what Hamza did. They are proposals, 
 - One has a validity date and a planned schedule that run past today. It is not proof that the mission is signed, started or delivered.
 - Each lists several team members. Hamza's exact role and scope are not stated for every mission.
 
-Therefore both mission files are `status: "to_confirm"` with questions in `openQuestions`. Confirm with Hamza: is it signed, in progress or delivered; what exactly did he do; may it be described, and how (anonymised or named).
+Both are now projects in `content/projects/` (`context: "ETIC INSA Technologies"`, anonymous `client`). On 2026-11-20 Hamza confirmed that he did everything each proposal describes. The planning automation tool is `verified`; the material flow prototype stays `to_confirm` until its status is known, because its planned schedule runs into 2027. Clients stay anonymous until ETIC and the client agree.
 
 ## Wording for experiences
 

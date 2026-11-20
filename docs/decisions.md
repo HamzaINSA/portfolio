@@ -26,7 +26,7 @@ Hamza delegates technical choices to Claude Code. The decisions below are propos
 | O2 | Which email to publish. The INSA address stops working after graduation | A durable personal address |
 | O3 | Public CV file: which version (the current CV contains a phone number) | A public-safe CV without phone and address, placed in `public/cv/` |
 | O4 | Photo on the About page (mockup shows an optional slot) | Optional; ask |
-| O5 | Naming clients of missions (see `content/experiences/`) | Keep anonymous until ETIC and the client agree |
+| O5 | Naming clients of ETIC and freelance projects (see `content/projects/`) | Keep anonymous until ETIC and the client agree |
 | O6 | Licence for the code (MIT or similar) and the statement for content | Ask; content stays all rights reserved |
 | O7 | Legal notice and privacy page (needed for a public site run by a person in France) | Propose a short draft; Hamza validates. Claude Code is not a lawyer |
 | O8 | Details missing from content (see `[TO CONFIRM]` markers) | Resolve through `content/experiences/README.md` checklist |

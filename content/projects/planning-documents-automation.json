@@ -1,0 +1,55 @@
+{
+  "id": "planning-documents-automation",
+  "title": "Planning documents automation tool",
+  "role": "Developer and technical consultant",
+  "context": "ETIC INSA Technologies",
+  "client": {
+    "disclosure": "anonymous",
+    "descriptor": "a French road-construction company",
+    "publicName": null
+  },
+  "startDate": null,
+  "endDate": null,
+  "current": false,
+  "featured": false,
+  "summary": "Tool that generates planning documents automatically from a planning software's exports, for a road-construction company.",
+  "highlights": [
+    "Built a tool that generates weekly planning documents, site organisation notes and a long-term tonnage plan from exports of the client's planning software, replacing manual re-entry.",
+    "Chose Excel with Power Query, macros and SharePoint, tools the client already uses, so that the client can maintain the solution without a new licence or server.",
+    "Added automatic consistency checks on dates and tonnages, with missing information entered only once.",
+    "Delivered a user guide, technical documentation and a training session so that the client can maintain the tool in-house."
+  ],
+  "stack": [
+    "Excel",
+    "Power Query",
+    "Excel macros",
+    "SharePoint"
+  ],
+  "tags": [
+    "data",
+    "automation",
+    "client-facing"
+  ],
+  "card": {
+    "task": "Generate weekly planning documents, site organisation notes and a long-term tonnage plan automatically instead of re-entering them by hand.",
+    "data": "Exports of the client's planning software.",
+    "method": "Excel with Power Query, macros and SharePoint, with automatic consistency checks on dates and tonnages.",
+    "metric": null,
+    "result": null,
+    "myRole": "The whole project: requirements analysis, design, build, documentation and client training."
+  },
+  "retrospective": {
+    "worked": null,
+    "failed": null,
+    "next": null
+  },
+  "links": [],
+  "status": "verified",
+  "openQuestions": [
+    "Start and end months?",
+    "May the client be named? Only with the agreement of ETIC and the client (keep anonymous until then).",
+    "Any measurable result (time saved per week, errors avoided)? Publish only with a source: [SOURCE NEEDED].",
+    "What worked, what failed, what is next? Pages omit empty blocks."
+  ],
+  "internalNote": "Moved from experiences/ on 2026-11-20 (ETIC work counts as projects). Written from an ETIC commercial proposal kept out of the repo; Hamza confirmed on 2026-11-20 that he did everything the proposal describes. Do not copy the proposal's text, names, figures or prices."
+}
