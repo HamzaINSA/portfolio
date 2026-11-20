@@ -164,3 +164,43 @@ describe('displayClient', () => {
     ).toBe('d');
   });
 });
+
+import { plannedSteps, toCheckpointView } from '../../src/lib/content/views';
+
+describe('toCheckpointView', () => {
+  it('formats the period and prefers the display name of the organisation', () => {
+    const view = toCheckpointView(
+      exp({
+        startDate: '2026-05',
+        endDate: null,
+        organization: { name: 'ETIC', displayName: 'ETIC (junior enterprise)' },
+      }),
+    );
+    expect(view.period).toBe('May 2026 – now');
+    expect(view.organization).toBe('ETIC (junior enterprise)');
+    expect(view.client).toBeNull();
+  });
+  it('never exposes a client name that is not disclosed', () => {
+    const view = toCheckpointView(
+      exp({
+        client: {
+          disclosure: 'anonymous',
+          descriptor: 'a consulting firm',
+          publicName: 'Secret',
+        },
+      }),
+    );
+    expect(view.client).toBe('a consulting firm');
+    expect(JSON.stringify(view)).not.toContain('Secret');
+  });
+});
+
+describe('plannedSteps', () => {
+  it('lists the titles of academic plans only', () => {
+    const steps = plannedSteps([
+      exp({ type: 'academic-plan', title: 'Double degree' }),
+      exp({ type: 'internship', title: 'Other' }),
+    ]);
+    expect(steps).toEqual(['Double degree']);
+  });
+});

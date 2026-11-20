@@ -47,6 +47,24 @@ export const en = {
     now: 'now',
   },
   evaluation: { title: 'Evaluation', all: 'all projects →' },
+  trainingPage: {
+    title: 'Training run',
+    crumb: '/ training',
+    intro:
+      'Every checkpoint is a period where I learned something that changed how I work. The curve is a schematic of my path, not real metrics.',
+    now: 'NOW',
+    checkpoint: 'CHECKPOINT',
+    did: 'what I did',
+    learned: 'what I learned',
+    stack: 'stack',
+    ask: 'ask about this →',
+    askQuestion: (organization: string) =>
+      `What did Hamza do at ${organization}?`,
+    program: 'program',
+    courses: 'relevant courses',
+    next: 'next',
+    cta: { title: 'See how this was evaluated.', button: 'EVALUATION →' },
+  },
   cta: {
     title: 'Ready for your next training run.',
     contact: 'CONTACT →',

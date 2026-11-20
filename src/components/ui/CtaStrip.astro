@@ -1,22 +1,25 @@
 ---
-import { en } from '../../i18n/en';
 import Container from '../layout/Container.astro';
 import Button from './Button.astro';
 
 interface Props {
-  contactHref: string;
+  title: string;
+  primary: { label: string; href: string };
+  secondary?: { label: string; href: string };
 }
-const { contactHref } = Astro.props;
+const { title, primary, secondary } = Astro.props;
 ---
 
 <section class="cta-strip">
   <Container class="cta-inner">
-    <p class="cta-title">{en.cta.title}</p>
+    <p class="cta-title">{title}</p>
     <div class="cta-actions">
-      <Button href={contactHref}>{en.cta.contact}</Button>
-      <Button href={en.nav.cta.href} variant="secondary">
-        {en.cta.ask}
-      </Button>
+      <Button href={primary.href}>{primary.label}</Button>
+      {secondary && (
+        <Button href={secondary.href} variant="secondary">
+          {secondary.label}
+        </Button>
+      )}
     </div>
   </Container>
 </section>

@@ -1,0 +1,124 @@
+---
+import { en } from '../../i18n/en';
+
+interface Props {
+  index: number;
+  period: string;
+  title: string;
+  subtitle: string;
+  program: string;
+  courses: string[];
+  next: string[];
+}
+const { index, period, title, subtitle, program, courses, next } = Astro.props;
+const t = en.trainingPage;
+---
+
+<article class="row on-ink">
+  <header class="side">
+    <p class="number">
+      {t.checkpoint} {index} · {t.now}
+    </p>
+    <p class="period">{period}</p>
+    <h2>
+      {title}
+      <br />
+      {subtitle}
+    </h2>
+  </header>
+  <div class="body">
+    <section>
+      <h3>{t.program}</h3>
+      <p>{program}</p>
+    </section>
+    {courses.length > 0 && (
+      <section>
+        <h3>{t.courses}</h3>
+        <p>{courses.join(' · ')}</p>
+      </section>
+    )}
+    {next.length > 0 && (
+      <section>
+        <h3>{t.next}</h3>
+        {next.map((n) => (
+          <p>{n}</p>
+        ))}
+      </section>
+    )}
+  </div>
+</article>
+
+<style>
+  .row {
+    display: grid;
+    grid-template-columns: 1fr;
+    background: var(--color-ink);
+    color: var(--color-on-ink);
+    border: var(--border-thick);
+  }
+
+  .side {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding: var(--space-5);
+    border-bottom: 2px solid var(--color-ink-line);
+  }
+
+  .number {
+    font-size: var(--text-label);
+    font-weight: 700;
+    color: var(--color-accent);
+  }
+
+  .period {
+    font-size: 0.875rem;
+    color: var(--color-on-ink-muted);
+  }
+
+  h2 {
+    font-size: clamp(1.375rem, 1.1rem + 0.9vw, 1.75rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+
+  .body {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(15rem, 100%), 1fr));
+    gap: var(--space-5);
+    padding: var(--space-5);
+  }
+
+  section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    font-size: 0.9375rem;
+  }
+
+  h3 {
+    font-family: var(--font-mono);
+    font-size: var(--text-label-small);
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: var(--leading-body);
+    color: var(--color-on-ink-muted);
+  }
+
+  @media (min-width: 48em) {
+    .row {
+      grid-template-columns: 1fr 2fr;
+    }
+
+    .side {
+      padding: 1.75rem;
+      border-right: 2px solid var(--color-ink-line);
+      border-bottom: 0;
+    }
+
+    .body {
+      gap: var(--space-6);
+      padding: 1.75rem;
+    }
+  }
+</style>
