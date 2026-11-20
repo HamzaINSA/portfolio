@@ -97,6 +97,25 @@ test.describe('Evaluation page', () => {
     ).toBeVisible();
   });
 
+  test('shows project logos from the site itself', async ({ page }) => {
+    await page.goto('/projects');
+    const logos = page.locator('#project-list img');
+    await expect(logos).toHaveCount(3);
+    for (const src of await logos.evaluateAll((imgs) =>
+      imgs.map((i) => (i as HTMLImageElement).getAttribute('src')),
+    )) {
+      expect(src).toMatch(/^\/images\/projects\//);
+    }
+    // Every logo file loads.
+    await page.evaluate(() =>
+      Promise.all(
+        [...document.querySelectorAll('#project-list img')].map((i) =>
+          (i as HTMLImageElement).decode(),
+        ),
+      ),
+    );
+  });
+
   test('has no horizontal scroll', async ({ page }) => {
     await page.goto('/projects');
     const overflow = await page.evaluate(

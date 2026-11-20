@@ -8,6 +8,10 @@
     "descriptor": "an environmental and territorial consulting firm",
     "publicName": "Inddigo"
   },
+  "image": {
+    "src": "/images/projects/inddigo.webp",
+    "alt": ""
+  },
   "startDate": null,
   "endDate": null,
   "current": true,

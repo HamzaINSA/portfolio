@@ -3,6 +3,10 @@
   "title": "J'ai PiGé",
   "role": null,
   "context": "ETIC INSA Technologies",
+  "image": {
+    "src": "/images/projects/jai-pige.webp",
+    "alt": ""
+  },
   "startDate": "2026-06",
   "endDate": "2026-08",
   "current": false,

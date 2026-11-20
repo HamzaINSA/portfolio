@@ -8,6 +8,10 @@
     "descriptor": "a French road-construction company",
     "publicName": "VINCI"
   },
+  "image": {
+    "src": "/images/projects/vinci.svg",
+    "alt": ""
+  },
   "startDate": null,
   "endDate": null,
   "current": true,

@@ -75,8 +75,9 @@ const when = [project.year, project.current && t.inProgress]
     border-bottom: var(--border-thick);
   }
 
+  /* Caps the width so wide wordmarks do not outweigh tall logos. */
   .media img {
-    max-width: 100%;
+    max-width: min(100%, 13rem);
     max-height: 100%;
     object-fit: contain;
   }
