@@ -44,9 +44,24 @@ describe('toProjectCardView', () => {
       summary: 'A summary.',
       topic: 'llm',
       topics: ['llm', 'mobile'],
+      context: null,
+      client: null,
       year: '2026',
       stack: ['TypeScript', 'Astro'],
     });
+  });
+  it('shows the frame and an anonymous client, never the real name by default', () => {
+    const view = toProjectCardView({
+      ...project,
+      context: 'ETIC INSA Technologies',
+      client: {
+        disclosure: 'anonymous',
+        descriptor: 'a road-construction company',
+        publicName: 'Hidden Corp',
+      },
+    });
+    expect(view.context).toBe('ETIC INSA Technologies');
+    expect(view.client).toBe('a road-construction company');
   });
   it('has no chip when there is no tag', () => {
     expect(toProjectCardView({ ...project, tags: [] }).topic).toBeNull();

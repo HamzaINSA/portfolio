@@ -12,6 +12,15 @@ const status = z.enum(['verified', 'to_confirm']);
 const stringList = z.array(z.string()).default([]);
 const link = z.object({ label: z.string(), url: z.url() }).strict();
 
+/** Client of a mission or project. Anonymous by default (decision D8). */
+const clientSchema = z
+  .object({
+    disclosure: z.enum(['anonymous', 'named']),
+    descriptor: z.string().min(1),
+    publicName: z.string().nullable().optional(),
+  })
+  .strict();
+
 export const experienceSchema = z
   .object({
     id: kebabId,
@@ -40,14 +49,7 @@ export const experienceSchema = z
     stack: stringList,
     tags: stringList,
     links: z.array(link).default([]),
-    client: z
-      .object({
-        disclosure: z.enum(['anonymous', 'named']),
-        descriptor: z.string(),
-        publicName: z.string().nullable().optional(),
-      })
-      .strict()
-      .optional(),
+    client: clientSchema.optional(),
     status,
     openQuestions: stringList,
     internalNote: z.string().optional(),
@@ -69,6 +71,9 @@ export const projectSchema = z
     highlights: stringList,
     stack: stringList,
     tags: stringList,
+    /** Frame the project was done in, for example "ETIC INSA Technologies". Null or absent for personal projects. */
+    context: nullableText,
+    client: clientSchema.optional(),
     card: z
       .object({
         task: nullableText,

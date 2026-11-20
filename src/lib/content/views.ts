@@ -43,6 +43,10 @@ export interface ProjectCardView {
   topic: string | null;
   /** All tags, used by the topic filter. */
   topics: string[];
+  /** Frame of the project ("ETIC INSA Technologies"), or null for a personal project. */
+  context: string | null;
+  /** Neutral client description (anonymous by default), or null. */
+  client: string | null;
   /** "2026", "2025–2026", or null when the start date is unknown (the year is then omitted). */
   year: string | null;
   stack: string[];
@@ -67,6 +71,8 @@ export function toProjectCardView(p: Project): ProjectCardView {
     summary: p.summary,
     topic: p.tags[0] ?? null,
     topics: p.tags,
+    context: p.context ?? null,
+    client: displayClient(p),
     year: yearSpan(p.startDate, p.endDate),
     stack: p.stack,
   };

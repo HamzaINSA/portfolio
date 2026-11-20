@@ -7,6 +7,13 @@ interface Props {
   project: ProjectCardView;
 }
 const { project } = Astro.props;
+const t = en.projectsPage;
+const frame = [
+  project.context && t.context(project.context),
+  project.client && t.client(project.client),
+]
+  .filter(Boolean)
+  .join(' · ');
 // No image area: projects have no image yet, and empty blocks are omitted (design-spec).
 ---
 
@@ -18,9 +25,10 @@ const { project } = Astro.props;
     </span>
   )}
   <h2 class="title">{project.title}</h2>
+  {frame && <p class="frame">{frame}</p>}
   <p class="summary">{project.summary}</p>
   {project.stack.length > 0 && <p class="stack">{project.stack.join(' · ')}</p>}
-  <span class="open">{en.projectsPage.open}</span>
+  <span class="open">{t.open}</span>
 </a>
 
 <style>
@@ -63,6 +71,11 @@ const { project } = Astro.props;
     font-weight: 700;
     line-height: 1.1;
     letter-spacing: normal;
+  }
+
+  .frame {
+    font-size: var(--text-label);
+    font-weight: 700;
   }
 
   .summary {

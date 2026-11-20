@@ -4,39 +4,175 @@
   "title": "Project",
   "description": "One project of the Evaluation page. Any null field is omitted from the page (never shown empty).",
   "type": "object",
-  "required": ["id", "title", "summary", "status"],
+  "required": [
+    "id",
+    "title",
+    "summary",
+    "status"
+  ],
   "additionalProperties": false,
   "properties": {
-    "id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
-    "title": { "type": "string", "minLength": 1 },
-    "role": { "type": ["string", "null"] },
-    "startDate": { "type": ["string", "null"], "pattern": "^\\d{4}(-\\d{2})?$" },
-    "endDate": { "type": ["string", "null"], "pattern": "^\\d{4}(-\\d{2})?$" },
-    "current": { "type": "boolean", "default": false },
-    "featured": { "type": "boolean", "default": false, "description": "Shown in the Home evaluation preview." },
-    "summary": { "type": "string", "minLength": 1 },
-    "highlights": { "type": "array", "items": { "type": "string" }, "default": [] },
-    "stack": { "type": "array", "items": { "type": "string" }, "default": [] },
-    "tags": { "type": "array", "items": { "type": "string" }, "default": [] },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "role": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "startDate": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^\\d{4}(-\\d{2})?$"
+    },
+    "endDate": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^\\d{4}(-\\d{2})?$"
+    },
+    "current": {
+      "type": "boolean",
+      "default": false
+    },
+    "featured": {
+      "type": "boolean",
+      "default": false,
+      "description": "Shown in the Home evaluation preview."
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "highlights": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "stack": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "context": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Frame of the project, for example \"ETIC INSA Technologies\" or freelance. Null for personal projects."
+    },
+    "client": {
+      "type": "object",
+      "description": "Client of the project, if any. Anonymous by default.",
+      "required": [
+        "disclosure",
+        "descriptor"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "disclosure": {
+          "enum": [
+            "anonymous",
+            "named"
+          ]
+        },
+        "descriptor": {
+          "type": "string",
+          "description": "Neutral description shown when anonymous."
+        },
+        "publicName": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Used only if disclosure is named and Hamza confirmed that ETIC and the client agree."
+        }
+      }
+    },
     "card": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "task": { "type": ["string", "null"] },
-        "data": { "type": ["string", "null"] },
-        "method": { "type": ["string", "null"] },
-        "metric": { "type": ["string", "null"] },
-        "result": { "type": ["string", "null"] },
-        "myRole": { "type": ["string", "null"] }
+        "task": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "data": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "method": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "metric": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "result": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "myRole": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
       }
     },
     "retrospective": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "worked": { "type": ["string", "null"] },
-        "failed": { "type": ["string", "null"] },
-        "next": { "type": ["string", "null"] }
+        "worked": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "failed": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "next": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
       }
     },
     "links": {
@@ -44,13 +180,37 @@
       "default": [],
       "items": {
         "type": "object",
-        "required": ["label", "url"],
+        "required": [
+          "label",
+          "url"
+        ],
         "additionalProperties": false,
-        "properties": { "label": { "type": "string" }, "url": { "type": "string", "format": "uri" } }
+        "properties": {
+          "label": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string",
+            "format": "uri"
+          }
+        }
       }
     },
-    "status": { "enum": ["verified", "to_confirm"] },
-    "openQuestions": { "type": "array", "items": { "type": "string" }, "default": [] },
-    "internalNote": { "type": "string" }
+    "status": {
+      "enum": [
+        "verified",
+        "to_confirm"
+      ]
+    },
+    "openQuestions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "internalNote": {
+      "type": "string"
+    }
   }
 }

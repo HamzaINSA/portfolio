@@ -73,6 +73,8 @@ export const en = {
     filterLabel: 'Filter projects by topic',
     all: 'All',
     open: 'open case study →',
+    context: (frame: string) => `with ${frame}`,
+    client: (client: string) => `for ${client}`,
     count: { one: '1 project shown', many: '{n} projects shown' },
     cta: {
       title: 'Something missing? Ask the model.',
