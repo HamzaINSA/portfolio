@@ -65,6 +65,20 @@ export const en = {
     next: 'next',
     cta: { title: 'See how this was evaluated.', button: 'EVALUATION →' },
   },
+  projectsPage: {
+    title: 'Evaluation',
+    crumb: '/ evaluation',
+    intro:
+      "What I built, how I measured it, and what didn't work. Filter by topic.",
+    filterLabel: 'Filter projects by topic',
+    all: 'All',
+    open: 'open case study →',
+    count: { one: '1 project shown', many: '{n} projects shown' },
+    cta: {
+      title: 'Something missing? Ask the model.',
+      button: 'ASK THE MODEL →',
+    },
+  },
   cta: {
     title: 'Ready for your next training run.',
     contact: 'CONTACT →',

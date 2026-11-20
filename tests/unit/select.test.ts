@@ -5,6 +5,8 @@ import {
   currentEducation,
   entriesById,
   featuredProjects,
+  projectTopics,
+  publishedProjects,
 } from '../../src/lib/content/select';
 import type {
   EducationItem,
@@ -75,6 +77,29 @@ describe('featuredProjects', () => {
       proj({ id: 'draft', status: 'to_confirm' }),
     ]);
     expect(result.map((p) => p.id)).toEqual(['new', 'old']);
+  });
+});
+
+describe('publishedProjects', () => {
+  it('keeps verified projects, featured or not, newest first, undated last', () => {
+    const result = publishedProjects([
+      proj({ id: 'old', startDate: '2025-01', featured: false }),
+      proj({ id: 'new', startDate: '2026-06' }),
+      proj({ id: 'undated' }),
+      proj({ id: 'hidden', startDate: '2027-01', status: 'to_confirm' }),
+    ]);
+    expect(result.map((p) => p.id)).toEqual(['new', 'old', 'undated']);
+  });
+});
+
+describe('projectTopics', () => {
+  it('lists each tag once, most used first, then alphabetical', () => {
+    const topics = projectTopics([
+      proj({ tags: ['mobile', 'llm'] }),
+      proj({ tags: ['llm', 'education'] }),
+      proj({ tags: [] }),
+    ]);
+    expect(topics).toEqual(['llm', 'education', 'mobile']);
   });
 });
 

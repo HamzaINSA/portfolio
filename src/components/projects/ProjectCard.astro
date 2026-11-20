@@ -1,0 +1,94 @@
+---
+import { en } from '../../i18n/en';
+import type { ProjectCardView } from '../../lib/content/views';
+import Chip from '../ui/Chip.astro';
+
+interface Props {
+  project: ProjectCardView;
+}
+const { project } = Astro.props;
+// No image area: projects have no image yet, and empty blocks are omitted (design-spec).
+---
+
+<a class="card" href={project.href}>
+  {(project.topic || project.year) && (
+    <span class="meta">
+      {project.topic && <Chip variant="accent">{project.topic}</Chip>}
+      {project.year && <span class="year">{project.year}</span>}
+    </span>
+  )}
+  <h2 class="title">{project.title}</h2>
+  <p class="summary">{project.summary}</p>
+  {project.stack.length > 0 && <p class="stack">{project.stack.join(' · ')}</p>}
+  <span class="open">{en.projectsPage.open}</span>
+</a>
+
+<style>
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    height: 100%;
+    padding: var(--space-4);
+    background: var(--color-surface);
+    border: var(--border-thick);
+    text-decoration: none;
+    transition:
+      background var(--transition-fast),
+      color var(--transition-fast);
+  }
+
+  .card:hover {
+    background: var(--color-ink);
+    color: var(--color-on-ink);
+  }
+
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+    font-size: var(--text-label-small);
+  }
+
+  /* The chip keeps ink text on lime when the card is inverted. */
+  .card:hover .meta :global(.chip) {
+    color: var(--color-ink);
+  }
+
+  .title {
+    font-family: var(--font-display);
+    font-size: var(--text-card-title);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: normal;
+  }
+
+  .summary {
+    font-size: 0.875rem;
+    line-height: 1.6;
+  }
+
+  .stack {
+    font-size: var(--text-label);
+    color: var(--color-muted);
+  }
+
+  .card:hover .stack {
+    color: var(--color-on-ink-muted);
+  }
+
+  .open {
+    margin-top: auto;
+    padding-top: var(--space-1);
+    font-size: 0.875rem;
+    font-weight: 700;
+  }
+
+  @media (min-width: 48em) {
+    .card {
+      padding: 1.375rem;
+    }
+  }
+</style>

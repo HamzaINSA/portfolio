@@ -1,0 +1,148 @@
+---
+import { en } from '../../i18n/en';
+import { formatCount } from '../../lib/filters/topic';
+
+interface Props {
+  topics: string[];
+  /** Number of items shown with no filter, for the screen-reader count. */
+  total: number;
+  /** id of the list whose `[data-topics]` children are filtered. */
+  controls: string;
+}
+const { topics, total, controls } = Astro.props;
+const t = en.projectsPage;
+// Rendered hidden: the script reveals it. Without JavaScript every project stays visible and no dead button is shown.
+---
+
+<div
+  class="filters"
+  role="group"
+  aria-label={t.filterLabel}
+  data-filter-bar
+  data-controls={controls}
+  data-count-one={t.count.one}
+  data-count-many={t.count.many}
+  hidden
+>
+  <button type="button" class="filter" data-topic="" aria-pressed="true">
+    {t.all}
+  </button>
+  {topics.map((topic) => (
+    <button
+      type="button"
+      class="filter"
+      data-topic={topic}
+      aria-pressed="false"
+    >
+      {topic}
+    </button>
+  ))}
+</div>
+<p class="visually-hidden" role="status" data-filter-status>
+  {formatCount(total, t.count)}
+</p>
+
+<script>
+  import {
+    formatCount,
+    matchesTopic,
+    resolveTopic,
+    TOPIC_PARAM,
+    topicSearch,
+  } from '../../lib/filters/topic';
+
+  for (const bar of document.querySelectorAll<HTMLElement>(
+    '[data-filter-bar]',
+  )) {
+    const list = document.getElementById(bar.dataset.controls ?? '');
+    const status = bar.parentElement?.querySelector<HTMLElement>(
+      '[data-filter-status]',
+    );
+    if (!list) continue;
+
+    const buttons = [
+      ...bar.querySelectorAll<HTMLButtonElement>('button[data-topic]'),
+    ];
+    const topics = buttons.map((b) => b.dataset.topic ?? '').filter(Boolean);
+    const items = [...list.querySelectorAll<HTMLElement>('[data-topics]')];
+
+    const apply = (topic: string | null, announce: boolean) => {
+      for (const b of buttons) {
+        b.setAttribute(
+          'aria-pressed',
+          String((b.dataset.topic || null) === topic),
+        );
+      }
+      let shown = 0;
+      for (const item of items) {
+        const visible = matchesTopic(
+          (item.dataset.topics ?? '').split(' '),
+          topic,
+        );
+        item.hidden = !visible;
+        if (visible) shown += 1;
+      }
+      if (status && announce) {
+        status.textContent = formatCount(shown, {
+          one: bar.dataset.countOne ?? '',
+          many: bar.dataset.countMany ?? '',
+        });
+      }
+    };
+
+    for (const b of buttons) {
+      b.addEventListener('click', () => {
+        const topic = b.dataset.topic || null;
+        apply(topic, true);
+        const url = new URL(window.location.href);
+        history.replaceState(
+          null,
+          '',
+          `${url.pathname}${topicSearch(url.search, topic)}${url.hash}`,
+        );
+      });
+    }
+
+    const initial = resolveTopic(
+      new URLSearchParams(window.location.search).get(TOPIC_PARAM),
+      topics,
+    );
+    apply(initial, false);
+    bar.hidden = false;
+  }
+</script>
+
+<style>
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .filter {
+    min-height: var(--target-min);
+    padding: var(--space-2) var(--space-4);
+    background: var(--color-surface);
+    color: var(--color-ink);
+    border: var(--border-thick);
+    font-family: inherit;
+    font-size: 0.875rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background var(--transition-fast);
+  }
+
+  .filter:hover {
+    background: var(--color-surface-2);
+  }
+
+  .filter[aria-pressed='true'] {
+    background: var(--color-accent);
+  }
+
+  @media (min-width: 48em) {
+    .filters {
+      gap: var(--space-3);
+    }
+  }
+</style>

@@ -1,6 +1,6 @@
 import { displayClient } from './anonymise';
 import { formatRange } from '../format/dates';
-import type { Experience } from './types';
+import type { Experience, Project } from './types';
 
 /** Display-safe fields of a checkpoint. Components receive this, never the raw experience. */
 export interface CheckpointView {
@@ -31,4 +31,43 @@ export function toCheckpointView(e: Experience): CheckpointView {
 /** Titles of published academic plans (for example a double degree), shown as "next". */
 export function plannedSteps(experiences: readonly Experience[]): string[] {
   return experiences.filter((e) => e.type === 'academic-plan').map((e) => e.title);
+}
+
+/** Display-safe fields of a project card on the Evaluation page. */
+export interface ProjectCardView {
+  id: string;
+  href: string;
+  title: string;
+  summary: string;
+  /** Chip shown on the card: the first tag, or null when the project has none. */
+  topic: string | null;
+  /** All tags, used by the topic filter. */
+  topics: string[];
+  /** "2026", "2025–2026", or null when the start date is unknown (the year is then omitted). */
+  year: string | null;
+  stack: string[];
+}
+
+/** "2026-06" + "2026-08" -> "2026"; "2025-09" + "2026-02" -> "2025–2026"; no start -> null. */
+export function yearSpan(
+  start: string | null | undefined,
+  end: string | null | undefined,
+): string | null {
+  const from = start?.slice(0, 4);
+  if (!from) return null;
+  const to = end?.slice(0, 4);
+  return to && to !== from ? `${from}–${to}` : from;
+}
+
+export function toProjectCardView(p: Project): ProjectCardView {
+  return {
+    id: p.id,
+    href: `/projects/${p.id}`,
+    title: p.title,
+    summary: p.summary,
+    topic: p.tags[0] ?? null,
+    topics: p.tags,
+    year: yearSpan(p.startDate, p.endDate),
+    stack: p.stack,
+  };
 }
