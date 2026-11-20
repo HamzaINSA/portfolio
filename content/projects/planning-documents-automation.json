@@ -10,14 +10,14 @@
   },
   "startDate": null,
   "endDate": null,
-  "current": false,
+  "current": true,
   "featured": false,
   "summary": "Tool that generates planning documents automatically from a planning software's exports, for a road-construction company.",
   "highlights": [
-    "Built a tool that generates weekly planning documents, site organisation notes and a long-term tonnage plan from exports of the client's planning software, replacing manual re-entry.",
+    "Building a tool that generates weekly planning documents, site organisation notes and a long-term tonnage plan from exports of the client's planning software, replacing manual re-entry.",
     "Chose Excel with Power Query, macros and SharePoint, tools the client already uses, so that the client can maintain the solution without a new licence or server.",
-    "Added automatic consistency checks on dates and tonnages, with missing information entered only once.",
-    "Delivered a user guide, technical documentation and a training session so that the client can maintain the tool in-house."
+    "Adding automatic consistency checks on dates and tonnages, with missing information entered only once.",
+    "Preparing a user guide, technical documentation and a training session so that the client can maintain the tool in-house."
   ],
   "stack": [
     "Excel",
@@ -36,7 +36,7 @@
     "method": "Excel with Power Query, macros and SharePoint, with automatic consistency checks on dates and tonnages.",
     "metric": null,
     "result": null,
-    "myRole": "The whole project: requirements analysis, design, build, documentation and client training."
+    "myRole": "The whole project, in progress: requirements analysis, design, build, documentation and client training."
   },
   "retrospective": {
     "worked": null,
@@ -46,10 +46,11 @@
   "links": [],
   "status": "verified",
   "openQuestions": [
-    "Start and end months?",
     "May the client be named? Only with the agreement of ETIC and the client (keep anonymous until then).",
     "Any measurable result (time saved per week, errors avoided)? Publish only with a source: [SOURCE NEEDED].",
-    "What worked, what failed, what is next? Pages omit empty blocks."
+    "What worked, what failed, what is next? Pages omit empty blocks.",
+    "Start month, and end month once finished?",
+    "Switch the verbs to the past tense and set current to false when the project is finished."
   ],
-  "internalNote": "Moved from experiences/ on 2026-11-20 (ETIC work counts as projects). Written from an ETIC commercial proposal kept out of the repo; Hamza confirmed on 2026-11-20 that he did everything the proposal describes. Do not copy the proposal's text, names, figures or prices."
+  "internalNote": "Moved from experiences/ on 2026-11-20 (ETIC work counts as projects). Written from an ETIC commercial proposal kept out of the repo; Hamza confirmed on 2026-11-20 that he does everything the proposal describes and that the project is in progress. Do not copy the proposal's text, names, figures or prices."
 }
