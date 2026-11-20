@@ -1,0 +1,34 @@
+{
+  "name": "Hamza Bencheikh",
+  "headline": "Computer Science engineering student",
+  "school": "INSA Lyon",
+  "yearLabel": "4th year",
+  "modelVersion": "v4",
+  "location": "Lyon, France",
+  "seeking": {
+    "role": "AI / LLM engineering internship",
+    "duration": "up to 4 months",
+    "start": "2027-05",
+    "relocation": true
+  },
+  "links": {
+    "github": "https://github.com/HamzaINSA",
+    "linkedin": "https://www.linkedin.com/in/hamzabencheikh05"
+  },
+  "contact": {
+    "email": null
+  },
+  "cv": {
+    "path": null
+  },
+  "photo": null,
+  "bio": null,
+  "status": "verified",
+  "openQuestions": [
+    "contact.email: which address to publish? The INSA address stops working after graduation (decision O2).",
+    "cv.path: provide a public-safe CV (no phone number, no address) in public/cv/ (decision O3).",
+    "bio: Hamza to write or approve 3 to 4 sentences in his own voice. Do not invent.",
+    "photo: optional (decision O4).",
+    "modelVersion: 'v4' follows the study year. Confirm it should change next year (v5 at KTH?)."
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "id": "propulseo-asys",
+  "title": "Propulseo and Asys",
+  "source": "propulseo-asys.json",
+  "keywords": ["propulseo", "asys", "incubator", "sponsor", "backed", "supported", "supports"],
+  "phrases": ["who supports", "who backs"],
+  "exampleQuestions": [
+    "What is Propulseo?",
+    "Who supports Hamza?",
+    "What is Asys?"
+  ],
+  "answer": "Hamza is a member of Propulseo and is backed by Asys. [TO CONFIRM: what the program is, what Asys provides, dates and exact wording]",
+  "links": [],
+  "sources": ["propulseo-asys"],
+  "related": ["involvement"],
+  "priority": 0,
+  "suggested": false,
+  "status": "to_confirm",
+  "openQuestions": [
+    "Becomes verified when experiences/propulseo-asys.json is confirmed."
+  ]
+}

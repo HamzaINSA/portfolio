@@ -1,0 +1,28 @@
+{
+  "id": "contact",
+  "title": "Contact",
+  "source": "contact.json",
+  "keywords": ["contact", "email", "mail", "reach", "linkedin", "github", "hire", "hiring", "talk", "message", "recruit"],
+  "phrases": ["get in touch", "write to"],
+  "exampleQuestions": [
+    "How can I reach him?",
+    "What is his email?",
+    "Where can I find him on LinkedIn?",
+    "I want to hire Hamza"
+  ],
+  "answer": "You can write to Hamza from the Contact page. He is also on LinkedIn and GitHub.",
+  "links": [
+    { "label": "Contact page", "href": "/about#contact" },
+    { "label": "LinkedIn", "href": "https://www.linkedin.com/in/hamzabencheikh05" },
+    { "label": "GitHub", "href": "https://github.com/HamzaINSA" }
+  ],
+  "sources": ["profile"],
+  "related": ["availability"],
+  "priority": 1,
+  "suggested": true,
+  "suggestedLabel": "How can I reach him?",
+  "status": "verified",
+  "openQuestions": [
+    "Once the public email is chosen (decision O2), the answer may state it. Never add a phone number."
+  ]
+}

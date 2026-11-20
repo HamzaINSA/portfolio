@@ -1,0 +1,21 @@
+{
+  "id": "motivation",
+  "title": "Motivation for AI and machine learning",
+  "source": "motivation.json",
+  "keywords": ["why", "motivation", "motivate", "machine", "learning", "ml", "ai", "artificial", "intelligence", "llm", "interested", "passion", "evaluate", "evaluation", "specialise", "specialize"],
+  "phrases": ["machine learning", "why ai"],
+  "exampleQuestions": [
+    "Why machine learning?",
+    "Why is Hamza interested in AI?",
+    "What motivates him?",
+    "What does he think of evaluating AI systems?"
+  ],
+  "answer": "Hamza wants to work on AI systems that real users depend on. In his view, building a model is only half of the job: the other half is evaluating it honestly and making it useful. That thread runs through his work: an evaluation pipeline for generative AI workflows at Delta Quest, a blind protocol to choose a language model for his interview-preparation app, and compliance designed from the start. He describes himself as at the beginning of his professional career in machine learning, looking for a team to learn from experienced engineers while contributing from the first weeks.",
+  "links": [{ "label": "See the projects", "href": "/projects" }],
+  "sources": ["delta-quest-internship", "ai-interview-prep-app", "phd-goal"],
+  "related": ["phd-goal", "projects"],
+  "priority": 0,
+  "suggested": true,
+  "suggestedLabel": "Why machine learning?",
+  "status": "verified"
+}

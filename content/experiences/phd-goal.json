@@ -1,0 +1,22 @@
+{
+  "id": "phd-goal",
+  "type": "career-goal",
+  "title": "Long-term goal: a PhD in machine learning",
+  "organization": { "name": "Career plan" },
+  "location": null,
+  "startDate": null,
+  "endDate": null,
+  "current": false,
+  "checkpoint": false,
+  "summary": "Aiming for a PhD specialised in machine learning, and a career working in this field.",
+  "highlights": [],
+  "learned": [],
+  "stack": [],
+  "tags": ["machine-learning", "research", "career"],
+  "links": [],
+  "status": "verified",
+  "openQuestions": [
+    "Research topics of interest (for example evaluation, reproducibility, LLMs) if Hamza wants to name them. Do not guess."
+  ],
+  "internalNote": "Source: Hamza's message. The cover letter says he is 'at the beginning of his professional career in machine learning': keep the tone modest and consistent with it."
+}

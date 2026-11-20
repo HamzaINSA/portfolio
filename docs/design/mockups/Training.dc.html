@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Training run</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<style>
+body{margin:0;background:#F1F0EA}
+a{color:inherit;text-decoration:none}
+a.nl:hover{background:#0E0E0E;color:#F1F0EA}
+</style>
+</helmet>
+<div style="background:#F1F0EA; color:#0E0E0E; font-family:'JetBrains Mono',ui-monospace,monospace; min-height:1900px">
+
+<div style="border-bottom:3px solid #0E0E0E; display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px; padding:12px 40px; font-size:14px; align-items:center">
+<a href="Home.dc.html" style="font-weight:700; min-height:44px; display:flex; align-items:center">HAMZA-V4</a>
+<div style="display:flex; flex-wrap:wrap; gap:8px; align-items:center">
+<a class="nl" href="Home.dc.html" style="min-height:44px; display:flex; align-items:center; padding:0 10px">home</a>
+<a class="nl" href="Training.dc.html" style="min-height:44px; display:flex; align-items:center; padding:0 10px; background:#0E0E0E; color:#F1F0EA">training</a>
+<a class="nl" href="Projects.dc.html" style="min-height:44px; display:flex; align-items:center; padding:0 10px">evaluation</a>
+<a class="nl" href="About.dc.html" style="min-height:44px; display:flex; align-items:center; padding:0 10px">about</a>
+<a href="Chat.dc.html" style="background:{{accent}}; border:2px solid #0E0E0E; font-weight:700; min-height:44px; display:flex; align-items:center; padding:0 16px">ASK THE MODEL →</a>
+</div>
+</div>
+
+<div style="max-width:1360px; margin:0 auto; padding:56px 40px 40px">
+<div style="font-size:13px; margin-bottom:16px">/ training</div>
+<h1 style="margin:0; font-family:'Space Grotesk',sans-serif; font-size:104px; line-height:0.92; letter-spacing:-0.045em; font-weight:700">Training run</h1>
+<p style="margin:20px 0 0; max-width:700px; font-size:17px; line-height:1.6">Every checkpoint is a period where I learned something that changed how I work. The curve is a schematic of my path, not real metrics.</p>
+</div>
+
+<!-- CURVE -->
+<div style="background:#0E0E0E; color:#F1F0EA; border-top:3px solid #0E0E0E; border-bottom:3px solid #0E0E0E">
+<div style="max-width:1360px; margin:0 auto; padding:56px 40px">
+<svg viewBox="0 0 1280 260" role="img" aria-label="Schematic loss curve across four checkpoints" style="width:100%; height:auto; display:block"><path d="M10 40 C 200 30, 300 200, 480 190 S 760 90, 900 150 S 1150 230, 1270 240" fill="none" stroke="{{accent}}" stroke-width="4"/><line x1="10" y1="255" x2="1270" y2="255" stroke="#555" stroke-width="2"/><circle cx="10" cy="40" r="10" fill="{{accent}}"/><circle cx="480" cy="190" r="10" fill="{{accent}}"/><circle cx="900" cy="150" r="10" fill="{{accent}}"/><circle cx="1270" cy="240" r="10" fill="{{accent}}"/></svg>
+<div style="display:flex; justify-content:space-between; font-size:12px; color:#B8B8B0; margin-top:8px"><span>[YEAR]</span><span>now</span></div>
+</div>
+</div>
+
+<!-- CHECKPOINTS -->
+<div style="max-width:1360px; margin:0 auto; padding:56px 40px; display:flex; flex-direction:column; gap:32px">
+
+<div style="border:3px solid #0E0E0E; background:#FFFFFF; display:grid; grid-template-columns:repeat(auto-fit, minmax(min(280px,100%), 1fr))">
+<div style="padding:28px; border-right:2px solid #0E0E0E; background:{{accent}}; display:flex; flex-direction:column; gap:10px"><div style="font-size:13px; font-weight:700">CHECKPOINT 1</div><div style="font-size:14px">[MM/YYYY] – [MM/YYYY]</div><div style="font-family:'Space Grotesk',sans-serif; font-size:28px; font-weight:700; line-height:1.1">[Role title]<br>[Company]</div></div>
+<div style="grid-column:span 2; padding:28px; display:grid; grid-template-columns:repeat(auto-fit, minmax(min(240px,100%), 1fr)); gap:24px">
+<div style="display:flex; flex-direction:column; gap:8px"><div style="font-size:12px; color:#555">what I did</div><div style="font-size:15px; line-height:1.6">[Two sentences on the work.]</div></div>
+<div style="display:flex; flex-direction:column; gap:8px"><div style="font-size:12px; color:#555">what I learned</div><div style="font-size:15px; line-height:1.6">[Two sentences on the lesson.]</div></div>
+<div style="display:flex; flex-direction:column; gap:8px"><div style="font-size:12px; color:#555">stack</div><div style="font-size:15px; line-height:1.6">[tech] · [tech] · [tech]</div><a href="Chat.dc.html" style="margin-top:8px; font-weight:700; text-decoration:underline; min-height:44px; display:flex; align-items:center">ask about this →</a></div>
+</div>
+</div>
+
+<div style="border:3px solid #0E0E0E; background:#FFFFFF; display:grid; grid-template-columns:repeat(auto-fit, minmax(min(280px,100%), 1fr))">
+<div style="padding:28px; border-right:2px solid #0E0E0E; background:#E4E3DB; display:flex; flex-direction:column; gap:10px"><div style="font-size:13px; font-weight:700">CHECKPOINT 2</div><div style="font-size:14px">[MM/YYYY] – [MM/YYYY]</div><div style="font-family:'Space Grotesk',sans-serif; font-size:28px; font-weight:700; line-height:1.1">[Role title]<br>[Company or project]</div></div>
+<div style="grid-column:span 2; padding:28px; display:grid; grid-template-columns:repeat(auto-fit, minmax(min(240px,100%), 1fr)); gap:24px">
+<div style="display:flex; flex-direction:column; gap:8px"><div style="font-size:12px; color:#555">what I did</div><div style="font-size:15px; line-height:1.6">[Two sentences on the work.]</div></div>
+<div style="display:flex; flex-direction:column; gap:8px"><div style="font-size:12px; color:#555">what I learned</div><div style="font-size:15px; line-height:1.6">[Two sentences on the lesson.]</div></div>
+<div style="display:flex; flex-direction:column; gap:8px"><div style="font-size:12px; color:#555">stack</div><div style="font-size:15px; line-height:1.6">[tech] · [tech]</div><a href="Chat.dc.html" style="margin-top:8px; font-weight:700; text-decoration:underline; min-height:44px; display:flex; align-items:center">ask about this →</a></div>
+</div>
+</div>
+
+<div style="border:3px solid #0E0E0E; background:#FFFFFF; display:grid; grid-template-columns:repeat(auto-fit, minmax(min(280px,100%), 1fr))">
+<div style="padding:28px; border-right:2px solid #0E0E0E; background:#E4E3DB; display:flex; flex-direction:column; gap:10px"><div style="font-size:13px; font-weight:700">CHECKPOINT 3</div><div style="font-size:14px">[MM/YYYY] – [MM/YYYY]</div><div style="font-family:'Space Grotesk',sans-serif; font-size:28px; font-weight:700; line-height:1.1">[Role title]<br>[Association or company]</div></div>
+<div style="grid-column:span 2; padding:28px; display:grid; grid-template-columns:repeat(auto-fit, minmax(min(240px,100%), 1fr)); gap:24px">
+<div style="display:flex; flex-direction:column; gap:8px"><div style="font-size:12px; color:#555">what I did</div><div style="font-size:15px; line-height:1.6">[Two sentences on the work.]</div></div>
+<div style="display:flex; flex-direction:column; gap:8px"><div style="font-size:12px; color:#555">what I learned</div><div style="font-size:15px; line-height:1.6">[Two sentences on the lesson.]</div></div>
+<div style="display:flex; flex-direction:column; gap:8px"><div style="font-size:12px; color:#555">stack</div><div style="font-size:15px; line-height:1.6">[tech] · [tech]</div><a href="Chat.dc.html" style="margin-top:8px; font-weight:700; text-decoration:underline; min-height:44px; display:flex; align-items:center">ask about this →</a></div>
+</div>
+</div>
+
+<div style="border:3px solid #0E0E0E; background:#0E0E0E; color:#F1F0EA; display:grid; grid-template-columns:repeat(auto-fit, minmax(min(280px,100%), 1fr))">
+<div style="padding:28px; border-right:2px solid #3A3A36; display:flex; flex-direction:column; gap:10px"><div style="font-size:13px; font-weight:700; color:{{accent}}">CHECKPOINT 4 · NOW</div><div style="font-size:14px; color:#B8B8B0">[YYYY] – [YYYY]</div><div style="font-family:'Space Grotesk',sans-serif; font-size:28px; font-weight:700; line-height:1.1">INSA Lyon<br>4th year</div></div>
+<div style="grid-column:span 2; padding:28px; display:grid; grid-template-columns:repeat(auto-fit, minmax(min(240px,100%), 1fr)); gap:24px">
+<div style="display:flex; flex-direction:column; gap:8px"><div style="font-size:12px; color:#B8B8B0">department</div><div style="font-size:15px; line-height:1.6">[DEPARTMENT]</div></div>
+<div style="display:flex; flex-direction:column; gap:8px"><div style="font-size:12px; color:#B8B8B0">relevant courses</div><div style="font-size:15px; line-height:1.6">[COURSE] · [COURSE] · [COURSE]</div></div>
+<div style="display:flex; flex-direction:column; gap:8px"><div style="font-size:12px; color:#B8B8B0">next</div><div style="font-size:15px; line-height:1.6">[AI / ML internship, dates]</div></div>
+</div>
+</div>
+
+</div>
+
+<div style="background:{{accent}}; border-top:3px solid #0E0E0E">
+<div style="max-width:1360px; margin:0 auto; padding:48px 40px; display:flex; flex-wrap:wrap; justify-content:space-between; gap:20px; align-items:center"><div style="font-family:'Space Grotesk',sans-serif; font-size:40px; font-weight:700; letter-spacing:-0.03em">See how this was evaluated.</div><a href="Projects.dc.html" style="background:#0E0E0E; color:#F1F0EA; padding:16px 28px; font-weight:700; min-height:52px; box-sizing:border-box; display:flex; align-items:center">EVALUATION →</a></div>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#C6FF3D","options":["#C6FF3D","#FF5C39","#7AE7FF","#FFD23F"]},"$preview":{"width":1440,"height":1900}}'>
+class Component extends DCLogic {
+renderVals() {
+return { accent: this.props.accent ?? '#C6FF3D' };
+}
+}
+</script>
+</body>
+</html>

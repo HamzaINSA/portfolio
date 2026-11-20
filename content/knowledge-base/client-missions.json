@@ -1,0 +1,22 @@
+{
+  "id": "client-missions",
+  "title": "Client missions",
+  "source": "client-missions.json",
+  "keywords": ["client", "mission", "consulting", "consultant", "customer", "freelance", "automation", "prototype", "deliver", "delivery"],
+  "phrases": ["client mission", "client work", "for customers", "for clients"],
+  "exampleQuestions": [
+    "What client missions has he done?",
+    "Does Hamza have consulting experience?",
+    "Has he built tools for customers?"
+  ],
+  "answer": "Through ETIC INSA Technologies, Hamza works on client missions, for example [TO CONFIRM: a tool automating planning documents for a road-construction company, and a Python prototype for material flow analysis for an environmental consulting firm]. [TO CONFIRM: his role and the status of each mission]",
+  "links": [{ "label": "See the training run", "href": "/training" }],
+  "sources": ["etic-mission-planning-automation", "etic-mission-material-flow-prototype"],
+  "related": ["experience"],
+  "priority": 1,
+  "suggested": false,
+  "status": "to_confirm",
+  "openQuestions": [
+    "Becomes verified only when both mission files in content/experiences/ are confirmed (status, role, permission to describe)."
+  ]
+}

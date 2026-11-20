@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "knowledge-entry.schema.json",
+  "title": "Knowledge-base entry",
+  "description": "One document the chatbot can answer from. See docs/chatbot-spec.md.",
+  "type": "object",
+  "required": ["id", "title", "source", "keywords", "exampleQuestions", "answer", "status"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+    "title": { "type": "string" },
+    "source": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+\\.json$",
+      "description": "File name shown to the visitor as the source of the answer."
+    },
+    "keywords": {
+      "type": "array",
+      "minItems": 3,
+      "items": { "type": "string", "pattern": "^[a-z0-9+#. ]+$" },
+      "description": "Lower-case, no accents. Single words (stemmed at match time)."
+    },
+    "phrases": {
+      "type": "array",
+      "default": [],
+      "items": { "type": "string", "pattern": "^[a-z0-9+#. ]+$" },
+      "description": "Multi-word expressions matched as contiguous tokens."
+    },
+    "exampleQuestions": {
+      "type": "array",
+      "minItems": 3,
+      "items": { "type": "string" },
+      "description": "Used by the evaluation set. Each must produce this entry."
+    },
+    "answer": { "type": "string", "minLength": 1, "description": "Third person, plain text, no HTML." },
+    "links": {
+      "type": "array",
+      "default": [],
+      "items": {
+        "type": "object",
+        "required": ["label", "href"],
+        "additionalProperties": false,
+        "properties": { "label": { "type": "string" }, "href": { "type": "string" } }
+      }
+    },
+    "sources": {
+      "type": "array",
+      "default": [],
+      "items": { "type": "string" },
+      "description": "Content ids (experiences, projects, education...) this answer relies on. A test checks they exist."
+    },
+    "related": { "type": "array", "default": [], "items": { "type": "string" } },
+    "priority": { "type": "integer", "default": 0 },
+    "suggested": { "type": "boolean", "default": false },
+    "suggestedLabel": { "type": "string" },
+    "status": { "enum": ["verified", "to_confirm"] },
+    "openQuestions": { "type": "array", "items": { "type": "string" }, "default": [] }
+  }
+}

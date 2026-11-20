@@ -1,0 +1,30 @@
+{
+  "id": "delta-quest-internship",
+  "type": "internship",
+  "title": "Developer (Internship)",
+  "organization": { "name": "Delta Quest" },
+  "location": "Sapporo, Japan",
+  "startDate": "2026-06",
+  "endDate": "2026-09",
+  "current": false,
+  "checkpoint": true,
+  "summary": "Three-month development internship on a consumer product, in an international team working in English.",
+  "highlights": [
+    "Implemented features in Unity (C#) and merged them into an existing codebase through reviewed pull requests.",
+    "Designed generative AI workflows and an evaluation pipeline, reducing output latency and improving response relevance.",
+    "Contributed to sprint deliveries in an Agile team using Jira and Git/GitHub (branches, pull requests, code reviews)."
+  ],
+  "learned": [
+    "Delivering at the pace of sprints.",
+    "Taking over an existing codebase quickly.",
+    "Writing code that others can review."
+  ],
+  "stack": ["Unity", "C#", "Generative AI workflows", "Jira", "Git/GitHub"],
+  "tags": ["llm", "evaluation", "game-development", "teamwork", "international"],
+  "links": [],
+  "status": "verified",
+  "openQuestions": [
+    "Latency and relevance improvements have no figures in the CV. Publish figures only with a verifiable source ([SOURCE NEEDED])."
+  ],
+  "internalNote": "Sources: CV and cover letter. Do not add product details beyond the CV wording."
+}

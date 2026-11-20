@@ -1,0 +1,24 @@
+{
+  "id": "kth-double-degree",
+  "type": "academic-plan",
+  "title": "Double degree at KTH",
+  "organization": { "name": "KTH Royal Institute of Technology" },
+  "location": "Stockholm, Sweden",
+  "startDate": "2027",
+  "endDate": null,
+  "current": false,
+  "checkpoint": false,
+  "summary": "Planned double degree at KTH next year to specialise in machine learning. [TO CONFIRM: programme name, dates, admission status]",
+  "highlights": [],
+  "learned": [],
+  "stack": [],
+  "tags": ["machine-learning", "international", "education"],
+  "links": [],
+  "status": "to_confirm",
+  "openQuestions": [
+    "Hamza said he will do a double degree at KTH next year to specialise in machine learning. Is admission confirmed or pending? Programme name? Exact dates (academic year 2027 to 2028)?",
+    "How does it fit with the 5th year at INSA Lyon (education.json lists 2025 to 2028)?",
+    "May it be published as 'planned' only after admission is confirmed?"
+  ],
+  "internalNote": "Source: Hamza's message only. Not in the CV. Not published until confirmed."
+}

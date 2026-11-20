@@ -1,0 +1,35 @@
+{
+  "id": "ai-interview-prep-app",
+  "title": "AI interview preparation web app",
+  "role": "Founder (early stage)",
+  "startDate": "2026-09",
+  "endDate": null,
+  "current": true,
+  "featured": true,
+  "summary": "Web app that prepares candidates for an interview from their CV and the job offer, through AI mock interviews.",
+  "highlights": [
+    "Defined the scope and the technical stack, including a provider-agnostic language-model layer.",
+    "Designed GDPR and AI Act compliance of the product.",
+    "Designed a blind protocol to choose the language model (Mistral or Claude) on quality and cost."
+  ],
+  "stack": ["TypeScript", "Next.js", "Supabase (PostgreSQL)", "Vercel", "Docker"],
+  "tags": ["llm", "evaluation", "product", "privacy"],
+  "card": {
+    "task": "Prepare a candidate for an interview from their CV and the job offer through AI mock interviews.",
+    "data": null,
+    "method": "Provider-agnostic LLM layer; blind protocol comparing Mistral and Claude on quality and cost.",
+    "metric": "Quality and cost of the language-model candidates.",
+    "result": null,
+    "myRole": "Founder: scope, stack, compliance design and model selection protocol."
+  },
+  "retrospective": { "worked": null, "failed": null, "next": null },
+  "links": [],
+  "status": "verified",
+  "openQuestions": [
+    "Result of the blind comparison (which model, what finding)? Publish only with a source: [SOURCE NEEDED].",
+    "Public repository or demo link?",
+    "What worked, what failed, what is next? Hamza's own words make this page credible; pages omit empty blocks.",
+    "Is this the product built in the Entrepreneurship Track?"
+  ],
+  "internalNote": "Sources: CV and cover letter. Facts verified against both."
+}

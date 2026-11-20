@@ -1,0 +1,31 @@
+{
+  "id": "etic-insa-technologies",
+  "type": "junior-enterprise",
+  "title": "Developer and Technical Consultant",
+  "organization": {
+    "name": "ETIC INSA Technologies",
+    "displayName": "ETIC INSA Technologies (Junior Enterprise of INSA Lyon, IT division)"
+  },
+  "location": "Lyon, France",
+  "startDate": "2026-05",
+  "endDate": null,
+  "current": true,
+  "checkpoint": true,
+  "summary": "Developer and technical consultant in the IT division of the student-run consulting firm of INSA Lyon.",
+  "highlights": [
+    "Managed end-to-end client engagements, from requirements to contractual delivery.",
+    "Aligned technical roadmaps with non-specialist client stakeholders and tracked deadlines to keep deliveries on schedule."
+  ],
+  "learned": [
+    "Explaining technical choices in plain terms to non-specialists.",
+    "Keeping deadlines under control."
+  ],
+  "stack": [],
+  "tags": ["consulting", "client-facing", "project-management"],
+  "links": [],
+  "status": "verified",
+  "openQuestions": [
+    "The CV says engagements 'worth several thousand euros'. Do not publish amounts."
+  ],
+  "internalNote": "Sources: CV and cover letter. Specific client missions are separate files (parentId = this id)."
+}

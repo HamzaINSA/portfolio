@@ -1,0 +1,22 @@
+{
+  "id": "interests",
+  "title": "Interests",
+  "source": "interests.json",
+  "keywords": ["hobbies", "hobby", "interests", "chess", "gym", "strength", "sport", "sports", "leisure"],
+  "phrases": ["free time", "outside work", "japanese culture"],
+  "exampleQuestions": [
+    "What are his hobbies?",
+    "Does Hamza play chess?",
+    "What does he do in his free time?"
+  ],
+  "answer": "Outside of work, Hamza practises strength training regularly, plays chess, and is interested in Japanese culture and language.",
+  "links": [],
+  "sources": [],
+  "related": ["languages"],
+  "priority": 0,
+  "suggested": false,
+  "status": "verified",
+  "openQuestions": [
+    "Source is the Interests line of the CV; it is not a content item, hence empty 'sources'."
+  ]
+}

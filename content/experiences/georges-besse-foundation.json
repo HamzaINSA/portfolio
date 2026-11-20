@@ -1,0 +1,22 @@
+{
+  "id": "georges-besse-foundation",
+  "type": "scholarship",
+  "title": "Laureate",
+  "organization": { "name": "Georges Besse Foundation" },
+  "location": null,
+  "startDate": null,
+  "endDate": null,
+  "current": false,
+  "checkpoint": false,
+  "summary": "Laureate of a merit-based support program for engineering students.",
+  "highlights": [],
+  "learned": [],
+  "stack": [],
+  "tags": ["distinction"],
+  "links": [],
+  "status": "verified",
+  "openQuestions": [
+    "Year of the award, if Hamza wants to show it."
+  ],
+  "internalNote": "Source: CV."
+}

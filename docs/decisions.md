@@ -1,0 +1,33 @@
+# Decisions
+
+Hamza delegates technical choices to Claude Code. The decisions below are proposed defaults, taken at planning time. You may challenge one if you find a concrete problem: write the reason in the PR and ask Hamza before changing a **decided** item.
+
+## Decided
+
+| ID | Decision | Why |
+|---|---|---|
+| D1 | **Astro** (latest stable at install time, versions pinned by the lockfile), **TypeScript strict**, static output | Fast static site, little JavaScript, content collections with schema validation |
+| D2 | **Plain CSS with design tokens** (CSS custom properties), no CSS framework, no UI framework | Mockups use a small, explicit token set; fewer dependencies |
+| D3 | **Content as data** in `content/` (JSON, Markdown for long text), validated by schemas. Site and chatbot read the same files | One source of truth, no contradictions between page and chat |
+| D4 | **Chatbot = local keyword retrieval** over knowledge-base entries, in the browser, no API, no network | Free, private, deterministic, explainable. Honest "no answer" fallback |
+| D5 | **Zero third-party runtime requests**: fonts self-hosted (Space Grotesk, JetBrains Mono), no CDN, no analytics, no embeds | Visitor privacy (fonts from a CDN leak visitor IPs), speed, simplicity |
+| D6 | **English only** in V1. UI strings in one file (`src/i18n/en.ts`) | Target applications are in English |
+| D7 | **Publish gate**: `check:content --strict` blocks builds with `to_confirm` content or placeholder markers | Never publish an unverified claim |
+| D8 | **Client missions anonymised by default** | Confidentiality; see `content-guidelines.md` |
+| D9 | **Contact form without backend**: opens the visitor's mail client (`mailto:`), nothing stored | No server, no data collection |
+| D10 | Tests: **Vitest** (unit, chatbot evaluation set), **Playwright + axe** (e2e, accessibility). CI on **GitHub Actions** | Standard, free for public repos |
+| D11 | Repo is **public**; code and content separated so that private data never enters it | Recruiters can read the code |
+
+## Open (ask Hamza; do not decide alone)
+
+| ID | Question | Recommendation |
+|---|---|---|
+| O1 | Deployment target and custom domain (Vercel, Cloudflare Pages, GitHub Pages) | Decide at milestone M7. Preview deployments per PR are a plus. Needs an account and DNS: ask |
+| O2 | Which email to publish. The INSA address stops working after graduation | A durable personal address |
+| O3 | Public CV file: which version (the current CV contains a phone number) | A public-safe CV without phone and address, placed in `public/cv/` |
+| O4 | Photo on the About page (mockup shows an optional slot) | Optional; ask |
+| O5 | Naming clients of missions (see `content/experiences/`) | Keep anonymous until ETIC and the client agree |
+| O6 | Licence for the code (MIT or similar) and the statement for content | Ask; content stays all rights reserved |
+| O7 | Legal notice and privacy page (needed for a public site run by a person in France) | Propose a short draft; Hamza validates. Claude Code is not a lawyer |
+| O8 | Details missing from content (see `[TO CONFIRM]` markers) | Resolve through `content/experiences/README.md` checklist |
+| O9 | Optional phase 2: semantic search in the browser (embeddings model download) | Only after V1 is live; ask first |

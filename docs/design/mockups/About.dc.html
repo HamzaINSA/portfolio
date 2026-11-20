@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>About and contact</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<style>
+body{margin:0;background:#F1F0EA}
+a{color:inherit;text-decoration:none}
+a.nl:hover{background:#0E0E0E;color:#F1F0EA}
+input,textarea,button{font-family:inherit}
+</style>
+</helmet>
+<div style="background:#F1F0EA; color:#0E0E0E; font-family:'JetBrains Mono',ui-monospace,monospace; min-height:1700px">
+
+<div style="border-bottom:3px solid #0E0E0E; display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px; padding:12px 40px; font-size:14px; align-items:center">
+<a href="Home.dc.html" style="font-weight:700; min-height:44px; display:flex; align-items:center">HAMZA-V4</a>
+<div style="display:flex; flex-wrap:wrap; gap:8px; align-items:center">
+<a class="nl" href="Home.dc.html" style="min-height:44px; display:flex; align-items:center; padding:0 10px">home</a>
+<a class="nl" href="Training.dc.html" style="min-height:44px; display:flex; align-items:center; padding:0 10px">training</a>
+<a class="nl" href="Projects.dc.html" style="min-height:44px; display:flex; align-items:center; padding:0 10px">evaluation</a>
+<a class="nl" href="About.dc.html" style="min-height:44px; display:flex; align-items:center; padding:0 10px; background:#0E0E0E; color:#F1F0EA">about</a>
+<a href="Chat.dc.html" style="background:{{accent}}; border:2px solid #0E0E0E; font-weight:700; min-height:44px; display:flex; align-items:center; padding:0 16px">ASK THE MODEL →</a>
+</div>
+</div>
+
+<!-- INTRO -->
+<div style="max-width:1360px; margin:0 auto; padding:56px 40px 40px; display:grid; grid-template-columns:repeat(auto-fit, minmax(min(420px,100%), 1fr)); gap:48px; align-items:start">
+<div>
+<div style="font-size:13px; margin-bottom:16px">/ about</div>
+<h1 style="margin:0; font-family:'Space Grotesk',sans-serif; font-size:96px; line-height:0.92; letter-spacing:-0.045em; font-weight:700">About the model</h1>
+<p style="margin:24px 0 0; font-size:18px; line-height:1.7; max-width:640px; text-wrap:pretty">[Three or four sentences in your own voice: who you are, what drew you to AI and machine learning, and what you want to learn next.]</p>
+</div>
+<div style="height:380px; background:#E4E3DB; border:3px solid #0E0E0E; box-shadow:10px 10px 0 {{accent}}; display:flex; align-items:center; justify-content:center; font-size:14px; text-align:center">[your photo<br>optional]</div>
+</div>
+
+<!-- STRENGTHS / LIMITS -->
+<div style="max-width:1360px; margin:0 auto; padding:24px 40px 56px; display:grid; grid-template-columns:repeat(auto-fit, minmax(min(300px,100%), 1fr)); gap:24px">
+<div style="border:3px solid #0E0E0E; background:#FFFFFF; padding:26px; display:flex; flex-direction:column; gap:12px"><div style="font-size:12px; color:#555">intended use</div><div style="font-size:16px; line-height:1.7">[Internship type, field, dates]</div></div>
+<div style="border:3px solid #0E0E0E; background:#FFFFFF; padding:26px; display:flex; flex-direction:column; gap:12px"><div style="font-size:12px; color:#555">strengths</div><div style="font-size:16px; line-height:1.7">[Strength 1] · [Strength 2] · [Strength 3]</div></div>
+<div style="border:3px solid #0E0E0E; background:#FFFFFF; padding:26px; display:flex; flex-direction:column; gap:12px"><div style="font-size:12px; color:#555">known limitations</div><div style="font-size:16px; line-height:1.7">[What you are still learning]</div></div>
+<div style="border:3px solid #0E0E0E; background:#FFFFFF; padding:26px; display:flex; flex-direction:column; gap:12px"><div style="font-size:12px; color:#555">out of scope</div><div style="font-size:16px; line-height:1.7">[What you are not looking for]</div></div>
+</div>
+
+<!-- SKILLS -->
+<div style="background:#0E0E0E; color:#F1F0EA; border-top:3px solid #0E0E0E; border-bottom:3px solid #0E0E0E">
+<div style="max-width:1360px; margin:0 auto; padding:56px 40px; display:grid; grid-template-columns:repeat(auto-fit, minmax(min(300px,100%), 1fr)); gap:32px">
+<div style="font-family:'Space Grotesk',sans-serif; font-size:48px; font-weight:700; letter-spacing:-0.03em; line-height:1">Capabilities</div>
+<div style="grid-column:span 2; display:grid; grid-template-columns:repeat(auto-fit, minmax(min(240px,100%), 1fr)); gap:24px">
+<div style="display:flex; flex-direction:column; gap:10px"><div style="font-size:12px; color:{{accent}}">languages</div><div style="font-size:15px; line-height:1.8">[language]<br>[language]<br>[language]</div></div>
+<div style="display:flex; flex-direction:column; gap:10px"><div style="font-size:12px; color:{{accent}}">ml and data</div><div style="font-size:15px; line-height:1.8">[framework]<br>[framework]<br>[tool]</div></div>
+<div style="display:flex; flex-direction:column; gap:10px"><div style="font-size:12px; color:{{accent}}">engineering</div><div style="font-size:15px; line-height:1.8">[tool]<br>[tool]<br>[tool]</div></div>
+</div>
+</div>
+</div>
+
+<!-- NEXT RUN -->
+<div style="background:{{accent}}; border-bottom:3px solid #0E0E0E">
+<div style="max-width:1360px; margin:0 auto; padding:64px 40px; display:flex; flex-direction:column; gap:16px"><div style="font-size:13px; font-weight:700">NEXT TRAINING RUN</div><div style="font-family:'Space Grotesk',sans-serif; font-size:48px; font-weight:700; letter-spacing:-0.03em; line-height:1.05">Where I'm heading</div><div style="font-size:18px; line-height:1.7; max-width:760px">[Two or three sentences: the AI problems you want to work on, the engineer you want to become, and what this internship should teach you.]</div></div>
+</div>
+
+<!-- CONTACT -->
+<div id="contact" style="max-width:1360px; margin:0 auto; padding:64px 40px 72px; display:grid; grid-template-columns:repeat(auto-fit, minmax(min(420px,100%), 1fr)); gap:48px">
+<div style="display:flex; flex-direction:column; gap:20px; align-items:flex-start">
+<h2 style="margin:0; font-family:'Space Grotesk',sans-serif; font-size:64px; letter-spacing:-0.04em; line-height:0.98; font-weight:700">Run inference.<br>Contact me.</h2>
+<a href="#mail" style="background:#0E0E0E; color:#F1F0EA; padding:16px 28px; font-weight:700; min-height:52px; box-sizing:border-box; display:flex; align-items:center">[YOUR EMAIL]</a>
+<div style="display:flex; flex-wrap:wrap; gap:14px"><a href="#linkedin" style="padding:14px 24px; font-weight:700; border:3px solid #0E0E0E; min-height:52px; box-sizing:border-box; display:flex; align-items:center">LinkedIn ↗</a><a href="#github" style="padding:14px 24px; font-weight:700; border:3px solid #0E0E0E; min-height:52px; box-sizing:border-box; display:flex; align-items:center">GitHub ↗</a><a href="#cv" style="padding:14px 24px; font-weight:700; border:3px solid #0E0E0E; min-height:52px; box-sizing:border-box; display:flex; align-items:center">CV ↓</a></div>
+</div>
+<form style="border:3px solid #0E0E0E; background:#FFFFFF; padding:28px; display:flex; flex-direction:column; gap:16px">
+<div style="display:flex; flex-direction:column; gap:6px"><label for="n" style="font-size:13px; font-weight:700">Name</label><input id="n" type="text" style="min-height:48px; box-sizing:border-box; border:2px solid #0E0E0E; padding:0 14px; font-size:15px; background:#F1F0EA"></div>
+<div style="display:flex; flex-direction:column; gap:6px"><label for="e" style="font-size:13px; font-weight:700">Email</label><input id="e" type="email" style="min-height:48px; box-sizing:border-box; border:2px solid #0E0E0E; padding:0 14px; font-size:15px; background:#F1F0EA"></div>
+<div style="display:flex; flex-direction:column; gap:6px"><label for="m" style="font-size:13px; font-weight:700">Message</label><textarea id="m" rows="4" style="box-sizing:border-box; border:2px solid #0E0E0E; padding:12px 14px; font-size:15px; background:#F1F0EA"></textarea></div>
+<button type="submit" style="min-height:52px; background:{{accent}}; border:3px solid #0E0E0E; font-weight:700; font-size:15px; cursor:pointer">SEND</button>
+<div style="font-size:12.5px; line-height:1.6; color:#444">Your message goes to my email only. Nothing is stored on this site.</div>
+</form>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#C6FF3D","options":["#C6FF3D","#FF5C39","#7AE7FF","#FFD23F"]},"$preview":{"width":1440,"height":1700}}'>
+class Component extends DCLogic {
+renderVals() {
+return { accent: this.props.accent ?? '#C6FF3D' };
+}
+}
+</script>
+</body>
+</html>

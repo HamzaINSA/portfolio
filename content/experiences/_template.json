@@ -1,0 +1,24 @@
+{
+  "id": "kebab-case-id",
+  "type": "internship",
+  "title": "Role title",
+  "organization": { "name": "Organisation" },
+  "location": "City, Country",
+  "startDate": "YYYY-MM",
+  "endDate": "YYYY-MM",
+  "current": false,
+  "checkpoint": false,
+  "summary": "One sentence describing the experience.",
+  "highlights": [
+    "Past-tense verb: what Hamza did or built, with a verifiable result when there is one."
+  ],
+  "learned": [
+    "What changed in how Hamza works."
+  ],
+  "stack": ["Tool or language"],
+  "tags": ["topic"],
+  "links": [],
+  "status": "to_confirm",
+  "openQuestions": [],
+  "internalNote": "Sources used. Never rendered."
+}

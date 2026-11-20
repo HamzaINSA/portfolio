@@ -1,0 +1,35 @@
+{
+  "id": "jai-pige",
+  "title": "J'ai PiGé",
+  "role": null,
+  "startDate": "2026-06",
+  "endDate": "2026-08",
+  "current": false,
+  "featured": true,
+  "summary": "Educational mobile app offering personalised exercises with progress tracking.",
+  "highlights": [
+    "Designed and delivered the app with React Native and Firebase.",
+    "Generated hundreds of tailored exercises through automated LLM workflows.",
+    "Used AI-assisted development: defined the features, steered the tool, reviewed and tested the generated code.",
+    "Built the Firebase backend: authentication, cloud database and push notifications."
+  ],
+  "stack": ["React Native", "Firebase", "LLM workflows"],
+  "tags": ["llm", "mobile", "education"],
+  "card": {
+    "task": "Offer personalised exercises with progress tracking.",
+    "data": null,
+    "method": "Automated LLM workflows generating tailored exercises; AI-assisted development with review and testing.",
+    "metric": null,
+    "result": "Public release planned.",
+    "myRole": null
+  },
+  "retrospective": { "worked": null, "failed": null, "next": null },
+  "links": [],
+  "status": "verified",
+  "openQuestions": [
+    "Personal project (CV) or ETIC mission (an ETIC document calls it that)? This decides 'myRole', the client wording and whether it moves to experiences/ as a client-mission.",
+    "How was the quality of generated exercises checked? That is the evaluation story recruiters want.",
+    "Release date or store link once public."
+  ],
+  "internalNote": "Sources: CV and cover letter. The June to August 2026 dates overlap with the Delta Quest internship (June to September 2026): fine, but confirm if asked."
+}

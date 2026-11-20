@@ -1,0 +1,24 @@
+{
+  "id": "academic-tutor",
+  "type": "tutoring",
+  "title": "Academic Tutor",
+  "organization": { "name": "INSA Lyon program and private tutoring" },
+  "location": "Lyon, France",
+  "startDate": "2023",
+  "endDate": "2026",
+  "current": false,
+  "checkpoint": false,
+  "summary": "Weekly support in mathematics, physics and computer science, including within an equal-opportunity program.",
+  "highlights": [
+    "Gave weekly support in mathematics, physics and computer science, within an INSA Lyon equal-opportunity program and as private tutoring."
+  ],
+  "learned": [],
+  "stack": [],
+  "tags": ["teaching"],
+  "links": [],
+  "status": "verified",
+  "openQuestions": [
+    "CV gives years only (2023 to 2026). Ask for months if needed. Is it finished or ongoing?"
+  ],
+  "internalNote": "Source: CV."
+}

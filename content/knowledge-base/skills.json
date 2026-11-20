@@ -1,0 +1,20 @@
+{
+  "id": "skills",
+  "title": "Technical skills",
+  "source": "skills.json",
+  "keywords": ["skills", "skill", "stack", "tools", "tool", "python", "java", "c++", "c#", "sql", "git", "linux", "technologies", "technology", "programming", "code", "coding", "framework", "frameworks", "tech", "proficient"],
+  "phrases": ["tech stack", "programming languages"],
+  "exampleQuestions": [
+    "What programming languages does he know?",
+    "Does Hamza know Python?",
+    "What is his tech stack?",
+    "Which tools does he use?"
+  ],
+  "answer": "Programming languages: C# (Unity), Python, Java, C and C++. Web: HTML, CSS and JavaScript. Backend and data: Firebase, SQL and relational data modeling. Tools: Git/GitHub, Jira, VS Code and Linux.",
+  "links": [{ "label": "See the full card", "href": "/about" }],
+  "sources": ["skills"],
+  "related": ["projects", "languages"],
+  "priority": 1,
+  "suggested": false,
+  "status": "verified"
+}

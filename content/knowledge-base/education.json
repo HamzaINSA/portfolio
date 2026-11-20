@@ -1,0 +1,21 @@
+{
+  "id": "education",
+  "title": "Education",
+  "source": "education.json",
+  "keywords": ["study", "studying", "school", "insa", "lyon", "degree", "education", "course", "coursework", "curriculum", "master", "university", "engineering", "department", "diploma", "student", "year"],
+  "phrases": ["computer science", "which school"],
+  "exampleQuestions": [
+    "What is he studying?",
+    "Which school does Hamza go to?",
+    "What courses has he taken?",
+    "Which degree is he preparing?"
+  ],
+  "answer": "Hamza is in the fourth year of the Computer Science Master's program at INSA Lyon (2025 to 2028), a leading French public engineering school with a five-year integrated program. Before that he followed INSA Lyon's Intensive Undergraduate Program, International Asia Track (2023 to 2025), with mathematics, physics, computer science and Japanese courses. Relevant coursework: Algorithms and Data Structures, Operating Systems, Computer Networks, Software Engineering and OOP, Artificial Intelligence, Probability and Project Management.",
+  "links": [{ "label": "See the training run", "href": "/training" }],
+  "sources": ["insa-lyon-computer-science", "insa-lyon-undergraduate-asia"],
+  "related": ["phd-goal"],
+  "priority": 0,
+  "suggested": true,
+  "suggestedLabel": "What is he studying?",
+  "status": "verified"
+}

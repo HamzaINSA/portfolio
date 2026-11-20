@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Portfolio - Model card</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<style>
+body{margin:0;background:#F1F0EA}
+a{color:inherit;text-decoration:none}
+a:hover{background:#0E0E0E;color:#F1F0EA}
+</style>
+</helmet>
+<div style="background:#F1F0EA; color:#0E0E0E; font-family:'JetBrains Mono',ui-monospace,monospace; min-height:2000px">
+
+<!-- TOP BAR -->
+<div style="border-bottom:3px solid #0E0E0E; display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px; padding:16px 40px; font-size:14px">
+<div style="font-weight:700">MODEL CARD · HAMZA BENCHEIKH</div>
+<div style="display:flex; flex-wrap:wrap; gap:24px">
+<a href="#card" style="min-height:44px; display:flex; align-items:center; padding:0 6px">card</a>
+<a href="#training" style="min-height:44px; display:flex; align-items:center; padding:0 6px">training</a>
+<a href="#eval" style="min-height:44px; display:flex; align-items:center; padding:0 6px">evaluation</a>
+<a href="#contact" style="min-height:44px; display:flex; align-items:center; padding:0 6px">contact</a>
+</div>
+</div>
+
+<!-- HERO -->
+<div style="padding:72px 40px 48px; max-width:1360px; margin:0 auto">
+<div style="display:flex; flex-wrap:wrap; gap:12px; margin-bottom:28px; font-size:13px">
+<span style="background:{{accent}}; padding:6px 12px; font-weight:700; border:2px solid #0E0E0E">STATUS: AVAILABLE FOR INTERNSHIP</span>
+<span style="padding:6px 12px; border:2px solid #0E0E0E">[START DATE] · [DURATION]</span>
+<span style="padding:6px 12px; border:2px solid #0E0E0E">LICENSE: OPEN TO OFFERS</span>
+</div>
+<h1 style="margin:0; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:168px; line-height:0.88; letter-spacing:-0.05em; text-wrap:balance">hamza<span style="background:{{accent}}; padding:0 14px; margin-left:8px; display:inline-block">v4</span></h1>
+<p style="margin:36px 0 0; max-width:760px; font-size:20px; line-height:1.6; text-wrap:pretty">A 4th-year INSA Lyon engineering student, fine-tuned for machine learning and AI. This page is my model card: what I was trained on, what I'm good at, where I still fail, and what I'm built for next.</p>
+<div style="display:flex; flex-wrap:wrap; gap:16px; margin-top:36px">
+<a href="#cv" style="background:#0E0E0E; color:#F1F0EA; padding:16px 28px; font-weight:700; border:3px solid #0E0E0E; min-height:52px; box-sizing:border-box; display:flex; align-items:center">DOWNLOAD CV ↓</a>
+<a href="#contact" style="padding:16px 28px; font-weight:700; border:3px solid #0E0E0E; min-height:52px; box-sizing:border-box; display:flex; align-items:center">RUN INFERENCE (CONTACT) →</a>
+</div>
+</div>
+
+<!-- CARD TABLE -->
+<div id="card" style="padding:24px 40px 72px; max-width:1360px; margin:0 auto">
+<div style="border:3px solid #0E0E0E; background:#FFFFFF">
+<div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(300px,100%), 1fr)); border-bottom:3px solid #0E0E0E">
+<div style="padding:12px 20px; font-size:13px; background:#0E0E0E; color:#F1F0EA; font-weight:700; grid-column:1 / -1">MODEL DETAILS</div>
+</div>
+<div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(300px,100%), 1fr))">
+<div style="padding:24px 20px; border-bottom:2px solid #0E0E0E; border-right:2px solid #0E0E0E; display:flex; flex-direction:column; gap:8px"><div style="font-size:12px; color:#555">name</div><div style="font-family:'Space Grotesk',sans-serif; font-size:26px; font-weight:700">Hamza Bencheikh</div></div>
+<div style="padding:24px 20px; border-bottom:2px solid #0E0E0E; border-right:2px solid #0E0E0E; display:flex; flex-direction:column; gap:8px"><div style="font-size:12px; color:#555">version</div><div style="font-family:'Space Grotesk',sans-serif; font-size:26px; font-weight:700">v4, INSA Lyon year 4</div></div>
+<div style="padding:24px 20px; border-bottom:2px solid #0E0E0E; border-right:2px solid #0E0E0E; display:flex; flex-direction:column; gap:8px"><div style="font-size:12px; color:#555">architecture</div><div style="font-family:'Space Grotesk',sans-serif; font-size:26px; font-weight:700">[DEPARTMENT]</div></div>
+<div style="padding:24px 20px; border-bottom:2px solid #0E0E0E; display:flex; flex-direction:column; gap:8px"><div style="font-size:12px; color:#555">languages</div><div style="font-family:'Space Grotesk',sans-serif; font-size:26px; font-weight:700">[LANGUAGES]</div></div>
+</div>
+<div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(420px,100%), 1fr))">
+<div style="padding:28px 20px; border-right:2px solid #0E0E0E; border-bottom:2px solid #0E0E0E; display:flex; flex-direction:column; gap:10px"><div style="font-size:12px; color:#555">intended use</div><div style="line-height:1.6; font-size:16px">Internship in [ML ENGINEERING / DATA SCIENCE / RESEARCH] from [START DATE] for [DURATION], in [LOCATION].</div></div>
+<div style="padding:28px 20px; border-bottom:2px solid #0E0E0E; display:flex; flex-direction:column; gap:10px"><div style="font-size:12px; color:#555">training data</div><div style="line-height:1.6; font-size:16px">[Courses, projects and experiences that shaped you most, in one sentence.]</div></div>
+</div>
+<div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(420px,100%), 1fr))">
+<div style="padding:28px 20px; border-right:2px solid #0E0E0E; display:flex; flex-direction:column; gap:10px"><div style="font-size:12px; color:#555">strengths</div><div style="line-height:1.6; font-size:16px">[Strength 1] · [Strength 2] · [Strength 3]</div></div>
+<div style="padding:28px 20px; display:flex; flex-direction:column; gap:10px"><div style="font-size:12px; color:#555">known limitations</div><div style="line-height:1.6; font-size:16px">[Something you are honestly still learning]. Honest limits make a model card credible.</div></div>
+</div>
+</div>
+</div>
+
+<!-- TRAINING / LOSS CURVE -->
+<div id="training" style="border-top:3px solid #0E0E0E; border-bottom:3px solid #0E0E0E; background:#0E0E0E; color:#F1F0EA">
+<div style="max-width:1360px; margin:0 auto; padding:80px 40px; display:flex; flex-direction:column; gap:40px">
+<div style="display:flex; flex-wrap:wrap; justify-content:space-between; gap:16px; align-items:flex-end">
+<h2 style="margin:0; font-family:'Space Grotesk',sans-serif; font-size:64px; letter-spacing:-0.03em; line-height:1; font-weight:700">Training run</h2>
+<div style="font-size:13px; color:#B8B8B0">schematic of my path, not real metrics</div>
+</div>
+<svg viewBox="0 0 1280 280" role="img" aria-label="Schematic loss curve falling across four checkpoints" style="width:100%; height:auto; display:block">
+<path d="M10 40 C 200 30, 300 200, 480 190 S 760 90, 900 150 S 1150 230, 1270 240" fill="none" stroke="{{accent}}" stroke-width="4"/>
+<line x1="10" y1="270" x2="1270" y2="270" stroke="#555" stroke-width="2"/>
+<circle cx="10" cy="40" r="9" fill="{{accent}}"/>
+<circle cx="480" cy="190" r="9" fill="{{accent}}"/>
+<circle cx="900" cy="150" r="9" fill="{{accent}}"/>
+<circle cx="1270" cy="240" r="9" fill="{{accent}}"/>
+</svg>
+<div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(240px,100%), 1fr)); gap:24px">
+<div style="border-top:2px solid {{accent}}; padding-top:16px; display:flex; flex-direction:column; gap:8px"><div style="font-size:12px; color:{{accent}}">checkpoint 1 · [YEAR]</div><div style="font-family:'Space Grotesk',sans-serif; font-size:22px; font-weight:700">[Experience or milestone]</div><div style="font-size:14px; line-height:1.6; color:#CFCFC7">[One sentence on what you learned.]</div></div>
+<div style="border-top:2px solid {{accent}}; padding-top:16px; display:flex; flex-direction:column; gap:8px"><div style="font-size:12px; color:{{accent}}">checkpoint 2 · [YEAR]</div><div style="font-family:'Space Grotesk',sans-serif; font-size:22px; font-weight:700">[Experience or milestone]</div><div style="font-size:14px; line-height:1.6; color:#CFCFC7">[One sentence on what you learned.]</div></div>
+<div style="border-top:2px solid {{accent}}; padding-top:16px; display:flex; flex-direction:column; gap:8px"><div style="font-size:12px; color:{{accent}}">checkpoint 3 · [YEAR]</div><div style="font-family:'Space Grotesk',sans-serif; font-size:22px; font-weight:700">[Experience or milestone]</div><div style="font-size:14px; line-height:1.6; color:#CFCFC7">[One sentence on what you learned.]</div></div>
+<div style="border-top:2px solid {{accent}}; padding-top:16px; display:flex; flex-direction:column; gap:8px"><div style="font-size:12px; color:{{accent}}">checkpoint 4 · now</div><div style="font-family:'Space Grotesk',sans-serif; font-size:22px; font-weight:700">INSA Lyon, year 4</div><div style="font-size:14px; line-height:1.6; color:#CFCFC7">[What you are focused on this year.]</div></div>
+</div>
+</div>
+</div>
+
+<!-- EVAL -->
+<div id="eval" style="max-width:1360px; margin:0 auto; padding:80px 40px">
+<h2 style="margin:0 0 36px; font-family:'Space Grotesk',sans-serif; font-size:64px; letter-spacing:-0.03em; line-height:1; font-weight:700">Evaluation</h2>
+<div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(380px,100%), 1fr)); gap:24px">
+<div style="border:3px solid #0E0E0E; background:#FFFFFF; padding:24px; display:flex; flex-direction:column; gap:12px"><div style="height:140px; background:#E4E3DB; border:2px dashed #0E0E0E; display:flex; align-items:center; justify-content:center; font-size:13px">[screenshot or result plot]</div><div style="font-family:'Space Grotesk',sans-serif; font-size:24px; font-weight:700">[Project name]</div><div style="line-height:1.6; font-size:15px">[Task, method, and the result you can honestly report.]</div><a href="#repo" style="font-weight:700; min-height:44px; display:flex; align-items:center">repo →</a></div>
+<div style="border:3px solid #0E0E0E; background:#FFFFFF; padding:24px; display:flex; flex-direction:column; gap:12px"><div style="height:140px; background:#E4E3DB; border:2px dashed #0E0E0E; display:flex; align-items:center; justify-content:center; font-size:13px">[screenshot or result plot]</div><div style="font-family:'Space Grotesk',sans-serif; font-size:24px; font-weight:700">[Project name]</div><div style="line-height:1.6; font-size:15px">[Task, method, and the result you can honestly report.]</div><a href="#repo" style="font-weight:700; min-height:44px; display:flex; align-items:center">repo →</a></div>
+<div style="border:3px solid #0E0E0E; background:#FFFFFF; padding:24px; display:flex; flex-direction:column; gap:12px"><div style="height:140px; background:#E4E3DB; border:2px dashed #0E0E0E; display:flex; align-items:center; justify-content:center; font-size:13px">[screenshot or result plot]</div><div style="font-family:'Space Grotesk',sans-serif; font-size:24px; font-weight:700">[Project name]</div><div style="line-height:1.6; font-size:15px">[Task, method, and the result you can honestly report.]</div><a href="#repo" style="font-weight:700; min-height:44px; display:flex; align-items:center">repo →</a></div>
+</div>
+</div>
+
+<!-- NEXT RUN + CONTACT -->
+<div id="contact" style="background:{{accent}}; border-top:3px solid #0E0E0E">
+<div style="max-width:1360px; margin:0 auto; padding:80px 40px; display:grid; grid-template-columns:repeat(auto-fit, minmax(min(420px,100%), 1fr)); gap:48px">
+<div style="display:flex; flex-direction:column; gap:16px"><div style="font-size:13px; font-weight:700">NEXT TRAINING RUN</div><div style="font-family:'Space Grotesk',sans-serif; font-size:44px; font-weight:700; letter-spacing:-0.02em; line-height:1.05">Where I'm heading</div><div style="font-size:17px; line-height:1.6; max-width:560px">[Two or three sentences: the AI problems you want to work on, the engineer you want to become, and what this internship should teach you.]</div></div>
+<div style="display:flex; flex-direction:column; gap:14px; align-items:flex-start; justify-content:flex-end">
+<a href="#mail" style="background:#0E0E0E; color:#F1F0EA; padding:16px 28px; font-weight:700; border:3px solid #0E0E0E; min-height:52px; box-sizing:border-box; display:flex; align-items:center">[YOUR EMAIL]</a>
+<div style="display:flex; gap:14px; flex-wrap:wrap"><a href="#linkedin" style="padding:14px 24px; font-weight:700; border:3px solid #0E0E0E; min-height:52px; box-sizing:border-box; display:flex; align-items:center">LinkedIn</a><a href="#github" style="padding:14px 24px; font-weight:700; border:3px solid #0E0E0E; min-height:52px; box-sizing:border-box; display:flex; align-items:center">GitHub</a></div>
+</div>
+</div>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#C6FF3D","options":["#C6FF3D","#FF5C39","#7AE7FF","#FFD23F"]},"$preview":{"width":1440,"height":2000}}'>
+class Component extends DCLogic {
+renderVals() {
+return { accent: this.props.accent ?? '#C6FF3D' };
+}
+}
+</script>
+</body>
+</html>

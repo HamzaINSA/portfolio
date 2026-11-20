@@ -1,0 +1,22 @@
+{
+  "id": "availability",
+  "title": "Availability",
+  "source": "availability.json",
+  "keywords": ["available", "availability", "when", "start", "starting", "date", "duration", "long", "location", "remote", "relocate", "relocation", "2027", "based", "live", "lives"],
+  "phrases": ["where is he based", "where does he live", "how long", "may 2027"],
+  "exampleQuestions": [
+    "When is he available?",
+    "Is Hamza available for an internship in May 2027?",
+    "How long can the internship last?",
+    "Is he open to relocation?",
+    "Where is he based?"
+  ],
+  "answer": "Hamza is looking for an AI / LLM engineering internship of up to four months starting in May 2027, and is open to relocation. He is based in Lyon, France.",
+  "links": [{ "label": "Contact Hamza", "href": "/about#contact" }],
+  "sources": ["profile"],
+  "related": ["contact"],
+  "priority": 1,
+  "suggested": true,
+  "suggestedLabel": "When is he available?",
+  "status": "verified"
+}

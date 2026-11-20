@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Evaluation - projects</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<style>
+body{margin:0;background:#F1F0EA}
+a{color:inherit;text-decoration:none}
+a.nl:hover{background:#0E0E0E;color:#F1F0EA}
+button{font-family:inherit}
+</style>
+</helmet>
+<div style="background:#F1F0EA; color:#0E0E0E; font-family:'JetBrains Mono',ui-monospace,monospace; min-height:1500px">
+
+<div style="border-bottom:3px solid #0E0E0E; display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px; padding:12px 40px; font-size:14px; align-items:center">
+<a href="Home.dc.html" style="font-weight:700; min-height:44px; display:flex; align-items:center">HAMZA-V4</a>
+<div style="display:flex; flex-wrap:wrap; gap:8px; align-items:center">
+<a class="nl" href="Home.dc.html" style="min-height:44px; display:flex; align-items:center; padding:0 10px">home</a>
+<a class="nl" href="Training.dc.html" style="min-height:44px; display:flex; align-items:center; padding:0 10px">training</a>
+<a class="nl" href="Projects.dc.html" style="min-height:44px; display:flex; align-items:center; padding:0 10px; background:#0E0E0E; color:#F1F0EA">evaluation</a>
+<a class="nl" href="About.dc.html" style="min-height:44px; display:flex; align-items:center; padding:0 10px">about</a>
+<a href="Chat.dc.html" style="background:{{accent}}; border:2px solid #0E0E0E; font-weight:700; min-height:44px; display:flex; align-items:center; padding:0 16px">ASK THE MODEL →</a>
+</div>
+</div>
+
+<div style="max-width:1360px; margin:0 auto; padding:56px 40px 32px">
+<div style="font-size:13px; margin-bottom:16px">/ evaluation</div>
+<h1 style="margin:0; font-family:'Space Grotesk',sans-serif; font-size:104px; line-height:0.92; letter-spacing:-0.045em; font-weight:700">Evaluation</h1>
+<p style="margin:20px 0 0; max-width:700px; font-size:17px; line-height:1.6">What I built, how I measured it, and what didn't work. Filter by topic.</p>
+<div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:28px">
+<sc-for list="{{filters}}" as="f" hint-placeholder-count="5">
+<button onClick="{{f.pick}}" style="cursor:pointer; min-height:44px; padding:8px 18px; border:3px solid #0E0E0E; background:{{f.bg}}; color:#0E0E0E; font-size:14px; font-weight:700">{{f.label}}</button>
+</sc-for>
+</div>
+</div>
+
+<div style="max-width:1360px; margin:0 auto; padding:16px 40px 72px; display:grid; grid-template-columns:repeat(auto-fit, minmax(min(400px,100%), 1fr)); gap:24px">
+<sc-for list="{{projects}}" as="p" hint-placeholder-count="6">
+<a href="ProjectDetail.dc.html" style="border:3px solid #0E0E0E; background:#FFFFFF; display:flex; flex-direction:column; min-width:0">
+<div style="height:180px; background:#E4E3DB; border-bottom:3px solid #0E0E0E; display:flex; align-items:center; justify-content:center; font-size:13px">[result plot or screenshot]</div>
+<div style="padding:22px; display:flex; flex-direction:column; gap:12px">
+<div style="display:flex; justify-content:space-between; gap:10px; font-size:12px"><span style="background:{{accent}}; border:2px solid #0E0E0E; padding:3px 8px; font-weight:700">{{p.tag}}</span><span>[YEAR]</span></div>
+<div style="font-family:'Space Grotesk',sans-serif; font-size:26px; font-weight:700; line-height:1.1">{{p.name}}</div>
+<div style="font-size:14px; line-height:1.6">[Task, method, honest result.]</div>
+<div style="font-size:13px; color:#555">[tech] · [tech] · [tech]</div>
+<div style="font-weight:700; font-size:14px; margin-top:4px">open case study →</div>
+</div>
+</a>
+</sc-for>
+</div>
+
+<div style="background:{{accent}}; border-top:3px solid #0E0E0E">
+<div style="max-width:1360px; margin:0 auto; padding:48px 40px; display:flex; flex-wrap:wrap; justify-content:space-between; gap:20px; align-items:center"><div style="font-family:'Space Grotesk',sans-serif; font-size:40px; font-weight:700; letter-spacing:-0.03em">Something missing? Ask the model.</div><a href="Chat.dc.html" style="background:#0E0E0E; color:#F1F0EA; padding:16px 28px; font-weight:700; min-height:52px; box-sizing:border-box; display:flex; align-items:center">ASK THE MODEL →</a></div>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#C6FF3D","options":["#C6FF3D","#FF5C39","#7AE7FF","#FFD23F"]},"$preview":{"width":1440,"height":1500}}'>
+class Component extends DCLogic {
+constructor(props) {
+super(props);
+this.state = { filter: 'All' };
+}
+renderVals() {
+const accent = this.props.accent ?? '#C6FF3D';
+const names = ['All', '[Topic 1]', '[Topic 2]', '[Topic 3]'];
+const all = [
+{ name: '[Project name 1]', tag: '[Topic 1]' },
+{ name: '[Project name 2]', tag: '[Topic 2]' },
+{ name: '[Project name 3]', tag: '[Topic 1]' },
+{ name: '[Project name 4]', tag: '[Topic 3]' },
+{ name: '[Project name 5]', tag: '[Topic 2]' },
+{ name: '[Project name 6]', tag: '[Topic 3]' }
+];
+const f = this.state.filter;
+return {
+accent,
+filters: names.map((n) => ({ label: n, pick: () => this.setState({ filter: n }), bg: n === f ? accent : '#FFFFFF' })),
+projects: all.filter((p) => f === 'All' || p.tag === f)
+};
+}
+}
+</script>
+</body>
+</html>

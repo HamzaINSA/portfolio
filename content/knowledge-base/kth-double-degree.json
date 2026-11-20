@@ -1,0 +1,22 @@
+{
+  "id": "kth-double-degree",
+  "title": "Double degree at KTH",
+  "source": "kth-double-degree.json",
+  "keywords": ["kth", "sweden", "swedish", "stockholm", "abroad", "exchange"],
+  "phrases": ["double degree", "double diploma", "study abroad"],
+  "exampleQuestions": [
+    "Is Hamza going to KTH?",
+    "Does he have a double degree?",
+    "Will he study abroad?"
+  ],
+  "answer": "Hamza plans a double degree at KTH next year to specialise in machine learning. [TO CONFIRM: programme name, dates and admission status]",
+  "links": [{ "label": "See the training run", "href": "/training" }],
+  "sources": ["kth-double-degree"],
+  "related": ["phd-goal", "education"],
+  "priority": 1,
+  "suggested": false,
+  "status": "to_confirm",
+  "openQuestions": [
+    "Becomes verified when experiences/kth-double-degree.json is confirmed (admission, programme name, dates)."
+  ]
+}

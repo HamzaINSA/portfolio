@@ -1,0 +1,23 @@
+{
+  "id": "propulseo-asys",
+  "type": "program",
+  "title": "Propulseo",
+  "organization": { "name": "Propulseo" },
+  "location": null,
+  "startDate": null,
+  "endDate": null,
+  "current": false,
+  "checkpoint": false,
+  "summary": "Member of Propulseo, backed by Asys. [TO CONFIRM: what the program is, what Asys provides, dates and exact wording]",
+  "highlights": [],
+  "learned": [],
+  "stack": [],
+  "tags": ["entrepreneurship"],
+  "links": [],
+  "status": "to_confirm",
+  "openQuestions": [
+    "Hamza said he is part of Propulseo and 'propulsé par Asys, who trusted him'. No document describes either. What are they exactly, since when, and how should the support be worded?",
+    "Is there an official link to add?"
+  ],
+  "internalNote": "Source: Hamza's message only. No other source. Do not describe either organisation beyond what he confirms."
+}

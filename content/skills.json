@@ -1,0 +1,34 @@
+{
+  "groups": [
+    {
+      "id": "languages",
+      "label": "Languages",
+      "items": ["C# (Unity)", "Python", "Java", "C", "C++"]
+    },
+    {
+      "id": "web",
+      "label": "Web",
+      "items": ["HTML", "CSS", "JavaScript"]
+    },
+    {
+      "id": "backend-data",
+      "label": "Backend & Data",
+      "items": ["Firebase", "SQL", "Relational data modeling"]
+    },
+    {
+      "id": "tools",
+      "label": "Tools",
+      "items": ["Git/GitHub", "Jira", "VS Code", "Linux"]
+    }
+  ],
+  "spoken": [
+    { "language": "French", "level": "Native" },
+    { "language": "English", "level": "B2" },
+    { "language": "Japanese", "level": "Intermediate" }
+  ],
+  "status": "verified",
+  "openQuestions": [
+    "Projects use TypeScript, Next.js, Supabase (PostgreSQL), Vercel, Docker and React Native, which the CV skills list does not include. Ask Hamza whether to add them (they appear in his project descriptions).",
+    "Mission sources mention Python data libraries (pandas, openpyxl) and Streamlit/Plotly: add only if Hamza confirms he used them himself (see missions marked to_confirm)."
+  ]
+}

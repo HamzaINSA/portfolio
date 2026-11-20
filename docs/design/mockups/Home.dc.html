@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Home</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<style>
+body{margin:0;background:#F1F0EA}
+a{color:inherit;text-decoration:none}
+a.nl:hover{background:#0E0E0E;color:#F1F0EA}
+</style>
+</helmet>
+<div style="background:#F1F0EA; color:#0E0E0E; font-family:'JetBrains Mono',ui-monospace,monospace; min-height:1900px">
+
+<div style="border-bottom:3px solid #0E0E0E; display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px; padding:12px 40px; font-size:14px; align-items:center">
+<a href="Home.dc.html" style="font-weight:700; min-height:44px; display:flex; align-items:center">HAMZA-V4</a>
+<div style="display:flex; flex-wrap:wrap; gap:8px; align-items:center">
+<a class="nl" href="Home.dc.html" style="min-height:44px; display:flex; align-items:center; padding:0 10px; background:#0E0E0E; color:#F1F0EA">home</a>
+<a class="nl" href="Training.dc.html" style="min-height:44px; display:flex; align-items:center; padding:0 10px">training</a>
+<a class="nl" href="Projects.dc.html" style="min-height:44px; display:flex; align-items:center; padding:0 10px">evaluation</a>
+<a class="nl" href="About.dc.html" style="min-height:44px; display:flex; align-items:center; padding:0 10px">about</a>
+<a href="Chat.dc.html" style="background:{{accent}}; border:2px solid #0E0E0E; font-weight:700; min-height:44px; display:flex; align-items:center; padding:0 16px">ASK THE MODEL →</a>
+</div>
+</div>
+
+<!-- HERO -->
+<div style="max-width:1360px; margin:0 auto; padding:64px 40px 56px; display:grid; grid-template-columns:repeat(auto-fit, minmax(min(480px,100%), 1fr)); gap:56px; align-items:center">
+<div>
+<div style="display:flex; flex-wrap:wrap; gap:12px; margin-bottom:28px; font-size:13px">
+<span style="background:{{accent}}; padding:6px 12px; font-weight:700; border:2px solid #0E0E0E">STATUS: AVAILABLE FOR INTERNSHIP</span>
+<span style="padding:6px 12px; border:2px solid #0E0E0E">[START DATE] · [DURATION]</span>
+</div>
+<h1 style="margin:0; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:152px; line-height:0.88; letter-spacing:-0.05em">hamza<span style="background:{{accent}}; padding:0 12px; margin-left:8px; display:inline-block">v4</span></h1>
+<p style="margin:32px 0 0; max-width:620px; font-size:19px; line-height:1.6; text-wrap:pretty">4th-year INSA Lyon engineering student, fine-tuned for machine learning and AI. Read my model card, or just ask the model.</p>
+<div style="display:flex; flex-wrap:wrap; gap:16px; margin-top:32px">
+<a href="Chat.dc.html" style="background:#0E0E0E; color:#F1F0EA; padding:16px 28px; font-weight:700; border:3px solid #0E0E0E; min-height:52px; box-sizing:border-box; display:flex; align-items:center">ASK THE MODEL →</a>
+<a href="#cv" style="padding:16px 28px; font-weight:700; border:3px solid #0E0E0E; min-height:52px; box-sizing:border-box; display:flex; align-items:center">DOWNLOAD CV ↓</a>
+</div>
+</div>
+
+<!-- CHAT TEASER WINDOW -->
+<div style="border:3px solid #0E0E0E; background:#0E0E0E; color:#F1F0EA; box-shadow:10px 10px 0 {{accent}}">
+<div style="display:flex; justify-content:space-between; padding:12px 18px; border-bottom:2px solid #3A3A36; font-size:13px"><span style="font-weight:700; color:{{accent}}">inference_console</span><span style="color:#B8B8B0">local · no API · no tracking</span></div>
+<div style="padding:24px 22px; display:flex; flex-direction:column; gap:16px; font-size:14px; line-height:1.6">
+<div style="color:#B8B8B0">&gt; I answer only from the data Hamza provided. Try one:</div>
+<a href="Chat.dc.html" style="border:2px solid {{accent}}; padding:12px 16px; min-height:44px; box-sizing:border-box; display:flex; align-items:center; color:{{accent}}">What has Hamza built?</a>
+<a href="Chat.dc.html" style="border:2px solid {{accent}}; padding:12px 16px; min-height:44px; box-sizing:border-box; display:flex; align-items:center; color:{{accent}}">Why machine learning?</a>
+<a href="Chat.dc.html" style="border:2px solid {{accent}}; padding:12px 16px; min-height:44px; box-sizing:border-box; display:flex; align-items:center; color:{{accent}}">When is he available?</a>
+<div style="border:2px solid #3A3A36; padding:12px 16px; color:#B8B8B0; display:flex; justify-content:space-between"><span>type a question…</span><span style="color:{{accent}}">↵</span></div>
+</div>
+</div>
+</div>
+
+<!-- CARD SUMMARY -->
+<div style="max-width:1360px; margin:0 auto; padding:24px 40px 72px">
+<div style="border:3px solid #0E0E0E; background:#FFFFFF">
+<div style="padding:12px 20px; font-size:13px; background:#0E0E0E; color:#F1F0EA; font-weight:700">MODEL DETAILS</div>
+<div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(280px,100%), 1fr))">
+<div style="padding:24px 20px; border-right:2px solid #0E0E0E; border-bottom:2px solid #0E0E0E; display:flex; flex-direction:column; gap:8px"><div style="font-size:12px; color:#555">version</div><div style="font-family:'Space Grotesk',sans-serif; font-size:24px; font-weight:700">v4, INSA Lyon year 4</div></div>
+<div style="padding:24px 20px; border-right:2px solid #0E0E0E; border-bottom:2px solid #0E0E0E; display:flex; flex-direction:column; gap:8px"><div style="font-size:12px; color:#555">architecture</div><div style="font-family:'Space Grotesk',sans-serif; font-size:24px; font-weight:700">[DEPARTMENT]</div></div>
+<div style="padding:24px 20px; border-bottom:2px solid #0E0E0E; display:flex; flex-direction:column; gap:8px"><div style="font-size:12px; color:#555">intended use</div><div style="font-family:'Space Grotesk',sans-serif; font-size:24px; font-weight:700">[AI / ML internship]</div></div>
+</div>
+<div style="padding:24px 20px; display:flex; flex-wrap:wrap; justify-content:space-between; gap:16px; align-items:center"><div style="font-size:15px; line-height:1.6; max-width:760px">[Two sentences: your strongest skills and the kind of ML work you want to do.]</div><a href="About.dc.html" style="font-weight:700; border:3px solid #0E0E0E; padding:12px 20px; min-height:48px; box-sizing:border-box; display:flex; align-items:center">FULL CARD →</a></div>
+</div>
+</div>
+
+<!-- TRAINING PREVIEW -->
+<div style="background:#0E0E0E; color:#F1F0EA; border-top:3px solid #0E0E0E">
+<div style="max-width:1360px; margin:0 auto; padding:72px 40px; display:flex; flex-direction:column; gap:32px">
+<div style="display:flex; flex-wrap:wrap; justify-content:space-between; gap:16px; align-items:flex-end"><h2 style="margin:0; font-family:'Space Grotesk',sans-serif; font-size:56px; letter-spacing:-0.03em; line-height:1; font-weight:700">Training run</h2><a href="Training.dc.html" style="color:{{accent}}; font-weight:700; min-height:44px; display:flex; align-items:center">all checkpoints →</a></div>
+<svg viewBox="0 0 1280 200" role="img" aria-label="Schematic loss curve across checkpoints" style="width:100%; height:auto; display:block"><path d="M10 30 C 200 20, 300 150, 480 140 S 760 70, 900 110 S 1150 170, 1270 175" fill="none" stroke="{{accent}}" stroke-width="4"/><circle cx="10" cy="30" r="9" fill="{{accent}}"/><circle cx="480" cy="140" r="9" fill="{{accent}}"/><circle cx="900" cy="110" r="9" fill="{{accent}}"/><circle cx="1270" cy="175" r="9" fill="{{accent}}"/></svg>
+<div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(240px,100%), 1fr)); gap:24px">
+<div style="border-top:2px solid {{accent}}; padding-top:14px"><div style="font-size:12px; color:{{accent}}">checkpoint 1</div><div style="font-family:'Space Grotesk',sans-serif; font-size:20px; font-weight:700; margin-top:6px">[Milestone]</div></div>
+<div style="border-top:2px solid {{accent}}; padding-top:14px"><div style="font-size:12px; color:{{accent}}">checkpoint 2</div><div style="font-family:'Space Grotesk',sans-serif; font-size:20px; font-weight:700; margin-top:6px">[Milestone]</div></div>
+<div style="border-top:2px solid {{accent}}; padding-top:14px"><div style="font-size:12px; color:{{accent}}">checkpoint 3</div><div style="font-family:'Space Grotesk',sans-serif; font-size:20px; font-weight:700; margin-top:6px">[Milestone]</div></div>
+<div style="border-top:2px solid {{accent}}; padding-top:14px"><div style="font-size:12px; color:{{accent}}">checkpoint 4 · now</div><div style="font-family:'Space Grotesk',sans-serif; font-size:20px; font-weight:700; margin-top:6px">INSA Lyon, year 4</div></div>
+</div>
+</div>
+</div>
+
+<!-- EVAL PREVIEW -->
+<div style="max-width:1360px; margin:0 auto; padding:72px 40px">
+<div style="display:flex; flex-wrap:wrap; justify-content:space-between; gap:16px; align-items:flex-end; margin-bottom:32px"><h2 style="margin:0; font-family:'Space Grotesk',sans-serif; font-size:56px; letter-spacing:-0.03em; line-height:1; font-weight:700">Evaluation</h2><a href="Projects.dc.html" style="font-weight:700; min-height:44px; display:flex; align-items:center; text-decoration:underline">all projects →</a></div>
+<div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(380px,100%), 1fr)); gap:24px">
+<a href="ProjectDetail.dc.html" style="border:3px solid #0E0E0E; background:#FFFFFF; padding:22px; display:flex; flex-direction:column; gap:12px"><div style="height:120px; background:#E4E3DB; border:2px dashed #0E0E0E; display:flex; align-items:center; justify-content:center; font-size:13px">[result plot]</div><div style="font-family:'Space Grotesk',sans-serif; font-size:24px; font-weight:700">[Project name]</div><div style="font-size:14px; line-height:1.6">[Task and honest result.]</div></a>
+<a href="ProjectDetail.dc.html" style="border:3px solid #0E0E0E; background:#FFFFFF; padding:22px; display:flex; flex-direction:column; gap:12px"><div style="height:120px; background:#E4E3DB; border:2px dashed #0E0E0E; display:flex; align-items:center; justify-content:center; font-size:13px">[result plot]</div><div style="font-family:'Space Grotesk',sans-serif; font-size:24px; font-weight:700">[Project name]</div><div style="font-size:14px; line-height:1.6">[Task and honest result.]</div></a>
+<a href="ProjectDetail.dc.html" style="border:3px solid #0E0E0E; background:#FFFFFF; padding:22px; display:flex; flex-direction:column; gap:12px"><div style="height:120px; background:#E4E3DB; border:2px dashed #0E0E0E; display:flex; align-items:center; justify-content:center; font-size:13px">[result plot]</div><div style="font-family:'Space Grotesk',sans-serif; font-size:24px; font-weight:700">[Project name]</div><div style="font-size:14px; line-height:1.6">[Task and honest result.]</div></a>
+</div>
+</div>
+
+<!-- FOOTER CTA -->
+<div style="background:{{accent}}; border-top:3px solid #0E0E0E">
+<div style="max-width:1360px; margin:0 auto; padding:64px 40px; display:flex; flex-wrap:wrap; justify-content:space-between; gap:24px; align-items:center"><div style="font-family:'Space Grotesk',sans-serif; font-size:48px; font-weight:700; letter-spacing:-0.03em; line-height:1.05; max-width:760px">Ready for your next training run.</div><div style="display:flex; flex-wrap:wrap; gap:14px"><a href="About.dc.html#contact" style="background:#0E0E0E; color:#F1F0EA; padding:16px 28px; font-weight:700; border:3px solid #0E0E0E; min-height:52px; box-sizing:border-box; display:flex; align-items:center">CONTACT →</a><a href="Chat.dc.html" style="padding:16px 28px; font-weight:700; border:3px solid #0E0E0E; min-height:52px; box-sizing:border-box; display:flex; align-items:center">ASK THE MODEL</a></div></div>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#C6FF3D","options":["#C6FF3D","#FF5C39","#7AE7FF","#FFD23F"]},"$preview":{"width":1440,"height":1900}}'>
+class Component extends DCLogic {
+renderVals() {
+return { accent: this.props.accent ?? '#C6FF3D' };
+}
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+# Dependencies and build output
+node_modules/
+dist/
+.astro/
+.vercel/
+.netlify/
+coverage/
+playwright-report/
+test-results/
+
+# Environment and secrets (never commit)
+.env
+.env.*
+!.env.example
+
+# Private raw sources (CV, proposals, contracts...). Local only.
+private/*
+!private/README.md
+
+# OS and editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# Logs
+*.log
+npm-debug.log*

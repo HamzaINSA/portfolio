@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "experience.schema.json",
+  "title": "Experience",
+  "description": "One item of the training run: internship, mission, association role, program, scholarship, academic plan or career goal.",
+  "type": "object",
+  "required": ["id", "type", "title", "organization", "summary", "status"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+    "type": {
+      "enum": [
+        "internship",
+        "junior-enterprise",
+        "client-mission",
+        "tutoring",
+        "program",
+        "association",
+        "scholarship",
+        "academic-plan",
+        "career-goal"
+      ]
+    },
+    "parentId": {
+      "type": "string",
+      "description": "Id of the experience this item belongs to (for example a mission inside the junior-enterprise)."
+    },
+    "title": { "type": "string", "minLength": 1 },
+    "organization": {
+      "type": "object",
+      "required": ["name"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string" },
+        "displayName": { "type": "string" }
+      }
+    },
+    "location": { "type": ["string", "null"] },
+    "startDate": { "type": ["string", "null"], "pattern": "^\\d{4}(-\\d{2})?$" },
+    "endDate": { "type": ["string", "null"], "pattern": "^\\d{4}(-\\d{2})?$" },
+    "current": { "type": "boolean", "default": false },
+    "checkpoint": {
+      "type": "boolean",
+      "default": false,
+      "description": "If true (and verified), the item is a checkpoint on the Training page curve."
+    },
+    "summary": { "type": "string", "minLength": 1 },
+    "highlights": { "type": "array", "items": { "type": "string" }, "default": [] },
+    "learned": { "type": "array", "items": { "type": "string" }, "default": [] },
+    "stack": { "type": "array", "items": { "type": "string" }, "default": [] },
+    "tags": { "type": "array", "items": { "type": "string" }, "default": [] },
+    "links": {
+      "type": "array",
+      "default": [],
+      "items": {
+        "type": "object",
+        "required": ["label", "url"],
+        "additionalProperties": false,
+        "properties": { "label": { "type": "string" }, "url": { "type": "string", "format": "uri" } }
+      }
+    },
+    "client": {
+      "type": "object",
+      "description": "Only for client-mission. Anonymous by default.",
+      "required": ["disclosure", "descriptor"],
+      "additionalProperties": false,
+      "properties": {
+        "disclosure": { "enum": ["anonymous", "named"] },
+        "descriptor": { "type": "string", "description": "Neutral description shown when anonymous." },
+        "publicName": { "type": ["string", "null"], "description": "Used only if disclosure is named and Hamza confirmed it." }
+      }
+    },
+    "status": { "enum": ["verified", "to_confirm"] },
+    "openQuestions": {
+      "type": "array",
+      "items": { "type": "string" },
+      "default": [],
+      "description": "Never rendered. No client names, prices or third-party personal data."
+    },
+    "internalNote": { "type": "string", "description": "Never rendered." }
+  }
+}

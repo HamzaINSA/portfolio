@@ -1,0 +1,20 @@
+{
+  "id": "experience",
+  "title": "Professional experience",
+  "source": "experience.json",
+  "keywords": ["experience", "internship", "intern", "work", "worked", "job", "company", "career", "role", "professional", "japan", "sapporo", "delta", "quest", "etic", "junior", "enterprise", "tutor", "tutoring"],
+  "phrases": ["delta quest", "junior enterprise"],
+  "exampleQuestions": [
+    "What experience does he have?",
+    "Has Hamza done an internship?",
+    "Did he work in Japan?",
+    "Where has he worked?"
+  ],
+  "answer": "From June to September 2026 Hamza did a three-month development internship at Delta Quest in Sapporo, Japan, in an international team working in English: he implemented Unity (C#) features through reviewed pull requests, designed generative AI workflows with an evaluation pipeline, and worked in Agile sprints with Jira and Git/GitHub. Since May 2026 he is a developer and technical consultant at ETIC INSA Technologies, the Junior Enterprise of INSA Lyon. He also gave weekly tutoring in mathematics, physics and computer science from 2023 to 2026.",
+  "links": [{ "label": "See the training run", "href": "/training" }],
+  "sources": ["delta-quest-internship", "etic-insa-technologies", "academic-tutor"],
+  "related": ["projects", "involvement"],
+  "priority": 0,
+  "suggested": false,
+  "status": "verified"
+}

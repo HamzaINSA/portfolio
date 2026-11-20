@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Mobile home</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<style>
+body{margin:0;background:#F1F0EA}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit}
+</style>
+</helmet>
+<div style="width:390px; height:1800px; box-sizing:border-box; background:#F1F0EA; color:#0E0E0E; font-family:'JetBrains Mono',ui-monospace,monospace; overflow:hidden">
+
+<div style="border-bottom:3px solid #0E0E0E; display:flex; justify-content:space-between; align-items:center; padding:6px 16px 6px 20px; font-size:14px">
+<a href="MobileHome.dc.html" style="font-weight:700; min-height:44px; display:flex; align-items:center">HAMZA-V4</a>
+<button aria-label="Open menu" style="width:44px; height:44px; background:transparent; border:3px solid #0E0E0E; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px; cursor:pointer; padding:0"><span style="width:20px; height:3px; background:#0E0E0E; display:block"></span><span style="width:20px; height:3px; background:#0E0E0E; display:block"></span></button>
+</div>
+
+<div style="padding:32px 20px 36px">
+<div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:22px; font-size:12px">
+<span style="background:{{accent}}; padding:5px 10px; font-weight:700; border:2px solid #0E0E0E">AVAILABLE FOR INTERNSHIP</span>
+<span style="padding:5px 10px; border:2px solid #0E0E0E">[START DATE]</span>
+</div>
+<h1 style="margin:0; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:92px; line-height:0.88; letter-spacing:-0.05em">hamza<br><span style="background:{{accent}}; padding:0 10px; display:inline-block">v4</span></h1>
+<p style="margin:24px 0 0; font-size:16px; line-height:1.6">4th-year INSA Lyon engineering student, fine-tuned for machine learning and AI.</p>
+<div style="display:flex; flex-direction:column; gap:12px; margin-top:24px">
+<a href="MobileChat.dc.html" style="background:#0E0E0E; color:#F1F0EA; padding:14px 20px; font-weight:700; border:3px solid #0E0E0E; min-height:52px; box-sizing:border-box; display:flex; align-items:center; justify-content:space-between"><span>ASK THE MODEL</span><span>→</span></a>
+<a href="#cv" style="padding:14px 20px; font-weight:700; border:3px solid #0E0E0E; min-height:52px; box-sizing:border-box; display:flex; align-items:center; justify-content:space-between"><span>DOWNLOAD CV</span><span>↓</span></a>
+</div>
+</div>
+
+<div style="margin:0 20px; border:3px solid #0E0E0E; background:#0E0E0E; color:#F1F0EA; box-shadow:6px 6px 0 {{accent}}">
+<div style="padding:10px 14px; border-bottom:2px solid #3A3A36; font-size:12px; font-weight:700; color:{{accent}}">inference_console</div>
+<div style="padding:16px 14px; display:flex; flex-direction:column; gap:10px; font-size:13px">
+<div style="color:#B8B8B0">&gt; Only answers from Hamza's data.</div>
+<a href="MobileChat.dc.html" style="border:2px solid {{accent}}; padding:10px 12px; min-height:44px; box-sizing:border-box; display:flex; align-items:center; color:{{accent}}">What has Hamza built?</a>
+<a href="MobileChat.dc.html" style="border:2px solid {{accent}}; padding:10px 12px; min-height:44px; box-sizing:border-box; display:flex; align-items:center; color:{{accent}}">When is he available?</a>
+</div>
+</div>
+
+<div style="padding:44px 20px 0">
+<div style="border:3px solid #0E0E0E; background:#FFFFFF">
+<div style="padding:10px 16px; font-size:12px; background:#0E0E0E; color:#F1F0EA; font-weight:700">MODEL DETAILS</div>
+<div style="padding:16px; border-bottom:2px solid #0E0E0E"><div style="font-size:11px; color:#555">version</div><div style="font-family:'Space Grotesk',sans-serif; font-size:20px; font-weight:700; margin-top:4px">v4, INSA Lyon year 4</div></div>
+<div style="padding:16px; border-bottom:2px solid #0E0E0E"><div style="font-size:11px; color:#555">architecture</div><div style="font-family:'Space Grotesk',sans-serif; font-size:20px; font-weight:700; margin-top:4px">[DEPARTMENT]</div></div>
+<div style="padding:16px"><div style="font-size:11px; color:#555">intended use</div><div style="font-family:'Space Grotesk',sans-serif; font-size:20px; font-weight:700; margin-top:4px">[AI / ML internship]</div></div>
+</div>
+</div>
+
+<div style="margin-top:44px; background:#0E0E0E; color:#F1F0EA; padding:36px 20px; display:flex; flex-direction:column; gap:20px">
+<div style="font-family:'Space Grotesk',sans-serif; font-size:40px; font-weight:700; letter-spacing:-0.03em; line-height:1">Training run</div>
+<svg viewBox="0 0 350 90" role="img" aria-label="Schematic loss curve" style="width:100%; height:auto; display:block"><path d="M6 12 C 60 8, 90 70, 130 66 S 210 30, 250 48 S 320 76, 344 78" fill="none" stroke="{{accent}}" stroke-width="3"/><circle cx="6" cy="12" r="6" fill="{{accent}}"/><circle cx="130" cy="66" r="6" fill="{{accent}}"/><circle cx="250" cy="48" r="6" fill="{{accent}}"/><circle cx="344" cy="78" r="6" fill="{{accent}}"/></svg>
+<div style="border-top:2px solid {{accent}}; padding-top:12px"><div style="font-size:11px; color:{{accent}}">checkpoint 1</div><div style="font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:700; margin-top:4px">[Milestone]</div></div>
+<div style="border-top:2px solid {{accent}}; padding-top:12px"><div style="font-size:11px; color:{{accent}}">checkpoint 2</div><div style="font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:700; margin-top:4px">[Milestone]</div></div>
+<div style="border-top:2px solid {{accent}}; padding-top:12px"><div style="font-size:11px; color:{{accent}}">checkpoint 4 · now</div><div style="font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:700; margin-top:4px">INSA Lyon, year 4</div></div>
+</div>
+
+<div style="padding:44px 20px 0; display:flex; flex-direction:column; gap:16px">
+<div style="font-family:'Space Grotesk',sans-serif; font-size:40px; font-weight:700; letter-spacing:-0.03em; line-height:1">Evaluation</div>
+<div style="border:3px solid #0E0E0E; background:#FFFFFF; padding:16px; display:flex; flex-direction:column; gap:10px"><div style="height:90px; background:#E4E3DB; border:2px dashed #0E0E0E; display:flex; align-items:center; justify-content:center; font-size:12px">[result plot]</div><div style="font-family:'Space Grotesk',sans-serif; font-size:20px; font-weight:700">[Project name]</div><div style="font-size:13px; line-height:1.6">[Task and honest result.]</div></div>
+<div style="border:3px solid #0E0E0E; background:#FFFFFF; padding:16px; display:flex; flex-direction:column; gap:10px"><div style="height:90px; background:#E4E3DB; border:2px dashed #0E0E0E; display:flex; align-items:center; justify-content:center; font-size:12px">[result plot]</div><div style="font-family:'Space Grotesk',sans-serif; font-size:20px; font-weight:700">[Project name]</div><div style="font-size:13px; line-height:1.6">[Task and honest result.]</div></div>
+</div>
+
+<div style="margin-top:44px; background:{{accent}}; border-top:3px solid #0E0E0E; padding:36px 20px; display:flex; flex-direction:column; gap:18px"><div style="font-family:'Space Grotesk',sans-serif; font-size:32px; font-weight:700; letter-spacing:-0.03em; line-height:1.05">Ready for your next training run.</div><a href="#mail" style="background:#0E0E0E; color:#F1F0EA; padding:14px 20px; font-weight:700; min-height:52px; box-sizing:border-box; display:flex; align-items:center">CONTACT →</a></div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#C6FF3D","options":["#C6FF3D","#FF5C39","#7AE7FF","#FFD23F"]},"$preview":{"width":390,"height":1800}}'>
+class Component extends DCLogic {
+renderVals() {
+return { accent: this.props.accent ?? '#C6FF3D' };
+}
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+{
+  "id": "phd-goal",
+  "title": "Long-term goal",
+  "source": "phd-goal.json",
+  "keywords": ["phd", "doctorate", "doctoral", "research", "researcher", "future", "plan", "plans", "goal", "goals", "ambition", "long", "term", "career"],
+  "phrases": ["long term", "in the future"],
+  "exampleQuestions": [
+    "Does Hamza want to do a PhD?",
+    "What are his long-term goals?",
+    "Is he interested in research?",
+    "What does he want to do in the future?"
+  ],
+  "answer": "Hamza aims for a PhD specialised in machine learning, and wants to build his career working in this field.",
+  "links": [],
+  "sources": ["phd-goal"],
+  "related": ["motivation", "education"],
+  "priority": 1,
+  "suggested": false,
+  "status": "verified"
+}

@@ -1,0 +1,21 @@
+{
+  "id": "projects",
+  "title": "Projects",
+  "source": "projects.json",
+  "keywords": ["project", "built", "build", "made", "github", "portfolio", "repository", "repo", "app", "product", "startup", "founder", "created", "create", "mobile", "web", "side"],
+  "phrases": ["side project", "interview app"],
+  "exampleQuestions": [
+    "What has Hamza built?",
+    "Does he have personal projects?",
+    "Tell me about his projects",
+    "Is he working on a startup?"
+  ],
+  "answer": "Hamza is the founder of an early-stage AI interview-preparation web app (since September 2026): it prepares candidates for an interview from their CV and the job offer through AI mock interviews. He defined the scope and stack (TypeScript, Next.js, Supabase, Vercel, Docker) with a provider-agnostic language-model layer, designed its GDPR and AI Act compliance, and designed a blind protocol to choose between Mistral and Claude on quality and cost. He also designed and delivered J'ai PiGé (June to August 2026), an educational mobile app built with React Native and Firebase, with hundreds of exercises generated through automated LLM workflows.",
+  "links": [{ "label": "See the projects", "href": "/projects" }],
+  "sources": ["ai-interview-prep-app", "jai-pige"],
+  "related": ["skills", "experience"],
+  "priority": 1,
+  "suggested": true,
+  "suggestedLabel": "What has Hamza built?",
+  "status": "verified"
+}

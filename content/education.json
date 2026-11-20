@@ -1,0 +1,41 @@
+[
+  {
+    "id": "insa-lyon-computer-science",
+    "institution": "INSA Lyon",
+    "program": "Computer Science Department, Master's degree in Computer Science",
+    "startYear": 2025,
+    "endYear": 2028,
+    "location": "Lyon, France",
+    "notes": [
+      "Leading French public engineering school (Grande École), five-year integrated program."
+    ],
+    "coursework": [
+      "Algorithms & Data Structures",
+      "Operating Systems",
+      "Computer Networks",
+      "Software Engineering & OOP",
+      "Artificial Intelligence",
+      "Probability",
+      "Project Management"
+    ],
+    "current": true,
+    "status": "verified",
+    "openQuestions": [
+      "The KTH double degree (see experiences/kth-double-degree.json) may change the end year or the way the 5th year is described. Confirm with Hamza."
+    ]
+  },
+  {
+    "id": "insa-lyon-undergraduate-asia",
+    "institution": "INSA Lyon",
+    "program": "Intensive Undergraduate Program, International Asia Track",
+    "startYear": 2023,
+    "endYear": 2025,
+    "location": "Lyon, France",
+    "notes": [
+      "Mathematics, physics and computer science, plus Japanese language courses."
+    ],
+    "coursework": [],
+    "current": false,
+    "status": "verified"
+  }
+]

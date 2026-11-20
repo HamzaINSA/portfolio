@@ -1,0 +1,22 @@
+{
+  "id": "entrepreneurship-track",
+  "type": "program",
+  "title": "Entrepreneurship Track",
+  "organization": { "name": "INSA Lyon" },
+  "location": "Lyon, France",
+  "startDate": "2026",
+  "endDate": "2027",
+  "current": true,
+  "checkpoint": false,
+  "summary": "INSA Lyon program on turning concrete problems into viable products.",
+  "highlights": [],
+  "learned": [],
+  "stack": [],
+  "tags": ["entrepreneurship", "product"],
+  "links": [],
+  "status": "verified",
+  "openQuestions": [
+    "Link to the interview-preparation app project if it is the product developed in this track (ask Hamza)."
+  ],
+  "internalNote": "Source: CV (2026 to 2027)."
+}
