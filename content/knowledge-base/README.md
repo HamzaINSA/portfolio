@@ -20,13 +20,15 @@ The documents the chatbot can answer from. One JSON file per entry. Schema: `../
 - "long / how long": `availability` vs `experience` → `availability` has priority 1.
 - "languages": programming (`skills`) vs spoken (`languages`) → the spoken entry answers and links to `skills` through `related`; the console shows "Did you mean programming languages?".
 - "research / interested": `phd-goal` vs `motivation` → `phd-goal` has priority 1.
+- "propulseo / asys": `propulseo-asys` vs `involvement` → `propulseo-asys` has priority 1.
+- "languages" alone: `languages` has priority 2 over `skills` (priority 1), and the console offers "Did you mean: Skills?".
 
 When a new entry or keyword creates a conflict, add the question to `tests/chat/eval-set.json` first, then resolve it with keywords, phrases or priority.
 
-## Entries that are not verified yet
+## Entries that are not verified
 
-`client-missions.json`, `kth-double-degree.json` and `propulseo-asys.json` are `to_confirm`: they exist so the structure is ready, they are excluded from production, and the strict gate fails if the evaluation set depends on them without verification. They become verified when the matching items in `../experiences/` are confirmed.
+None at the moment. An entry marked `to_confirm` is never embedded in the site and makes the strict gate fail on `main`.
 
 ## Entries
 
-`education`, `experience`, `projects`, `client-missions` (to confirm), `motivation`, `phd-goal`, `kth-double-degree` (to confirm), `availability`, `skills`, `languages`, `involvement`, `interests`, `contact`, `propulseo-asys` (to confirm).
+`education`, `experience`, `projects`, `client-missions`, `motivation`, `phd-goal`, `kth-double-degree`, `availability`, `skills`, `languages`, `involvement`, `interests`, `contact`, `propulseo-asys`.

@@ -2,8 +2,23 @@
   "id": "languages",
   "title": "Spoken languages",
   "source": "languages.json",
-  "keywords": ["language", "languages", "speak", "spoken", "french", "english", "japanese", "fluent", "fluency", "bilingual", "multilingual", "level"],
-  "phrases": ["spoken languages"],
+  "keywords": [
+    "language",
+    "languages",
+    "speak",
+    "spoken",
+    "french",
+    "english",
+    "japanese",
+    "fluent",
+    "fluency",
+    "bilingual",
+    "multilingual",
+    "level"
+  ],
+  "phrases": [
+    "spoken languages"
+  ],
   "exampleQuestions": [
     "What languages does Hamza speak?",
     "Does he speak Japanese?",
@@ -11,9 +26,14 @@
   ],
   "answer": "Hamza speaks French (native), English (B2) and Japanese (intermediate). He works in English and has worked in Japan.",
   "links": [],
-  "sources": ["skills", "delta-quest-internship"],
-  "related": ["skills"],
-  "priority": 0,
+  "sources": [
+    "skills",
+    "delta-quest-internship"
+  ],
+  "related": [
+    "skills"
+  ],
+  "priority": 2,
   "suggested": false,
   "status": "verified"
 }
