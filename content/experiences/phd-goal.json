@@ -2,21 +2,25 @@
   "id": "phd-goal",
   "type": "career-goal",
   "title": "Long-term goal: a PhD in machine learning",
-  "organization": { "name": "Career plan" },
+  "organization": {
+    "name": "Career plan"
+  },
   "location": null,
   "startDate": null,
   "endDate": null,
   "current": false,
   "checkpoint": false,
-  "summary": "Aiming for a PhD specialised in machine learning, and a career working in this field.",
+  "summary": "Aiming for a PhD in machine learning after KTH, to work directly on AI models and their architecture. ETH Zurich and EPFL are the universities Hamza is currently considering.",
   "highlights": [],
   "learned": [],
   "stack": [],
-  "tags": ["machine-learning", "research", "career"],
+  "tags": [
+    "machine-learning",
+    "research",
+    "career"
+  ],
   "links": [],
   "status": "verified",
-  "openQuestions": [
-    "Research topics of interest (for example evaluation, reproducibility, LLMs) if Hamza wants to name them. Do not guess."
-  ],
-  "internalNote": "Source: Hamza's message. The cover letter says he is 'at the beginning of his professional career in machine learning': keep the tone modest and consistent with it."
+  "openQuestions": [],
+  "internalNote": "Source: Hamza's message. The cover letter says he is 'at the beginning of his professional career in machine learning': keep the tone modest and consistent with it. ETH Zurich and EPFL as current options: Hamza, 2026-11-21."
 }

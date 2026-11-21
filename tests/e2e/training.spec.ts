@@ -34,12 +34,7 @@ test.describe('Training page', () => {
       page.getByRole('img', { name: /not real metrics/ }).first(),
     ).toBeAttached();
     const text = await page.locator('body').innerText();
-    for (const forbidden of [
-      '[TO CONFIRM',
-      '[SOURCE NEEDED',
-      'KTH',
-      'Propulseo',
-    ]) {
+    for (const forbidden of ['[TO CONFIRM', '[SOURCE NEEDED']) {
       expect(text).not.toContain(forbidden);
     }
   });

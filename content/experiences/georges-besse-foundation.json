@@ -1,22 +1,24 @@
 {
   "id": "georges-besse-foundation",
   "type": "scholarship",
-  "title": "Laureate",
-  "organization": { "name": "Georges Besse Foundation" },
+  "title": "Excellence scholarship laureate",
+  "organization": {
+    "name": "Georges Besse Foundation"
+  },
   "location": null,
-  "startDate": null,
+  "startDate": "2023",
   "endDate": null,
-  "current": false,
+  "current": true,
   "checkpoint": false,
-  "summary": "Laureate of a merit-based support program for engineering students.",
+  "summary": "Laureate of the Georges Besse Foundation's excellence scholarship since 2023, which supports Hamza through his engineering studies on the strength of his academic results.",
   "highlights": [],
   "learned": [],
   "stack": [],
-  "tags": ["distinction"],
+  "tags": [
+    "distinction"
+  ],
   "links": [],
   "status": "verified",
-  "openQuestions": [
-    "Year of the award, if Hamza wants to show it."
-  ],
-  "internalNote": "Source: CV."
+  "openQuestions": [],
+  "internalNote": "Sources: CV; Hamza (2026-11-21) for the start year and the continuing support."
 }

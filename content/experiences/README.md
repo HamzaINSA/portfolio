@@ -22,16 +22,15 @@ Everything that makes up Hamza's "training run": internships, client missions, a
 | `etic-insa-technologies.json` | junior-enterprise | verified | From CV; current |
 | `academic-tutor.json` | tutoring | verified | From CV |
 | `aedi-general-secretary.json` | association | verified | From CV |
-| `georges-besse-foundation.json` | scholarship | verified | From CV |
+| `georges-besse-foundation.json` | scholarship | verified | From CV; since 2023 (Hamza) |
 | `entrepreneurship-track.json` | program | verified | From CV |
-| `propulseo-asys.json` | program | **to_confirm** | Hamza gave the names only |
-| `kth-double-degree.json` | academic-plan | **to_confirm** | Hamza: planned for next year |
+| `propulseo-asys.json` | scholarship | verified | Hamza, 2026-11-21; Asys checked on public sources |
+| `kth-double-degree.json` | academic-plan | verified | Published as a plan; admission pending |
 | `phd-goal.json` | career-goal | verified | Stated by Hamza |
 
 ## Open questions for Hamza (ask in French, one by one)
 
 1. **ETIC projects** now live in `../projects/` (Hamza, 2026-11-20: work done with ETIC or as a freelancer is a project; experiences are roles such as internships or tutoring). Their remaining questions are in each project file: dates, and naming of clients (anonymous until ETIC and the client agree).
-2. **Propulseo and Asys:** what is Propulseo (program, incubator, association?), since when, what did Asys do ("propulsé par Asys")? How should it be worded?
 3. **KTH double degree:** programme name, exact dates, admission confirmed or still pending, and what happens to the 5th year at INSA Lyon.
 4. **Delta Quest:** may figures be published for the latency reduction and relevance improvement? Only with a verifiable source; otherwise keep the qualitative wording.
 5. **Dates:** exact start and end months for tutoring (CV gives 2023 to 2026), the Entrepreneurship Track and the Georges Besse Foundation.

@@ -2,18 +2,48 @@
   "id": "phd-goal",
   "title": "Long-term goal",
   "source": "phd-goal.json",
-  "keywords": ["phd", "doctorate", "doctoral", "research", "researcher", "future", "plan", "plans", "goal", "goals", "ambition", "long", "term", "career"],
-  "phrases": ["long term", "in the future"],
+  "keywords": [
+    "phd",
+    "doctorate",
+    "doctoral",
+    "research",
+    "researcher",
+    "future",
+    "plan",
+    "plans",
+    "goal",
+    "goals",
+    "ambition",
+    "long",
+    "term",
+    "career",
+    "eth",
+    "zurich",
+    "epfl",
+    "lausanne",
+    "switzerland",
+    "efficiency",
+    "architecture"
+  ],
+  "phrases": [
+    "long term",
+    "in the future"
+  ],
   "exampleQuestions": [
     "Does Hamza want to do a PhD?",
     "What are his long-term goals?",
     "Is he interested in research?",
     "What does he want to do in the future?"
   ],
-  "answer": "Hamza aims for a PhD specialised in machine learning, and wants to build his career working in this field.",
+  "answer": "Hamza aims for a PhD in machine learning after his double degree at KTH, to work directly on AI models and their architecture, and especially on making them more efficient. ETH Zurich and EPFL are the universities he is currently considering.",
   "links": [],
-  "sources": ["phd-goal"],
-  "related": ["motivation", "education"],
+  "sources": [
+    "phd-goal"
+  ],
+  "related": [
+    "motivation",
+    "education"
+  ],
   "priority": 1,
   "suggested": false,
   "status": "verified"

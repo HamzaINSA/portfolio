@@ -38,11 +38,7 @@ test.describe('About page', () => {
     }
     await expect(page.getByText(/CV/)).toHaveCount(0);
     const text = await page.locator('main').innerText();
-    for (const forbidden of [
-      '[TO CONFIRM',
-      '[SOURCE NEEDED',
-      'Planned double degree at KTH',
-    ]) {
+    for (const forbidden of ['[TO CONFIRM', '[SOURCE NEEDED']) {
       expect(text).not.toContain(forbidden);
     }
   });
@@ -52,9 +48,9 @@ test.describe('About page', () => {
     const capabilities = page.getByRole('region', { name: 'Capabilities' });
     await expect(capabilities.getByText('Python')).toBeVisible();
     await expect(capabilities.getByText('French (Native)')).toBeVisible();
-    await expect(
-      page.getByRole('region', { name: "Where I'm heading" }),
-    ).toContainText('PhD');
+    const next = page.getByRole('region', { name: "Where I'm heading" });
+    await expect(next).toContainText('Planned double degree at KTH');
+    await expect(next).toContainText('ETH Zurich and EPFL');
   });
 
   test('contact block links to the email, LinkedIn and GitHub', async ({
