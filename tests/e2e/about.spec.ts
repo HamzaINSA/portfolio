@@ -30,7 +30,11 @@ test.describe('About page', () => {
     page,
   }) => {
     await page.goto('/about');
-    const notes = page.getByRole('region', { name: 'Release notes' });
+    await expect(
+      page.getByRole('region', { name: 'Release notes' }),
+    ).toBeVisible();
+    // Resolved by CSS from here: re-resolving the role locator crashes Playwright's Firefox build.
+    const notes = page.locator('section[aria-labelledby="releases-title"]');
     const versions = await notes.locator('.ver').allTextContents();
     expect(versions[0]).toBe('v6');
     expect(versions.at(-1)).toBe('v1–v2');
