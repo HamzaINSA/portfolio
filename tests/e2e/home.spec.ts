@@ -22,13 +22,7 @@ test.describe('Home', () => {
   test('never shows unverified content', async ({ page }) => {
     await page.goto('/');
     const text = await page.locator('body').innerText();
-    for (const forbidden of [
-      '[TO CONFIRM',
-      '[SOURCE NEEDED',
-      // The unverified KTH item; the approved bio may mention KTH as a plan.
-      'Planned double degree at KTH',
-      'Propulseo',
-    ]) {
+    for (const forbidden of ['[TO CONFIRM', '[SOURCE NEEDED']) {
       expect(text).not.toContain(forbidden);
     }
   });

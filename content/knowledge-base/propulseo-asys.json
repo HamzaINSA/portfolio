@@ -2,21 +2,37 @@
   "id": "propulseo-asys",
   "title": "Propulseo and Asys",
   "source": "propulseo-asys.json",
-  "keywords": ["propulseo", "asys", "incubator", "sponsor", "backed", "supported", "supports"],
-  "phrases": ["who supports", "who backs"],
+  "keywords": [
+    "asys",
+    "backed",
+    "grant",
+    "mentor",
+    "mentored",
+    "mentoring",
+    "propulseo",
+    "sponsor",
+    "supported",
+    "supports"
+  ],
+  "phrases": [
+    "who supports",
+    "who backs"
+  ],
   "exampleQuestions": [
     "What is Propulseo?",
     "Who supports Hamza?",
     "What is Asys?"
   ],
-  "answer": "Hamza is a member of Propulseo and is backed by Asys. [TO CONFIRM: what the program is, what Asys provides, dates and exact wording]",
+  "answer": "Since 2026 Hamza is a member of Propulseo, an association that supports students with a grant and mentoring by a partner company. He is mentored by Asys, a French HR software company specialised in time management and workforce planning.",
   "links": [],
-  "sources": ["propulseo-asys"],
-  "related": ["involvement"],
+  "sources": [
+    "propulseo-asys"
+  ],
+  "related": [
+    "involvement"
+  ],
   "priority": 0,
   "suggested": false,
-  "status": "to_confirm",
-  "openQuestions": [
-    "Becomes verified when experiences/propulseo-asys.json is confirmed."
-  ]
+  "status": "verified",
+  "openQuestions": []
 }
