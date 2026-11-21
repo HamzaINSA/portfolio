@@ -42,9 +42,13 @@ test.describe('Home', () => {
     expect(external).toEqual([]);
   });
 
-  test('skip link moves focus to the main content', async ({ page }) => {
+  test('skip link moves focus to the main content', async ({
+    page,
+    browserName,
+  }) => {
     await page.goto('/');
-    await page.keyboard.press('Tab');
+    // Safari on macOS reaches links with Option+Tab only (system default), not with Tab.
+    await page.keyboard.press(browserName === 'webkit' ? 'Alt+Tab' : 'Tab');
     const skip = page.getByRole('link', { name: 'Skip to content' });
     await expect(skip).toBeFocused();
     await page.keyboard.press('Enter');

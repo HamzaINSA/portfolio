@@ -4,6 +4,8 @@ import { defineConfig, devices } from '@playwright/test';
 const channel = process.env['PW_CHANNEL'];
 // Port of the preview server used by the tests; change it if 4321 is taken (for example by `npm run dev`).
 const port = process.env['PW_PORT'] ?? '4321';
+// Cross-browser check (M6): PW_ALL_BROWSERS=1 adds Firefox and Safari (WebKit) at desktop width.
+const allBrowsers = !!process.env['PW_ALL_BROWSERS'];
 
 export default defineConfig({
   testDir: 'tests/e2e',
@@ -27,5 +29,11 @@ export default defineConfig({
       name: 'phone',
       use: { ...devices['Pixel 7'], ...(channel ? { channel } : {}) },
     },
+    ...(allBrowsers
+      ? [
+          { name: 'firefox', use: { ...devices['Desktop Firefox'] } },
+          { name: 'safari', use: { ...devices['Desktop Safari'] } },
+        ]
+      : []),
   ],
 });

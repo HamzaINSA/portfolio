@@ -56,9 +56,10 @@ npm run preview        # serve the production build
 npm run lint           # ESLint + Prettier check
 npm run typecheck      # TypeScript, strict
 npm run test           # unit tests (Vitest), including chatbot evaluation set
-npm run test:e2e       # Playwright + axe accessibility checks
+npm run test:e2e       # Playwright + axe accessibility checks (PW_ALL_BROWSERS=1 adds Firefox and Safari)
 npm run check:content  # publish gate on content/ (warnings; add -- --strict or CONTENT_STRICT=1 to fail)
 npm run og:image       # regenerate public/og.png (social image) from content/profile.json
+npm run lighthouse     # Lighthouse CI on dist/ (run npm run build first; CHROME_PATH if Chrome is not found)
 ```
 
 ## Definition of done (every PR)
