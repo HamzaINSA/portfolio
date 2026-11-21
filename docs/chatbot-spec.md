@@ -42,7 +42,7 @@ Show suggestion chips under it. No source line.
 
 - Opening message: "I answer only from the data Hamza provided. Pick a question or type your own."
 - Suggestion chips (from entries flagged `suggested: true`, at most 5): "What has Hamza built?", "What is he studying?", "Why machine learning?", "When is he available?", "How can I reach him?".
-- Typing and sending (Enter or button) appends the question, then the answer. A short artificial delay is not allowed (it would pretend work that does not happen).
+- Typing and sending (Enter or button) appends the question, then the answer. Typing effect (decision D12): the answer is retrieved at once, then a "searching knowledge_base" placeholder shows for 600 ms and the answer appears word by word, in 1.5 s at most (35 ms per word for short answers). The source, links and chips appear when the answer is complete. A new question completes the current answer at once; Reset cancels it. With `prefers-reduced-motion: reduce`, the answer appears at once. The page keeps saying that this is local retrieval, not an AI service.
 - Query parameter `/ask?q=…` asks the question on load (used by teasers and "ask about this" links). Sanitise: treat as text only, never as HTML.
 - Answers can include `links` rendered as buttons (for example "Contact page").
 - Input limit: 200 characters. Empty input does nothing.
@@ -50,7 +50,7 @@ Show suggestion chips under it. No source line.
 
 ## Accessibility
 
-- The message list is a labelled region with `aria-live="polite"`; each new answer is announced once.
+- The message list is a labelled region with `aria-live="polite"`; each new answer is announced once. The animated placeholder is `aria-hidden`; the complete answer replaces it, so screen readers never hear partial text.
 - Input has a visible `<label>`; Send is a real `<button type="submit">`; chips are real `<button>`s.
 - Focus returns to the input after sending. No focus trap. No auto-scrolling that fights the screen reader.
 - Contrast on the dark console meets AA (see `design-spec.md`).

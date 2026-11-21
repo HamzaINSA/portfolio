@@ -17,6 +17,7 @@ Hamza delegates technical choices to the coding assistant. The decisions below a
 | D9 | **Contact form without backend**: opens the visitor's mail client (`mailto:`), nothing stored | No server, no data collection |
 | D10 | Tests: **Vitest** (unit, chatbot evaluation set), **Playwright + axe** (e2e, accessibility). CI on **GitHub Actions** | Standard, free for public repos |
 | D11 | Repo is **public**; code and content separated so that private data never enters it | Recruiters can read the code |
+| D12 | **Typing effect in the chatbot** (Hamza, 2026-11-21): a short "searching knowledge_base" step (600 ms), then the answer appears word by word (1.5 s at most). Replaces the earlier rule against artificial delays. The page still says it is local retrieval with no AI service; reduced motion shows the answer at once | Makes the console feel like a model console; the disclosure keeps it honest |
 
 ## Open (ask Hamza; do not decide alone)
 

@@ -150,6 +150,7 @@ export const en = {
     reset: 'RESET',
     you: 'You',
     model: 'Model',
+    searching: 'searching knowledge_base',
     source: (file: string) => `source: ${file}`,
     fallback:
       "I don't have that in my data, so I won't guess. You can ask Hamza directly:",

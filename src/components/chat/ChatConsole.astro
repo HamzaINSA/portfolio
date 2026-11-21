@@ -161,15 +161,15 @@ const data = JSON.stringify({ entries, strings }).replace(/</g, '\\u003c');
       return chip;
     };
 
-    const ask = (raw: string) => {
-      const question = raw.trim().slice(0, MAX_QUESTION_LENGTH);
-      if (!question) return;
-      const user = el('li', 'msg msg--user');
-      user.append(el('span', 'visually-hidden', `${strings.you}: `));
-      user.append(el('p', 'bubble', question));
+    const scrollDown = () => {
+      const region = log.parentElement;
+      if (region) region.scrollTop = region.scrollHeight;
+    };
+
+    // The full answer item: what screen readers hear and what stays in the log.
+    const answerItem = (result: ReturnType<typeof retrieve>) => {
       const bot = el('li', 'msg msg--bot');
       bot.append(el('span', 'visually-hidden', `${strings.model}: `));
-      const result = retrieve(question, entries);
       if (result) {
         bot.append(el('p', 'bubble', result.entry.answer));
         bot.append(
@@ -199,18 +199,85 @@ const data = JSON.stringify({ entries, strings }).replace(/</g, '\\u003c');
           if (extra) actions.append(extra);
           bot.append(actions);
         }
-        highlight(result.entry.source);
       } else {
         const p = el('p', 'bubble', `${strings.fallback} `);
         const a = el('a', 'inline-link', strings.contactLink.label);
         a.href = strings.contactLink.href;
         p.append(a);
         bot.append(p);
-        highlight(null);
       }
-      log.append(user, bot);
-      const region = log.parentElement;
-      if (region) region.scrollTop = region.scrollHeight;
+      return bot;
+    };
+
+    // Typing effect. The answer is retrieved instantly; it is only revealed over time.
+    // The animated placeholder is hidden from assistive technology, and the complete
+    // answer item replaces it at the end, so the live log announces it once, in full.
+    const SEARCH_MS = 600;
+    const STREAM_MS = 1500; // the whole answer appears within this time
+    const WORD_MS = 35;
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let pending: { finish: () => void; cancel: () => void } | null = null;
+
+    const reveal = (result: ReturnType<typeof retrieve>) => {
+      const final = answerItem(result);
+      const done = () => highlight(result ? result.entry.source : null);
+      if (reducedMotion.matches) {
+        done();
+        log.append(final);
+        scrollDown();
+        return;
+      }
+
+      const placeholder = el('li', 'msg msg--bot');
+      placeholder.setAttribute('aria-hidden', 'true');
+      const bubble = el('p', 'bubble thinking', strings.searching);
+      placeholder.append(bubble);
+      log.append(placeholder);
+      scrollDown();
+
+      const text = result ? result.entry.answer : strings.fallback;
+      const words = text.split(/(?<=\s)/);
+      const step = Math.min(WORD_MS, STREAM_MS / words.length);
+      let timer = 0;
+      let shown = 0;
+
+      const finish = () => {
+        window.clearTimeout(timer);
+        pending = null;
+        done();
+        placeholder.replaceWith(final);
+        scrollDown();
+      };
+      const cancel = () => {
+        window.clearTimeout(timer);
+        pending = null;
+      };
+      const tick = () => {
+        shown += 1;
+        bubble.textContent = words.slice(0, shown).join('');
+        scrollDown();
+        if (shown < words.length) timer = window.setTimeout(tick, step);
+        else finish();
+      };
+      timer = window.setTimeout(() => {
+        bubble.classList.remove('thinking');
+        bubble.classList.add('streaming');
+        done();
+        tick();
+      }, SEARCH_MS);
+      pending = { finish, cancel };
+    };
+
+    const ask = (raw: string) => {
+      const question = raw.trim().slice(0, MAX_QUESTION_LENGTH);
+      if (!question) return;
+      // A new question completes the previous answer at once.
+      pending?.finish();
+      const user = el('li', 'msg msg--user');
+      user.append(el('span', 'visually-hidden', `${strings.you}: `));
+      user.append(el('p', 'bubble', question));
+      log.append(user);
+      reveal(retrieve(question, entries));
     };
 
     root.addEventListener('click', (event) => {
@@ -222,6 +289,7 @@ const data = JSON.stringify({ entries, strings }).replace(/</g, '\\u003c');
         input.focus();
       }
       if ((event.target as HTMLElement).closest('[data-reset]')) {
+        pending?.cancel();
         log.innerHTML = opening;
         highlight(null);
         input.value = '';
@@ -339,6 +407,50 @@ const data = JSON.stringify({ entries, strings }).replace(/</g, '\\u003c');
     font-size: 0.9375rem;
     line-height: 1.6;
     overflow-wrap: anywhere;
+  }
+
+  /* "searching knowledge_base..." with dots that cycle, then a block cursor while typing. */
+  .log :global(.thinking) {
+    color: var(--color-on-ink-muted);
+  }
+
+  .log :global(.thinking::after) {
+    display: inline-block;
+    width: 1.5em;
+    content: '';
+    animation: dots 1.2s steps(4, end) infinite;
+  }
+
+  .log :global(.streaming::after) {
+    display: inline-block;
+    width: 0.55em;
+    height: 1em;
+    margin-left: 0.1em;
+    vertical-align: text-bottom;
+    background: var(--color-accent);
+    content: '';
+    animation: blink 0.9s steps(2, start) infinite;
+  }
+
+  @keyframes dots {
+    0% {
+      content: '';
+    }
+    25% {
+      content: '.';
+    }
+    50% {
+      content: '..';
+    }
+    75% {
+      content: '...';
+    }
+  }
+
+  @keyframes blink {
+    to {
+      visibility: hidden;
+    }
   }
 
   .log :global(.msg--user .bubble) {

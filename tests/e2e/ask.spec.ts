@@ -22,7 +22,47 @@ test.describe('Ask the model', () => {
     await expect(page.locator('.file--used')).toHaveText(/projects\.json/);
   });
 
-  test('answers typed questions with Enter and keeps focus in the input', async ({
+  test('searches first, then types the answer word by word', async ({
+    page,
+  }) => {
+    await page.goto('/ask');
+    await page.getByRole('button', { name: 'What has Hamza built?' }).click();
+    const typing = page.locator('[data-log] .msg--bot').last();
+    // The animated placeholder is hidden from screen readers.
+    await expect(typing).toHaveAttribute('aria-hidden', 'true');
+    await expect(typing.locator('.thinking')).toHaveText(
+      'searching knowledge_base',
+    );
+    const streaming = page.locator('[data-log] .streaming');
+    await expect(streaming).toBeVisible();
+    const partial = (await streaming.textContent()) ?? '';
+    // The full answer replaces the placeholder: complete, readable, with its source.
+    await expect(lastAnswer(page)).toContainText('source: projects.json');
+    await expect(lastAnswer(page)).not.toHaveAttribute('aria-hidden');
+    const full =
+      (await lastAnswer(page).locator('.bubble').textContent()) ?? '';
+    expect(full.length).toBeGreaterThan(partial.length);
+    expect(full.startsWith(partial)).toBe(true);
+  });
+
+  test('a new question completes the answer being typed', async ({ page }) => {
+    await page.goto('/ask');
+    const input = page.getByLabel(/Your question/);
+    await input.fill('Does he speak Japanese?');
+    await input.press('Enter');
+    await input.fill('Is Hamza going to KTH?');
+    await input.press('Enter');
+    const answers = page.locator('[data-log] .msg--bot');
+    await expect(answers.nth(1)).toContainText('source: languages.json');
+    await expect(answers.nth(2)).toContainText(
+      'source: kth-double-degree.json',
+    );
+    await expect(page.locator('[data-log] [aria-hidden="true"]')).toHaveCount(
+      0,
+    );
+  });
+
+  test('answers a typed question with Enter and keeps focus in the input', async ({
     page,
   }) => {
     await page.goto('/ask');
@@ -165,6 +205,22 @@ test.describe('Ask the model', () => {
         document.documentElement.clientWidth,
     );
     expect(overflow).toBeLessThanOrEqual(0);
+  });
+});
+
+test.describe('Ask the model with reduced motion', () => {
+  test.use({ reducedMotion: 'reduce' });
+
+  test('shows the whole answer at once, without the typing effect', async ({
+    page,
+  }) => {
+    await page.goto('/ask');
+    await page.getByRole('button', { name: 'What has Hamza built?' }).click();
+    await expect(lastAnswer(page)).toContainText('source: projects.json');
+    await expect(page.locator('.thinking, .streaming')).toHaveCount(0);
+    await expect(page.locator('[data-log] [aria-hidden="true"]')).toHaveCount(
+      0,
+    );
   });
 });
 
