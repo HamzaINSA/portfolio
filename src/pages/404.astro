@@ -5,7 +5,11 @@ import { en } from '../i18n/en';
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout title={`${en.notFound.title} · ${en.siteName}`}>
+<BaseLayout
+  title={`${en.notFound.title} · ${en.siteName}`}
+  description={en.notFound.text}
+  noindex
+>
   <Container class="not-found">
     <h1>{en.notFound.title}</h1>
     <p>{en.notFound.text}</p>

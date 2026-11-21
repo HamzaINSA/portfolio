@@ -44,7 +44,11 @@ const chip = [project.topic, when].filter(Boolean).join(' · ');
 const askHref = `/ask?q=${encodeURIComponent(t.askQuestion(project.title))}`;
 ---
 
-<BaseLayout title={`${project.title} · ${en.siteName}`} current="evaluation">
+<BaseLayout
+  title={`${project.title} · ${en.siteName}`}
+  description={project.summary}
+  current="evaluation"
+>
   <Container class="detail-head">
     <a class="back" href="/projects">
       {t.back}

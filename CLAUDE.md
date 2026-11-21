@@ -8,7 +8,7 @@ The personal website of Hamza Bencheikh, a 4th-year Computer Science engineering
 
 Goal: stand out to tech recruiters. The site is built around a "model card" concept (Hamza presented as a model: version, intended use, training run, evaluation, limitations) plus a **local chatbot** that answers questions about Hamza from a knowledge base, with no API and no tracking.
 
-**Status:** milestones M0 to M2 are done; M3 (Training and Evaluation pages) is in progress. See `docs/roadmap.md` for what comes next. You (Claude Code) write all of the code.
+**Status:** milestones M0 to M5 are done; M6 (polish: SEO, performance, legal page) is in progress. See `docs/roadmap.md` for what comes next. You (Claude Code) write all of the code.
 
 ## How to work with Hamza
 
@@ -58,6 +58,7 @@ npm run typecheck      # TypeScript, strict
 npm run test           # unit tests (Vitest), including chatbot evaluation set
 npm run test:e2e       # Playwright + axe accessibility checks
 npm run check:content  # publish gate on content/ (warnings; add -- --strict or CONTENT_STRICT=1 to fail)
+npm run og:image       # regenerate public/og.png (social image) from content/profile.json
 ```
 
 ## Definition of done (every PR)

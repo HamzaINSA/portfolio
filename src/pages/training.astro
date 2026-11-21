@@ -29,7 +29,11 @@ const seeking = `${profile.seeking.role}, ${formatMonth(profile.seeking.start)} 
 const next = [seeking, ...plannedSteps(publishedOnly(experiences))];
 ---
 
-<BaseLayout title={`${t.title} · ${en.siteName}`} current="training">
+<BaseLayout
+  title={`${t.title} · ${en.siteName}`}
+  description={t.intro}
+  current="training"
+>
   <PageHeader crumb={t.crumb} title={t.title} intro={t.intro} />
 
   <section class="curve-band on-ink" aria-label={en.training.curveLabel}>
