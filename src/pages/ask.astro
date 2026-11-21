@@ -1,0 +1,114 @@
+---
+import ChatConsole from '../components/chat/ChatConsole.astro';
+import Container from '../components/layout/Container.astro';
+import { en } from '../i18n/en';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getKnowledgeBase } from '../lib/content';
+import { toRetrievalEntries } from '../lib/content/views';
+
+const entries = toRetrievalEntries(await getKnowledgeBase());
+const t = en.askPage;
+---
+
+<BaseLayout title={`${t.title} · ${en.siteName}`}>
+  <Container class="ask-head">
+    <h1>
+      {t.title}
+      <span class="cursor" aria-hidden="true">
+        _
+      </span>
+    </h1>
+    <p class="intro">{t.intro}</p>
+  </Container>
+
+  <Container class="ask-body">
+    <ChatConsole entries={entries} />
+
+    <section class="faq" aria-labelledby="faq-title" data-faq>
+      <h2 id="faq-title">{t.faqTitle}</h2>
+      <p class="faq-intro">{t.faqIntro}</p>
+      <dl>
+        {entries.map((entry) => (
+          <div class="faq-item">
+            <dt>{entry.title}</dt>
+            <dd>
+              <p>{entry.answer}</p>
+              <p class="faq-source">{t.source(entry.source)}</p>
+            </dd>
+          </div>
+        ))}
+      </dl>
+    </section>
+  </Container>
+</BaseLayout>
+
+<style>
+  :global(.ask-head) {
+    padding-block: var(--space-10) var(--space-6);
+  }
+
+  h1 {
+    font-size: clamp(3.5rem, 2.2rem + 4.5vw, 5.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+  }
+
+  .cursor {
+    display: inline-block;
+    margin-left: var(--space-2);
+    padding: 0 var(--space-2);
+    background: var(--color-accent);
+  }
+
+  .intro {
+    max-width: 45rem;
+    margin-top: var(--space-5);
+    font-size: clamp(0.9375rem, 0.85rem + 0.35vw, 1.0625rem);
+    line-height: 1.6;
+  }
+
+  :global(.ask-body) {
+    padding-bottom: var(--section-pad);
+  }
+
+  .faq h2 {
+    font-size: var(--text-section-title);
+    letter-spacing: -0.03em;
+  }
+
+  .faq-intro {
+    max-width: 45rem;
+    margin-block: var(--space-4) var(--space-6);
+  }
+
+  .faq dl {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(22rem, 100%), 1fr));
+    gap: var(--space-4);
+    margin: 0;
+  }
+
+  .faq-item {
+    padding: var(--space-5);
+    background: var(--color-surface);
+    border: var(--border-thick);
+  }
+
+  dt {
+    margin-bottom: var(--space-2);
+    font-family: var(--font-display);
+    font-size: var(--text-card-title);
+    font-weight: 700;
+  }
+
+  dd {
+    margin: 0;
+    line-height: 1.7;
+  }
+
+  .faq-source {
+    margin-top: var(--space-2);
+    font-size: var(--text-label-small);
+    color: var(--color-muted);
+  }
+</style>

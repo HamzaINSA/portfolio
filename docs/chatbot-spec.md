@@ -16,7 +16,7 @@ Entries live in `content/knowledge-base/*.json` (schema: `content/schema/knowled
 
 Fields: `id`, `title`, `source` (file name shown to the visitor), `keywords`, `phrases`, `exampleQuestions`, `answer`, `links`, `related`, `priority`, `status`.
 
-Build step `scripts/build-knowledge-base.ts` bundles entries with `status: "verified"` into one JSON served from the same origin. In dev, `to_confirm` entries may be included for convenience, with a visible "unverified" tag. In production they are excluded, and the strict content gate fails if an entry needed by the evaluation set is unverified.
+At build time, `/ask` embeds the verified entries (internal fields removed, see `toRetrievalEntries` in `src/lib/content/views.ts`) as a JSON `<script type="application/json">` in the page. Answering therefore needs no request at all, not even to the same origin. Unverified entries are never embedded, in dev or in production (simpler than a dev-only "unverified" tag), and the evaluation set runs on verified entries only.
 
 ## Matching algorithm (`src/lib/retrieval`, pure functions)
 
@@ -25,7 +25,7 @@ Build step `scripts/build-knowledge-base.ts` bundles entries with `status: "veri
 3. **Light stemming**: strip a trailing plural `s` (but not `ss`), and `ing` where the stem is at least 4 letters. Apply the same function to entry keywords, so both sides match.
 4. **Score** each entry: `+2` per distinct keyword found among tokens, `+3` per `phrase` found as a contiguous token sequence. Ties are broken by higher `priority`, then by alphabetical `id` (determinism).
 5. **Threshold**: answer only if the best score is at least 2. A single weak keyword (score 1 is impossible by construction) never answers.
-6. **Result**: `{ entry, score }` or `null`. Optionally return the second-best entry if its score is at least 2 and it is a different topic, shown as a "Related" suggestion chip.
+6. **Result**: `{ entry, score }` or `null`. The second-best entry is shown as a "Related" chip only if its score is at least 2 **and** it is listed in the answer's `related` field (author-curated; this avoids noise such as "Skills" after a question that merely contains "technologies").
 7. **Ambiguity**: when the top two scores are equal, answer with the higher priority entry and show the other as "Did you mean…?" chip.
 
 Keep the algorithm simple; improve it only through the evaluation set below, and document any change here.
@@ -62,7 +62,9 @@ Show suggestion chips under it. No source line.
 - Nothing from the conversation is stored or sent. The privacy page says so, and it must stay true.
 - Prompt-injection is not applicable (there is no language model), but a test includes such inputs to confirm they produce the fallback.
 
-## Evaluation set (`tests/chat/eval-set.json`, runs in CI)
+Stop words are removed before stemming (otherwise "his" would become "hi" and slip through). Suggestion chips ask the entry's first example question, which the evaluation set guarantees to resolve to that entry.
+
+## Evaluation set (`tests/chat/eval-set.json`, runs in CI through `npm run test`)
 
 Build it from entries' `exampleQuestions`, plus hand-written cases. Required groups:
 
