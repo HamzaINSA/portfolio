@@ -108,16 +108,35 @@ export const en = {
     title: 'About the model',
     crumb: '/ about',
     photoAlt: 'Portrait of Hamza Bencheikh',
-    cards: {
-      intendedUse: 'intended use',
-      strengths: 'strengths',
-      limitations: 'known limitations',
-      outOfScope: 'out of scope',
-    },
     relocation: 'open to relocation',
+    terminal: {
+      label: 'Model summary',
+      binary: 'hamza',
+      version: '--version',
+      objective: '--objective',
+      deploy: '--deploy',
+    },
+    releases: {
+      title: 'Release notes',
+      latest: 'LATEST',
+      tags: {
+        init: 'INIT',
+        added: 'ADDED',
+        changed: 'CHANGED',
+        planned: 'PLANNED',
+        goal: 'GOAL',
+      },
+      learned: 'show what I learned',
+      learnedTag: 'LEARNED',
+    },
     capabilities: 'Capabilities',
     spoken: 'Spoken',
-    next: { label: 'NEXT TRAINING RUN', title: "Where I'm heading" },
+    deploy: {
+      label: 'Deploy this model',
+      command: (start: string) =>
+        `$ hamza --deploy --team yours --from ${start}`,
+      cta: 'CONTACT →',
+    },
     contact: {
       title: ['Run inference.', 'Contact me.'],
       linkedin: 'LinkedIn ↗',

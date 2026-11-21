@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About · B · Bento</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+  .top { padding-block: 56px 32px; display: flex; justify-content: space-between; align-items: end; gap: 24px; flex-wrap: wrap; }
+  .top p { font-size: 15px; max-width: 420px; line-height: 1.6; }
+
+  .bento {
+    display: grid; gap: 16px; padding-bottom: 64px;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: minmax(150px, auto);
+    grid-template-areas:
+      "photo quote quote quote"
+      "photo now   lang  sapporo"
+      "obj   obj   backed backed"
+      "next  phd   gives  look"
+      ;
+  }
+  .tile { background: var(--white); border: 3px solid var(--ink); padding: 22px; display: flex; flex-direction: column; gap: 10px; transition: transform .15s, box-shadow .15s; }
+  .tile:hover { transform: translate(-4px, -4px); box-shadow: 8px 8px 0 var(--ink); }
+  .tile h3 { font-size: 24px; letter-spacing: -0.02em; line-height: 1.1; }
+  .tile p { font-size: 14px; line-height: 1.6; }
+  .ink { background: var(--ink); color: var(--on-ink); }
+  .ink .label { color: var(--on-ink-muted); }
+  .lime { background: var(--lime); }
+
+  .t-photo { grid-area: photo; padding: 0; overflow: hidden; position: relative; }
+  .t-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .t-photo .chip { position: absolute; left: 14px; bottom: 14px; }
+  .t-quote { grid-area: quote; justify-content: center; }
+  .t-quote p { font-family: var(--display); font-size: clamp(24px, 1rem + 1.5vw, 36px); line-height: 1.15; letter-spacing: -0.02em; }
+  .t-quote mark { background: var(--lime); padding: 0 6px; }
+  .t-now { grid-area: now; }
+  .t-lang { grid-area: lang; }
+  .t-sap { grid-area: sapporo; }
+  .t-obj { grid-area: obj; }
+  .t-backed { grid-area: backed; }
+  .t-next { grid-area: next; }
+  .t-phd { grid-area: phd; }
+  .t-gives { grid-area: gives; }
+  .t-look { grid-area: look; }
+
+  .big { font-family: var(--display); font-size: 56px; line-height: 0.9; letter-spacing: -0.04em; }
+  .langs { display: grid; gap: 8px; font-size: 14px; }
+  .langs div { display: flex; justify-content: space-between; border-bottom: 2px solid var(--surface-2); padding-bottom: 6px; }
+  .langs span { font-size: 12px; color: var(--muted); }
+  .formula { font-size: 17px; line-height: 2; }
+  .formula em { font-style: normal; color: var(--lime); }
+  .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .pair div { border-left: 4px solid var(--lime); padding-left: 12px; }
+  .btn { margin-top: auto; align-self: start; background: var(--ink); color: var(--lime); font-weight: 700; padding: 12px 16px; font-size: 14px; }
+
+  @media (max-width: 1000px) {
+    .bento { grid-template-columns: 1fr 1fr; grid-template-areas:
+      "photo quote" "photo quote" "now lang" "sapporo next" "obj obj" "backed backed" "phd gives" "look look"; }
+  }
+  @media (max-width: 620px) {
+    .bento { grid-template-columns: 1fr; grid-template-areas: "quote" "photo" "look" "now" "sapporo" "lang" "obj" "next" "phd" "backed" "gives"; }
+    .t-photo { aspect-ratio: 4 / 5; }
+    .pair { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="nav"><b>HAMZA-V4</b><span><i>home</i><i>training</i><i>evaluation</i><i class="on">about</i><em>ASK THE MODEL →</em></span></div>
+
+<section class="wrap top">
+  <div>
+    <div class="crumb">/ about</div>
+    <h1 class="h1">About the model</h1>
+  </div>
+  <p>Everything worth knowing in one screen. Each tile comes from the same data as the chatbot.</p>
+</section>
+
+<section class="wrap bento">
+  <div class="tile t-photo"><img src="../../../../public/images/about/hamza.webp" alt="Portrait of Hamza"><span class="chip">hamza-v4 · Lyon</span></div>
+
+  <div class="tile t-quote"><span class="label">what drives me</span><p>The models themselves: their <mark>architecture</mark>, and making them need less energy and compute while staying useful.</p></div>
+
+  <div class="tile t-now"><span class="label">currently</span><h3>4th year, Computer Science, INSA Lyon</h3><p>ETIC missions for VINCI and Inddigo.</p></div>
+
+  <div class="tile t-lang"><span class="label">speaks</span>
+    <div class="langs"><div>French <span>native</span></div><div>English <span>B2</span></div><div>Japanese <span>intermediate</span></div></div>
+  </div>
+
+  <div class="tile t-sap ink"><span class="label">last deployment</span><div class="big">Sapporo</div><p>Summer 2026 · Delta Quest · generative AI workflows and an evaluation pipeline.</p></div>
+
+  <div class="tile t-obj ink"><span class="label">objective function</span><p class="formula">minimise <em>energy</em> + <em>compute</em><br>subject to: the model stays <em>useful</em><br>deploy in: companies that run it</p></div>
+
+  <div class="tile t-backed"><span class="label">backed by</span>
+    <div class="pair">
+      <div><h3>Georges Besse Foundation</h3><p>Excellence scholarship since 2023.</p></div>
+      <div><h3>Propulseo × Asys</h3><p>Grant and mentoring since 2026.</p></div>
+    </div>
+  </div>
+
+  <div class="tile t-next"><span class="label">next run · planned</span><div class="big">KTH</div><p>Stockholm, 2027 → 2028. Double degree in machine learning.</p></div>
+
+  <div class="tile t-phd"><span class="label">long-term goal</span><h3>PhD in machine learning</h3><p>ETH Zurich or EPFL, today's options.</p></div>
+
+  <div class="tile t-gives"><span class="label">gives back</span><h3>Tutor &amp; AEDI</h3><p>Weekly tutoring 2023 → 2026. General Secretary of the CS student association.</p></div>
+
+  <div class="tile t-look lime"><span class="label" style="color:var(--ink)">looking for</span><h3>AI / LLM internship, from May 2027</h3><p>Up to 4 months · abroad · open to relocation.</p><span class="btn">CONTACT →</span></div>
+</section>
+
+<p class="note">Proposal B · "Bento". A grid of tiles of different sizes, readable in 10 seconds. Tiles lift on hover. On phone they stack, with the photo and "looking for" near the top.</p>
+</body>
+</html>

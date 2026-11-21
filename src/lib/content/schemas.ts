@@ -181,3 +181,32 @@ export const skillsSchema = z
     openQuestions: stringList,
   })
   .strict();
+
+/** About page "release notes": Hamza's path as version history, oldest first in the file. */
+export const releaseSchema = z
+  .object({
+    version: z.string(),
+    period: z.string(),
+    state: z.enum(['past', 'current', 'planned', 'goal']),
+    title: z.string(),
+    items: z.array(
+      z
+        .object({
+          tag: z.enum(['init', 'added', 'changed', 'planned', 'goal']),
+          text: z.string(),
+        })
+        .strict(),
+    ),
+    learned: stringList,
+  })
+  .strict();
+
+export const releasesSchema = z
+  .object({
+    objective: z.string().nullable(),
+    objectiveComment: z.string().nullable(),
+    releases: z.array(releaseSchema),
+    status,
+    openQuestions: stringList,
+  })
+  .strict();

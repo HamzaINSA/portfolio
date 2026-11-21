@@ -50,7 +50,18 @@ const askHref = `/ask?q=${encodeURIComponent(t.askQuestion(project.title))}`;
       {t.back}
     </a>
     {chip && <Chip variant="accent">{chip}</Chip>}
-    <h1>{project.title}</h1>
+    <div class="title-row">
+      {project.image && (
+        <span class="logo">
+          <img
+            src={project.image.src}
+            alt={project.image.alt}
+            decoding="async"
+          />
+        </span>
+      )}
+      <h1>{project.title}</h1>
+    </div>
     {frame && <p class="frame">{frame}</p>}
     <p class="intro">{project.summary}</p>
     {project.links.length > 0 && (
@@ -65,14 +76,6 @@ const askHref = `/ask?q=${encodeURIComponent(t.askQuestion(project.title))}`;
       </ul>
     )}
   </Container>
-
-  {project.image && (
-    <Container class="hero-wrap">
-      <div class="hero">
-        <img src={project.image.src} alt={project.image.alt} decoding="async" />
-      </div>
-    </Container>
-  )}
 
   {project.facts.length > 0 && (
     <Container class="card-wrap">
@@ -172,25 +175,44 @@ const askHref = `/ask?q=${encodeURIComponent(t.askQuestion(project.title))}`;
     list-style: none;
   }
 
-  :global(.hero-wrap),
   :global(.card-wrap) {
     padding-bottom: var(--space-8);
   }
 
-  /* Logos sit centred on white; a screenshot would fill the same frame. */
-  .hero {
+  /* Phone: the small logo sits above the title so the title keeps its width. */
+  .title-row {
     display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-3);
+  }
+
+  @media (min-width: 48em) {
+    .title-row {
+      flex-direction: row;
+      align-items: center;
+      gap: var(--space-5);
+    }
+  }
+
+  /* The client logo, small, next to the title. Fixed height, free width. */
+  .logo {
+    display: flex;
+    flex: none;
     align-items: center;
     justify-content: center;
-    height: clamp(13rem, 8rem + 16vw, 26.25rem);
-    padding: var(--space-8);
+    height: clamp(3.5rem, 2.75rem + 2vw, 5rem);
+    min-width: clamp(3.5rem, 2.75rem + 2vw, 5rem);
+    max-width: 11rem;
+    padding: var(--space-2) var(--space-3);
     background: var(--color-surface);
     border: var(--border-thick);
   }
 
-  .hero img {
-    max-width: min(100%, 28rem);
-    max-height: 100%;
+  .logo img {
+    width: auto;
+    max-width: 100%;
+    height: 100%;
     object-fit: contain;
   }
 

@@ -2,7 +2,7 @@ import { displayClient } from './anonymise';
 import { formatRange } from '../format/dates';
 import { publishedOnly } from './gate';
 import type { RetrievalEntry } from '../retrieval/match';
-import type { Experience, KnowledgeEntry, Project, Skills } from './types';
+import type { Experience, KnowledgeEntry, Project, Release, Releases, Skills } from './types';
 
 /** Display-safe fields of a checkpoint. Components receive this, never the raw experience. */
 export interface CheckpointView {
@@ -133,13 +133,16 @@ export function bioParagraphs(bio: string | null | undefined): string[] {
     .filter(Boolean);
 }
 
-/** Published goals for the "next training run" block: academic plans first, then career goals. */
-export function nextRunSteps(experiences: readonly Experience[]): string[] {
-  const published = publishedOnly(experiences);
-  return [
-    ...published.filter((e) => e.type === 'academic-plan'),
-    ...published.filter((e) => e.type === 'career-goal'),
-  ].map((e) => e.summary);
+/** "v4" becomes "4.0", as a command-line tool would print it. */
+export function versionNumber(modelVersion: string): string {
+  const n = modelVersion.replace(/^v/i, '');
+  return n.includes('.') ? n : `${n}.0`;
+}
+
+/** Release notes of the About page: newest first; nothing when the file is not verified. */
+export function releaseNotes(data: Releases): Release[] {
+  if (data.status !== 'verified') return [];
+  return data.releases.filter((r) => r.items.length > 0).reverse();
 }
 
 /** Capability columns of the About page: skill groups, then spoken languages with their level. */

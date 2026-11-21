@@ -8,13 +8,15 @@ test.describe('About page', () => {
     expect(results.violations).toEqual([]);
   });
 
-  test('shows the bio, the photo and the intended use', async ({ page }) => {
+  test('shows the terminal summary and the photo', async ({ page }) => {
     await page.goto('/about');
     await expect(
       page.getByRole('heading', { level: 1, name: 'About the model' }),
     ).toBeVisible();
-    await expect(page.locator('.bio')).toHaveCount(4);
-    await expect(page.getByText(/I plan to join KTH/)).toBeVisible();
+    const term = page.getByRole('group', { name: 'Model summary' });
+    await expect(term).toContainText('hamza 4.0');
+    await expect(term).toContainText('4th year');
+    await expect(term).toContainText('less energy and compute');
     const photo = page.getByRole('img', {
       name: 'Portrait of Hamza Bencheikh',
     });
@@ -22,35 +24,55 @@ test.describe('About page', () => {
     expect(
       await photo.evaluate((img: HTMLImageElement) => img.naturalWidth),
     ).toBeGreaterThan(0);
-    await expect(
-      page.getByRole('heading', { name: 'intended use' }),
-    ).toBeVisible();
   });
 
-  test('omits model card cells without content and never shows a CV', async ({
+  test('shows the release notes, newest first, with the current one marked', async ({
     page,
   }) => {
     await page.goto('/about');
-    for (const name of ['strengths', 'known limitations', 'out of scope']) {
-      await expect(
-        page.getByRole('heading', { name, exact: true }),
-      ).toHaveCount(0);
-    }
-    await expect(page.getByText(/CV/)).toHaveCount(0);
+    const notes = page.getByRole('region', { name: 'Release notes' });
+    const versions = await notes.locator('.ver').allTextContents();
+    expect(versions[0]).toBe('v6');
+    expect(versions.at(-1)).toBe('v1–v2');
+    const current = notes.locator('.rel--current');
+    await expect(current).toHaveCount(1);
+    await expect(current).toContainText('LATEST');
+    await expect(current).toContainText('Sapporo');
+    await expect(notes).toContainText('KTH');
+    await expect(notes).toContainText('ETH Zurich and EPFL');
+  });
+
+  test('"show what I learned" opens with the keyboard', async ({ page }) => {
+    await page.goto('/about');
+    const summary = page.getByText('show what I learned');
+    const learned = page.getByText('Delivering at the pace of sprints.');
+    await expect(learned).toBeHidden();
+    await summary.focus();
+    await page.keyboard.press('Enter');
+    await expect(learned).toBeVisible();
+  });
+
+  test('never shows a CV or a placeholder', async ({ page }) => {
+    await page.goto('/about');
+    await expect(page.getByText(/\bCV\b/)).toHaveCount(0);
     const text = await page.locator('main').innerText();
     for (const forbidden of ['[TO CONFIRM', '[SOURCE NEEDED']) {
       expect(text).not.toContain(forbidden);
     }
   });
 
-  test('lists capabilities and the next training run', async ({ page }) => {
+  test('lists capabilities and the deploy strip leads to the contact block', async ({
+    page,
+  }) => {
     await page.goto('/about');
     const capabilities = page.getByRole('region', { name: 'Capabilities' });
     await expect(capabilities.getByText('Python')).toBeVisible();
     await expect(capabilities.getByText('French (Native)')).toBeVisible();
-    const next = page.getByRole('region', { name: "Where I'm heading" });
-    await expect(next).toContainText('Planned double degree at KTH');
-    await expect(next).toContainText('ETH Zurich and EPFL');
+    const deploy = page.getByRole('region', { name: 'Deploy this model' });
+    await expect(deploy).toContainText('--from 2027-05');
+    await expect(deploy).toContainText('open to relocation');
+    await deploy.getByRole('link', { name: 'CONTACT →' }).click();
+    await expect(page).toHaveURL(/#contact$/);
   });
 
   test('contact block links to the email, LinkedIn and GitHub', async ({

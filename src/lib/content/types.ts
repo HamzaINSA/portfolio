@@ -5,6 +5,8 @@ import type {
   knowledgeEntrySchema,
   profileSchema,
   projectSchema,
+  releaseSchema,
+  releasesSchema,
   skillsSchema,
 } from './schemas';
 
@@ -14,3 +16,5 @@ export type KnowledgeEntry = z.infer<typeof knowledgeEntrySchema>;
 export type Profile = z.infer<typeof profileSchema>;
 export type EducationItem = z.infer<typeof educationItemSchema>;
 export type Skills = z.infer<typeof skillsSchema>;
+export type Releases = z.infer<typeof releasesSchema>;
+export type Release = z.infer<typeof releaseSchema>;

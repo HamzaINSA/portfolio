@@ -17,27 +17,29 @@ const frame = [
 const when = [project.year, project.current && t.inProgress]
   .filter(Boolean)
   .join(' · ');
-// The image area is omitted when the project has no image (design-spec: no empty blocks).
+// The logo sits small next to the title; it is omitted when the project has none.
 ---
 
 <a class="card" href={project.href}>
-  {project.image && (
-    <span class="media">
-      <img
-        src={project.image.src}
-        alt={project.image.alt}
-        loading="lazy"
-        decoding="async"
-      />
-    </span>
-  )}
   {(project.topic || when) && (
     <span class="meta">
       {project.topic && <Chip variant="accent">{project.topic}</Chip>}
       {when && <span class="year">{when}</span>}
     </span>
   )}
-  <h2 class="title">{project.title}</h2>
+  <span class="head">
+    {project.image && (
+      <span class="logo">
+        <img
+          src={project.image.src}
+          alt={project.image.alt}
+          loading="lazy"
+          decoding="async"
+        />
+      </span>
+    )}
+    <h2 class="title">{project.title}</h2>
+  </span>
   {frame && <p class="frame">{frame}</p>}
   <p class="summary">{project.summary}</p>
   {project.stack.length > 0 && <p class="stack">{project.stack.join(' · ')}</p>}
@@ -64,21 +66,31 @@ const when = [project.year, project.current && t.inProgress]
     color: var(--color-on-ink);
   }
 
-  .media {
+  .head {
     display: flex;
     align-items: center;
-    justify-content: center;
-    height: 11.25rem; /* 180px, as in the mockup */
-    margin: calc(-1 * var(--space-4)) calc(-1 * var(--space-4)) var(--space-1);
-    padding: var(--space-6);
-    background: var(--color-surface);
-    border-bottom: var(--border-thick);
+    gap: var(--space-3);
   }
 
-  /* Caps the width so wide wordmarks do not outweigh tall logos. */
-  .media img {
-    max-width: min(100%, 13rem);
-    max-height: 100%;
+  /* A small white tile keeps every logo legible, also on the inverted hover card. */
+  .logo {
+    display: flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    height: 3.25rem;
+    min-width: 3.25rem;
+    max-width: 7.5rem;
+    padding: var(--space-1) var(--space-2);
+    background: var(--color-surface);
+    border: var(--border-thin);
+  }
+
+  /* Fixed height, free width: wide wordmarks stay readable, square marks stay small. */
+  .logo img {
+    width: auto;
+    max-width: 100%;
+    height: 100%;
     object-fit: contain;
   }
 
@@ -133,10 +145,6 @@ const when = [project.year, project.current && t.inProgress]
   @media (min-width: 48em) {
     .card {
       padding: 1.375rem;
-    }
-
-    .media {
-      margin: -1.375rem -1.375rem var(--space-1);
     }
   }
 </style>

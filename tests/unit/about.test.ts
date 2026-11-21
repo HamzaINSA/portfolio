@@ -1,35 +1,80 @@
 import { describe, expect, it } from 'vitest';
 import { buildMailto } from '../../src/lib/contact/mailto';
-import { capabilityGroups, nextRunSteps } from '../../src/lib/content/views';
-import type { Experience, Skills } from '../../src/lib/content/types';
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
+import { releasesSchema } from '../../src/lib/content/schemas';
+import {
+  capabilityGroups,
+  releaseNotes,
+  versionNumber,
+} from '../../src/lib/content/views';
+import type { Releases, Skills } from '../../src/lib/content/types';
 
-const exp = (over: Partial<Experience>): Experience => ({
-  id: 'x',
-  type: 'internship',
-  title: 't',
-  organization: { name: 'o' },
-  current: false,
-  checkpoint: false,
-  summary: 's',
-  highlights: [],
-  learned: [],
-  stack: [],
-  tags: [],
-  links: [],
+const releases = (over: Partial<Releases>): Releases => ({
+  objective: null,
+  objectiveComment: null,
+  releases: [
+    {
+      version: 'v1',
+      period: '2023',
+      state: 'past',
+      title: 'A',
+      items: [{ tag: 'init', text: 'a' }],
+      learned: [],
+    },
+    {
+      version: 'v2',
+      period: '2024',
+      state: 'past',
+      title: 'Empty',
+      items: [],
+      learned: [],
+    },
+    {
+      version: 'v3',
+      period: '2025',
+      state: 'current',
+      title: 'C',
+      items: [{ tag: 'added', text: 'c' }],
+      learned: [],
+    },
+  ],
   status: 'verified',
   openQuestions: [],
   ...over,
 });
 
-describe('nextRunSteps', () => {
-  it('lists published plans before career goals and skips unverified ones', () => {
-    const steps = nextRunSteps([
-      exp({ type: 'career-goal', summary: 'PhD' }),
-      exp({ type: 'academic-plan', summary: 'KTH', status: 'to_confirm' }),
-      exp({ type: 'academic-plan', summary: 'Exchange' }),
-      exp({ type: 'internship', summary: 'Job' }),
+describe('releaseNotes', () => {
+  it('lists releases newest first and skips empty ones', () => {
+    expect(releaseNotes(releases({})).map((r) => r.version)).toEqual([
+      'v3',
+      'v1',
     ]);
-    expect(steps).toEqual(['Exchange', 'PhD']);
+  });
+  it('shows nothing when the file is not verified', () => {
+    expect(releaseNotes(releases({ status: 'to_confirm' }))).toEqual([]);
+  });
+  it('does not change the order of the source data', () => {
+    const data = releases({});
+    releaseNotes(data);
+    expect(data.releases[0]?.version).toBe('v1');
+  });
+  it('validates content/releases.json, with exactly one current release', () => {
+    const file = JSON.parse(
+      readFileSync(
+        join(__dirname, '..', '..', 'content', 'releases.json'),
+        'utf8',
+      ),
+    ) as unknown;
+    const data = releasesSchema.parse(file);
+    expect(data.releases.filter((r) => r.state === 'current')).toHaveLength(1);
+  });
+});
+
+describe('versionNumber', () => {
+  it('prints the model version as a tool would', () => {
+    expect(versionNumber('v4')).toBe('4.0');
+    expect(versionNumber('v4.1')).toBe('4.1');
   });
 });
 
