@@ -2,17 +2,49 @@
   "id": "involvement",
   "title": "Involvement and distinctions",
   "source": "involvement.json",
-  "keywords": ["involvement", "involved", "association", "aedi", "leadership", "scholarship", "laureate", "georges", "besse", "foundation", "entrepreneurship", "track", "community", "volunteer", "secretary", "award"],
-  "phrases": ["student association", "general secretary"],
+  "keywords": [
+    "involvement",
+    "involved",
+    "association",
+    "aedi",
+    "leadership",
+    "scholarship",
+    "laureate",
+    "georges",
+    "besse",
+    "foundation",
+    "entrepreneurship",
+    "track",
+    "community",
+    "volunteer",
+    "secretary",
+    "award",
+    "propulseo",
+    "asys",
+    "mentor",
+    "mentoring",
+    "excellence"
+  ],
+  "phrases": [
+    "student association",
+    "general secretary"
+  ],
   "exampleQuestions": [
     "Is he involved in any association?",
     "What is AEDI?",
     "Has he received any scholarship?"
   ],
-  "answer": "Since May 2026 Hamza is General Secretary of AEDI, the Computer Science student association. He is also a laureate of the Georges Besse Foundation, a merit-based support program for engineering students, and follows INSA Lyon's Entrepreneurship Track (2026 to 2027), a program on turning concrete problems into viable products.",
+  "answer": "Since May 2026 Hamza is General Secretary of AEDI, the Computer Science student association. Since 2023 he holds an excellence scholarship from the Georges Besse Foundation, which supports him through his engineering studies. Since 2026 he is also a member of Propulseo, mentored by Asys, an HR software company, and he follows INSA Lyon's Entrepreneurship Track (2026 to 2027), a program on turning concrete problems into viable products.",
   "links": [],
-  "sources": ["aedi-general-secretary", "georges-besse-foundation", "entrepreneurship-track"],
-  "related": ["experience"],
+  "sources": [
+    "aedi-general-secretary",
+    "entrepreneurship-track",
+    "georges-besse-foundation",
+    "propulseo-asys"
+  ],
+  "related": [
+    "experience"
+  ],
   "priority": 0,
   "suggested": false,
   "status": "verified"

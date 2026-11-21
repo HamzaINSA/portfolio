@@ -1,23 +1,29 @@
 {
   "id": "propulseo-asys",
-  "type": "program",
-  "title": "Propulseo",
-  "organization": { "name": "Propulseo" },
-  "location": null,
-  "startDate": null,
+  "type": "scholarship",
+  "title": "Propulseo laureate, mentored by Asys",
+  "organization": {
+    "name": "Propulseo",
+    "displayName": "Propulseo (association, Lyon)"
+  },
+  "location": "Lyon, France",
+  "startDate": "2026",
   "endDate": null,
-  "current": false,
+  "current": true,
   "checkpoint": false,
-  "summary": "Member of Propulseo, backed by Asys. [TO CONFIRM: what the program is, what Asys provides, dates and exact wording]",
+  "summary": "Member of Propulseo since 2026, an association that supports students with a grant and mentoring by a partner company; Hamza is mentored by Asys, a French HR software company (time management and workforce planning).",
   "highlights": [],
   "learned": [],
   "stack": [],
-  "tags": ["entrepreneurship"],
-  "links": [],
-  "status": "to_confirm",
-  "openQuestions": [
-    "Hamza said he is part of Propulseo and 'propulsé par Asys, who trusted him'. No document describes either. What are they exactly, since when, and how should the support be worded?",
-    "Is there an official link to add?"
+  "tags": [
+    "scholarship",
+    "mentoring"
   ],
-  "internalNote": "Source: Hamza's message only. No other source. Do not describe either organisation beyond what he confirms."
+  "links": [],
+  "status": "verified",
+  "openQuestions": [
+    "Start month, if Hamza wants it.",
+    "Official link to add, if wanted."
+  ],
+  "internalNote": "Source: Hamza (2026-11-21). Asys spelling and activity checked on public sources (lafabriquedunet.fr, asys.fr). Propulseo's own materials call its grant a need-based 'bourse de vie', so the wording stays 'a grant', not 'excellence scholarship'. No figures."
 }
