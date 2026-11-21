@@ -37,7 +37,11 @@ const capabilities = capabilityGroups(skills, t.spoken);
 const email = profile.contact.email;
 ---
 
-<BaseLayout title={`${t.title} · ${en.siteName}`} current="about">
+<BaseLayout
+  title={`${t.title} · ${en.siteName}`}
+  description={en.meta.about}
+  current="about"
+>
   <Container class="intro">
     <div class="intro-text">
       <p class="crumb">{t.crumb}</p>

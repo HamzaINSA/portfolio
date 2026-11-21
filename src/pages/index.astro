@@ -1,4 +1,5 @@
 ---
+import { homeDescription, personJsonLd } from '../lib/seo/meta';
 import ConsoleTeaser from '../components/sections/ConsoleTeaser.astro';
 import EvaluationPreview from '../components/sections/EvaluationPreview.astro';
 import Hero from '../components/sections/Hero.astro';
@@ -59,7 +60,11 @@ const cards = featuredProjects(projects).map((p) => ({
 }));
 ---
 
-<BaseLayout current="home">
+<BaseLayout
+  current="home"
+  description={homeDescription(profile)}
+  jsonLd={personJsonLd(profile, Astro.site)}
+>
   <Container class="hero">
     <Hero
       firstName={firstName}

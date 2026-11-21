@@ -2,6 +2,12 @@
 export const en = {
   siteName: 'Hamza Bencheikh',
   skipLink: 'Skip to content',
+  meta: {
+    ogImage: '/og.png',
+    ogImageAlt: (name: string, role: string, month: string) =>
+      `${name}, model card: ${role} from ${month}`,
+    about: 'Release notes, capabilities and how to contact Hamza.',
+  },
   nav: {
     label: 'Main',
     items: [

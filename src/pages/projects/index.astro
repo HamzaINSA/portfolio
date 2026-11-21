@@ -17,7 +17,11 @@ const topics = projectTopics(projects, FILTER_TOPICS);
 const t = en.projectsPage;
 ---
 
-<BaseLayout title={`${t.title} · ${en.siteName}`} current="evaluation">
+<BaseLayout
+  title={`${t.title} · ${en.siteName}`}
+  description={t.intro}
+  current="evaluation"
+>
   <PageHeader crumb={t.crumb} title={t.title} intro={t.intro} />
 
   <Container class="projects">

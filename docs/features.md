@@ -78,6 +78,8 @@ Acceptance summary: suggestions and free text work; answers show their source fi
 
 Title and description per page, canonical URLs, Open Graph and Twitter card image, `sitemap.xml`, `robots.txt`, JSON-LD `Person` (name, school, links; no phone, no address), `lang="en"`. The social preview image is generated or designed to match the identity; ask Hamza before using any photo.
 
+Implementation: `src/lib/seo/meta.ts` (pure helpers), tags in `BaseLayout.astro`, `sitemap.xml` and `robots.txt` endpoints in `src/pages/`. The social image `public/og.png` has no photo and is generated from `content/profile.json` with `npm run og:image`; run it again when the profile changes. Absolute URLs need `SITE_URL` (set at M7, decision O1).
+
 ## F10. Accessibility and performance (P0, applies everywhere)
 
 WCAG 2.1 AA. Contrast: the accent (lime) is used as a **fill** on ink or paper, and as **text only on ink backgrounds**. Visible focus on every control (see `design-spec.md`). `prefers-reduced-motion` disables transitions. Axe tests at both widths in CI. Performance budget in `architecture.md`.

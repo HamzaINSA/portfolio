@@ -10,7 +10,7 @@ const entries = toRetrievalEntries(await getKnowledgeBase());
 const t = en.askPage;
 ---
 
-<BaseLayout title={`${t.title} · ${en.siteName}`}>
+<BaseLayout title={`${t.title} · ${en.siteName}`} description={t.intro}>
   <Container class="ask-head">
     <h1>
       {t.title}
