@@ -12,6 +12,6 @@ Read in this order if you are starting from zero:
 8. `roadmap.md`: order of work
 9. `risky-tasks.md`: when to stop and ask Hamza
 
-`kickoff-prompt.md` is the first prompt Hamza pastes into Claude Code.
+`kickoff-prompt.md` is the first prompt Hamza pastes into the coding assistant.
 
 All docs are in English. Conversations with Hamza are in French.

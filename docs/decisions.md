@@ -1,6 +1,6 @@
 # Decisions
 
-Hamza delegates technical choices to Claude Code. The decisions below are proposed defaults, taken at planning time. You may challenge one if you find a concrete problem: write the reason in the PR and ask Hamza before changing a **decided** item.
+Hamza delegates technical choices to the coding assistant. The decisions below are proposed defaults, taken at planning time. You may challenge one if you find a concrete problem: write the reason in the PR and ask Hamza before changing a **decided** item.
 
 ## Decided
 
@@ -28,6 +28,6 @@ Hamza delegates technical choices to Claude Code. The decisions below are propos
 | O4 | Photo on the About page (mockup shows an optional slot). Resolved 2026-11-20: Hamza supplied a photo and chose the cut-out on an ink background with a lime grid (`public/images/about/hamza.webp`, metadata stripped; original stays in `private/`) | Done |
 | O5 | Naming clients of ETIC and freelance projects (see `content/projects/`). Resolved for VINCI and Inddigo: Hamza confirmed on 2026-11-20 they may be named, with their logos | Keep anonymous until ETIC and the client agree |
 | O6 | Licence for the code (MIT or similar) and the statement for content | Ask; content stays all rights reserved |
-| O7 | Legal notice and privacy page (needed for a public site run by a person in France) | Propose a short draft; Hamza validates. Claude Code is not a lawyer |
+| O7 | Legal notice and privacy page (needed for a public site run by a person in France) | Propose a short draft; Hamza validates. The coding assistant is not a lawyer |
 | O8 | Details missing from content (see `[TO CONFIRM]` markers) | Resolve through `content/experiences/README.md` checklist |
 | O9 | Optional phase 2: semantic search in the browser (embeddings model download) | Only after V1 is live; ask first |

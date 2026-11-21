@@ -1,6 +1,6 @@
 # Design reference
 
-Hamza designed and validated these screens in a Claude design canvas (a private page that only he can open). The source of the validated screens is copied in `mockups/` as `.dc.html` files.
+Hamza designed and validated these screens in a private design canvas (a private page that only he can open). The source of the validated screens is copied in `mockups/` as `.dc.html` files.
 
 ## How to read the mockups
 

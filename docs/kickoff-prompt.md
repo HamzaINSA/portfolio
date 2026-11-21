@@ -1,6 +1,6 @@
-# Kickoff prompt for Claude Code
+# Kickoff prompt for the coding assistant
 
-Hamza pastes this into Claude Code, from the root of the cloned repository, to start work.
+Hamza pastes this into the coding assistant, from the root of the cloned repository, to start work.
 
 ```text
 You are the lead engineer of my personal portfolio website. I am Hamza, a student: you own the technical choices and the quality of the code. Talk to me in French, explain simply. Code, commits, PRs, issues and docs are in English.

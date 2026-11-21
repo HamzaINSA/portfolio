@@ -6,12 +6,11 @@ The site presents Hamza as a "model card" (version, intended use, training run, 
 
 ## Status
 
-Planning phase finished: mockups validated, content drafted, specs written. Implementation is done with Claude Code. Start with [`CLAUDE.md`](CLAUDE.md) and [`docs/README.md`](docs/README.md).
+Milestones M0 to M4 are done: tooling and CI, content layer, Home, Training, Evaluation and project pages, About and contact. Next is the local chatbot (M5). Start with [`docs/README.md`](docs/README.md); the order of work is in [`docs/roadmap.md`](docs/roadmap.md).
 
 ## Repository layout
 
 ```
-CLAUDE.md     Instructions for Claude Code (entry point)
 docs/         Product brief, architecture, features, design spec, chatbot spec, roadmap
 docs/design/  Validated mockups (HTML source) and how to read them
 content/      All site content as data (experiences, projects, skills, knowledge base)
