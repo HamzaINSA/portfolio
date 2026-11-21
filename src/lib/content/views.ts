@@ -1,7 +1,8 @@
 import { displayClient } from './anonymise';
 import { formatRange } from '../format/dates';
 import { publishedOnly } from './gate';
-import type { Experience, Project, Skills } from './types';
+import type { RetrievalEntry } from '../retrieval/match';
+import type { Experience, KnowledgeEntry, Project, Skills } from './types';
 
 /** Display-safe fields of a checkpoint. Components receive this, never the raw experience. */
 export interface CheckpointView {
@@ -151,4 +152,22 @@ export function capabilityGroups(
     .map((g) => ({ label: g.label, items: g.items }));
   const spoken = skills.spoken.map((s) => `${s.language} (${s.level})`);
   return spoken.length > 0 ? [...groups, { label: spokenLabel, items: spoken }] : groups;
+}
+
+/** Knowledge-base entries the chatbot may use: verified only, without internal fields. */
+export function toRetrievalEntries(entries: readonly KnowledgeEntry[]): RetrievalEntry[] {
+  return publishedOnly(entries).map((e) => ({
+    id: e.id,
+    title: e.title,
+    source: e.source,
+    keywords: e.keywords,
+    phrases: e.phrases,
+    exampleQuestions: e.exampleQuestions,
+    answer: e.answer,
+    links: e.links,
+    related: e.related,
+    priority: e.priority,
+    suggested: e.suggested,
+    suggestedLabel: e.suggestedLabel,
+  }));
 }

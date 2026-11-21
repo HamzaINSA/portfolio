@@ -14,13 +14,20 @@
     "deliver",
     "delivery",
     "vinci",
-    "inddigo"
+    "inddigo",
+    "etic",
+    "planning",
+    "material",
+    "flow"
   ],
   "phrases": [
     "client mission",
     "client work",
     "for customers",
-    "for clients"
+    "for clients",
+    "etic insa",
+    "material flow",
+    "planning documents"
   ],
   "exampleQuestions": [
     "What client missions has he done?",

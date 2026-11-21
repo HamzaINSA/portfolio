@@ -70,21 +70,14 @@ test.describe('About page', () => {
     );
   });
 
-  test('the form has labelled fields and sends nothing over the network', async ({
-    page,
-    baseURL,
-  }) => {
+  // Never submit a valid form here: it would open the mail app of whoever runs the tests.
+  // The mailto: link itself is covered by the unit tests (tests/unit/about.test.ts).
+  test('the form has labelled fields', async ({ page }) => {
     await page.goto('/about');
     const form = page.getByRole('form', { name: 'Contact form' });
-    await form.getByLabel('Name').fill('Ada');
-    await form.getByLabel('Email').fill('ada@example.org');
-    await form.getByLabel('Message').fill('Hello');
-    const requests: string[] = [];
-    page.on('request', (request) => requests.push(request.url()));
-    await form.getByRole('button', { name: 'SEND' }).click();
-    await page.waitForTimeout(300);
-    expect(requests.filter((url) => url.startsWith('http'))).toEqual([]);
-    expect(page.url().startsWith(baseURL ?? '')).toBe(true);
+    for (const label of ['Name', 'Email', 'Message']) {
+      await expect(form.getByLabel(label)).toBeVisible();
+    }
   });
 
   test('the form requires its fields before opening the mail client', async ({
@@ -92,7 +85,6 @@ test.describe('About page', () => {
   }) => {
     await page.goto('/about');
     const form = page.getByRole('form', { name: 'Contact form' });
-    await form.getByRole('button', { name: 'SEND' }).click();
     const valid = await form.evaluate((f: HTMLFormElement) =>
       f.checkValidity(),
     );
