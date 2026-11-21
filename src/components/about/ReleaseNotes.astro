@@ -1,0 +1,252 @@
+---
+import { en } from '../../i18n/en';
+import type { Release } from '../../lib/content/types';
+
+interface Props {
+  releases: Release[];
+}
+const { releases } = Astro.props;
+const t = en.aboutPage.releases;
+---
+
+<section class="notes" aria-labelledby="releases-title">
+  <h2 id="releases-title">{t.title}</h2>
+  <ol class="list">
+    {releases.map((r) => (
+      <li class:list={['rel', `rel--${r.state}`]}>
+        <p class="meta">
+          <span class="ver">{r.version}</span>
+          <span class="period">{r.period}</span>
+        </p>
+        <div class="body">
+          <h3>
+            {r.title}
+            {r.state === 'current' && <span class="latest">{t.latest}</span>}
+          </h3>
+          <ul class="items">
+            {r.items.map((item) => (
+              <li>
+                <span class:list={['tag', `tag--${item.tag}`]}>
+                  {t.tags[item.tag]}
+                </span>
+                <span>{item.text}</span>
+              </li>
+            ))}
+          </ul>
+          {r.learned.length > 0 && (
+            <details class="learned">
+              <summary>{t.learned}</summary>
+              <ul class="items">
+                {r.learned.map((text) => (
+                  <li>
+                    <span class="tag">{t.learnedTag}</span>
+                    <span>{text}</span>
+                  </li>
+                ))}
+              </ul>
+            </details>
+          )}
+        </div>
+      </li>
+    ))}
+  </ol>
+</section>
+
+<style>
+  .notes {
+    padding-bottom: var(--section-pad);
+  }
+
+  h2 {
+    margin-bottom: var(--space-8);
+    font-size: var(--text-section-title);
+    letter-spacing: -0.03em;
+  }
+
+  .list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  /* Phone: version above the card; the timeline runs down the left edge. */
+  .rel {
+    --rail: 0.5rem; /* x of the timeline */
+    --body-x: var(--space-10); /* x where the cards start */
+    position: relative;
+    display: grid;
+    padding-left: var(--space-10);
+  }
+
+  .rel::before {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: var(--rail);
+    border-left: 4px solid var(--color-ink);
+    content: '';
+  }
+
+  .rel--planned::before,
+  .rel--goal::before {
+    border-left-style: dashed;
+  }
+
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--space-1) var(--space-3);
+    padding-top: var(--space-5);
+  }
+
+  .ver {
+    font-family: var(--font-display);
+    font-size: clamp(1.875rem, 1.4rem + 1.5vw, 2.5rem);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+
+  .period {
+    font-size: var(--text-label-small);
+    color: var(--color-muted);
+  }
+
+  .body {
+    position: relative;
+    margin-block: var(--space-3) var(--space-4);
+    padding: var(--space-5) var(--space-6);
+    background: var(--color-surface);
+    border: var(--border-thick);
+  }
+
+  /* The dot on the timeline. */
+  .body::before {
+    position: absolute;
+    top: var(--space-5);
+    left: calc(var(--rail) + 2px - 0.625rem - var(--body-x));
+    width: 1.25rem;
+    height: 1.25rem;
+    background: var(--color-paper);
+    border: 4px solid var(--color-ink);
+    border-radius: 50%;
+    content: '';
+  }
+
+  .rel--current .body {
+    background: var(--color-ink);
+    color: var(--color-on-ink);
+    box-shadow: var(--shadow-offset-small);
+  }
+
+  .rel--current .body::before {
+    background: var(--color-accent);
+  }
+
+  .rel--planned .body,
+  .rel--goal .body {
+    background: transparent;
+    border-style: dashed;
+  }
+
+  h3 {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3);
+    font-size: clamp(1.25rem, 1rem + 0.8vw, 1.5rem);
+    letter-spacing: -0.02em;
+  }
+
+  .latest {
+    padding: var(--space-1) var(--space-2);
+    background: var(--color-accent);
+    color: var(--color-ink);
+    font-family: var(--font-mono);
+    font-size: var(--text-label-small);
+    letter-spacing: normal;
+  }
+
+  .items {
+    display: grid;
+    gap: var(--space-2);
+    margin: var(--space-4) 0 0;
+    padding: 0;
+    list-style: none;
+    font-size: 0.875rem;
+    line-height: 1.6;
+  }
+
+  /* Phone: the tag starts the line, so the text keeps the full width. */
+  .tag {
+    display: inline-block;
+    min-width: 5rem;
+    margin-right: var(--space-2);
+  }
+
+  .tag {
+    align-self: start;
+    padding: 0.125rem var(--space-1);
+    border: 2px solid currentColor;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  .tag--added {
+    background: var(--color-accent);
+    color: var(--color-ink);
+    border-color: var(--color-accent);
+  }
+
+  .learned summary {
+    width: fit-content;
+    min-height: var(--target-min);
+    margin-top: var(--space-2);
+    padding-block: var(--space-3);
+    font-size: var(--text-label);
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .rel--current .learned summary:focus-visible {
+    outline: var(--focus-ring-on-ink);
+  }
+
+  .learned .items {
+    margin-top: 0;
+    color: var(--color-on-ink-soft);
+  }
+
+  /* Desktop: versions on the left, the timeline between them and the cards. */
+  @media (min-width: 48em) {
+    .rel {
+      --rail: 11.5rem;
+      --body-x: calc(10rem + var(--space-14));
+      grid-template-columns: 10rem 1fr;
+      gap: 0 var(--space-14);
+      padding-left: 0;
+    }
+
+    .items li {
+      display: grid;
+      grid-template-columns: 5rem 1fr;
+      gap: var(--space-3);
+    }
+
+    .tag {
+      margin-right: 0;
+    }
+
+    .meta {
+      flex-direction: column;
+      align-items: flex-end;
+      text-align: right;
+    }
+
+    .body {
+      margin-block: var(--space-4);
+    }
+  }
+</style>

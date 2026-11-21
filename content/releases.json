@@ -1,0 +1,104 @@
+{
+  "objective": "make models need less energy and compute",
+  "objectiveComment": "while staying useful",
+  "releases": [
+    {
+      "version": "v1–v2",
+      "period": "2023 → 2025",
+      "state": "past",
+      "title": "Initial release",
+      "items": [
+        {
+          "tag": "init",
+          "text": "INSA Lyon, Intensive Undergraduate Program, International Asia Track: mathematics, physics, computer science and Japanese."
+        },
+        {
+          "tag": "init",
+          "text": "Georges Besse Foundation excellence scholarship, since 2023."
+        },
+        {
+          "tag": "init",
+          "text": "Weekly tutoring in mathematics, physics and computer science, until 2026."
+        }
+      ],
+      "learned": []
+    },
+    {
+      "version": "v3",
+      "period": "2025 → 2026",
+      "state": "past",
+      "title": "Computer Science department",
+      "items": [
+        {
+          "tag": "changed",
+          "text": "Moved into the Computer Science department of INSA Lyon: algorithms, operating systems, networks, software engineering, artificial intelligence."
+        }
+      ],
+      "learned": []
+    },
+    {
+      "version": "v4",
+      "period": "2026 → 2027",
+      "state": "current",
+      "title": "Current release",
+      "items": [
+        {
+          "tag": "added",
+          "text": "Generative AI workflows and an evaluation pipeline, at Delta Quest in Sapporo, Japan, summer 2026."
+        },
+        {
+          "tag": "added",
+          "text": "Client projects with ETIC INSA Technologies, for VINCI and Inddigo."
+        },
+        {
+          "tag": "added",
+          "text": "An early-stage AI interview-preparation web app, since September 2026."
+        },
+        {
+          "tag": "added",
+          "text": "General Secretary of AEDI, the Computer Science student association."
+        },
+        {
+          "tag": "added",
+          "text": "Propulseo laureate, mentored by Asys. INSA Lyon Entrepreneurship Track."
+        }
+      ],
+      "learned": [
+        "Delivering at the pace of sprints.",
+        "Taking over an existing codebase quickly.",
+        "Explaining technical choices in plain terms to non-specialists."
+      ]
+    },
+    {
+      "version": "v5",
+      "period": "2027 → 2028 · planned",
+      "state": "planned",
+      "title": "Fine-tuning on machine learning",
+      "items": [
+        {
+          "tag": "planned",
+          "text": "Double degree at KTH in Stockholm, specialising in machine learning. Application in progress."
+        }
+      ],
+      "learned": []
+    },
+    {
+      "version": "v6",
+      "period": "after KTH · goal",
+      "state": "goal",
+      "title": "Research release",
+      "items": [
+        {
+          "tag": "goal",
+          "text": "PhD in machine learning, to work on AI models and their architecture. ETH Zurich and EPFL are the options today."
+        }
+      ],
+      "learned": []
+    }
+  ],
+  "status": "verified",
+  "openQuestions": [
+    "Chosen by Hamza on 2026-11-21 (About page proposal C). Every line restates a verified fact from profile.json, education.json or experiences/. Update it when those change (KTH admission, PhD).",
+    "Versions follow the study year (modelVersion v4 = 4th year). Years 1 and 2 are merged into 'v1–v2' because no fact is specific to the second year."
+  ]
+}

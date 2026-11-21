@@ -1,44 +1,39 @@
 ---
+import ReleaseNotes from '../components/about/ReleaseNotes.astro';
 import ContactForm from '../components/contact/ContactForm.astro';
 import Container from '../components/layout/Container.astro';
 import Button from '../components/ui/Button.astro';
 import { en } from '../i18n/en';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { getExperiences, getProfile, getSkills } from '../lib/content';
+import { getProfile, getReleases, getSkills } from '../lib/content';
 import {
-  bioParagraphs,
   capabilityGroups,
-  nextRunSteps,
+  releaseNotes,
+  versionNumber,
 } from '../lib/content/views';
 import { formatMonth } from '../lib/format/dates';
 
-const [profile, skills, experiences] = await Promise.all([
+const [profile, skills, releasesFile] = await Promise.all([
   getProfile(),
   getSkills(),
-  getExperiences(),
+  getReleases(),
 ]);
 const t = en.aboutPage;
 
-const bio = bioParagraphs(profile.bio);
+const releases = releaseNotes(releasesFile);
+const objective =
+  releasesFile.status === 'verified' ? releasesFile.objective : null;
 const seeking = profile.seeking;
 const intendedUse = [
   seeking.role,
-  `${formatMonth(seeking.start)} · ${seeking.duration}`,
+  formatMonth(seeking.start),
+  seeking.duration,
   seeking.relocation ? t.relocation : null,
 ]
   .filter(Boolean)
   .join(' · ');
 
-// Cards without content are omitted (strengths, limitations and out of scope need Hamza's own words).
-const cards = [
-  { label: t.cards.intendedUse, items: [intendedUse] },
-  { label: t.cards.strengths, items: profile.strengths },
-  { label: t.cards.limitations, items: profile.limitations },
-  { label: t.cards.outOfScope, items: profile.outOfScope },
-].filter((card) => card.items.length > 0);
-
 const capabilities = capabilityGroups(skills, t.spoken);
-const next = nextRunSteps(experiences);
 const email = profile.contact.email;
 ---
 
@@ -47,9 +42,43 @@ const email = profile.contact.email;
     <div class="intro-text">
       <p class="crumb">{t.crumb}</p>
       <h1>{t.title}</h1>
-      {bio.map((paragraph) => (
-        <p class="bio">{paragraph}</p>
-      ))}
+      <div class="term" role="group" aria-label={t.terminal.label}>
+        <p>
+          <span class="prompt" aria-hidden="true">
+            $
+          </span>
+          {t.terminal.binary} {t.terminal.version}
+        </p>
+        <p>
+          {t.terminal.binary} {versionNumber(profile.modelVersion)}
+          <span class="comment">
+            # {profile.yearLabel}, {profile.headline}, {profile.school}
+          </span>
+        </p>
+        {objective && (
+          <>
+            <p>
+              <span class="prompt" aria-hidden="true">
+                $
+              </span>
+              {t.terminal.binary} {t.terminal.objective}
+            </p>
+            <p>
+              {objective}
+              {releasesFile.objectiveComment && (
+                <span class="comment"># {releasesFile.objectiveComment}</span>
+              )}
+            </p>
+          </>
+        )}
+        <p>
+          <span class="prompt" aria-hidden="true">
+            $
+          </span>
+          {t.terminal.binary} {t.terminal.deploy}
+          <span class="cursor" aria-hidden="true"></span>
+        </p>
+      </div>
     </div>
     {profile.photo && (
       <div class="photo">
@@ -64,16 +93,11 @@ const email = profile.contact.email;
     )}
   </Container>
 
-  <Container class="cards-wrap">
-    <ul class="cards">
-      {cards.map((card) => (
-        <li class="card">
-          <h2 class="card-label">{card.label}</h2>
-          <p class="card-text">{card.items.join(' · ')}</p>
-        </li>
-      ))}
-    </ul>
-  </Container>
+  {releases.length > 0 && (
+    <Container>
+      <ReleaseNotes releases={releases} />
+    </Container>
+  )}
 
   {capabilities.length > 0 && (
     <section class="capabilities on-ink" aria-labelledby="capabilities-title">
@@ -95,17 +119,20 @@ const email = profile.contact.email;
     </section>
   )}
 
-  {next.length > 0 && (
-    <section class="next" aria-labelledby="next-title">
-      <Container class="next-inner">
-        <p class="next-label">{t.next.label}</p>
-        <h2 id="next-title">{t.next.title}</h2>
-        {next.map((step) => (
-          <p class="next-text">{step}</p>
-        ))}
-      </Container>
-    </section>
-  )}
+  <section class="deploy" aria-labelledby="deploy-title">
+    <Container class="deploy-inner">
+      <div>
+        <h2 id="deploy-title" class="visually-hidden">
+          {t.deploy.label}
+        </h2>
+        <p class="deploy-command">
+          <code>{t.deploy.command(seeking.start)}</code>
+        </p>
+        <p class="deploy-text">{intendedUse}</p>
+      </div>
+      <Button href="#contact">{t.deploy.cta}</Button>
+    </Container>
+  </section>
 
   <section id="contact" class="contact" aria-labelledby="contact-title">
     <Container class="contact-inner">
@@ -151,12 +178,43 @@ const email = profile.contact.email;
     text-wrap: balance;
   }
 
-  .bio {
-    max-width: 40rem;
-    margin-top: var(--space-5);
-    font-size: clamp(0.9375rem, 0.85rem + 0.35vw, 1.125rem);
-    line-height: 1.7;
-    text-wrap: pretty;
+  .term {
+    max-width: 47.5rem;
+    margin-top: var(--space-6);
+    padding: var(--space-5) var(--space-6);
+    background: var(--color-ink);
+    color: var(--color-on-ink);
+    border: var(--border-thick);
+    box-shadow: var(--shadow-offset-small);
+    font-size: clamp(0.8125rem, 0.75rem + 0.3vw, 0.9375rem);
+    line-height: 1.9;
+    overflow-wrap: anywhere;
+  }
+
+  .prompt {
+    margin-right: var(--space-2);
+    color: var(--color-accent);
+  }
+
+  .comment {
+    margin-left: var(--space-2);
+    color: var(--color-on-ink-muted);
+  }
+
+  .cursor {
+    display: inline-block;
+    width: 0.6em;
+    height: 1.1em;
+    margin-left: var(--space-1);
+    vertical-align: text-bottom;
+    background: var(--color-accent);
+    animation: blink 1s steps(2, start) infinite;
+  }
+
+  @keyframes blink {
+    to {
+      visibility: hidden;
+    }
   }
 
   /* Leaves room on the right for the offset shadow. */
@@ -171,40 +229,6 @@ const email = profile.contact.email;
     display: block;
     width: 100%;
     height: auto;
-  }
-
-  :global(.cards-wrap) {
-    padding-bottom: var(--space-10);
-  }
-
-  .cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(18.75rem, 100%), 1fr));
-    gap: var(--space-4);
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  .card {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-3);
-    padding: var(--space-6);
-    background: var(--color-surface);
-    border: var(--border-thick);
-  }
-
-  .card-label {
-    font-family: var(--font-mono);
-    font-size: var(--text-label-small);
-    font-weight: 400;
-    letter-spacing: normal;
-    color: var(--color-muted);
-  }
-
-  .card-text {
-    line-height: 1.7;
   }
 
   .capabilities {
@@ -255,33 +279,29 @@ const email = profile.contact.email;
     line-height: 1.8;
   }
 
-  .next {
+  .deploy {
     background: var(--color-accent);
     border-bottom: var(--border-thick);
   }
 
-  .next :global(.next-inner) {
+  .deploy :global(.deploy-inner) {
     display: flex;
-    flex-direction: column;
-    gap: var(--space-4);
-    padding-block: var(--section-pad);
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-6);
+    padding-block: var(--space-10);
   }
 
-  .next-label {
-    font-size: var(--text-label);
+  .deploy-command {
+    font-size: clamp(1rem, 0.75rem + 1.1vw, 1.625rem);
     font-weight: 700;
+    overflow-wrap: anywhere;
   }
 
-  .next h2 {
-    font-size: clamp(2.25rem, 1.6rem + 2vw, 3rem);
-    letter-spacing: -0.03em;
-    line-height: 1.05;
-  }
-
-  .next-text {
-    max-width: 47.5rem;
-    font-size: clamp(0.9375rem, 0.85rem + 0.35vw, 1.125rem);
-    line-height: 1.7;
+  .deploy-text {
+    margin-top: var(--space-2);
+    font-size: var(--text-label);
   }
 
   .contact :global(.contact-inner) {
@@ -315,6 +335,13 @@ const email = profile.contact.email;
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-3);
+  }
+
+  /* Large screens: the terminal column takes the room, the photo stays a fixed size. */
+  @media (min-width: 64em) {
+    :global(.intro) {
+      grid-template-columns: 1fr 22rem;
+    }
   }
 
   @media (min-width: 48em) {
