@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About · C · Release notes</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+  .hero { display: grid; grid-template-columns: 1fr 340px; gap: 56px; align-items: start; padding-block: 56px 48px; }
+  .term { margin-top: 28px; background: var(--ink); color: var(--on-ink); border: 3px solid var(--ink); box-shadow: 8px 8px 0 var(--lime); font-size: 15px; line-height: 1.9; padding: 20px 24px; max-width: 760px; }
+  .term .p { color: var(--lime); }
+  .term .c { color: var(--on-ink-muted); }
+  .cursor { display: inline-block; width: 10px; height: 18px; background: var(--lime); vertical-align: text-bottom; animation: b 1s steps(2, start) infinite; }
+  @keyframes b { to { visibility: hidden; } }
+  .photo { aspect-ratio: 4 / 5; }
+
+  .notes { padding-bottom: 64px; }
+  .notes h2 { font-size: clamp(40px, 1.5rem + 3vw, 64px); letter-spacing: -0.03em; margin-bottom: 32px; }
+  .rel { display: grid; grid-template-columns: 180px 1fr; gap: 0 32px; position: relative; }
+  .rel::before { content: ''; position: absolute; left: 188px; top: 0; bottom: 0; border-left: 4px solid var(--ink); }
+  .rel.future::before { border-left-style: dashed; }
+  .meta { text-align: right; padding: 24px 0; }
+  .ver { font-family: var(--display); font-size: 40px; line-height: 1; letter-spacing: -0.03em; }
+  .date { font-size: 12px; color: var(--muted); margin-top: 6px; }
+  .body { position: relative; margin: 16px 0 16px 28px; background: var(--white); border: 3px solid var(--ink); padding: 22px 24px; }
+  .body::before { content: ''; position: absolute; left: -40px; top: 22px; width: 20px; height: 20px; background: var(--paper); border: 4px solid var(--ink); border-radius: 50%; }
+  .rel.current .body { background: var(--ink); color: var(--on-ink); box-shadow: 8px 8px 0 var(--lime); }
+  .rel.current .body::before { background: var(--lime); }
+  .rel.future .body { background: transparent; border-style: dashed; }
+  .body h3 { font-size: 24px; letter-spacing: -0.02em; display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+  ul { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 8px; font-size: 14px; line-height: 1.6; }
+  li { display: grid; grid-template-columns: 74px 1fr; gap: 10px; }
+  .tag { font-size: 11px; font-weight: 700; padding: 2px 6px; align-self: start; text-align: center; border: 2px solid currentColor; }
+  .add { background: var(--lime); color: var(--ink); border-color: var(--ink); }
+  .rel.current .muted { color: var(--on-ink-muted); }
+  details summary { cursor: pointer; font-size: 13px; margin-top: 12px; font-weight: 700; }
+
+  .next { background: var(--lime); border-block: 3px solid var(--ink); padding-block: 40px; }
+  .next .wrap { display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; }
+  .next code { font-size: clamp(18px, 0.8rem + 1.2vw, 26px); font-weight: 700; }
+  .btn { background: var(--ink); color: var(--lime); font-weight: 700; padding: 16px 24px; }
+
+  @media (max-width: 860px) {
+    .hero { grid-template-columns: 1fr; }
+    .photo { max-width: 280px; }
+    .rel { grid-template-columns: 1fr; }
+    .rel::before { left: 8px; }
+    .meta { text-align: left; padding: 20px 0 0 40px; display: flex; gap: 12px; align-items: baseline; }
+    .ver { font-size: 30px; }
+    .body { margin-left: 40px; }
+    .body::before { left: -44px; }
+  }
+</style>
+</head>
+<body>
+<div class="nav"><b>HAMZA-V4</b><span><i>home</i><i>training</i><i>evaluation</i><i class="on">about</i><em>ASK THE MODEL →</em></span></div>
+
+<section class="wrap hero">
+  <div>
+    <div class="crumb">/ about</div>
+    <h1 class="h1">About the model</h1>
+    <div class="term">
+      <div><span class="p">$</span> hamza --version</div>
+      <div>hamza 4.0 <span class="c"># 4th year, Computer Science, INSA Lyon</span></div>
+      <div><span class="p">$</span> hamza --objective</div>
+      <div>make models need less energy and compute, <span class="c"># while staying useful</span></div>
+      <div><span class="p">$</span> hamza --deploy <span class="cursor"></span></div>
+    </div>
+  </div>
+  <img class="photo" src="../../../../public/images/about/hamza.webp" alt="Portrait of Hamza">
+</section>
+
+<section class="wrap notes">
+  <h2>Release notes</h2>
+
+  <div class="rel future">
+    <div class="meta"><div class="ver">v6</div><div class="date">after KTH · goal</div></div>
+    <div class="body"><h3>Research release</h3>
+      <ul><li><span class="tag">GOAL</span><span>PhD in machine learning, to work on models and their architecture. ETH Zurich and EPFL are today's options.</span></li></ul>
+    </div>
+  </div>
+
+  <div class="rel future">
+    <div class="meta"><div class="ver">v5</div><div class="date">2027 → 2028 · planned</div></div>
+    <div class="body"><h3>Fine-tuning on machine learning</h3>
+      <ul><li><span class="tag">PLANNED</span><span>Double degree at KTH, Stockholm, specialising in machine learning. Application in progress.</span></li></ul>
+    </div>
+  </div>
+
+  <div class="rel current">
+    <div class="meta"><div class="ver">v4</div><div class="date">2026 → 2027</div></div>
+    <div class="body"><h3>Current release <span class="chip">LATEST</span></h3>
+      <ul>
+        <li><span class="tag add">ADDED</span><span>Generative AI workflows and an evaluation pipeline, Delta Quest, Sapporo, summer 2026.</span></li>
+        <li><span class="tag add">ADDED</span><span>Client work with ETIC INSA Technologies for VINCI and Inddigo.</span></li>
+        <li><span class="tag add">ADDED</span><span>General Secretary of AEDI, the CS student association.</span></li>
+        <li><span class="tag add">ADDED</span><span>Propulseo laureate, mentored by Asys.</span></li>
+      </ul>
+      <details><summary>show learned ↓</summary>
+        <ul class="muted"><li><span class="tag">LEARNED</span><span>Delivering at the pace of sprints. Taking over an existing codebase quickly. Explaining technical choices in plain terms.</span></li></ul>
+      </details>
+    </div>
+  </div>
+
+  <div class="rel">
+    <div class="meta"><div class="ver">v3</div><div class="date">2025 → 2026</div></div>
+    <div class="body"><h3>Computer Science department</h3>
+      <ul><li><span class="tag">CHANGED</span><span>Moved into the CS department: algorithms, systems, networks, software engineering, artificial intelligence.</span></li></ul>
+    </div>
+  </div>
+
+  <div class="rel">
+    <div class="meta"><div class="ver">v1</div><div class="date">2023</div></div>
+    <div class="body"><h3>Initial release</h3>
+      <ul>
+        <li><span class="tag">INIT</span><span>INSA Lyon, International Asia Track: maths, physics, computer science and Japanese.</span></li>
+        <li><span class="tag">INIT</span><span>Georges Besse Foundation excellence scholarship.</span></li>
+        <li><span class="tag">INIT</span><span>Weekly tutoring in maths, physics and CS, until 2026.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="next">
+  <div class="wrap">
+    <code>$ hamza --deploy --team yours --from 2027-05</code>
+    <span class="btn">CONTACT →</span>
+  </div>
+</section>
+
+<p class="note">Proposal C · "Release notes". Your path as version history of a piece of software, newest on top. The current version is highlighted; future versions are dashed. Matches the "hamza-v4" name in the header.</p>
+</body>
+</html>
