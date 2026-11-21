@@ -16,7 +16,7 @@ Entries live in `content/knowledge-base/*.json` (schema: `content/schema/knowled
 
 Fields: `id`, `title`, `source` (file name shown to the visitor), `keywords`, `phrases`, `exampleQuestions`, `answer`, `links`, `related`, `priority`, `status`.
 
-Build step `scripts/build-knowledge-base.ts` bundles entries with `status: "verified"` into one JSON served from the same origin. In dev, `to_confirm` entries may be included for convenience, with a visible "unverified" tag. In production they are excluded, and the strict content gate fails if an entry needed by the evaluation set is unverified.
+At build time, `/ask` embeds the verified entries (internal fields removed, see `toRetrievalEntries` in `src/lib/content/views.ts`) as a JSON `<script type="application/json">` in the page. Answering therefore needs no request at all, not even to the same origin. Unverified entries are never embedded, in dev or in production (simpler than a dev-only "unverified" tag), and the evaluation set runs on verified entries only.
 
 ## Matching algorithm (`src/lib/retrieval`, pure functions)
 
@@ -25,7 +25,7 @@ Build step `scripts/build-knowledge-base.ts` bundles entries with `status: "veri
 3. **Light stemming**: strip a trailing plural `s` (but not `ss`), and `ing` where the stem is at least 4 letters. Apply the same function to entry keywords, so both sides match.
 4. **Score** each entry: `+2` per distinct keyword found among tokens, `+3` per `phrase` found as a contiguous token sequence. Ties are broken by higher `priority`, then by alphabetical `id` (determinism).
 5. **Threshold**: answer only if the best score is at least 2. A single weak keyword (score 1 is impossible by construction) never answers.
-6. **Result**: `{ entry, score }` or `null`. Optionally return the second-best entry if its score is at least 2 and it is a different topic, shown as a "Related" suggestion chip.
+6. **Result**: `{ entry, score }` or `null`. The second-best entry is shown as a "Related" chip only if its score is at least 2 **and** it is listed in the answer's `related` field (author-curated; this avoids noise such as "Skills" after a question that merely contains "technologies").
 7. **Ambiguity**: when the top two scores are equal, answer with the higher priority entry and show the other as "Did you mean…?" chip.
 
 Keep the algorithm simple; improve it only through the evaluation set below, and document any change here.
@@ -42,7 +42,7 @@ Show suggestion chips under it. No source line.
 
 - Opening message: "I answer only from the data Hamza provided. Pick a question or type your own."
 - Suggestion chips (from entries flagged `suggested: true`, at most 5): "What has Hamza built?", "What is he studying?", "Why machine learning?", "When is he available?", "How can I reach him?".
-- Typing and sending (Enter or button) appends the question, then the answer. A short artificial delay is not allowed (it would pretend work that does not happen).
+- Typing and sending (Enter or button) appends the question, then the answer. Typing effect (decision D12): the answer is retrieved at once, then a "searching knowledge_base" placeholder shows for 600 ms and the answer appears word by word, in 1.5 s at most (35 ms per word for short answers). The source, links and chips appear when the answer is complete. A new question completes the current answer at once; Reset cancels it. With `prefers-reduced-motion: reduce`, the answer appears at once. The page keeps saying that this is local retrieval, not an AI service.
 - Query parameter `/ask?q=…` asks the question on load (used by teasers and "ask about this" links). Sanitise: treat as text only, never as HTML.
 - Answers can include `links` rendered as buttons (for example "Contact page").
 - Input limit: 200 characters. Empty input does nothing.
@@ -50,7 +50,7 @@ Show suggestion chips under it. No source line.
 
 ## Accessibility
 
-- The message list is a labelled region with `aria-live="polite"`; each new answer is announced once.
+- The message list is a labelled region with `aria-live="polite"`; each new answer is announced once. The animated placeholder is `aria-hidden`; the complete answer replaces it, so screen readers never hear partial text.
 - Input has a visible `<label>`; Send is a real `<button type="submit">`; chips are real `<button>`s.
 - Focus returns to the input after sending. No focus trap. No auto-scrolling that fights the screen reader.
 - Contrast on the dark console meets AA (see `design-spec.md`).
@@ -62,7 +62,9 @@ Show suggestion chips under it. No source line.
 - Nothing from the conversation is stored or sent. The privacy page says so, and it must stay true.
 - Prompt-injection is not applicable (there is no language model), but a test includes such inputs to confirm they produce the fallback.
 
-## Evaluation set (`tests/chat/eval-set.json`, runs in CI)
+Stop words are removed before stemming (otherwise "his" would become "hi" and slip through). Suggestion chips ask the entry's first example question, which the evaluation set guarantees to resolve to that entry.
+
+## Evaluation set (`tests/chat/eval-set.json`, runs in CI through `npm run test`)
 
 Build it from entries' `exampleQuestions`, plus hand-written cases. Required groups:
 

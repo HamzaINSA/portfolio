@@ -1,0 +1,639 @@
+---
+import { en } from '../../i18n/en';
+import type { RetrievalEntry } from '../../lib/retrieval/match';
+import { MAX_QUESTION_LENGTH } from '../../lib/retrieval/match';
+
+interface Props {
+  entries: RetrievalEntry[];
+}
+const { entries } = Astro.props;
+const t = en.askPage;
+const suggestions = entries
+  .filter((e) => e.suggested)
+  .slice(0, 5)
+  .map((e) => e.suggestedLabel ?? e.title);
+const sources = [...new Set(entries.map((e) => e.source))].sort();
+// The knowledge base is embedded in the page: answering needs no network call at all.
+// "<" is escaped so that no content can close the script element.
+const strings = {
+  ...t,
+  // Formatted strings become templates: functions do not survive JSON.
+  source: t.source('{x}'),
+  didYouMean: t.didYouMean('{x}'),
+  related: t.related('{x}'),
+};
+const data = JSON.stringify({ entries, strings }).replace(/</g, '\\u003c');
+---
+
+<div class="ask-grid" data-chat hidden>
+  <section class="console on-ink" aria-label={t.consoleTitle}>
+    <div class="head">
+      <span class="title">{t.consoleTitle}</span>
+      <span class="meta">{t.consoleMeta}</span>
+      <button type="button" class="reset" data-reset>
+        {t.reset}
+      </button>
+    </div>
+    <div class="log" role="log" aria-label={t.logLabel} data-log-region>
+      <ol class="log-list" data-log>
+        <li class="msg msg--bot">
+          <p class="bubble">{t.opening}</p>
+        </li>
+      </ol>
+    </div>
+    <div class="chips" role="group" aria-label={t.suggestionsLabel}>
+      {suggestions.map((s) => (
+        <button type="button" class="chip" data-ask={s}>
+          {s}
+        </button>
+      ))}
+    </div>
+    <form class="bar" data-form>
+      <label for="ask-input" class="label">
+        {t.inputLabel}
+      </label>
+      <div class="row">
+        <input
+          id="ask-input"
+          name="q"
+          type="text"
+          autocomplete="off"
+          maxlength={MAX_QUESTION_LENGTH}
+          placeholder={t.placeholder}
+          data-input
+        />
+        <button type="submit" class="send">
+          {t.send}
+        </button>
+      </div>
+    </form>
+  </section>
+
+  <aside class="side">
+    <section class="panel" aria-labelledby="kb-title">
+      <h2 id="kb-title" class="panel-title">
+        {t.kbTitle}
+      </h2>
+      <ul class="files">
+        {sources.map((s) => (
+          <li class="file" data-file={s}>
+            <span>{s}</span>
+            <span class="used" data-used hidden>
+              {t.kbUsed}
+            </span>
+          </li>
+        ))}
+      </ul>
+    </section>
+    <section class="panel how" aria-labelledby="how-title">
+      <h2 id="how-title" class="how-title">
+        {t.howTitle}
+      </h2>
+      <p>{t.how}</p>
+    </section>
+  </aside>
+</div>
+
+<script type="application/json" id="chat-data" set:html={data} />
+<script>
+  import {
+    MAX_QUESTION_LENGTH,
+    retrieve,
+    type RetrievalEntry,
+  } from '../../lib/retrieval/match';
+  import type { en } from '../../i18n/en';
+
+  type Strings = Omit<
+    typeof en.askPage,
+    'source' | 'didYouMean' | 'related'
+  > & {
+    source: string;
+    didYouMean: string;
+    related: string;
+  };
+
+  const root = document.querySelector<HTMLElement>('[data-chat]');
+  const raw = document.getElementById('chat-data')?.textContent;
+  const log = root?.querySelector<HTMLOListElement>('[data-log]');
+  const form = root?.querySelector<HTMLFormElement>('[data-form]');
+  const input = root?.querySelector<HTMLInputElement>('[data-input]');
+  if (root && raw && log && form && input) {
+    const { entries, strings } = JSON.parse(raw) as {
+      entries: RetrievalEntry[];
+      strings: Strings;
+    };
+    const opening = log.innerHTML;
+    const fill = (template: string, value: string) =>
+      template.replace('{x}', value);
+
+    const el = <K extends keyof HTMLElementTagNameMap>(
+      tag: K,
+      className: string,
+      text?: string,
+    ) => {
+      const node = document.createElement(tag);
+      node.className = className;
+      if (text !== undefined) node.textContent = text;
+      return node;
+    };
+
+    // Only same-site paths and https links from the knowledge base are rendered as links.
+    const safeHref = (href: string) =>
+      href.startsWith('/') ||
+      href.startsWith('https://') ||
+      href.startsWith('mailto:')
+        ? href
+        : null;
+
+    const highlight = (file: string | null) => {
+      for (const item of root.querySelectorAll<HTMLElement>('[data-file]')) {
+        const used = item.dataset.file === file;
+        item.classList.toggle('file--used', used);
+        const mark = item.querySelector<HTMLElement>('[data-used]');
+        if (mark) mark.hidden = !used;
+      }
+    };
+
+    const chipFor = (label: string, question: string) => {
+      const chip = el('button', 'chip', label);
+      chip.type = 'button';
+      chip.dataset.ask = question;
+      return chip;
+    };
+
+    const scrollDown = () => {
+      const region = log.parentElement;
+      if (region) region.scrollTop = region.scrollHeight;
+    };
+
+    // The full answer item: what screen readers hear and what stays in the log.
+    const answerItem = (result: ReturnType<typeof retrieve>) => {
+      const bot = el('li', 'msg msg--bot');
+      bot.append(el('span', 'visually-hidden', `${strings.model}: `));
+      if (result) {
+        bot.append(el('p', 'bubble', result.entry.answer));
+        bot.append(
+          el('p', 'source', fill(strings.source, result.entry.source)),
+        );
+        const links = result.entry.links
+          .map((l) => ({ label: l.label, href: safeHref(l.href) }))
+          .filter((l): l is { label: string; href: string } => l.href !== null);
+        const extra = result.ambiguous
+          ? chipFor(
+              fill(strings.didYouMean, result.ambiguous.title),
+              result.ambiguous.exampleQuestions[0] ?? result.ambiguous.title,
+            )
+          : result.related
+            ? chipFor(
+                fill(strings.related, result.related.title),
+                result.related.exampleQuestions[0] ?? result.related.title,
+              )
+            : null;
+        if (links.length > 0 || extra) {
+          const actions = el('div', 'actions');
+          for (const l of links) {
+            const a = el('a', 'link', `${l.label} →`);
+            a.href = l.href;
+            actions.append(a);
+          }
+          if (extra) actions.append(extra);
+          bot.append(actions);
+        }
+      } else {
+        const p = el('p', 'bubble', `${strings.fallback} `);
+        const a = el('a', 'inline-link', strings.contactLink.label);
+        a.href = strings.contactLink.href;
+        p.append(a);
+        bot.append(p);
+      }
+      return bot;
+    };
+
+    // Typing effect. The answer is retrieved instantly; it is only revealed over time.
+    // The animated placeholder is hidden from assistive technology, and the complete
+    // answer item replaces it at the end, so the live log announces it once, in full.
+    const SEARCH_MS = 600;
+    const STREAM_MS = 1500; // the whole answer appears within this time
+    const WORD_MS = 35;
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let pending: { finish: () => void; cancel: () => void } | null = null;
+
+    const reveal = (result: ReturnType<typeof retrieve>) => {
+      const final = answerItem(result);
+      const done = () => highlight(result ? result.entry.source : null);
+      if (reducedMotion.matches) {
+        done();
+        log.append(final);
+        scrollDown();
+        return;
+      }
+
+      const placeholder = el('li', 'msg msg--bot');
+      placeholder.setAttribute('aria-hidden', 'true');
+      const bubble = el('p', 'bubble thinking', strings.searching);
+      placeholder.append(bubble);
+      log.append(placeholder);
+      scrollDown();
+
+      const text = result ? result.entry.answer : strings.fallback;
+      const words = text.split(/(?<=\s)/);
+      const step = Math.min(WORD_MS, STREAM_MS / words.length);
+      let timer = 0;
+      let shown = 0;
+
+      const finish = () => {
+        window.clearTimeout(timer);
+        pending = null;
+        done();
+        placeholder.replaceWith(final);
+        scrollDown();
+      };
+      const cancel = () => {
+        window.clearTimeout(timer);
+        pending = null;
+      };
+      const tick = () => {
+        shown += 1;
+        bubble.textContent = words.slice(0, shown).join('');
+        scrollDown();
+        if (shown < words.length) timer = window.setTimeout(tick, step);
+        else finish();
+      };
+      timer = window.setTimeout(() => {
+        bubble.classList.remove('thinking');
+        bubble.classList.add('streaming');
+        done();
+        tick();
+      }, SEARCH_MS);
+      pending = { finish, cancel };
+    };
+
+    const ask = (raw: string) => {
+      const question = raw.trim().slice(0, MAX_QUESTION_LENGTH);
+      if (!question) return;
+      // A new question completes the previous answer at once.
+      pending?.finish();
+      const user = el('li', 'msg msg--user');
+      user.append(el('span', 'visually-hidden', `${strings.you}: `));
+      user.append(el('p', 'bubble', question));
+      log.append(user);
+      reveal(retrieve(question, entries));
+    };
+
+    root.addEventListener('click', (event) => {
+      const target = (event.target as HTMLElement).closest<HTMLElement>(
+        '[data-ask]',
+      );
+      if (target?.dataset.ask) {
+        ask(target.dataset.ask);
+        input.focus();
+      }
+      if ((event.target as HTMLElement).closest('[data-reset]')) {
+        pending?.cancel();
+        log.innerHTML = opening;
+        highlight(null);
+        input.value = '';
+        input.focus();
+      }
+    });
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      ask(input.value);
+      input.value = '';
+      input.focus();
+    });
+
+    // Reveal the console and hide the static FAQ (shown when JavaScript is off).
+    root.hidden = false;
+    for (const faq of document.querySelectorAll<HTMLElement>('[data-faq]'))
+      faq.hidden = true;
+
+    // /ask?q=… asks a question on load (teasers, "ask about this" links). Treated as text only.
+    const q = new URLSearchParams(window.location.search).get('q');
+    if (q) ask(q);
+  }
+</script>
+
+<style>
+  .ask-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(22.5rem, 100%), 1fr));
+    gap: var(--space-8);
+    align-items: start;
+  }
+
+  .console {
+    min-width: 0;
+    background: var(--color-ink);
+    color: var(--color-on-ink);
+    border: var(--border-thick);
+    box-shadow: var(--shadow-offset-small);
+  }
+
+  @media (min-width: 64em) {
+    .console {
+      grid-column: span 2;
+      box-shadow: var(--shadow-offset);
+    }
+  }
+
+  .head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2) var(--space-4);
+    padding: var(--space-3) var(--space-4);
+    border-bottom: 2px solid var(--color-ink-line);
+    font-size: var(--text-label);
+  }
+
+  .title {
+    font-weight: 700;
+    color: var(--color-accent);
+  }
+
+  .meta {
+    flex: 1;
+    color: var(--color-on-ink-muted);
+  }
+
+  .reset {
+    min-height: var(--target-min);
+    padding: 0 var(--space-3);
+    background: transparent;
+    color: var(--color-on-ink);
+    border: 2px solid var(--color-ink-line);
+    font: inherit;
+    font-size: var(--text-label-small);
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .reset:hover {
+    border-color: var(--color-on-ink);
+  }
+
+  .log {
+    height: min(25rem, 55vh);
+    padding: var(--space-5);
+    overflow-y: auto;
+  }
+
+  .log-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .log :global(.msg) {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    max-width: 86%;
+  }
+
+  .log :global(.msg--user) {
+    align-self: flex-end;
+  }
+
+  .log :global(.bubble) {
+    padding: var(--space-3) var(--space-4);
+    border: 2px solid var(--color-ink-line);
+    background: var(--color-ink-bubble);
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+  }
+
+  /* "searching knowledge_base..." with dots that cycle, then a block cursor while typing. */
+  .log :global(.thinking) {
+    color: var(--color-on-ink-muted);
+  }
+
+  .log :global(.thinking::after) {
+    display: inline-block;
+    width: 1.5em;
+    content: '';
+    animation: dots 1.2s steps(4, end) infinite;
+  }
+
+  .log :global(.streaming::after) {
+    display: inline-block;
+    width: 0.55em;
+    height: 1em;
+    margin-left: 0.1em;
+    vertical-align: text-bottom;
+    background: var(--color-accent);
+    content: '';
+    animation: blink 0.9s steps(2, start) infinite;
+  }
+
+  @keyframes dots {
+    0% {
+      content: '';
+    }
+    25% {
+      content: '.';
+    }
+    50% {
+      content: '..';
+    }
+    75% {
+      content: '...';
+    }
+  }
+
+  @keyframes blink {
+    to {
+      visibility: hidden;
+    }
+  }
+
+  .log :global(.msg--user .bubble) {
+    background: var(--color-accent);
+    color: var(--color-ink);
+    border-color: var(--color-accent);
+  }
+
+  .log :global(.source) {
+    font-size: var(--text-label-small);
+    color: var(--color-accent);
+  }
+
+  .log :global(.actions) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .log :global(.link),
+  .log :global(.inline-link) {
+    color: var(--color-accent);
+    font-weight: 700;
+  }
+
+  .log :global(.link) {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--target-min);
+    padding: 0 var(--space-3);
+    border: 2px solid var(--color-accent);
+    font-size: var(--text-label);
+    text-decoration: none;
+  }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    padding: 0 var(--space-5) var(--space-4);
+  }
+
+  .console :global(.chip) {
+    min-height: var(--target-min);
+    padding: var(--space-2) var(--space-3);
+    background: transparent;
+    color: var(--color-accent);
+    border: 2px solid var(--color-accent);
+    font: inherit;
+    font-size: var(--text-label);
+    font-weight: 500;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .console :global(.chip:hover) {
+    background: var(--color-accent);
+    color: var(--color-ink);
+  }
+
+  .bar {
+    border-top: 2px solid var(--color-ink-line);
+  }
+
+  .label {
+    display: block;
+    padding: var(--space-2) var(--space-5) 0;
+    font-size: var(--text-label-small);
+    color: var(--color-on-ink-muted);
+  }
+
+  .row {
+    display: flex;
+  }
+
+  .row input {
+    flex: 1;
+    min-width: 0;
+    min-height: 3.5rem;
+    padding: 0 var(--space-5);
+    background: var(--color-ink);
+    color: var(--color-on-ink);
+    border: 0;
+    font: inherit;
+    font-size: 0.9375rem;
+  }
+
+  /* Keep the focus ring inside the console frame. */
+  .row input:focus-visible,
+  .send:focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: -3px;
+  }
+
+  .row input::placeholder {
+    color: var(--color-on-ink-muted);
+  }
+
+  .send {
+    min-height: 3.5rem;
+    padding: 0 var(--space-6);
+    background: var(--color-accent);
+    color: var(--color-ink);
+    border: 0;
+    font: inherit;
+    font-size: 0.9375rem;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .side {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    min-width: 0;
+  }
+
+  .panel {
+    background: var(--color-surface);
+    border: var(--border-thick);
+  }
+
+  .panel-title {
+    padding: var(--space-3) var(--space-4);
+    background: var(--color-ink);
+    color: var(--color-on-ink);
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+    font-weight: 700;
+    letter-spacing: normal;
+  }
+
+  .files {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    margin: 0;
+    padding: var(--space-4);
+    list-style: none;
+    font-size: 0.875rem;
+  }
+
+  .file {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-3);
+    border: var(--border-thin);
+  }
+
+  .file--used {
+    background: var(--color-accent);
+    font-weight: 700;
+  }
+
+  .how {
+    padding: var(--space-4);
+    font-size: 0.875rem;
+    line-height: 1.7;
+  }
+
+  .how-title {
+    margin-bottom: var(--space-2);
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: normal;
+  }
+
+  /* Phone: suggestions scroll sideways in one row, as in MobileChat. */
+  @media (max-width: 47.99em) {
+    .chips {
+      flex-wrap: nowrap;
+      overflow-x: auto;
+    }
+
+    .console :global(.chip) {
+      flex: none;
+    }
+
+    .meta {
+      flex-basis: 100%;
+      order: 3;
+    }
+  }
+</style>

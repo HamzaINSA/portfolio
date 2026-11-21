@@ -134,6 +134,37 @@ export const en = {
       },
     },
   },
+  askPage: {
+    title: 'Ask the model',
+    intro:
+      'A small search engine over the data Hamza wrote. It runs in your browser, uses no AI service and sends nothing anywhere.',
+    consoleTitle: 'inference_console',
+    consoleMeta: 'retrieval over knowledge_base · local',
+    opening:
+      'I answer only from the data Hamza provided. Pick a question or type your own.',
+    logLabel: 'Conversation',
+    suggestionsLabel: 'Suggested questions',
+    inputLabel: 'Your question (200 characters max)',
+    placeholder: 'Ask about studies, projects, availability…',
+    send: 'SEND ↵',
+    reset: 'RESET',
+    you: 'You',
+    model: 'Model',
+    searching: 'searching knowledge_base',
+    source: (file: string) => `source: ${file}`,
+    fallback:
+      "I don't have that in my data, so I won't guess. You can ask Hamza directly:",
+    contactLink: { label: 'Contact page', href: '/about#contact' },
+    didYouMean: (title: string) => `Did you mean: ${title}?`,
+    related: (title: string) => `Related: ${title}`,
+    kbTitle: 'KNOWLEDGE BASE',
+    kbUsed: '← used',
+    howTitle: 'HOW IT WORKS',
+    how: 'Your question is split into words, matched against keywords in each file, and the best match is returned as written. If nothing matches, the model says so instead of guessing.',
+    faqTitle: 'Everything the model knows',
+    faqIntro:
+      'JavaScript is off, so the console is not available. Here is the whole knowledge base, as written by Hamza.',
+  },
   cta: {
     title: 'Ready for your next training run.',
     contact: 'CONTACT →',
