@@ -17,7 +17,7 @@ Check the current stable versions when you scaffold and pin them. Do not rely on
 
 ```
 .github/
-  workflows/ci.yml                 typecheck, lint, test, check:content, build, e2e
+  workflows/ci.yml                 typecheck, lint, test, check:content, build, e2e, Lighthouse; cross-browser e2e
   PULL_REQUEST_TEMPLATE.md         (already present)
 content/                           data, schemas, knowledge base (see content/README.md)
 docs/                              specs (this folder)
@@ -102,5 +102,5 @@ Pages are rendered at build time. The only runtime data is the knowledge-base bu
 
 **Git and CI**
 - `main` is always deployable. Work on branches, merge through PRs. Use Conventional Commits (`feat:`, `fix:`, `docs:`, `chore:`, `test:`, `refactor:`).
-- CI runs on every PR: install, typecheck, lint, unit tests, `check:content` (non-strict on PRs, strict on `main`), build, e2e.
+- CI runs on every PR: install, typecheck, lint, unit tests, `check:content` (non-strict on PRs, strict on `main`), build, e2e, then Lighthouse (`lighthouserc.cjs`: performance ≥ 0.9, accessibility 1, best practices and SEO ≥ 0.95; reports kept as a CI artifact, never uploaded to a public server). A second job runs the e2e suite at desktop width in Firefox and Safari (WebKit).
 - Never commit generated build output, `.env` files or anything from `private/`.
