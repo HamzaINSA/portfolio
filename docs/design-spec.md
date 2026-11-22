@@ -47,7 +47,7 @@ Shape and layout
 
 ## Screens (see `design/README.md` for the file map)
 
-1. **Home**: nav; hero left (status chips, big `hamza` + lime `v4` chip, intro, two CTAs) and console teaser right; model-details table (version, architecture, intended use) with "FULL CARD →"; ink section "Training run" with curve and four checkpoint columns; "Evaluation" with three cards; lime closing strip.
+1. **Home**: nav; hero left (status chips, big `hamza` + lime `v4` chip, intro, two CTAs) and console teaser right; logo strip "worked with & backed by" (decision D14, mockup `docs/design/mockups/home-options/logos.html`, option A in colour); model-details table (version, architecture, intended use) with "FULL CARD →"; ink section "Training run" with a curve that draws itself, checkpoint buttons and one checkpoint card (D14, `home-options/curve.html`, option A); "Evaluation" with three cards; lime closing strip.
 2. **Ask the model**: title with lime cursor `_`; two columns: console window (header `inference_console` + "retrieval over knowledge_base · local"; message area 400 px high, scrolling; chips; input bar with lime SEND button) and side panel (knowledge-base file list with the used file highlighted in lime, and a "HOW IT WORKS" box).
 3. **Training**: title, short intro, ink section with the curve, then one bordered row per checkpoint (left cell lime for the first and grey for the others with period and title; right cells "what I did", "what I learned", "stack" + "ask about this →"), final ink row for current education, lime closing strip.
 4. **Evaluation**: title, filter buttons (active = lime), grid of project cards (tag chip, year, small client logo next to the title (Hamza, 2026-11-21), title, summary, stack, "open case study →"), closing strip.
