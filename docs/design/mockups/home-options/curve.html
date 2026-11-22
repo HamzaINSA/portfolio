@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Home · training curve options</title>
+<link rel="stylesheet" href="../about-options/shared.css">
+<style>
+  .opt { padding-block: 40px 16px; }
+  .opt-title { font-family: var(--display); font-size: 28px; margin-bottom: 6px; }
+  .opt-note { font-size: 13px; color: var(--muted); max-width: 780px; line-height: 1.6; }
+  .ink { background: var(--ink); color: var(--on-ink); padding-block: 48px; }
+  .head { display: flex; justify-content: space-between; align-items: end; gap: 16px; flex-wrap: wrap; margin-bottom: 20px; }
+  .head h2 { font-size: clamp(36px, 1.2rem + 3vw, 56px); letter-spacing: -0.03em; }
+  .head a { color: var(--lime); font-weight: 700; }
+  .schematic { font-size: 11px; color: var(--on-ink-muted); margin-top: 6px; }
+  svg { width: 100%; height: auto; display: block; overflow: visible; }
+  .path { fill: none; stroke: var(--lime); stroke-width: 4; }
+  .ghost { fill: none; stroke: var(--ink-line); stroke-width: 4; stroke-dasharray: 10 10; }
+  .dot { fill: var(--ink); stroke: var(--lime); stroke-width: 4; cursor: pointer; }
+  .dot.on { fill: var(--lime); }
+  .dot:focus-visible { outline: none; stroke: var(--white); stroke-width: 6; }
+  button { font: inherit; }
+  .btn { font-size: 12px; font-weight: 700; padding: 10px 14px; min-height: 44px; background: transparent; color: var(--lime); border: 2px solid var(--lime); cursor: pointer; }
+
+  /* A: draw-in + selectable checkpoints */
+  .a-layout { display: grid; grid-template-columns: 1fr 340px; gap: 32px; align-items: start; }
+  .card { border: 2px solid var(--lime); padding: 20px; min-height: 220px; }
+  .card .k { font-size: 12px; color: var(--lime); }
+  .card h3 { font-size: 24px; margin: 8px 0 4px; letter-spacing: -0.02em; }
+  .card .org { font-size: 13px; color: var(--on-ink-muted); }
+  .card ul { margin: 16px 0 0; padding: 0; list-style: none; font-size: 13px; line-height: 1.6; display: grid; gap: 6px; }
+  .card li::before { content: '+ '; color: var(--lime); }
+  .chips { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px; }
+  .chip-btn { font-size: 12px; padding: 8px 12px; min-height: 44px; background: transparent; color: var(--on-ink); border: 2px solid var(--ink-line); cursor: pointer; }
+  .chip-btn[aria-pressed="true"] { background: var(--lime); color: var(--ink); border-color: var(--lime); font-weight: 700; }
+  #a-path { stroke-dasharray: var(--len); stroke-dashoffset: var(--len); }
+  #a-path.drawn { transition: stroke-dashoffset 1.6s ease-out; stroke-dashoffset: 0; }
+  .here { font-size: 11px; font-weight: 700; fill: var(--ink); }
+
+  /* B: scrubber */
+  .b-top { display: grid; grid-template-columns: 1fr auto; gap: 16px; align-items: center; margin-bottom: 12px; }
+  .epoch { font-size: 14px; }
+  .epoch b { color: var(--lime); }
+  .range { width: 100%; accent-color: var(--lime); margin-top: 16px; height: 32px; }
+  .b-panel { margin-top: 16px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .b-panel > div { border-top: 2px solid var(--ink-line); padding-top: 12px; opacity: 0.35; transition: opacity .2s; }
+  .b-panel > div.reached { opacity: 1; border-top-color: var(--lime); }
+  .b-panel .k { font-size: 12px; color: var(--lime); }
+  .b-panel h3 { font-size: 20px; margin: 6px 0; }
+  .b-panel p { font-size: 12px; color: var(--on-ink-muted); line-height: 1.6; }
+
+  /* C: training log */
+  .c-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start; }
+  .log { background: #050505; border: 2px solid var(--ink-line); padding: 16px 18px; font-size: 13px; line-height: 1.8; min-height: 300px; }
+  .log .p { color: var(--lime); }
+  .log .m { color: var(--on-ink-muted); }
+  .log .ok { color: var(--lime); font-weight: 700; }
+  .cursor { display: inline-block; width: 8px; height: 15px; background: var(--lime); vertical-align: text-bottom; animation: blink 1s steps(2, start) infinite; }
+  @keyframes blink { to { visibility: hidden; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    #a-path, #a-path.drawn { transition: none; stroke-dashoffset: 0; }
+    .cursor { animation: none; }
+  }
+  @media (max-width: 860px) {
+    .a-layout, .c-layout { grid-template-columns: 1fr; }
+    .b-panel { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="nav"><b>HAMZA-V4</b><span><i class="on">home</i><i>training</i><i>evaluation</i><i>about</i><em>ASK THE MODEL →</em></span></div>
+
+<!-- ============ A ============ -->
+<section class="wrap opt">
+  <h2 class="opt-title">A · The curve draws itself, each checkpoint opens</h2>
+  <p class="opt-note">When the section scrolls into view, the curve draws from left to right. Each dot is a button: click it (or use the buttons under the curve, keyboard-friendly) and the card shows the role, the place and what I learned there, from content/. The "now" dot is selected by default.</p>
+</section>
+<section class="ink">
+  <div class="wrap">
+    <div class="head"><h2>Training run</h2><a href="#">all checkpoints →</a></div>
+    <div class="a-layout">
+      <div>
+        <svg viewBox="0 0 1280 210" aria-hidden="true">
+          <path id="a-path" class="path" d="M10 10 C 220 55, 430 125, 640 145 C 850 165, 1060 183, 1270 190"/>
+          <circle class="dot" data-i="0" cx="10" cy="10" r="12"/>
+          <circle class="dot" data-i="1" cx="640" cy="145" r="12"/>
+          <circle class="dot on" data-i="2" cx="1270" cy="190" r="12"/>
+        </svg>
+        <p class="schematic">Schematic of my path, not real metrics.</p>
+        <div class="chips" role="group" aria-label="Checkpoints">
+          <button class="chip-btn" data-i="0" aria-pressed="false">01 · ETIC</button>
+          <button class="chip-btn" data-i="1" aria-pressed="false">02 · Delta Quest</button>
+          <button class="chip-btn" data-i="2" aria-pressed="true">03 · now</button>
+        </div>
+      </div>
+      <div class="card" aria-live="polite" id="a-card"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ B ============ -->
+<section class="wrap opt">
+  <h2 class="opt-title">B · Scrub the training run</h2>
+  <p class="opt-note">A slider under the curve, like scrubbing a video. Drag it (or use the arrow keys) and a marker travels along the curve; each checkpoint lights up when you pass it. PLAY runs it on its own. Very "ML dashboard", playful, still honest: no numbers on the axis.</p>
+</section>
+<section class="ink">
+  <div class="wrap">
+    <div class="head"><h2>Training run</h2><a href="#">all checkpoints →</a></div>
+    <div class="b-top">
+      <p class="epoch" id="b-epoch">checkpoint <b>0 / 3</b> · drag to train</p>
+      <button class="btn" id="b-play" type="button">▶ PLAY</button>
+    </div>
+    <svg viewBox="0 0 1280 210" aria-hidden="true">
+      <path class="ghost" d="M10 10 C 220 55, 430 125, 640 145 C 850 165, 1060 183, 1270 190"/>
+      <path id="b-path" class="path" d="M10 10 C 220 55, 430 125, 640 145 C 850 165, 1060 183, 1270 190"/>
+      <circle class="dot" cx="10" cy="10" r="10"/>
+      <circle class="dot" cx="640" cy="145" r="10"/>
+      <circle class="dot" cx="1270" cy="190" r="10"/>
+      <circle id="b-marker" r="16" fill="var(--lime)" cx="10" cy="10"/>
+    </svg>
+    <input class="range" id="b-range" type="range" min="0" max="100" value="0" aria-label="Training progress">
+    <p class="schematic">Schematic of my path, not real metrics.</p>
+    <div class="b-panel">
+      <div data-at="0"><p class="k">checkpoint 1 · May 2026 →</p><h3>ETIC INSA Technologies</h3><p>Developer and Technical Consultant. Learned: explaining technical choices in plain terms.</p></div>
+      <div data-at="50"><p class="k">checkpoint 2 · Jun → Sep 2026</p><h3>Delta Quest, Sapporo</h3><p>Developer (internship). Learned: delivering at the pace of sprints.</p></div>
+      <div data-at="100"><p class="k">checkpoint 3 · now</p><h3>INSA Lyon, 4th year</h3><p>Next run: AI / LLM engineering internship, from May 2027.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ C ============ -->
+<section class="wrap opt">
+  <h2 class="opt-title">C · Training log next to the curve</h2>
+  <p class="opt-note">A console prints the run line by line when the section appears, and the matching dot lights up on the curve at the same time. Same mood as the chatbot console. REPLAY restarts it. With reduced motion, the full log is shown at once.</p>
+</section>
+<section class="ink">
+  <div class="wrap">
+    <div class="head"><h2>Training run</h2><a href="#">all checkpoints →</a></div>
+    <div class="c-layout">
+      <div>
+        <svg viewBox="0 0 640 260" aria-hidden="true">
+          <path class="path" d="M10 10 C 110 70, 215 160, 320 185 C 425 210, 530 235, 630 245"/>
+          <circle class="dot" id="c0" cx="10" cy="10" r="10"/>
+          <circle class="dot" id="c1" cx="320" cy="185" r="10"/>
+          <circle class="dot" id="c2" cx="630" cy="245" r="10"/>
+        </svg>
+        <p class="schematic">Schematic of my path, not real metrics.</p>
+      </div>
+      <div>
+        <div class="log" id="c-log" aria-live="off"></div>
+        <p style="margin-top:12px"><button class="btn" id="c-replay" type="button">↻ REPLAY</button></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<p class="note">Home "Training run" · three proposals to make the curve useful. Texts come from content/experiences (titles, dates, "learned"). The curve stays a drawing: no fake numbers. Option A or B can also replace the static curve on the Training page.</p>
+
+<script>
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const data = [
+    { k: 'checkpoint 1 · May 2026 → now', t: 'Developer and Technical Consultant', o: 'ETIC INSA Technologies · Lyon', l: ['Explaining technical choices in plain terms to non-specialists.', 'Keeping deadlines under control.'] },
+    { k: 'checkpoint 2 · June → September 2026', t: 'Developer (Internship)', o: 'Delta Quest · Sapporo, Japan', l: ['Delivering at the pace of sprints.', 'Taking over an existing codebase quickly.'] },
+    { k: 'checkpoint 3 · now', t: 'INSA Lyon, 4th year', o: 'Computer Science department', l: ['Next run: AI / LLM engineering internship, from May 2027.'] },
+  ];
+
+  // A
+  const aPath = document.getElementById('a-path');
+  aPath.style.setProperty('--len', aPath.getTotalLength());
+  new IntersectionObserver((e, obs) => { if (e[0].isIntersecting) { aPath.classList.add('drawn'); obs.disconnect(); } }, { threshold: 0.4 }).observe(aPath);
+  const select = (i) => {
+    const d = data[i];
+    document.getElementById('a-card').innerHTML = `<p class="k">${d.k}</p><h3>${d.t}</h3><p class="org">${d.o}</p><ul>${d.l.map((x) => `<li>${x}</li>`).join('')}</ul>`;
+    document.querySelectorAll('.a-layout .dot').forEach((c) => c.classList.toggle('on', +c.dataset.i === i));
+    document.querySelectorAll('.chip-btn').forEach((b) => b.setAttribute('aria-pressed', +b.dataset.i === i));
+  };
+  document.querySelectorAll('.a-layout .dot, .chip-btn').forEach((el) => el.addEventListener('click', () => select(+el.dataset.i)));
+  select(2);
+
+  // B
+  const bPath = document.getElementById('b-path'), len = bPath.getTotalLength();
+  const range = document.getElementById('b-range'), marker = document.getElementById('b-marker');
+  bPath.style.strokeDasharray = len;
+  const update = () => {
+    const v = +range.value, p = bPath.getPointAtLength((len * v) / 100);
+    marker.setAttribute('cx', p.x); marker.setAttribute('cy', p.y);
+    bPath.style.strokeDashoffset = len - (len * v) / 100;
+    let reached = 0;
+    document.querySelectorAll('.b-panel > div').forEach((d) => { const ok = v >= +d.dataset.at; d.classList.toggle('reached', ok); if (ok) reached++; });
+    document.getElementById('b-epoch').innerHTML = `checkpoint <b>${reached} / 3</b> · ${v >= 100 ? 'now' : 'drag to train'}`;
+  };
+  range.addEventListener('input', update); update();
+  let timer = null;
+  document.getElementById('b-play').addEventListener('click', (e) => {
+    if (timer) { clearInterval(timer); timer = null; e.target.textContent = '▶ PLAY'; return; }
+    if (+range.value >= 100) range.value = 0;
+    e.target.textContent = '❚❚ PAUSE';
+    timer = setInterval(() => { range.value = +range.value + 1; update(); if (+range.value >= 100) { clearInterval(timer); timer = null; e.target.textContent = '▶ PLAY'; } }, reduced ? 0 : 30);
+  });
+
+  // C
+  const lines = [
+    ['<span class="p">$</span> hamza --train --resume', null],
+    ['<span class="m">loading checkpoint 1 · ETIC INSA Technologies</span>', 0],
+    ['  role: Developer and Technical Consultant', null],
+    ['  + explaining technical choices in plain terms', null],
+    ['<span class="m">loading checkpoint 2 · Delta Quest, Sapporo</span>', 1],
+    ['  role: Developer (Internship), Jun → Sep 2026', null],
+    ['  + delivering at the pace of sprints', null],
+    ['<span class="m">checkpoint 3 · INSA Lyon, 4th year</span>', 2],
+    ['<span class="ok">status: ready for next run · from May 2027</span>', null],
+  ];
+  const log = document.getElementById('c-log');
+  const run = () => {
+    log.innerHTML = '';
+    document.querySelectorAll('.c-layout .dot').forEach((d) => d.classList.remove('on'));
+    lines.forEach(([html, dot], i) => setTimeout(() => {
+      log.insertAdjacentHTML('beforeend', `<div>${html}</div>`);
+      if (dot !== null) document.getElementById('c' + dot).classList.add('on');
+      if (i === lines.length - 1) log.insertAdjacentHTML('beforeend', '<span class="cursor"></span>');
+    }, reduced ? 0 : i * 450));
+  };
+  new IntersectionObserver((e, obs) => { if (e[0].isIntersecting) { run(); obs.disconnect(); } }, { threshold: 0.4 }).observe(log);
+  document.getElementById('c-replay').addEventListener('click', run);
+</script>
+</body>
+</html>
