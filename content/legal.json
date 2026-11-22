@@ -40,9 +40,9 @@
       ]
     }
   ],
-  "status": "to_confirm",
+  "status": "verified",
   "openQuestions": [
-    "Draft written by the coding assistant on 2026-11-21 (decision O7, option A: one English page). Hamza validates the text, then status becomes verified. The assistant is not a lawyer.",
+    "Draft written by the coding assistant on 2026-11-21 (decision O7, option A: one English page). Text validated by Hamza on 2026-11-22. The assistant is not a lawyer.",
     "hosting stays null until the host is chosen (decision O1, M7): name, address and phone of the host are required by French law (LCEN). A production build (SITE_URL set) fails while it is null.",
     "Check that every logo shown may be used (VINCI, Inddigo, J'ai PiGé)."
   ]
