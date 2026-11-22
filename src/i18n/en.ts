@@ -37,6 +37,11 @@ export const en = {
     intro: '> I answer only from the data Hamza provided. Try one:',
     inputPlaceholder: 'type a question…',
   },
+  partners: {
+    title: 'worked with & backed by',
+    pause: 'PAUSE',
+    play: 'PLAY',
+  },
   modelDetails: {
     title: 'MODEL DETAILS',
     version: 'version',
@@ -50,6 +55,9 @@ export const en = {
     curveLabel: 'Schematic of my path, not real metrics',
     checkpoint: 'checkpoint',
     now: 'now',
+    pick: 'Choose a checkpoint',
+    learned: 'learned',
+    next: (role: string, month: string) => `Next run: ${role}, from ${month}.`,
   },
   evaluation: { title: 'Evaluation', all: 'all projects →' },
   trainingPage: {

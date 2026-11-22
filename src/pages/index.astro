@@ -3,6 +3,7 @@ import { homeDescription, personJsonLd } from '../lib/seo/meta';
 import ConsoleTeaser from '../components/sections/ConsoleTeaser.astro';
 import EvaluationPreview from '../components/sections/EvaluationPreview.astro';
 import Hero from '../components/sections/Hero.astro';
+import LogoStrip from '../components/sections/LogoStrip.astro';
 import ModelDetails from '../components/sections/ModelDetails.astro';
 import TrainingPreview from '../components/sections/TrainingPreview.astro';
 import Container from '../components/layout/Container.astro';
@@ -12,6 +13,7 @@ import {
   getEducation,
   getExperiences,
   getKnowledgeBase,
+  getPartners,
   getProfile,
   getProjects,
 } from '../lib/content';
@@ -22,17 +24,20 @@ import {
   featuredProjects,
 } from '../lib/content/select';
 import { formatMonth } from '../lib/format/dates';
-import { bioParagraphs } from '../lib/content/views';
+import { isPublishable } from '../lib/content/gate';
+import { bioParagraphs, toCheckpointView } from '../lib/content/views';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-const [profile, education, experiences, projects, knowledgeBase] =
+const [profile, education, experiences, projects, knowledgeBase, partnersFile] =
   await Promise.all([
     getProfile(),
     getEducation(),
     getExperiences(),
     getProjects(),
     getKnowledgeBase(),
+    getPartners(),
   ]);
+const partners = isPublishable(partnersFile) ? partnersFile.partners : [];
 
 const firstName = (profile.name.split(' ')[0] ?? profile.name).toLowerCase();
 // "4th year" -> "4th-year" so that it reads as an adjective in the intro.
@@ -46,10 +51,7 @@ const suggestions = entriesById(knowledgeBase, teaserSuggestionIds).map(
   }),
 );
 
-const steps = checkpoints(experiences).map((e) => ({
-  title: e.title,
-  organization: e.organization.displayName ?? e.organization.name,
-}));
+const steps = checkpoints(experiences).map(toCheckpointView);
 const education_ = currentEducation(education);
 const now = `${profile.school}, ${profile.yearLabel}`;
 
@@ -75,6 +77,8 @@ const cards = featuredProjects(projects).map((p) => ({
     <ConsoleTeaser suggestions={suggestions} />
   </Container>
 
+  {partners.length > 0 && <LogoStrip partners={partners} />}
+
   <ModelDetails
     version={`${profile.modelVersion}, ${profile.school} ${profile.yearLabel}`}
     architecture={education_?.program ?? null}
@@ -83,7 +87,15 @@ const cards = featuredProjects(projects).map((p) => ({
     aboutHref="/about"
   />
 
-  <TrainingPreview checkpoints={steps} now={now} trainingHref="/training" />
+  <TrainingPreview
+    checkpoints={steps}
+    now={now}
+    next={en.training.next(
+      profile.seeking.role,
+      formatMonth(profile.seeking.start),
+    )}
+    trainingHref="/training"
+  />
 
   {cards.length > 0 && (
     <EvaluationPreview projects={cards} allHref="/projects" />

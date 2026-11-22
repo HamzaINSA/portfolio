@@ -1,0 +1,189 @@
+---
+import { en } from '../../i18n/en';
+import type { Partner } from '../../lib/content/types';
+import Container from '../layout/Container.astro';
+
+interface Props {
+  partners: Partner[];
+}
+const { partners } = Astro.props;
+const t = en.partners;
+// Square marks look smaller than wide wordmarks at the same height: they get a little more.
+const isSquare = (p: Partner) => p.logo.width / p.logo.height < 1.5;
+---
+
+<section class="partners" aria-labelledby="partners-title" data-partners>
+  <Container class="partners-inner">
+    <h2 id="partners-title" class="label">
+      {t.title}
+    </h2>
+    <div class="marquee">
+      <div class="track">
+        <ul class="group">
+          {partners.map((p) => (
+            <li>
+              <img
+                class:list={{ square: isSquare(p) }}
+                src={p.logo.src}
+                alt={p.name}
+                width={p.logo.width}
+                height={p.logo.height}
+                loading="lazy"
+                decoding="async"
+              />
+            </li>
+          ))}
+        </ul>
+        {/* Second copy so the loop has no gap; hidden from assistive technologies. */}
+        <ul class="group copy" aria-hidden="true">
+          {partners.map((p) => (
+            <li>
+              <img
+                class:list={{ square: isSquare(p) }}
+                src={p.logo.src}
+                alt=""
+                width={p.logo.width}
+                height={p.logo.height}
+                loading="lazy"
+                decoding="async"
+              />
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+    <button class="pause" type="button" aria-pressed="false" hidden>
+      {t.pause}
+    </button>
+  </Container>
+</section>
+
+<script>
+  // Moving content must be pausable (WCAG 2.2.2). The strip moves only with JavaScript (so the button
+  // works) and when the visitor has not asked for reduced motion; otherwise it is a still, wrapped list.
+  import { en } from '../../i18n/en';
+
+  for (const strip of document.querySelectorAll<HTMLElement>(
+    '[data-partners]',
+  )) {
+    const button = strip.querySelector<HTMLButtonElement>('.pause');
+    if (
+      !button ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    )
+      continue;
+    strip.classList.add('is-moving');
+    button.hidden = false;
+    button.addEventListener('click', () => {
+      const paused = strip.classList.toggle('is-paused');
+      button.setAttribute('aria-pressed', String(paused));
+      button.textContent = paused ? en.partners.play : en.partners.pause;
+    });
+  }
+</script>
+
+<style>
+  .partners {
+    border-block: var(--border-thick);
+  }
+
+  .partners :global(.partners-inner) {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
+    align-items: center;
+    padding-block: var(--space-4);
+  }
+
+  .label {
+    font-family: var(--font-mono);
+    font-size: var(--text-label-small);
+    font-weight: 700;
+    letter-spacing: normal;
+  }
+
+  .marquee {
+    overflow: hidden;
+  }
+
+  .track {
+    display: flex;
+  }
+
+  .group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-4) var(--space-10);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .copy {
+    display: none;
+  }
+
+  img {
+    display: block;
+    width: auto;
+    max-width: 11rem;
+    height: 2.5rem;
+    object-fit: contain;
+  }
+
+  img.square {
+    height: 3rem;
+  }
+
+  .pause {
+    justify-self: start;
+    min-height: var(--target-min);
+    padding-inline: var(--space-4);
+    background: transparent;
+    color: var(--color-ink);
+    border: var(--border-thin);
+    font: inherit;
+    font-size: var(--text-label-small);
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .pause:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: 2px;
+  }
+
+  /* Moving: one line, two copies, shifted by exactly one copy for a seamless loop. */
+  .is-moving .track {
+    width: max-content;
+    animation: partners-scroll 45s linear infinite;
+  }
+
+  .is-moving .group {
+    flex-wrap: nowrap;
+    padding-right: var(--space-10);
+  }
+
+  .is-moving .copy {
+    display: flex;
+  }
+
+  .is-moving .marquee:hover .track,
+  .is-moving.is-paused .track {
+    animation-play-state: paused;
+  }
+
+  @keyframes partners-scroll {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @media (min-width: 48em) {
+    .partners :global(.partners-inner) {
+      grid-template-columns: auto 1fr auto;
+      gap: var(--space-6);
+    }
+  }
+</style>
