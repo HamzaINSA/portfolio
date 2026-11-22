@@ -8,13 +8,14 @@ export default defineConfig({
   security: {
     // Content Security Policy as a <meta> tag on every page. Astro adds hashes of its inline scripts
     // and styles to script-src and style-src; everything else may only come from the site itself.
-    // connect-src 'none': the site, including the chatbot, never makes a network request (rule 3).
+    // connect-src 'self': no request may leave the site (rule 3). Not 'none': tools such as Lighthouse
+    // read robots.txt with a same-origin request from the page. The chatbot itself makes none (e2e test).
     csp: {
       directives: [
         "default-src 'self'",
         "img-src 'self'",
         "font-src 'self'",
-        "connect-src 'none'",
+        "connect-src 'self'",
         "object-src 'none'",
         "base-uri 'self'",
       ],

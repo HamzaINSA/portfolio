@@ -25,7 +25,7 @@ test.describe('Content Security Policy', () => {
       await page.goto(path);
       await expect(
         page.locator('meta[http-equiv="content-security-policy"]'),
-      ).toHaveAttribute('content', /connect-src 'none'/);
+      ).toHaveAttribute('content', /connect-src 'self'/);
       await page.mouse.wheel(0, 4000);
       await page.waitForLoadState('networkidle');
       const violations = await page.evaluate(
