@@ -10,6 +10,7 @@ module.exports = {
         'http://localhost/projects',
         'http://localhost/about',
         'http://localhost/ask',
+        'http://localhost/legal',
       ],
       // Median of 3 runs, to smooth out the noise of shared CI machines.
       numberOfRuns: 3,

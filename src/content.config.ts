@@ -7,6 +7,7 @@ import {
   knowledgeEntrySchema,
   profileSchema,
   projectSchema,
+  legalSchema,
   releasesSchema,
   skillsSchema,
 } from './lib/content/schemas';
@@ -26,6 +27,10 @@ export const collections = {
   releases: defineCollection({
     loader: file('content/releases.json', { parser: single }),
     schema: releasesSchema.extend({ id: z.string() }),
+  }),
+  legal: defineCollection({
+    loader: file('content/legal.json', { parser: single }),
+    schema: legalSchema.extend({ id: z.string() }),
   }),
   education: defineCollection({
     loader: file('content/education.json'),

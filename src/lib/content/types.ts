@@ -3,6 +3,7 @@ import type {
   educationItemSchema,
   experienceSchema,
   knowledgeEntrySchema,
+  legalSchema,
   profileSchema,
   projectSchema,
   releaseSchema,
@@ -18,3 +19,4 @@ export type EducationItem = z.infer<typeof educationItemSchema>;
 export type Skills = z.infer<typeof skillsSchema>;
 export type Releases = z.infer<typeof releasesSchema>;
 export type Release = z.infer<typeof releaseSchema>;
+export type Legal = z.infer<typeof legalSchema>;

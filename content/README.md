@@ -12,6 +12,7 @@ content/
   education.json            INSA Lyon items (the KTH plan is in experiences/)
   skills.json               skills grouped as on the CV
   releases.json             About page "release notes": the path as version history (restates verified facts)
+  legal.json                /legal page: privacy and legal text, host details (null until decision O1)
   experiences/              everything that makes up the "training run"
     README.md               how to add an experience, status policy, open questions checklist
     _template.json          copy this to add one

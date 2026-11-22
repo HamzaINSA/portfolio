@@ -21,6 +21,7 @@ export const en = {
   menu: { open: 'Open menu', close: 'Close menu', title: 'Menu' },
   footer: {
     rights: 'All rights reserved.',
+    legal: 'Legal & privacy',
     github: 'GitHub',
     linkedin: 'LinkedIn',
   },
@@ -194,6 +195,20 @@ export const en = {
     title: 'Ready for your next training run.',
     contact: 'CONTACT →',
     ask: 'ASK THE MODEL',
+  },
+  legalPage: {
+    title: 'Legal notice and privacy',
+    crumb: '/ legal',
+    description:
+      'Who publishes this site, who hosts it, and what happens to your data: nothing is collected.',
+    updated: (month: string) => `Last updated: ${month}`,
+    publisher: {
+      title: 'Publisher',
+      text: (name: string) =>
+        `This site is a personal, non-commercial website published by ${name}, who is also the director of publication.`,
+      contact: 'Contact',
+    },
+    host: { title: 'Host', phone: 'Phone' },
   },
   notFound: {
     title: 'Page not found',
