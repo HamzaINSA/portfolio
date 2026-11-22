@@ -31,6 +31,7 @@ Goal: stand out to tech recruiters. The site is built around a "model card" conc
 | How content is written and verified | `docs/content-guidelines.md` |
 | What to build, in which order | `docs/roadmap.md` |
 | Tasks where you must ask first | `docs/risky-tasks.md` |
+| Hosting and deployment (Cloudflare Pages) | `docs/deployment.md` |
 | First prompt to start with | `docs/kickoff-prompt.md` |
 | The content itself (single source of truth) | `content/` (start with `content/README.md`) |
 

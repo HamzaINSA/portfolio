@@ -25,7 +25,7 @@ Hamza delegates technical choices to the coding assistant. The decisions below a
 
 | ID | Question | Recommendation |
 |---|---|---|
-| O1 | Deployment target and custom domain (Vercel, Cloudflare Pages, GitHub Pages) | Decide at milestone M7. Preview deployments per PR are a plus. Needs an account and DNS: ask |
+| O1 | Deployment target and custom domain | **Hosting decided** (Hamza, 2026-11-22): Cloudflare Pages, preview deployment per PR, see `docs/deployment.md`. The custom domain is still open: ask |
 | O2 | Which email to publish. Resolved 2026-11-21: Hamza chose his INSA address (hamza.bencheikh@insa-lyon.fr); switch to a durable address before graduation | Done, revisit before graduation |
 | O3 | Public CV file. Resolved 2026-11-20: no CV on the site; the site is the CV and applications already include it | Done |
 | O4 | Photo on the About page (mockup shows an optional slot). Resolved 2026-11-20: Hamza supplied a photo and chose the cut-out on an ink background with a lime grid (`public/images/about/hamza.webp`, metadata stripped; original stays in `private/`) | Done |

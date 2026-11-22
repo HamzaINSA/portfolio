@@ -1,6 +1,10 @@
 {
   "updated": "2026-11",
-  "hosting": null,
+  "hosting": {
+    "name": "Cloudflare, Inc. (Cloudflare Pages)",
+    "address": "101 Townsend St, San Francisco, CA 94107, USA",
+    "phone": "+1 (650) 319-8930"
+  },
   "sections": [
     {
       "id": "privacy",
@@ -43,7 +47,7 @@
   "status": "verified",
   "openQuestions": [
     "Draft written by the coding assistant on 2026-11-21 (decision O7, option A: one English page). Text validated by Hamza on 2026-11-22. The assistant is not a lawyer.",
-    "hosting stays null until the host is chosen (decision O1, M7): name, address and phone of the host are required by French law (LCEN). A production build (SITE_URL set) fails while it is null.",
+    "hosting: Cloudflare Pages, chosen by Hamza on 2026-11-22 (decision O1). Name, address and phone read on 2026-11-22 on https://www.cloudflare.com/privacypolicy/ and https://www.cloudflare.com/website-terms/ (\"Have Questions?\" block). Re-check them if the host changes.",
     "Check that every logo shown may be used (VINCI, Inddigo, J'ai PiGé)."
   ]
 }

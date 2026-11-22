@@ -52,7 +52,7 @@ Each milestone is a set of small PRs. Do them in order. After each milestone, te
 
 - Resolve every `[TO CONFIRM]` with Hamza; run `check:content --strict`.
 - Choose hosting and domain **(ASK: O1)**, connect repository, set up preview deployments.
-- Fill `hosting` in `content/legal.json` (name, address, phone of the host: required by French law). A production build fails while it is null.
+- ~~Fill `hosting` in `content/legal.json`~~: done (Cloudflare, Inc., checked on cloudflare.com on 2026-11-22).
 - Set `SITE_URL` in the production build: canonical links, `og:url`, `og:image` and the sitemap stay out of the build until it is set.
 - Final accessibility, link and content review; Hamza validates the live preview.
 - Done when: the strict build passes and Hamza approves the preview.
