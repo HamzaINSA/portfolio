@@ -11,6 +11,7 @@ Read in this order if you are starting from zero:
 7. `content-guidelines.md` and `../content/README.md`: how content is stored and verified
 8. `roadmap.md`: order of work
 9. `risky-tasks.md`: when to stop and ask Hamza
+10. `deployment.md`: hosting on Cloudflare Pages, security headers, setup steps
 
 `kickoff-prompt.md` is the first prompt Hamza pastes into the coding assistant.
 
