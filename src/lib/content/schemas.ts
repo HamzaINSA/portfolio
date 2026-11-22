@@ -211,6 +211,28 @@ export const releasesSchema = z
   })
   .strict();
 
+export const legalSchema = z
+  .object({
+    updated: z.string().regex(/^\d{4}-\d{2}$/),
+    // Required by French law (LCEN) once the site is hosted; null until the host is chosen (decision O1).
+    hosting: z
+      .object({ name: z.string(), address: z.string(), phone: z.string() })
+      .strict()
+      .nullable(),
+    sections: z.array(
+      z
+        .object({
+          id: z.string().regex(/^[a-z0-9-]+$/),
+          title: z.string(),
+          paragraphs: z.array(z.string().min(1)).min(1),
+        })
+        .strict(),
+    ),
+    status,
+    openQuestions: stringList,
+  })
+  .strict();
+
 export const partnersSchema = z
   .object({
     partners: z.array(

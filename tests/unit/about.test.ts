@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { buildMailto } from '../../src/lib/contact/mailto';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { releasesSchema } from '../../src/lib/content/schemas';
+import { legalSchema, releasesSchema } from '../../src/lib/content/schemas';
 import {
   capabilityGroups,
   releaseNotes,
@@ -130,5 +130,23 @@ describe('buildMailto', () => {
     );
     expect(params.get('subject')).toBe('Contact');
     expect(params.get('body')).toBe('');
+  });
+});
+
+describe('content/legal.json', () => {
+  const legal = legalSchema.parse(
+    JSON.parse(readFileSync(join(process.cwd(), 'content/legal.json'), 'utf8')),
+  );
+
+  it('has unique section ids, used as heading anchors', () => {
+    const ids = legal.sections.map((s) => s.id);
+    expect(new Set(ids).size).toBe(ids.length);
+    expect(ids).not.toContain('publisher');
+    expect(ids).not.toContain('host');
+  });
+
+  it('never holds a phone number or address of Hamza', () => {
+    const text = JSON.stringify(legal.sections);
+    expect(text).not.toMatch(/\+33|\b0[67]\d{8}\b/);
   });
 });

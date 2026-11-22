@@ -86,6 +86,7 @@ describe('sitemap and robots', () => {
       '/projects/b',
       '/about',
       '/ask',
+      '/legal',
     ]);
   });
   it('writes absolute locations', () => {

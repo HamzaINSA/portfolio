@@ -93,5 +93,6 @@ export function sitePaths(projectIds: string[]): string[] {
     ...projectIds.map((id) => `/projects/${id}`),
     '/about',
     '/ask',
+    '/legal',
   ];
 }

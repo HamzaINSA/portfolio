@@ -1,0 +1,93 @@
+---
+import Container from '../components/layout/Container.astro';
+import PageHeader from '../components/ui/PageHeader.astro';
+import { en } from '../i18n/en';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getLegal, getProfile } from '../lib/content';
+import { formatMonth } from '../lib/format/dates';
+
+const [profile, legal] = await Promise.all([getProfile(), getLegal()]);
+const t = en.legalPage;
+
+// French law (LCEN) requires the host's details on a public site. SITE_URL marks a production build
+// (decision O1): never ship one without them.
+if (Astro.site && !legal.hosting) {
+  throw new Error(
+    'content/legal.json: hosting is required for a production build (SITE_URL is set).',
+  );
+}
+---
+
+<BaseLayout title={`${t.title} · ${en.siteName}`} description={t.description}>
+  <PageHeader
+    crumb={t.crumb}
+    title={t.title}
+    intro={t.updated(formatMonth(legal.updated))}
+  />
+
+  <Container class="legal">
+    <div class="prose">
+      <section aria-labelledby="publisher">
+        <h2 id="publisher">{t.publisher.title}</h2>
+        <p>{t.publisher.text(profile.name)}</p>
+        <p>
+          {t.publisher.contact}:{' '}
+          <a href={`mailto:${profile.contact.email}`}>
+            {profile.contact.email}
+          </a>
+        </p>
+      </section>
+
+      {legal.hosting && (
+        <section aria-labelledby="host">
+          <h2 id="host">{t.host.title}</h2>
+          <p>{legal.hosting.name}</p>
+          <p>{legal.hosting.address}</p>
+          <p>
+            {t.host.phone}: {legal.hosting.phone}
+          </p>
+        </section>
+      )}
+
+      {legal.sections.map((section) => (
+        <section aria-labelledby={section.id}>
+          <h2 id={section.id}>{section.title}</h2>
+          {section.paragraphs.map((text) => (
+            <p>{text}</p>
+          ))}
+        </section>
+      ))}
+    </div>
+  </Container>
+</BaseLayout>
+
+<style>
+  :global(.legal) {
+    padding-bottom: var(--section-pad);
+  }
+
+  /* Readable line length for long text. */
+  .prose {
+    display: grid;
+    gap: var(--space-8);
+    max-width: 48rem;
+  }
+
+  h2 {
+    margin-bottom: var(--space-3);
+    font-size: clamp(1.25rem, 1rem + 0.8vw, 1.5rem);
+    letter-spacing: -0.02em;
+  }
+
+  p {
+    line-height: 1.7;
+  }
+
+  p + p {
+    margin-top: var(--space-3);
+  }
+
+  a {
+    text-underline-offset: 0.2em;
+  }
+</style>

@@ -1,0 +1,49 @@
+{
+  "updated": "2026-11",
+  "hosting": null,
+  "sections": [
+    {
+      "id": "privacy",
+      "title": "Privacy",
+      "paragraphs": [
+        "This site does not collect personal data. It sets no cookies, stores nothing in your browser and uses no analytics, advertising or third-party service. Fonts and images are served by the site itself."
+      ]
+    },
+    {
+      "id": "chatbot",
+      "title": "Ask the model",
+      "paragraphs": [
+        "The chatbot runs entirely in your browser. Your questions are never sent anywhere and are not stored."
+      ]
+    },
+    {
+      "id": "contact",
+      "title": "Contact form",
+      "paragraphs": [
+        "The form sends nothing by itself: it opens your own email app with a pre-filled message. If you send that email, your name, email address and message reach me by email.",
+        "I use them only to reply to you, and I keep them only as long as our exchange needs. You can ask me at any time, by email, to see or delete them. You can also file a complaint with the CNIL, the French data protection authority (cnil.fr)."
+      ]
+    },
+    {
+      "id": "logs",
+      "title": "Hosting logs",
+      "paragraphs": [
+        "Like any web host, the host of this site may record technical logs (IP address, date, page requested) to run and secure its service. These logs are handled under the host's own privacy policy; I do not use them to track visitors."
+      ]
+    },
+    {
+      "id": "ip",
+      "title": "Intellectual property",
+      "paragraphs": [
+        "The texts and images of this site are mine unless stated otherwise. Company names and logos belong to their owners and are shown only to identify the organisations involved in my projects.",
+        "Fonts: Space Grotesk and JetBrains Mono, under the SIL Open Font License."
+      ]
+    }
+  ],
+  "status": "verified",
+  "openQuestions": [
+    "Draft written by the coding assistant on 2026-11-21 (decision O7, option A: one English page). Text validated by Hamza on 2026-11-22. The assistant is not a lawyer.",
+    "hosting stays null until the host is chosen (decision O1, M7): name, address and phone of the host are required by French law (LCEN). A production build (SITE_URL set) fails while it is null.",
+    "Check that every logo shown may be used (VINCI, Inddigo, J'ai PiGé)."
+  ]
+}
