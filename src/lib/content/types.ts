@@ -4,6 +4,7 @@ import type {
   experienceSchema,
   knowledgeEntrySchema,
   legalSchema,
+  partnersSchema,
   profileSchema,
   projectSchema,
   releaseSchema,
@@ -20,3 +21,5 @@ export type Skills = z.infer<typeof skillsSchema>;
 export type Releases = z.infer<typeof releasesSchema>;
 export type Release = z.infer<typeof releaseSchema>;
 export type Legal = z.infer<typeof legalSchema>;
+export type Partners = z.infer<typeof partnersSchema>;
+export type Partner = Partners['partners'][number];

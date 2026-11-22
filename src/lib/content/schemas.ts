@@ -232,3 +232,27 @@ export const legalSchema = z
     openQuestions: stringList,
   })
   .strict();
+
+export const partnersSchema = z
+  .object({
+    partners: z.array(
+      z
+        .object({
+          id: z.string().regex(/^[a-z0-9-]+$/),
+          name: z.string(),
+          // Kept for honesty and future use: who I worked with vs who supports me.
+          relation: z.enum(['worked-with', 'backed-by']),
+          logo: z
+            .object({
+              src: z.string().regex(/^\/images\/.+\.(webp|svg|png)$/),
+              width: z.number().int().positive(),
+              height: z.number().int().positive(),
+            })
+            .strict(),
+        })
+        .strict(),
+    ),
+    status,
+    openQuestions: stringList,
+  })
+  .strict();

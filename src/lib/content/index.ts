@@ -1,5 +1,5 @@
 import { getCollection, getEntry } from 'astro:content';
-import type { EducationItem, Experience, KnowledgeEntry, Legal, Profile, Project, Releases, Skills } from './types';
+import type { EducationItem, Experience, KnowledgeEntry, Legal, Partners, Profile, Project, Releases, Skills } from './types';
 
 // Thin loaders over the Astro collections. Selection and gate logic live in pure modules (select.ts, gate.ts).
 
@@ -24,6 +24,12 @@ export async function getReleases(): Promise<Releases> {
 export async function getLegal(): Promise<Legal> {
   const entry = await getEntry('legal', 'main');
   if (!entry) throw new Error('content/legal.json is missing');
+  return entry.data;
+}
+
+export async function getPartners(): Promise<Partners> {
+  const entry = await getEntry('partners', 'main');
+  if (!entry) throw new Error('content/partners.json is missing');
   return entry.data;
 }
 

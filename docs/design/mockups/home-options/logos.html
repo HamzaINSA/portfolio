@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Home · logo strip options</title>
+<link rel="stylesheet" href="../about-options/shared.css">
+<style>
+  .opt { padding-block: 40px 8px; }
+  .opt-title { font-family: var(--display); font-size: 28px; margin-bottom: 6px; }
+  .opt-note { font-size: 13px; color: var(--muted); margin-bottom: 20px; max-width: 760px; line-height: 1.6; }
+  .hero-stub { padding: 28px 0; font-family: var(--display); font-size: 56px; line-height: 0.95; letter-spacing: -0.04em; }
+
+  /* Shared marquee mechanics: the list is rendered twice and shifted by half its width. */
+  .marquee { overflow: hidden; }
+  .track { display: flex; width: max-content; animation: scroll var(--speed, 40s) linear infinite; }
+  .track.reverse { animation-direction: reverse; }
+  .marquee:hover .track, .marquee:focus-within .track, .paused .track { animation-play-state: paused; }
+  @keyframes scroll { to { transform: translateX(-50%); } }
+  @media (prefers-reduced-motion: reduce) {
+    .track { animation: none; flex-wrap: wrap; width: auto; }
+    .track [aria-hidden="true"] { display: none; }
+  }
+  .group { display: flex; align-items: center; }
+  .logo { display: flex; align-items: center; justify-content: center; height: 64px; padding: 0 28px; }
+  .logo img { height: 52px; width: auto; max-width: 170px; object-fit: contain; }
+  /* Square marks need more height than wide wordmarks to look the same size. */
+  .logo img[src*="etic"], .logo img[src*="besse"], .logo img[src*="inddigo"] { height: 60px; }
+  .ph { font-family: var(--display); font-weight: 700; font-size: 20px; letter-spacing: -0.02em; white-space: nowrap; }
+  .ph small { display: block; font-family: var(--mono); font-weight: 400; font-size: 10px; color: var(--muted); letter-spacing: 0; }
+  .pause { font: inherit; font-size: 12px; font-weight: 700; padding: 10px 14px; background: transparent; border: 2px solid currentColor; color: inherit; cursor: pointer; min-height: 44px; }
+
+  /* A */
+  .a { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 24px; border-block: 3px solid var(--ink); padding-block: 8px; }
+  .a .label { font-size: 12px; font-weight: 700; color: var(--ink); white-space: nowrap; }
+  .a .logo img, .a .ph { filter: grayscale(1); opacity: 0.75; transition: filter .15s, opacity .15s; }
+  .a .logo:hover img, .a .logo:hover .ph { filter: none; opacity: 1; }
+
+  /* B */
+  .b { background: var(--ink); color: var(--on-ink); padding: 28px 0; display: grid; gap: 12px; }
+  .b .lane { display: grid; grid-template-columns: 150px 1fr; align-items: center; gap: 16px; padding-inline: 40px; }
+  .b .lane-label { font-size: 12px; color: var(--lime); font-weight: 700; }
+  .b .logo { background: var(--white); margin-right: 16px; height: 72px; border: 2px solid var(--white); }
+  .b .ph small { color: #666; }
+  .b .ph { color: var(--ink); }
+  .b .foot { display: flex; justify-content: flex-end; padding-inline: 40px; }
+
+  /* C */
+  .c { border: 3px solid var(--ink); background: var(--white); box-shadow: 8px 8px 0 var(--lime); }
+  .c .bar { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 16px; background: var(--ink); color: var(--on-ink); font-size: 13px; }
+  .c .bar b { color: var(--lime); }
+  .c .tile { display: grid; grid-template-rows: 72px auto; gap: 8px; width: 210px; margin: 18px 0 18px 18px; padding: 14px; border: 2px solid var(--ink); background: var(--paper); }
+  .c .tile .logo { height: 72px; padding: 0 8px; background: var(--white); border: 2px solid var(--surface-2); }
+  .c .tile .rel { font-size: 11px; line-height: 1.5; }
+  .c .tile .rel b { display: inline-block; background: var(--lime); padding: 0 4px; margin-bottom: 2px; }
+
+  @media (max-width: 760px) {
+    .hero-stub { font-size: 40px; }
+    .a { grid-template-columns: 1fr; gap: 8px; }
+    .b .lane { grid-template-columns: 1fr; padding-inline: 16px; }
+    .b .foot { padding-inline: 16px; }
+    .c .tile { width: 170px; }
+  }
+</style>
+</head>
+<body>
+<div class="nav"><b>HAMZA-V4</b><span><i class="on">home</i><i>training</i><i>evaluation</i><i>about</i><em>ASK THE MODEL →</em></span></div>
+
+<!-- ============ A ============ -->
+<section class="wrap opt">
+  <h2 class="opt-title">A · Quiet strip under the hero</h2>
+  <p class="opt-note">One thin band right under the hero, logos in grey that turn to colour on hover. Classic "trusted by" look, very discreet. Pauses on hover or keyboard focus; a PAUSE button stops it for good (accessibility rule: moving content must be pausable).</p>
+  <div class="hero-stub">hamza is a 4th-year INSA Lyon engineering student…</div>
+</section>
+<div class="wrap">
+  <div class="a" id="a">
+    <span class="label">WORKED WITH &amp; BACKED BY</span>
+    <div class="marquee"><div class="track" style="--speed:45s">
+      <div class="group">
+        <span class="logo"><span class="ph">Delta Quest<small>logo to come</small></span></span>
+        <span class="logo"><img src="../../../../public/images/logos/etic.webp" alt="ETIC INSA Technologies"></span>
+        <span class="logo"><img src="../../../../public/images/projects/vinci.svg" alt="VINCI"></span>
+        <span class="logo"><img src="../../../../public/images/projects/inddigo.webp" alt="Inddigo"></span>
+        <span class="logo"><img src="../../../../public/images/logos/georges-besse.webp" alt="Georges Besse Foundation"></span>
+        <span class="logo"><img src="../../../../public/images/logos/propulseo.webp" alt="Propulseo"></span>
+        <span class="logo"><img src="../../../../public/images/logos/insa-lyon.webp" alt="INSA Lyon"></span>
+      </div>
+      <div class="group" aria-hidden="true">
+        <span class="logo"><span class="ph">Delta Quest<small>logo to come</small></span></span>
+        <span class="logo"><img src="../../../../public/images/logos/etic.webp" alt=""></span>
+        <span class="logo"><img src="../../../../public/images/projects/vinci.svg" alt=""></span>
+        <span class="logo"><img src="../../../../public/images/projects/inddigo.webp" alt=""></span>
+        <span class="logo"><img src="../../../../public/images/logos/georges-besse.webp" alt=""></span>
+        <span class="logo"><img src="../../../../public/images/logos/propulseo.webp" alt=""></span>
+        <span class="logo"><img src="../../../../public/images/logos/insa-lyon.webp" alt=""></span>
+      </div>
+    </div></div>
+    <button class="pause" data-target="a" type="button">PAUSE</button>
+  </div>
+</div>
+
+<!-- ============ B ============ -->
+<section class="wrap opt">
+  <h2 class="opt-title">B · Two lanes: "worked with" and "backed by"</h2>
+  <p class="opt-note">A black band with two rows moving in opposite directions. The top row is who I built things for or with; the bottom row is who supports me. Bolder and more "wow", and it says clearly what each logo means.</p>
+</section>
+<div class="b" id="b">
+  <div class="lane">
+    <span class="lane-label">WORKED WITH →</span>
+    <div class="marquee"><div class="track" style="--speed:35s">
+      <div class="group">
+        <span class="logo"><span class="ph">Delta Quest<small>logo to come</small></span></span>
+        <span class="logo"><img src="../../../../public/images/logos/etic.webp" alt="ETIC INSA Technologies"></span>
+        <span class="logo"><img src="../../../../public/images/projects/vinci.svg" alt="VINCI"></span>
+        <span class="logo"><img src="../../../../public/images/projects/inddigo.webp" alt="Inddigo"></span>
+      </div>
+      <div class="group" aria-hidden="true">
+        <span class="logo"><span class="ph">Delta Quest<small>logo to come</small></span></span>
+        <span class="logo"><img src="../../../../public/images/logos/etic.webp" alt=""></span>
+        <span class="logo"><img src="../../../../public/images/projects/vinci.svg" alt=""></span>
+        <span class="logo"><img src="../../../../public/images/projects/inddigo.webp" alt=""></span>
+      </div>
+    </div></div>
+  </div>
+  <div class="lane">
+    <span class="lane-label">← BACKED BY</span>
+    <div class="marquee"><div class="track reverse" style="--speed:35s">
+      <div class="group">
+        <span class="logo"><img src="../../../../public/images/logos/georges-besse.webp" alt="Georges Besse Foundation"></span>
+        <span class="logo"><img src="../../../../public/images/logos/propulseo.webp" alt="Propulseo"></span>
+        <span class="logo"><img src="../../../../public/images/logos/insa-lyon.webp" alt="INSA Lyon"></span>
+      </div>
+      <div class="group" aria-hidden="true">
+        <span class="logo"><img src="../../../../public/images/logos/georges-besse.webp" alt=""></span>
+        <span class="logo"><img src="../../../../public/images/logos/propulseo.webp" alt=""></span>
+        <span class="logo"><img src="../../../../public/images/logos/insa-lyon.webp" alt=""></span>
+      </div>
+    </div></div>
+  </div>
+  <div class="foot"><button class="pause" data-target="b" type="button">PAUSE</button></div>
+</div>
+
+<!-- ============ C ============ -->
+<section class="wrap opt">
+  <h2 class="opt-title">C · "Training data sources": tiles with what each one means</h2>
+  <p class="opt-note">Fits the "model" story: the organisations are the data I was trained on. Each tile says the relationship in one line (internship, client via ETIC, scholarship…), so a recruiter never wonders whether VINCI hired me directly. Slower, readable, honest.</p>
+</section>
+<div class="wrap">
+  <div class="c" id="c">
+    <div class="bar"><span><b>$</b> hamza --training-data-sources</span><button class="pause" data-target="c" type="button">PAUSE</button></div>
+    <div class="marquee"><div class="track" style="--speed:60s">
+      <div class="group">
+        <div class="tile"><span class="logo"><span class="ph">Delta Quest<small>logo to come</small></span></span><p class="rel"><b>INTERNSHIP</b><br>Sapporo, Japan · 2026</p></div>
+        <div class="tile"><span class="logo"><img src="../../../../public/images/logos/etic.webp" alt="ETIC INSA Technologies"></span><p class="rel"><b>JUNIOR ENTERPRISE</b><br>developer &amp; consultant</p></div>
+        <div class="tile"><span class="logo"><img src="../../../../public/images/projects/vinci.svg" alt="VINCI"></span><p class="rel"><b>CLIENT PROJECT</b><br>with ETIC INSA Technologies</p></div>
+        <div class="tile"><span class="logo"><img src="../../../../public/images/projects/inddigo.webp" alt="Inddigo"></span><p class="rel"><b>CLIENT PROJECT</b><br>with ETIC INSA Technologies</p></div>
+        <div class="tile"><span class="logo"><img src="../../../../public/images/logos/georges-besse.webp" alt="Georges Besse Foundation"></span><p class="rel"><b>SCHOLARSHIP</b><br>excellence, since 2023</p></div>
+        <div class="tile"><span class="logo"><img src="../../../../public/images/logos/propulseo.webp" alt="Propulseo"></span><p class="rel"><b>LAUREATE</b><br>mentored by Asys</p></div>
+        <div class="tile"><span class="logo"><img src="../../../../public/images/logos/insa-lyon.webp" alt="INSA Lyon"></span><p class="rel"><b>SCHOOL</b><br>Computer Science, 4th year</p></div>
+      </div>
+      <div class="group" aria-hidden="true">
+        <div class="tile"><span class="logo"><span class="ph">Delta Quest<small>logo to come</small></span></span><p class="rel"><b>INTERNSHIP</b><br>Sapporo, Japan · 2026</p></div>
+        <div class="tile"><span class="logo"><img src="../../../../public/images/logos/etic.webp" alt=""></span><p class="rel"><b>JUNIOR ENTERPRISE</b><br>developer &amp; consultant</p></div>
+        <div class="tile"><span class="logo"><img src="../../../../public/images/projects/vinci.svg" alt=""></span><p class="rel"><b>CLIENT PROJECT</b><br>with ETIC INSA Technologies</p></div>
+        <div class="tile"><span class="logo"><img src="../../../../public/images/projects/inddigo.webp" alt=""></span><p class="rel"><b>CLIENT PROJECT</b><br>with ETIC INSA Technologies</p></div>
+        <div class="tile"><span class="logo"><img src="../../../../public/images/logos/georges-besse.webp" alt=""></span><p class="rel"><b>SCHOLARSHIP</b><br>excellence, since 2023</p></div>
+        <div class="tile"><span class="logo"><img src="../../../../public/images/logos/propulseo.webp" alt=""></span><p class="rel"><b>LAUREATE</b><br>mentored by Asys</p></div>
+        <div class="tile"><span class="logo"><img src="../../../../public/images/logos/insa-lyon.webp" alt=""></span><p class="rel"><b>SCHOOL</b><br>Computer Science, 4th year</p></div>
+      </div>
+    </div></div>
+  </div>
+</div>
+
+<p class="note">Home logo strip · three proposals. Delta Quest is still a placeholder: its logo is missing. J'ai PiGé is left out on purpose: it is a project, not an organisation (its logo stays on its project card). Every option pauses on hover and keyboard focus, has a PAUSE button, and shows a still list when the visitor asks for reduced motion.</p>
+
+<script>
+  document.querySelectorAll('.pause').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const box = document.getElementById(btn.dataset.target);
+      const paused = box.classList.toggle('paused');
+      btn.textContent = paused ? 'PLAY' : 'PAUSE';
+    });
+  });
+</script>
+</body>
+</html>

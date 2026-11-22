@@ -5,6 +5,7 @@ import {
   educationItemSchema,
   experienceSchema,
   knowledgeEntrySchema,
+  partnersSchema,
   profileSchema,
   projectSchema,
   legalSchema,
@@ -31,6 +32,10 @@ export const collections = {
   legal: defineCollection({
     loader: file('content/legal.json', { parser: single }),
     schema: legalSchema.extend({ id: z.string() }),
+  }),
+  partners: defineCollection({
+    loader: file('content/partners.json', { parser: single }),
+    schema: partnersSchema.extend({ id: z.string() }),
   }),
   education: defineCollection({
     loader: file('content/education.json'),

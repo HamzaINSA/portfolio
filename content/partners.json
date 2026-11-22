@@ -1,0 +1,52 @@
+{
+  "partners": [
+    {
+      "id": "delta-quest",
+      "name": "Delta Quest",
+      "relation": "worked-with",
+      "logo": { "src": "/images/logos/delta-quest.webp", "width": 220, "height": 160 }
+    },
+    {
+      "id": "etic",
+      "name": "ETIC INSA Technologies",
+      "relation": "worked-with",
+      "logo": { "src": "/images/logos/etic.webp", "width": 171, "height": 160 }
+    },
+    {
+      "id": "vinci",
+      "name": "VINCI",
+      "relation": "worked-with",
+      "logo": { "src": "/images/projects/vinci.svg", "width": 1024, "height": 276 }
+    },
+    {
+      "id": "inddigo",
+      "name": "Inddigo",
+      "relation": "worked-with",
+      "logo": { "src": "/images/logos/inddigo.webp", "width": 105, "height": 160 }
+    },
+    {
+      "id": "georges-besse",
+      "name": "Georges Besse Foundation",
+      "relation": "backed-by",
+      "logo": { "src": "/images/logos/georges-besse.webp", "width": 165, "height": 160 }
+    },
+    {
+      "id": "propulseo",
+      "name": "Propulseo",
+      "relation": "backed-by",
+      "logo": { "src": "/images/logos/propulseo.webp", "width": 1191, "height": 160 }
+    },
+    {
+      "id": "insa-lyon",
+      "name": "INSA Lyon",
+      "relation": "backed-by",
+      "logo": { "src": "/images/logos/insa-lyon.webp", "width": 738, "height": 160 }
+    }
+  ],
+  "status": "verified",
+  "openQuestions": [
+    "Home logo strip, option A chosen by Hamza on 2026-11-22, in colour. Every organisation is already a verified fact in experiences/ or projects/ (VINCI and Inddigo are ETIC client projects, disclosure named).",
+    "Logo files provided by Hamza. J'ai PiGé is left out: it is a project, not an organisation; its logo stays on its project card.",
+    "Logo use: Hamza to check with ETIC that the VINCI and Inddigo logos may be shown."
+  ]
+}

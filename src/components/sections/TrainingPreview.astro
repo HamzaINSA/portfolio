@@ -1,43 +1,142 @@
 ---
 import { en } from '../../i18n/en';
+import type { CheckpointView } from '../../lib/content/views';
 import LossCurve from '../charts/LossCurve.astro';
 import Container from '../layout/Container.astro';
 
 interface Props {
-  checkpoints: { title: string; organization: string }[];
+  checkpoints: CheckpointView[];
   now: string;
+  /** Line shown on the "now" card, about the next step. */
+  next: string;
   trainingHref: string;
 }
-const { checkpoints, now, trainingHref } = Astro.props;
+const { checkpoints, now, next, trainingHref } = Astro.props;
+const t = en.training;
 const total = checkpoints.length + 1;
+const nowIndex = total - 1;
+// "ETIC INSA Technologies (Junior Enterprise …)" -> "ETIC INSA Technologies" for the short button label.
+const short = (organization: string) =>
+  organization.split(' (')[0] ?? organization;
+const steps = [
+  ...checkpoints.map((c, i) => ({
+    label: `${t.checkpoint} ${i + 1} · ${c.period}`,
+    button: `${String(i + 1).padStart(2, '0')} · ${short(c.organization)}`,
+    title: c.title,
+    organization: c.organization,
+    lines: c.learned.slice(0, 2),
+  })),
+  {
+    label: `${t.checkpoint} ${total} · ${t.now}`,
+    button: `${String(total).padStart(2, '0')} · ${t.now}`,
+    title: now,
+    organization: null,
+    lines: [next],
+  },
+];
 ---
 
-<section class="training on-ink" aria-labelledby="training-title">
+<section class="training on-ink" aria-labelledby="training-title" data-training>
   <Container class="training-inner">
     <div class="head">
-      <h2 id="training-title">{en.training.title}</h2>
+      <h2 id="training-title">{t.title}</h2>
       <a class="all" href={trainingHref}>
-        {en.training.all}
+        {t.all}
       </a>
     </div>
-    <LossCurve count={total} label={en.training.curveLabel} />
-    <ol class="checkpoints">
-      {checkpoints.map((c, i) => (
-        <li>
-          <p class="label">
-            {en.training.checkpoint} {i + 1}
-          </p>
-          <p class="title">{c.title}</p>
-          <p class="org">{c.organization}</p>
-        </li>
-      ))}
-      <li>
-        <p class="label">{`${en.training.checkpoint} ${total} · ${en.training.now}`}</p>
-        <p class="title">{now}</p>
-      </li>
-    </ol>
+    <div class="body">
+      <div class="chart">
+        <LossCurve count={total} label={t.curveLabel} active={nowIndex} />
+        <p class="schematic">{t.curveLabel}.</p>
+        {/* Shown by the script: without JavaScript every checkpoint is listed below. */}
+        <div class="picker" role="group" aria-label={t.pick} hidden>
+          {steps.map((step, i) => (
+            <button
+              type="button"
+              data-step={i}
+              aria-controls={`checkpoint-${i}`}
+              aria-pressed={i === nowIndex ? 'true' : 'false'}
+            >
+              {step.button}
+            </button>
+          ))}
+        </div>
+      </div>
+      <ol class="checkpoints" aria-live="polite">
+        {steps.map((step, i) => (
+          <li id={`checkpoint-${i}`} data-step={i}>
+            <p class="label">{step.label}</p>
+            <p class="title">{step.title}</p>
+            {step.organization && <p class="org">{step.organization}</p>}
+            {step.lines.length > 0 && (
+              <ul class="lines">
+                {step.lines.map((line) => (
+                  <li>{line}</li>
+                ))}
+              </ul>
+            )}
+          </li>
+        ))}
+      </ol>
+    </div>
   </Container>
 </section>
+
+<script>
+  // Progressive enhancement: one checkpoint card at a time, chosen with the buttons or the curve
+  // markers, and a curve that draws itself the first time the section is seen.
+  for (const section of document.querySelectorAll<HTMLElement>(
+    '[data-training]',
+  )) {
+    const picker = section.querySelector<HTMLElement>('.picker');
+    if (!picker) continue;
+    const buttons = [...picker.querySelectorAll<HTMLButtonElement>('button')];
+    const cards = [
+      ...section.querySelectorAll<HTMLElement>('.checkpoints > li'),
+    ];
+    const markers = [...section.querySelectorAll<SVGCircleElement>('.marker')];
+
+    const select = (step: number) => {
+      buttons.forEach((b) =>
+        b.setAttribute(
+          'aria-pressed',
+          String(Number(b.dataset['step']) === step),
+        ),
+      );
+      cards.forEach((c) => (c.hidden = Number(c.dataset['step']) !== step));
+      markers.forEach((m) =>
+        m.classList.toggle('is-active', Number(m.dataset['step']) === step),
+      );
+    };
+
+    section.classList.add('is-interactive');
+    picker.hidden = false;
+    select(buttons.length - 1);
+    buttons.forEach((b) =>
+      b.addEventListener('click', () => select(Number(b.dataset['step']))),
+    );
+    markers.forEach((m) =>
+      m.addEventListener('click', () => select(Number(m.dataset['step']))),
+    );
+
+    const reduced = window.matchMedia(
+      '(prefers-reduced-motion: reduce)',
+    ).matches;
+    if (!reduced && 'IntersectionObserver' in window) {
+      section.classList.add('is-armed');
+      const observer = new IntersectionObserver(
+        (entries) => {
+          if (entries.some((e) => e.isIntersecting)) {
+            section.classList.add('is-drawn');
+            observer.disconnect();
+          }
+        },
+        { threshold: 0.35 },
+      );
+      observer.observe(section);
+    }
+  }
+</script>
 
 <style>
   .training {
@@ -84,7 +183,7 @@ const total = checkpoints.length + 1;
     list-style: none;
   }
 
-  li {
+  .checkpoints > li {
     padding-top: var(--space-3);
     border-top: 2px solid var(--color-accent);
   }
@@ -105,6 +204,97 @@ const total = checkpoints.length + 1;
     margin-top: var(--space-1);
     font-size: var(--text-label);
     color: var(--color-on-ink-muted);
+  }
+
+  .schematic {
+    margin-top: var(--space-2);
+    font-size: var(--text-label-small);
+    color: var(--color-on-ink-muted);
+  }
+
+  .lines {
+    display: grid;
+    gap: var(--space-1);
+    margin: var(--space-3) 0 0;
+    padding: 0;
+    list-style: none;
+    font-size: var(--text-label);
+    line-height: 1.6;
+  }
+
+  .lines li {
+    padding: 0;
+    border: 0;
+  }
+
+  .lines li::before {
+    color: var(--color-accent);
+    content: '+ ';
+  }
+
+  /* Interactive mode (JavaScript on). */
+  .picker {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-top: var(--space-4);
+  }
+
+  .picker button {
+    min-height: var(--target-min);
+    padding-inline: var(--space-3);
+    background: transparent;
+    color: var(--color-on-ink);
+    border: 2px solid var(--color-ink-line);
+    font: inherit;
+    font-size: var(--text-label-small);
+    cursor: pointer;
+  }
+
+  .picker button[aria-pressed='true'] {
+    background: var(--color-accent);
+    color: var(--color-ink);
+    border-color: var(--color-accent);
+    font-weight: 700;
+  }
+
+  .picker button:focus-visible {
+    outline: var(--focus-ring-on-ink);
+    outline-offset: 2px;
+  }
+
+  .is-interactive :global(.marker) {
+    cursor: pointer;
+  }
+
+  .is-interactive .checkpoints {
+    display: block;
+  }
+
+  .is-interactive .checkpoints > li {
+    min-height: 12rem;
+    padding: var(--space-5);
+    border: 2px solid var(--color-accent);
+  }
+
+  /* Draw-in: the curve is hidden until the section is seen, then traced from left to right. */
+  .is-armed :global(.line) {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+  }
+
+  .is-drawn :global(.line) {
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 1.6s ease-out;
+  }
+
+  @media (min-width: 64em) {
+    .is-interactive .body {
+      display: grid;
+      grid-template-columns: 1fr 22rem;
+      gap: var(--space-8);
+      align-items: start;
+    }
   }
 
   @media (min-width: 48em) {
